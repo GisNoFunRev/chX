@@ -1,0 +1,30 @@
+# Logseq interne Dateien
+logseq/bak/
+logseq/.recycle/
+logseq/.tdb/
+
+# Cache und Index (werden von Logseq automatisch neu generiert)
+.logseq/
+
+# Falls du Plugins nutzt, die lokale Einstellungen speichern
+# (Oft nicht nötig zu syncen, da gerätespezifisch)
+# logseq/plugins/
+
+# Betriebssystem-spezifische Dateien
+.DS_Store
+Thumbs.db# Logseq interne Dateien
+logseq/bak/
+logseq/.recycle/
+logseq/.tdb/
+
+# Cache und Index (werden von Logseq automatisch neu generiert)
+.logseq/
+
+# Falls du Plugins nutzt, die lokale Einstellungen speichern
+# (Oft nicht nötig zu syncen, da gerätespezifisch)
+# logseq/plugins/
+
+
+
+
+
