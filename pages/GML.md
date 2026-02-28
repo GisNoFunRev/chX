@@ -1,1 +1,0 @@
-- ![Murphy_ProbabilisticMachineLearning_AdvancedTopics_DRAFT_2023-compressed_1-1715695055.pdf](../assets/Murphy_ProbabilisticMachineLearning_AdvancedTopics_DRAFT_2023-compressed_1-1715695055_1771419773068_0.pdf)

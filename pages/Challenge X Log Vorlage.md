@@ -1,0 +1,24 @@
+## Datum [TT.MM.JJJJ]
+- ### Phase: (Wo befinden wir uns in der Umsetzung)
+- #### 1. Was wurde heute gemacht
+- -> Link zu Journal
+	- -> Festhalten in Form:
+		- [ Tätigkeit A: ... ]
+		- [ Tätigkeit B: ... ]
+		- etc...
+		- [ Genutzte Ressourcen ]
+		- Hier können Ergebnisse aus Meetings mit Fachexperten festgehalten werden
+			- Als seperater Link?
+- #### 2. Reflexion und Erkenntnisse
+	- -> Reflexion und Erkenntnisse
+		- -> Festhalten in Form:
+			- **Herausforderungen**
+				- **Was ging gut was nicht?**
+				- **Was wurde gelernt?**
+				- **Entscheidungslog - Warum Methode A und nicht B? vice versa**
+- #### 3. Zeitplan / Status-Check
+	- Plan erfüllt JA [ ] Nein [ ]
+	- Was sind aktuelle Pendenzen?
+		- Was wird noch als TODO mitgetragen
+- #### Nächste Schritte
+	- Konkrete TODOS
