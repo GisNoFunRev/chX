@@ -7,6 +7,11 @@
 	- Leitfaden Gespräch
 	- Korrektur und Rückkopplung
 - ---
+- Framework Dokumentation
+- Struktur Dokumentation CLD
+- Expert Briefing Document
+- [[Dokumentation Struktur und Beziehungen im CLD ]]
+- ---
 - # Framework für unsere Dokumentation
   background-color:: green
 - Zweck
@@ -14,6 +19,7 @@
 	- Offenlegung aller Modellannahmen
 	- Trennung zwischen:
 		- Konzeptionelles Modell (CLD)-> für unser Experti:innen- Review
+			- Feedback von Salomon einbauen,
 		- Formelles Simulationsmodell (Stock-Flow in BPTK) -> Nicht dokumentieren (?)
 	- Wir machen (vorerst) ein Systemdynamik- Modell mit VENSIM und nicht eine integrierte Analysemodellierung
 - Scope und Systemgrenzen
@@ -21,6 +27,8 @@
 		- EU27 als aggregiertes Gesamtsystem
 		- Keine regionale Differenzierung (Phase 1)
 		- Keine globale Kopplung (z.B. Importabhängigkeit)
+		- Ukraine oder nicht
+		  background-color:: yellow
 	- Zeitlicher Rahmen
 		- Simulationszeitraum: 2026–2050
 		- Historische Referenzdaten zur Kalibrierung: 2000–2025
@@ -42,12 +50,13 @@
 		- Housing Demand
 		- Population
 	- Anmerkung
-		- Urbane Fläche und Landwirschaftliche  Fläche sind nicht als eigene Variablen modelliert, sondern implizit über Land Conversion abgebildet.
+		- Urbane Fläche (und indirekt Landwirschaftliche  Fläche) sind nicht als eigene Variablen modelliert, sondern implizit über Land Conversion abgebildet.
 		- Bevölkerung ist im CLD bisher als exogene Ursache gekennzeichnet.
 	- Nicht Moddeliert
 		- Klimadynamiken
+		- ff
 - Allgemeine Modellannahmen (sollte klarer forumliert und begründet sein)
-	- Aggregation über Länder ist zulässig (keine regionale Heterogenität)
+	- Aggregation über Länder  hinweg ist zulässig (keine regionale Heterogenität)
 	- weitere Annahmen in den spezifischen Beschreibungen der Kanten des CLD
 	-
 - ---
@@ -159,15 +168,22 @@
   
   ---
 - ## 5. Konkrete Fragen an die Expert:innen
-- 1. Sind die identifizierten Kernmechanismen relevant un korrekt?
+- 1. Sind die identifizierten Kernmechanismen relevant und korrekt?
 - 2.Sind die identifizierten Kernmechanismen vollständig oder fehlen strukturell relevante Einflussfaktoren?
 - 3. Sind die angenommenen Wirkungsrichtungen fachlich konsistent?
 - 4. Gibt es bekannte Nichtlinearitäten oder Schwellenwerte, die strukturell berücksichtigt werden sollten?
 - 5. Sind relevante zeitliche Verzögerungen konzeptionell falsch eingeschätzt?
 - 6. Gibt es Literatur, die einzelne Mechanismen explizit stützt oder infrage stellt? (eher streichen - unser Job I guess)
-  
-  ---
+- offener formulieren
+  background-color:: yellow
+- ---
 - ## 6. Beilage
 - Causal Loop Diagram (CLD)
 - Strukturierte Dokumentation der einzelnen Beziehungen
 - Loop-Beschreibungen
+- ---
+- korrekturen:
+	- keine fragen bereits einfügen
+	- nur abstract und hauptthese als amuse bouche
+	- offene fragen anstatt viele behauptungen
+	- passion und engagement !!!
