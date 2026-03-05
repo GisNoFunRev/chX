@@ -1,0 +1,24 @@
+### Phase: Experten Briefing - Vorbereitung der Kontaktaufnahme
+- #### 1. Was wurde heute gemacht
+- Hier wurden die Tätigkeiten dokumentiert: [[Mar 5th, 2026]]
+- #### 2. Reflexion und Erkenntnisse
+	- **Herausforderungen**:
+		- Meeting Findung nicht alle Coaches wurden eingeladen: Moritz hat gefehlt.
+		- Fokus auf das Deliverable, in diesem Termin das Experten Briefing.
+		- Welche Form wird bei der Kontaktaufnahme für den Knowladge-Aufbau genutzt.
+	- **Was ging gut was nicht?**
+		- **GUT:**
+			- Der Diskurs gab uns wichtige Erkenntnisse für eine Kontaktaufnahme.
+			- Fragen wurden kritisch hinterfragt und müssen noch geschärft werden, Stichwort öffnen, um das Interesse zu zeigen aber den zu extrahierenden Informationsgehalt zu maximieren.
+		- **SCHLECHT**:
+			- Fokus auf die Time-Line insbesondere auf die Deliverables, die Zeit der Coaches ist begrenzt, deshalb muss darauf geachtet werden die Artefakte zu schärfen welche für den weiteren Verlauf der Arbeit wichtig sind.
+			- Nicht alle Coaches wurden eingeladen.
+	- **Was wurde gelernt**:
+		- Nächstes Mal alle Coaches einladen!
+		- Fragen für die Kontaktaufnahme öffnen.
+- #### 3. Zeitplan / Status-Check
+	- Plan erfüllt JA [ ] Nein [ ]
+	- Was sind aktuelle Pendenzen?
+		- Was wird noch als TODO mitgetragen
+- #### Nächste Schritte
+	- Konkrete TODOS
