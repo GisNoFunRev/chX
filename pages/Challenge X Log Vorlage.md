@@ -1,4 +1,4 @@
-## Datum [TT.MM.JJJJ]
+- #Log
 - ### Phase: (Wo befinden wir uns in der Umsetzung)
 - #### 1. Was wurde heute gemacht
 - -> Link zu Journal

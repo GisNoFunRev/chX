@@ -1,12 +1,8 @@
-# Strukturierte Dokumentation der Mechanismen (CLD)
-
----
-- # Dokumentation pro Beziehung im CLD
-- **Economic Growth → Income** – Wirtschaftliches Wachstum erhöht das durchschnittliche Einkommensniveau in einer Volkswirtschaft. Die Beziehung wird als direkte makroökonomische Wirkung verstanden. Die Beziehung wird zunächst als annähernd linear modelliert. Keine expliziten Schwellenwerte werden angenommen.
-  ---
-- ## Wirkungslogik
-  Wirtschaftliches Wachstum erhöht das durchschnittliche Einkommensniveau in einer Volkswirtschaft. Die Beziehung wird als direkte makroökonomische Wirkung verstanden.  
+## Dokumentation pro Beziehung im CLD
+- ### Economic Growth → Income
+  Wirtschaftliches Wachstum erhöht das durchschnittliche Einkommensniveau in einer Volkswirtschaft. Die Beziehung wird als direkte makroökonomische Wirkung verstanden. 
   
+  **Wirkungslogik:**  
   Die Beziehung wird zunächst als annähernd linear modelliert. Keine expliziten Schwellenwerte werden angenommen.
   
   **Vorzeichen:** +
@@ -25,9 +21,10 @@
   Niedrig
   
   ---
-- **Income → Land Consumption per Capita** – Steigendes Einkommen erhöht tendenziell den Flächenverbrauch pro Person, z.B. durch grössere Wohnflächen, suburbanes Wohnen oder Infrastruktur.
-  ---
-- ## Wirkungslogik
+- ## Income → Land Consumption per Capita
+  Steigendes Einkommen erhöht tendenziell den Flächenverbrauch pro Person, z.B. durch grössere Wohnflächen, suburbanes Wohnen oder Infrastruktur.
+  
+  **Wirkungslogik:**  
   Die Wirkung wird als indirekte sozioökonomische Beziehung verstanden.  
   
   Die Beziehung wird vorläufig als monoton steigend modelliert.
@@ -47,9 +44,11 @@
   Mittel
   
   ---
-- **Land Consumption per Capita → Land Conversion** – Steigender Flächenverbrauch pro Person erhöht den Bedarf an zusätzlicher Siedlungsfläche und führt zur Umwandlung landwirtschaftlicher Flächen.
-  ---
-- ## Wirkungslogik
+- ## Land Consumption per Capita → Land Conversion
+  Steigender Flächenverbrauch pro Person erhöht den Bedarf an zusätzlicher Siedlungsfläche und führt zur Umwandlung landwirtschaftlicher Flächen.
+  
+  
+  **Wirkungslogik:**  
   Steigender Flächenverbrauch pro Person erhöht den Bedarf an zusätzlicher Siedlungsfläche. Dies führt zur Umwandlung landwirtschaftlicher Flächen.
   
   **Vorzeichen:** +
@@ -67,9 +66,11 @@
   Mittel
   
   ---
-- **Land Conversion → Agricultural Land** – Die Umwandlung von Land in Siedlungsfläche reduziert direkt die verfügbare landwirtschaftliche Fläche.
-  ---
-- ## Wirkungslogik
+- ## Land Conversion → Agricultural Land
+  Die Umwandlung von Land in Siedlungsfläche reduziert direkt die verfügbare landwirtschaftliche Fläche.
+  
+  
+  **Wirkungslogik:**  
   Die Umwandlung von Land in Siedlungsfläche reduziert direkt die verfügbare landwirtschaftliche Fläche.
   
   **Vorzeichen:** –
@@ -89,7 +90,8 @@
   ---
 - **Agricultural Land → Food Production** – Mehr landwirtschaftliche Fläche erhöht bei konstantem Ertrag die mögliche Nahrungsmittelproduktion.
   ---
-- ## Wirkungslogik
+  
+  **Wirkungslogik:**  
   Mehr landwirtschaftliche Fläche erhöht bei konstantem Ertrag die mögliche Nahrungsmittelproduktion.
   
   **Vorzeichen:** +
@@ -109,7 +111,8 @@
   ---
 - **Agrotechnological Progress → Yield per ha** – Technologischer Fortschritt erhöht die Produktivität pro Flächeneinheit.
   ---
-- ## Wirkungslogik
+  
+  **Wirkungslogik:**  
   Technologischer Fortschritt erhöht die Produktivität pro Flächeneinheit.
   
   **Vorzeichen:** +
@@ -129,7 +132,8 @@
   ---
 - **Yield per ha → Food Production** – Steigende Erträge erhöhen bei gleicher Fläche die Gesamtproduktion.
   ---
-- ## Wirkungslogik
+  
+  **Wirkungslogik:**  
   Steigende Erträge erhöhen bei gleicher Fläche die Gesamtproduktion.
   
   **Vorzeichen:** +
@@ -149,7 +153,8 @@
   ---
 - **Food Production → Import Dependence** – Sinkende Nahrungsmittelproduktion erhöht die Abhängigkeit von Importen.
   ---
-- ## Wirkungslogik
+  
+  **Wirkungslogik:**  
   Sinkende Nahrungsmittelproduktion erhöht die Abhängigkeit von Importen.
   
   **Vorzeichen:** –
@@ -169,7 +174,8 @@
   ---
 - **Import Dependence → Economic Pressure** – Steigende Importabhängigkeit kann wirtschaftlichen oder politischen Druck erzeugen, die heimische Produktion oder wirtschaftliche Aktivität zu steigern.
   ---
-- ## Wirkungslogik
+  
+  **Wirkungslogik:**  
   Steigende Importabhängigkeit kann wirtschaftlichen oder politischen Druck erzeugen, die heimische Produktion oder wirtschaftliche Aktivität zu steigern.
   
   **Vorzeichen:** +
@@ -189,7 +195,8 @@
   ---
 - **Economic Pressure → Land Conversion** – Wirtschaftlicher Druck kann zusätzliche Landnutzung zur wirtschaftlichen Aktivierung fördern.
   ---
-- ## Wirkungslogik
+  
+  **Wirkungslogik:**  
   Wirtschaftlicher Druck kann zusätzliche Landnutzung zur wirtschaftlichen Aktivierung fördern.
   
   **Vorzeichen:** +
@@ -212,47 +219,51 @@
   ---
 - **R1 – Economic Growth Loop** – Wirtschaftliches Wachstum erhöht Flächennachfrage und fördert weitere wirtschaftliche Aktivität.
   ---
-- ## Struktur
-  Economic Growth → Income → Land Consumption per Capita → Land Conversion → Economic Growth
+- ## Economic Growth → Income → Land Consumption per Capita → Land Conversion → Economic Growth
   
   **Typ:** Reinforcing
-- ## Interpretation
+  
+  **Interpretation:**  
   Wirtschaftliches Wachstum erhöht Flächennachfrage und fördert weitere wirtschaftliche Aktivität.
-- ## Dominanzannahme
+  
+  **Dominanzannahme:**  
   Dominant bei wachstumsorientierten politischen Rahmenbedingungen.
   
   ---
 - **B1 – Agricultural Technology Loop** – Technologischer Fortschritt kann Flächendruck teilweise kompensieren.
   ---
-- ## Struktur
-  Agrotechnological Progress → Yield per ha → Food Production → Land Requirement → Agricultural Land
+- ## Agrotechnological Progress → Yield per ha → Food Production → Land Requirement → Agricultural Land
   
   **Typ:** Balancing
-- ## Interpretation
+  
+  **Interpretation:**  
   Technologischer Fortschritt kann Flächendruck teilweise kompensieren.
-- ## Dominanzannahme
+  
+  **Dominanzannahme:**  
   Wirksam bei starkem technologischen Fortschritt.
   
   ---
 - **B2 – Spatial Planning Loop** – Politische Planung stabilisiert landwirtschaftliche Fläche.
   ---
-- ## Struktur
-  Spatial Planning → Soil Protection → Agricultural Land → Land Conversion
+- ## Spatial Planning → Soil Protection → Agricultural Land → Land Conversion
   
   **Typ:** Balancing
-- ## Interpretation
+  
+  **Interpretation:**  
   Politische Planung stabilisiert landwirtschaftliche Fläche.
-- ## Dominanzannahme
+  
+  **Dominanzannahme:**  
   Abhängig von institutioneller Stärke.
   
   ---
 - **R2 – Import Pressure Loop** – Sinkende Produktion kann indirekt zusätzlichen Landnutzungsdruck erzeugen.
   ---
-- ## Struktur
-  Food Production ↓ → Import Dependence ↑ → Economic Pressure ↑ → Land Conversion ↑
+- ## Food Production ↓ → Import Dependence ↑ → Economic Pressure ↑ → Land Conversion ↑
   
   **Typ:** Reinforcing
-- ## Interpretation
+  
+  **Interpretation:**  
   Sinkende Produktion kann indirekt zusätzlichen Landnutzungsdruck erzeugen.
-- ## Dominanzannahme
+  
+  **Dominanzannahme:**  
   Relevant bei hoher Marktintegration.
