@@ -1,9 +1,9 @@
 ## Dokumentation pro Beziehung im CLD
 - ### Economic Growth → Income
-  Wirtschaftliches Wachstum erhöht das durchschnittliche Einkommensniveau in einer Volkswirtschaft. Die Beziehung wird als direkte makroökonomische Wirkung verstanden. 
+  Wirtschaftliches Wachstum erhöht das durchschnittliche Einkommensniveau in einer Volkswirtschaft. 
   
   **Wirkungslogik:**  
-  Die Beziehung wird zunächst als annähernd linear modelliert. Keine expliziten Schwellenwerte werden angenommen.
+  Die Beziehung wird zunächst als annähernd linear modelliert. Keine expliziten Schwellenwerte oder Sättigungen werden modelliert.
   
   **Vorzeichen:** +
   
@@ -27,7 +27,7 @@
   **Wirkungslogik:**  
   Die Wirkung wird als indirekte sozioökonomische Beziehung verstanden.  
   
-  Die Beziehung wird vorläufig als monoton steigend modelliert.
+  Die Beziehung wird als monoton steigend modelliert.
   
   **Vorzeichen:** +
   
@@ -49,7 +49,8 @@
   
   
   **Wirkungslogik:**  
-  Steigender Flächenverbrauch pro Person erhöht den Bedarf an zusätzlicher Siedlungsfläche. Dies führt zur Umwandlung landwirtschaftlicher Flächen.
+  Die Beziehung wird als monoton steigend modelliert.
+  
   
   **Vorzeichen:** +
   
@@ -67,11 +68,14 @@
   
   ---
 - ## Land Conversion → Agricultural Land
-  Die Umwandlung von Land in Siedlungsfläche reduziert direkt die verfügbare landwirtschaftliche Fläche.
+  Die Umwandlung von Land in Siedlungsfläche reduziert direkt die verfügbare landwirtschaftliche Fläche. 
   
   
   **Wirkungslogik:**  
-  Die Umwandlung von Land in Siedlungsfläche reduziert direkt die verfügbare landwirtschaftliche Fläche.
+  Agricultural Land wird als Bestandsvariable modelliert, deren Umfang durch Flächenumwandlungen reduziert wird.
+  
+  Die Beziehung wird als monoton steigend modelliert.
+  
   
   **Vorzeichen:** –
   
@@ -88,11 +92,14 @@
   Niedrig
   
   ---
-- **Agricultural Land → Food Production** – Mehr landwirtschaftliche Fläche erhöht bei konstantem Ertrag die mögliche Nahrungsmittelproduktion.
-  ---
+- ## Agricultural Land → Food Production
+  Mehr landwirtschaftliche Fläche erhöht bei konstantem Ertrag die mögliche Nahrungsmittelproduktion.
+  
   
   **Wirkungslogik:**  
-  Mehr landwirtschaftliche Fläche erhöht bei konstantem Ertrag die mögliche Nahrungsmittelproduktion.
+  Food Production wird als Funktion der landwirtschaftlichen Fläche und des Flächenertrags modelliert. 
+  Die Beziehung wird als monoton steigend modelliert.
+  
   
   **Vorzeichen:** +
   
@@ -109,11 +116,12 @@
   Niedrig
   
   ---
-- **Agrotechnological Progress → Yield per ha** – Technologischer Fortschritt erhöht die Produktivität pro Flächeneinheit.
-  ---
+- ## Agrotechnological Progress → Yield per ha
+  Technologischer Fortschritt erhöht die Produktivität pro Flächeneinheit.
+  
   
   **Wirkungslogik:**  
-  Technologischer Fortschritt erhöht die Produktivität pro Flächeneinheit.
+  Die Beziehung wird als monoton steigend modelliert.
   
   **Vorzeichen:** +
   
@@ -130,11 +138,13 @@
   Mittel
   
   ---
-- **Yield per ha → Food Production** – Steigende Erträge erhöhen bei gleicher Fläche die Gesamtproduktion.
-  ---
+- ## Yield per ha → Food Production
+  Steigende Erträge erhöhen bei gleicher Fläche die Gesamtproduktion.
+  
   
   **Wirkungslogik:**  
-  Steigende Erträge erhöhen bei gleicher Fläche die Gesamtproduktion.
+  Yield per ha bestimmt gemeinsam mit der landwirtschaftlichen Fläche die Produktionsmenge.
+  Die Beziehung wird als monoton steigend modelliert.
   
   **Vorzeichen:** +
   
@@ -151,11 +161,12 @@
   Niedrig
   
   ---
-- **Food Production → Import Dependence** – Sinkende Nahrungsmittelproduktion erhöht die Abhängigkeit von Importen.
-  ---
+- ## Food Production → Import Dependence
+  Sinkende heimische Nahrungsmittelproduktion erhöht die Abhängigkeit von Importen.
+  
   
   **Wirkungslogik:**  
-  Sinkende Nahrungsmittelproduktion erhöht die Abhängigkeit von Importen.
+  Import Dependence wird als Funktion der Differenz zwischen inländischer Produktion und Nachfrage interpretiert.
   
   **Vorzeichen:** –
   
@@ -172,11 +183,13 @@
   Mittel
   
   ---
-- **Import Dependence → Economic Pressure** – Steigende Importabhängigkeit kann wirtschaftlichen oder politischen Druck erzeugen, die heimische Produktion oder wirtschaftliche Aktivität zu steigern.
-  ---
+- ## Import Dependence → Economic Pressure
+  Steigende Importabhängigkeit erzeugt wirtschaftlichen Druck. Import Dependence wird im Modell als Indikator für Versorgungssicherheit interpretiert.
+  
   
   **Wirkungslogik:**  
   Steigende Importabhängigkeit kann wirtschaftlichen oder politischen Druck erzeugen, die heimische Produktion oder wirtschaftliche Aktivität zu steigern.
+  Die Beziehung wird als monoton steigend modelliert.
   
   **Vorzeichen:** +
   
@@ -193,11 +206,12 @@
   Hoch
   
   ---
-- **Economic Pressure → Land Conversion** – Wirtschaftlicher Druck kann zusätzliche Landnutzung zur wirtschaftlichen Aktivierung fördern.
-  ---
+- ## Economic Pressure → Land Conversion
+  Wirtschaftlicher Druck stärkt die wirtschaftliche Ausrichtung der Nutzung von Flächen .
+  
   
   **Wirkungslogik:**  
-  Wirtschaftlicher Druck kann zusätzliche Landnutzung zur wirtschaftlichen Aktivierung fördern.
+  Die Beziehung wird als monoton steigend modelliert.
   
   **Vorzeichen:** +
   
@@ -217,53 +231,46 @@
 - # Dokumentation pro Loop
   
   ---
-- **R1 – Economic Growth Loop** – Wirtschaftliches Wachstum erhöht Flächennachfrage und fördert weitere wirtschaftliche Aktivität.
-  ---
-- ## Economic Growth → Income → Land Consumption per Capita → Land Conversion → Economic Growth
+- ## R1 – Import Pressure Loop
+  Sinkende Produktion aufgrund von Land Conversion produziert Importabhängigkeit. Daraus resultierender ökonomischer Druck fördert Land Conversion.
+  
+  Land Conversion -> Agricultural Land -> Food Production → Import Dependence → Economic Pressure → Land Conversion
   
   **Typ:** Reinforcing
   
-  **Interpretation:**  
-  Wirtschaftliches Wachstum erhöht Flächennachfrage und fördert weitere wirtschaftliche Aktivität.
+  **Dominanzannahme:**  
+  Relevant bei hoher Marktintegration.
+- ## R2 – Economic Growth Loop (Gelb)
+  Land Conversion fördert wirtschaftliches Wachstum, was die  Flächennachfrage erhöht, was zu erhöhter Land Conversion führt.
+  
+  Economic Growth → Income → Land Consumption per Capita → Land Conversion → Economic Growth
+  
+  **Typ:** Reinforcing
   
   **Dominanzannahme:**  
   Dominant bei wachstumsorientierten politischen Rahmenbedingungen.
   
   ---
-- **B1 – Agricultural Technology Loop** – Technologischer Fortschritt kann Flächendruck teilweise kompensieren.
-  ---
-- ## Agrotechnological Progress → Yield per ha → Food Production → Land Requirement → Agricultural Land
+- ## B1 – Agricultural Technology Loop
+  Agrotechnologischer Fortschritt kann die Produktivität per Hektar landwirtschaftlicher Fläche erhöhen, was bei gleichbleibender Nahrungsmittelproduktion den Bedarf an landwirschafflicher Totalfläche  reduziert.
+  
+  Land Conversion -> Agrotechnological Progress → Yield per ha → Land Requirement → Agricultural Land -> Land Conversion 
   
   **Typ:** Balancing
-  
-  **Interpretation:**  
-  Technologischer Fortschritt kann Flächendruck teilweise kompensieren.
   
   **Dominanzannahme:**  
   Wirksam bei starkem technologischen Fortschritt.
   
   ---
-- **B2 – Spatial Planning Loop** – Politische Planung stabilisiert landwirtschaftliche Fläche.
-  ---
-- ## Spatial Planning → Soil Protection → Agricultural Land → Land Conversion
+	-
+- ## B2 – Spatial Planning Loop
+  Abnehmende Landwirtschaftsfläche kann politisch problematisiert werden. Darauf folgende Raumplanung stabilisiert über regulatorische Massnahmen die landwirtschaftliche Fläche, was wiederum die Land Conversion abbremst
+  
+  Land Conversion -> Spatial Planning → Soil Protection → Agricultural Land → Land Conversion
   
   **Typ:** Balancing
-  
-  **Interpretation:**  
-  Politische Planung stabilisiert landwirtschaftliche Fläche.
   
   **Dominanzannahme:**  
   Abhängig von institutioneller Stärke.
   
   ---
-- **R2 – Import Pressure Loop** – Sinkende Produktion kann indirekt zusätzlichen Landnutzungsdruck erzeugen.
-  ---
-- ## Food Production ↓ → Import Dependence ↑ → Economic Pressure ↑ → Land Conversion ↑
-  
-  **Typ:** Reinforcing
-  
-  **Interpretation:**  
-  Sinkende Produktion kann indirekt zusätzlichen Landnutzungsdruck erzeugen.
-  
-  **Dominanzannahme:**  
-  Relevant bei hoher Marktintegration.
