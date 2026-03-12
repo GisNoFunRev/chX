@@ -24,6 +24,7 @@ documentation/*
 !docunmentation/*/ 
 
 !documentation/**/
+!documentation/***/
 
 documentation/experten-breefing/*
 documentation/experten-breefing/documentation-cld/*
