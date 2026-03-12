@@ -32,11 +32,17 @@ documentation/experten-breefing/documentation-cld/*
 !documentation/experten-breefing/experten-breefing.tex
 !documentation/experten-breefing/experten-breefing.pdf
  
-!documentation/experten-breefing/documentation-cld/doc-cld.tex
-!documentation/experten-breefing/documentation-cld/doc-cld.pdf
+# 1. Ignoriere grundsätzlich alles im Dokumentations-Ordner
+documentation/**/*
+# 2. Erlaube die Ordnerstruktur (WICHTIG: Git muss in die Ordner schauen dürfen)
+!documentation/experten-breefing/
+!documentation/experten-breefing/documentation-cld/
 
-
-
+# 3. Schließe die spezifischen Dateien wieder ein (Negation des Ignores)
+!documentation/main.tex
+!documentation/main.pdf
+!documentation/experten-breefing/experten-breefing.tex
+!documentation/experten-breefing/experten-breefing.pdf
 
 
 
