@@ -1,48 +1,31 @@
-# Logseq interne Dateien
+# --- Logseq & OS ---
 logseq/bak/
 logseq/.recycle/
 logseq/.tdb/
-
-# Cache und Index (werden von Logseq automatisch neu generiert)
 .logseq/
-
-# Betriebssystem-spezifische Dateien
 .DS_Store
-Thumbs.db# Logseq interne Dateien
-logseq/bak/
-logseq/.recycle/
-logseq/.tdb/
+Thumbs.db
 
-# Cache und Index (werden von Logseq automatisch neu generiert)
-.logseq/
+# --- Dokumentation Logik ---
 
-documentation/*
-
-!documentation/main.tex
-!documentation/main.pdf
-
-!docunmentation/*/ 
-
-!documentation/**/
-!documentation/***/
-
-documentation/experten-breefing/*
-documentation/experten-breefing/documentation-cld/*
-
-!documentation/experten-breefing/experten-breefing.tex
-!documentation/experten-breefing/experten-breefing.pdf
- 
-# 1. Ignoriere grundsätzlich alles im Dokumentations-Ordner
+# 1. Alles in documentation ignorieren
 documentation/**/*
-# 2. Erlaube die Ordnerstruktur (WICHTIG: Git muss in die Ordner schauen dürfen)
+
+# 2. Die Ordnerstruktur explizit begehbar machen
+!documentation/
 !documentation/experten-breefing/
 !documentation/experten-breefing/documentation-cld/
 
-# 3. Schließe die spezifischen Dateien wieder ein (Negation des Ignores)
+# 3. Spezifische Dateien im Hauptordner zulassen
 !documentation/main.tex
 !documentation/main.pdf
+
+# 4. Spezifische Dateien im Unterordner zulassen
 !documentation/experten-breefing/experten-breefing.tex
 !documentation/experten-breefing/experten-breefing.pdf
+
+# 5. ALLE Dateien im doc-cld Ordner zulassen (inkl. doc-cld.tex/pdf)
+!documentation/experten-breefing/documentation-cld/*
 
 
 

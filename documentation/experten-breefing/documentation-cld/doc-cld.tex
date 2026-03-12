@@ -1,0 +1,374 @@
+\documentclass[11pt, a4paper, oneside]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[t1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage[german=swiss]{csquotes}
+
+% --- layout und design ---
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{charter} % eine gut lesbare serifenschrift für dokumente
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+% --- hyperlinks ---
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=cyan]{hyperref}
+
+% --- dokumentmetadaten ---
+\title{dokumentation struktur und beziehungen im cld}
+\subtitle{eine dokumentation der beziehungen und der einzelnen elemente im cld}
+\author{alexis makaratzis & roberto fazekas}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\section{dokumentation pro beziehung im cld}
+
+in dieser dokumentation wird bezug auf folgendes cld - causal loop diagram genommen und die einzelnen beziehungen im detail erklärt.
+
+\subsection{economic growth → income}
+das modell aggregiert die eu27 als makroskopisches gesamtsystem. regionale differenzierungen werden in dieser phase bewusst nicht modelliert.
+wirtschaftliches wachstum erhöht das durchschnittliche einkommensniveau in einer volkswirtschaft. 
+
+\paragraph{wirkungslogik:}
+
+die beziehung wird zunächst als annähernd linear modelliert. keine expliziten schwellenwerte oder sättigungen werden modelliert.
+
+\paragraph{vorzeichen:}
+
++
+
+\paragraph{zeit:} 
+
+die wirkung erfolgt mit kurz- bis mittelfristiger verzögerung, da einkommensveränderungen über arbeitsmarkt- und produktivitätsdynamiken entstehen.
+
+\paragraph{annahmen:}
+\begin{itemize}
+\item wirtschaftswachstum wirkt positiv auf einkommen. 
+\item verteilungsfragen werden nicht modelliert
+\end{itemize}
+
+\paragraph{evidenzbasis:}
+
+theoretisch begründet (makroökonomischer standardmechanismus).
+
+\paragraph{unsicherheitsgrad:} 
+
+niedrig
+
+\subsection{income → land consumption per capita}
+steigendes einkommen erhöht tendenziell den flächenverbrauch pro person, z.b. durch grössere wohnflächen, suburbanes wohnen oder infrastruktur.
+
+\paragraph{wirkungslogik:}
+
+die wirkung wird als indirekte sozioökonomische beziehung verstanden.  
+die beziehung wird als monoton steigend modelliert.
+
+\paragraph{vorzeichen:}
+
++
+
+\paragraph{zeit:} 
+
+verzögerung durch bauprozesse, infrastrukturentwicklung und haushaltsentscheidungen.
+
+\paragraph{annahmen:}
+\begin{itemize}
+\item höheres einkommen führt im durchschnitt zu höherem flächenkonsum. 
+\end{itemize}
+
+\paragraph{evidenzbasis:}
+
+empirisch gestützt durch urban-sprawl-literatur.
+
+\paragraph{unsicherheitsgrad:} 
+
+mittel
+
+
+\subsection{land consumption per capita → land conversion}
+steigender flächenverbrauch pro person erhöht den bedarf an zusätzlicher siedlungsfläche und führt zur umwandlung landwirtschaftlicher flächen.
+
+\paragraph{wirkungslogik:}
+
+die beziehung wird als monoton steigend modelliert.
+
+\paragraph{vorzeichen:}
+
++
+
+\paragraph{zeit:} 
+
+strukturelle verzögerung durch planungs- und bauprozesse.
+
+\paragraph{annahmen:}
+\begin{itemize}
+\item verdichtungsstrategien kompensieren den effekt nicht vollständig.
+\end{itemize}
+
+\paragraph{evidenzbasis:}
+
+empirisch dokumentiert (eu land take studien).
+
+\paragraph{unsicherheitsgrad:} 
+
+mittel
+
+
+\subsection{land conversion → agricultural land}
+die umwandlung von land in siedlungsfläche reduziert direkt die verfügbare landwirtschaftliche fläche. 
+
+\paragraph{wirkungslogik:}
+agricultural land wird als bestandsvariable modelliert, deren umfang durch flächenumwandlungen reduziert wird.
+die beziehung wird als monoton steigend modelliert.
+
+\paragraph{vorzeichen:}
+
+--
+
+\paragraph{zeit:} 
+
+direkte wirkung nach umsetzung der landnutzungsänderung.
+
+\paragraph{annahmen:}
+\begin{itemize}
+\item rückumwandlung (renaturierung) ist strukturell nicht dominant.
+\end{itemize}
+
+\paragraph{evidenzbasis:}
+
+empirisch gut dokumentiert.
+
+\paragraph{unsicherheitsgrad:} 
+
+niedrig
+
+
+\subsection{agricultural land → food production}
+
+mehr landwirtschaftliche fläche erhöht bei konstantem ertrag die mögliche nahrungsmittelproduktion.
+
+\paragraph{wirkungslogik:}
+
+food production wird als funktion der landwirtschaftlichen fläche und des flächenertrags modelliert. 
+die beziehung wird als monoton steigend modelliert.
+
+\paragraph{vorzeichen:}
+
++
+
+\paragraph{zeit:} 
+
+produktionsverzögerung durch landwirtschaftliche zyklen.
+
+\paragraph{annahmen:}
+\begin{itemize}
+\item produktion proportional zur fläche bei gegebenem ertrag.
+\end{itemize}
+
+\paragraph{evidenzbasis:}
+
+agrarökonomische standardbeziehung.
+
+\paragraph{unsicherheitsgrad:} 
+
+niedrig
+
+
+\subsection{agrotechnological progress → yield per ha}
+
+technologischer fortschritt erhöht die produktivität pro flächeneinheit.
+
+\paragraph{wirkungslogik:}
+
+die beziehung wird als monoton steigend modelliert.
+
+\paragraph{vorzeichen:}
+
++
+
+\paragraph{zeit:} 
+
+langsame diffusion von innovationen.
+
+\paragraph{annahmen:}
+\begin{itemize}
+\item fortschritt wirkt überwiegend positiv auf erträge.
+\end{itemize}
+
+\paragraph{evidenzbasis:}
+
+empirisch gut dokumentiert.
+
+\paragraph{unsicherheitsgrad:} 
+
+mittel
+
+\subsection{yield per ha → food production}
+steigende erträge erhöhen bei gleicher fläche die gesamtproduktion.
+
+
+\paragraph{wirkungslogik:}
+
+yield per ha bestimmt gemeinsam mit der landwirtschaftlichen fläche die produktionsmenge.
+die beziehung wird als monoton steigend modelliert.
+
+\paragraph{vorzeichen:}
+
++
+
+\paragraph{zeit:} 
+
+wirkung tritt mit landwirtschaftlichen produktionszyklen ein.
+
+\paragraph{annahmen:}
+\begin{itemize}
+\item keine starke ertragsdegradation berücksichtigt.
+\end{itemize}
+
+\paragraph{evidenzbasis:}
+
+empirisch belegt.
+
+\paragraph{unsicherheitsgrad:} 
+
+niedrig
+
+\subsection{food production → import dependence}
+sinkende heimische nahrungsmittelproduktion erhöht die abhängigkeit von importen.
+
+\paragraph{wirkungslogik:}
+
+import dependence wird als funktion der differenz zwischen inländischer produktion und nachfrage interpretiert.
+
+\paragraph{vorzeichen:}
+
+--
+
+\paragraph{zeit:} 
+
+kurzfristige anpassung über handelsmärkte.
+
+\paragraph{annahmen:}
+\begin{itemize}
+\item die eu ist kein vollständig autarkes ernährungssystem.
+\end{itemize}
+
+\paragraph{evidenzbasis:}
+
+handelsökonomisch plausibel.
+
+\paragraph{unsicherheitsgrad:} 
+
+mittel
+
+\subsection{import dependence → economic pressure}
+steigende importabhängigkeit erzeugt wirtschaftlichen druck. import dependence wird im modell als indikator für versorgungssicherheit interpretiert.
+
+\paragraph{wirkungslogik:}
+
+steigende importabhängigkeit kann wirtschaftlichen oder politischen druck erzeugen, die heimische produktion oder wirtschaftliche aktivität zu steigern.
+die beziehung wird als monoton steigend modelliert.
+
+\paragraph{vorzeichen:}
+
++
+
+\paragraph{zeit:} 
+
+mittelfristige politische und wirtschaftliche anpassungsprozesse.
+
+\paragraph{annahmen:}
+\begin{itemize}
+\item importabhängigkeit wird politisch und ökonomisch als problem wahrgenommen.
+\end{itemize}
+
+\paragraph{evidenzbasis:}
+
+teilweise theoretisch, teilweise hypothesenbasiert.
+
+\paragraph{unsicherheitsgrad:} 
+
+hoch
+
+\subsection{economic pressure → land conversion}
+wirtschaftlicher druck stärkt die wirtschaftliche ausrichtung der nutzung von flächen .
+
+\paragraph{wirkungslogik:}
+
+die beziehung wird als monoton steigend modelliert.
+
+\paragraph{vorzeichen:}
+
++
+
+\paragraph{zeit:} 
+
+politisch-institutionelle verzögerung.
+
+\paragraph{annahmen:}
+\begin{itemize}
+\item wirtschaftliche nutzung konkurriert mit flächenschutzinteressen.
+\end{itemize}
+
+\paragraph{evidenzbasis:}
+
+explorative annahme.
+
+\paragraph{unsicherheitsgrad:} 
+
+hoch
+
+\section{dokumentation pro loop}
+\subsection{r1 - import prerssure loop}
+sinkende produktion aufgrund von land conversion produziert importabhängigkeit. daraus resultierender ökonomischer druck fördert land conversion.
+
+land conversion -> agricultural land -> food production → import dependence → economic pressure → land conversion
+
+\paragraph{typ:}
+reinforcing
+
+\paragraph{dominanzannahme:}
+relevant bei hoher marktintegration.
+
+\subsection{r2 – economic growth loop (gelb)}
+land conversion fördert wirtschaftliches wachstum, was die  flächennachfrage erhöht, was zu erhöhter land conversion führt.
+
+economic growth → income → land consumption per capita → land conversion → economic growth
+
+\paragraph{typ:}
+reinforcing
+
+\paragraph{dominanzannahme:}
+dominant bei wachstumsorientierten politischen rahmenbedingungen.
+
+\subsection{b1 – agricultural technology loop}
+agrotechnologischer fortschritt kann die produktivität per hektar landwirtschaftlicher fläche erhöhen, 
+was bei gleichbleibender nahrungsmittelproduktion den bedarf an landwirschafflicher totalfläche  reduziert.
+
+land conversion -> agrotechnological progress → yield per ha → land requirement → agricultural land -> land conversion 
+
+\paragraph{typ:}
+balancing
+
+\paragraph{dominanzannahme:}
+wirksam bei starkem technologischen fortschritt.
+
+\subsection{b2 – spatial planning loop}
+abnehmende landwirtschaftsfläche kann politisch problematisiert werden. 
+darauf folgende raumplanung stabilisiert über regulatorische massnahmen die landwirtschaftliche fläche,
+was wiederum die land conversion abbremst.
+
+land conversion -> spatial planning → soil protection → agricultural land → land conversion
+
+\paragraph{typ:}
+balancing
+
+\paragraph{dominanzannahme:}
+abhängig von institutioneller stärke.
+
+\end{document}
