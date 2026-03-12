@@ -1,0 +1,106 @@
+\documentclass[11pt, a4paper, oneside]{scrartcl}
+
+% --- Pakete für Sprache und Zeichenkodierung ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage[german=swiss]{csquotes}
+
+% --- Layout und Design ---
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{charter} % Eine gut lesbare Serifenschrift für Dokumente
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+% --- Hyperlinks ---
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=cyan]{hyperref}
+
+% --- Dokumentmetadaten ---
+\title{Expert Briefing Document}
+\subtitle{Strukturvalidierung eines systemdynamischen Modells zur Landnutzungsdynamik in den EU27 (2026--2050)}
+\author{Modellierungsteam}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\section{Zielsetzung der Anfrage}
+Im Rahmen eines systemdynamischen Modellierungsprojekts untersuchen wir die strukturelle Wechselwirkung zwischen Urbanisierungsprozessen und landwirtschaftlicher Flächennutzung in den EU27 im Zeitraum 2026--2050.
+
+Ziel dieser Anfrage ist \textbf{nicht} die Validierung von Simulationsergebnissen oder Parametrisierungen, sondern die \textbf{Strukturvalidierung der angenommenen kausalen Mechanismen} auf konzeptioneller Ebene (Causal Loop Diagram). 
+
+Wir möchten prüfen,
+\begin{itemize}
+  \item Fachliche Plausibilität der modellierten Einflussbeziehungen.
+  \item Identifikation fehlender relevanter Mechanismen.
+  \item Konsistenz der Wirkungsrichtungen mit dem Stand der Fachliteratur.
+  \item Ob zentrale Rückkopplungsstrukturen adäquat abgebildet sind. 
+\end{itemize}
+
+\section{Modellrahmen und Systemgrenzen}
+Das Modell aggregiert die EU27 als makroskopisches Gesamtsystem. Regionale Differenzierungen werden in dieser Phase bewusst nicht modelliert.
+
+\paragraph{Simulationszeitraum:} 2026--2050. Historische Daten (2000--2025) dienen der konzeptionellen Kalibrierung.
+
+\paragraph{Ausschlüsse (Out of Scope):}
+\begin{itemize}
+  \item Explizite Klimadynamiken und geopolitische Schocks.
+  \item Globale Marktgleichgewichte.
+  \item Detaillierte sektorale Differenzierungen.
+\end{itemize}
+
+Die Modellierung folgt einem strukturellen Ansatz im Sinne der \textit{System Dynamics} (Forrester), mit Fokus auf endogene Rückkopplungen.
+
+\section{Konzeptionelle Kernmechanismen}
+Basierend auf dem Causal Loop Diagram (CLD) wurden vier zentrale strukturelle Dynamiken identifiziert:
+
+\subsection{Wirtschaftlicher Verstärkungsmechanismus}
+Wirtschaftliches Wachstum erhöht das verfügbare Einkommen, was den Flächenverbrauch pro Kopf (Wohnraum, Gewerbe) steigert. Dies führt zu einer erhöhten Landumwandlung (\textit{Land Conversion}) und reduziert die landwirtschaftliche Nutzfläche.
+Ohne regulatorische Gegenmechanismen wirkt dieser Prozess selbstverstärkend.
+
+\subsection{Technologischer Kompensationsmechanismus}
+Agrartechnologischer Fortschritt steigert den Ertrag pro Hektar. Bei gleichbleibender Produktionsnachfrage sinkt dadurch der theoretische Flächenbedarf. 
+Dieser Mechanismus wirkt stabilisierend (Balancing Loop) auf die Flächenverfügbarkeit, kann jedoch Landverluste durch Urbanisierung oft nur partiell kompensieren.
+
+\subsection{Raumplanerischer Schutzmechanismus}
+Institutionelle Eingriffe (Spatial Planning, Green Belts) stärken den Bodenschutz. Dieser Mechanismus ist politisch sensitiv und agiert als dämpfender Faktor auf den Urbanisierungsdruck, 
+ist jedoch nicht automatisch systemisch dominant.
+
+\subsection{Importdruck-Mechanismusi}
+Eine sinkende Nahrungsmittelproduktion erhöht die Importabhängigkeit. 
+Der daraus resultierende wirtschaftliche und politische Druck kann wiederum Flächennutzungsentscheidungen (z.\,B. Re-Aktivierung von Brachen) beeinflussen.
+Dieser Mechanismus stellt eine indirekte Rückkopplung dar.
+
+\section{Zentrale Annahmen}
+\begin{itemize}
+  \item \textbf{Aggregation:} Die Aggregation über die EU27 wird als strukturell zulässig erachtet.
+  \item \textbf{Pfadabhängigkeit:} \textit{Land Conversion} beschreibt primär die Umwandlung von Agrarfläche in Siedlungsfläche.
+  \item \textbf{Exogenität:} Die Bevölkerungsentwicklung wirkt als exogene Treibkraft auf die Wohnraumnachfrage.
+  \item \textbf{Monotonie:} Beziehungen werden als monoton gerichtet modelliert.
+\end{itemize}
+
+Diese Annahmen sind explizit dokumentiert und offen zur Diskussion.
+
+\section{Konkrete Fragen an die Experten:innen}
+Um die Validierung zielgerichtet zu gestalten, bitten wir um Stellungnahme zu folgenden Punkten:
+
+\begin{enumerate}
+  \item Sind die identifizierten Kernmechanismen relevant und korrekt? 
+  \item Sind die identifizierten Kernmechanismen vollständig oder fehlen strukturell relevante Einflussfaktoren?
+  \item Sind die angenommenen Wirkungsrichtungen fachlich konsistent?
+  \item Gibt es bekannte Nichtlinearitäten oder Schwellenwerte, die strukturell berücksichtigt werden sollten?
+  \item Sind relevante zeitliche Verzögerungen konzeptionell falsch eingeschätzt?
+  \item Gibt es Literatur, die einzelne Mechanismen explizit stützt oder infrage stellt? (eher streichen - unser Job I guess)
+\end{enumerate}
+
+\section{Beilage}
+\begin{itemize}
+  \item Causal Loop Diagram (CLD) Grafik.
+  \item Strukturierte Dokumentation.
+  \item Detaillierte Loop-Beschreibungen.
+\end{itemize}
+
+\end{document}
