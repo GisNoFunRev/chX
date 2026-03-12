@@ -15,6 +15,7 @@ documentation/**/*
 !documentation/
 !documentation/experten-breefing/
 !documentation/experten-breefing/documentation-cld/
+!documentation/experten-breefing/documentation-cld/assets/
 
 # 3. Spezifische Dateien im Hauptordner zulassen
 !documentation/main.tex
@@ -24,8 +25,9 @@ documentation/**/*
 !documentation/experten-breefing/experten-breefing.tex
 !documentation/experten-breefing/experten-breefing.pdf
 
-# 5. ALLE Dateien im doc-cld Ordner zulassen (inkl. doc-cld.tex/pdf)
-!documentation/experten-breefing/documentation-cld/*
+# 5. Spezifische Dateien im Ordner documenta 
+!documentation/experten-breefing/documentation-cld/doc-cld.tex
+!documentation/experten-breefing/documentation-cld/doc-cld.pdf
 
-
-
+# 6. Spezifische Grafiken im Ordner zulassen
+!documentation/experten-breefing/documentation-cld/assets/cld.png
