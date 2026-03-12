@@ -19,12 +19,17 @@ logseq/.tdb/
 documentation/*
 
 !documentation/main.tex
+!documentation/main.pdf
 
 !docunmentation/*/ 
 
 !documentation/**/
 
+documentation/experten-breefing/*
 
+!documentation/experten-breefing/main.tex
+!documentation/experten-breefing/main.pdf
+ 
 
 
 
