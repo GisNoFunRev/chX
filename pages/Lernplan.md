@@ -3,9 +3,9 @@
 - Die Lernergebnisse stellen die erbrachten Erkenntnisse dar welche zu den spezifischen Lerneinheiten gesammelt wurden. Ergebnisse können in Form von Zusammenfassungen dokumentiert werden. Im falle von praktischen Lerneinheiten wie der Umgang mit Vensim oder der Repetition von einzelnen Modellkomponenten, kann es dienlich sein, wenn ein Modell in Abgelegt wird oder der Vorgang zur Erstellung eines solchen Modells dokumentiert wird.
 - {{renderer :kanbandnd_69b6cc5a-0949-4b21-aa22-048b0e3dee18}}
 	- Lerneinheiten
-		- Vensim: Einfache Modelle on the fly bauen
+		- Vensim: Einfache Modelle on the fly bauen: [[Ressources Vensim]]
 		- Vensim: Komplexere Modelle erstellen können
-		- Repetition: Komponenten eines Symstem Dynamics Modell Was sind Stocks und Flows usw.
+		- Repetition: Komponenten eines Symstem Dynamics Modell Was sind Stocks und Flows usw: [[Ressources Repetition]]
 		- Fachliteratur: Complexity (Part One) What is Complexity Dynamics Defining Measuring Complexity
 		- Fachliteratur: Complexity (Part Three) Prospects of Computer Modelling
 		- Fachliteratur: Complexity (Part Four)
