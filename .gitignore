@@ -24,6 +24,8 @@ documentation/**/*
 # 4. Spezifische Dateien im Unterordner zulassen
 !documentation/experten-breefing/experten-breefing.tex
 !documentation/experten-breefing/experten-breefing.pdf
+!documentation/experten-breefing/Strukturvalidierung_Expertinnen.tex
+!documentation/experten-breefing/Strukturvalidierung_Expertinnen.pdf
 
 # 5. Spezifische Dateien im Ordner documenta 
 !documentation/experten-breefing/documentation-cld/doc-cld.tex
