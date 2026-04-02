@@ -1,11 +1,61 @@
 {UTF-8}
+Aggricultural Land= INTEG (
+	-Land Conversion Rate * ( 1 / Agricultural Land Requirement ) * (180000 / Soil Protection\
+		),
+		1.6004e+06)
+	~	km2 [0,?]
+	~		|
+
+Agricultural Land Requirement=
+	Yield / 1.8e+06
+	~	
+	~		|
+
+Agrotechnological Progress=
+	Urban Land * 1.1
+	~	
+	~		|
+
+Yield=
+	1.8e+09 * ( Agrotechnological Progress / 170000 )
+	~	kcal / km2
+	~	(Population * Pro person Bedarf) / Food Production
+		
+		Eurostat gibt fuer die EU 2023 eine Getreideproduktion von 271.6 Mio. t auf 51.0 \
+		Mio. ha an. Das sind rund 5.33 t/ha. FAO gibt fuer Weizen grob 334 kcal \
+		pro 100 g an, also etwa 3.34 Mio. kcal pro Tonne.
+		
+		
+		es folgt: ≈ 1.8 Milliarden kcal pro km^2 und Jahr
+	|
+
+Soil Protection=
+	Spatial Planning * 1.01
+	~	
+	~		|
+
+Spatial Planning=
+	Urban Land * 1.01
+	~	
+	~		|
+
+Income=
+	1.1 * Economic Growth
+	~	
+	~		|
+
+Land Consumption per Capita=
+	1.0003 * Income
+	~	
+	~		|
+
 Economic Pressure=
 	(Import Dependence)^2
 	~	
 	~		|
 
 Caloric Baseline Need pP=
-	3400
+	3400*365
 	~	kcal / Person
 	~	Ein EU-Kommissionsbericht, der sich auf FAO-Schaetzungen stuetzt, nennt \
 		fuer die EU eine durchschnittliche dietary energy supply von 3’416 kcal \
@@ -13,8 +63,8 @@ Caloric Baseline Need pP=
 	|
 
 Land Conversion Rate=
-	MAX ( (Land Consumption per Capita * Population*Economic Pressure) , Aggricultural Land\
-		 )
+	MIN ( (Land Consumption per Capita * Population*Economic Pressure )/1 , Aggricultural Land\
+		 / 1)
 	~	km2/Time
 	~		|
 
@@ -28,31 +78,7 @@ Import Dependence=
 	~	
 	~		|
 
-Yield=
-	1.8e+09
-	~	kcal / km2
-	~	(Population * Pro person Bedarf) / Food Production
-		
-		Eurostat gibt fuer die EU 2023 eine Getreideproduktion von 271.6 Mio. t auf 51.0 \
-		Mio. ha an. Das sind rund 5.33 t/ha. FAO gibt fuer Weizen grob 334 kcal \
-		pro 100 g an, also etwa 3.34 Mio. kcal pro Tonne.
-		
-		
-		es folgt: ≈ 1.8 Milliarden kcal pro km^2 und Jahr
-	|
-
-Aggricultural Land= INTEG (
-	-Land Conversion Rate,
-		1.6004e+06 )
-	~	km2 [0,?]
-	~		|
-
 Economic Growth=0.02 * (Urban Land / 150000)
-	~	
-	~		|
-
-Income= INTEG (Income * Economic Growth,
-		1)
 	~	
 	~		|
 
@@ -60,10 +86,6 @@ Urban Land= INTEG (
 	Land Conversion Rate,
 		181700)
 	~	km2 [0,1.7821e+06]
-	~		|
-
-Land Consumption per Capita=0.0003 * Income
-	~	
 	~		|
 
 Population=4.5e+08
@@ -87,7 +109,7 @@ INITIAL TIME  = 2026
 	|
 
 SAVEPER  = 
-        TIME STEP 
+        TIME STEP
 	~	Year [0,?]
 	~	The frequency with which output is stored.
 	|
@@ -101,34 +123,45 @@ TIME STEP  = 1
 V300  Do not put anything below this section - it will be ignored
 *View 1
 $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,92,2
-10,1,Economic Growth,486,257,48,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,2,Income,646,201,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,3,Land Consumption per Capita,835,88,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,4,Urban Land,678,304,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,5,2,3,1,0,0,0,0,192,0,-1--1--1,,1|(679,85)|
-10,6,Population,452,700,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,7,Aggricultural Land,1233,304,49,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,8,10,7,100,0,0,22,0,192,0,-1--1--1,,1|(1063,325)|
-1,9,10,4,4,0,0,22,0,192,0,-1--1--1,,1|(827,325)|
-11,10,200,937,325,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
-10,11,Land Conversion Rate,937,359,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,12,7,11,1,0,0,0,0,192,0,-1--1--1,,1|(1096,413)|
-1,13,4,1,1,0,0,0,0,192,0,-1--1--1,,1|(541,368)|
-1,14,1,2,1,0,0,0,0,192,0,-1--1--1,,1|(523,187)|
-1,15,3,10,1,0,0,0,0,192,0,-1--1--1,,1|(941,120)|
-1,16,6,11,0,0,0,0,0,192,0,-1--1--1,,1|(688,533)|
-10,17,Food Production,928,610,41,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,18,7,17,1,0,0,0,0,64,0,-1--1--1,,1|(1158,475)|
-10,19,Yield,921,886,21,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,20,19,17,0,0,0,0,0,64,0,-1--1--1,,1|(923,758)|
-10,21,Import Dependence,763,648,49,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,22,17,21,0,0,0,0,0,64,0,-1--1--1,,1|(856,625)|
-10,23,Caloric Baseline Need pP,560,815,62,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,24,23,21,0,0,0,0,0,64,0,-1--1--1,,1|(655,735)|
-1,26,6,21,0,0,0,0,0,64,0,-1--1--1,,1|(599,675)|
-10,27,Economic Pressure,829,521,38,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-1,28,21,27,0,0,0,0,0,64,0,-1--1--1,,1|(792,590)|
-1,29,27,11,0,0,0,0,0,64,0,-1--1--1,,1|(875,450)|
+10,1,Economic Growth,562,112,48,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Land Consumption per Capita,915,151,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Urban Land,642,304,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,Population,649,458,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Aggricultural Land,1197,304,49,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,7,100,0,0,22,0,192,0,-1--1--1,,1|(1030,325)|
+1,9,10,4,4,0,0,22,0,192,0,-1--1--1,,1|(794,325)|
+11,10,398,906,325,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,Land Conversion Rate,906,359,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,7,11,1,0,0,0,0,192,0,-1--1--1,,1|(1062,410)|
+1,13,4,1,1,0,0,0,0,192,0,-1--1--1,,1|(498,230)|
+1,15,3,10,1,0,0,0,0,192,0,-1--1--1,,1|(950,202)|
+1,16,6,11,0,0,0,0,0,192,0,-1--1--1,,1|(765,413)|
+10,17,Food Production,882,692,41,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,18,7,17,1,0,0,0,0,64,0,-1--1--1,,1|(1140,517)|
+10,19,Yield,903,808,21,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,20,19,17,0,0,0,0,0,64,0,-1--1--1,,1|(894,760)|
+10,21,Import Dependence,727,583,49,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,17,21,1,0,0,0,0,64,0,-1--1--1,,1|(788,684)|
+10,23,Caloric Baseline Need pP,677,672,62,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,23,21,0,0,0,0,0,64,0,-1--1--1,,1|(698,633)|
+1,25,6,21,0,0,0,0,0,64,0,-1--1--1,,1|(686,519)|
+10,26,Economic Pressure,793,521,38,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,21,26,0,0,0,0,0,64,0,-1--1--1,,1|(754,556)|
+1,28,26,11,0,0,0,0,0,64,0,-1--1--1,,1|(841,450)|
+10,29,Income,762,51,33,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,30,1,29,1,0,0,0,0,64,0,-1--1--1,,1|(634,50)|
+1,31,29,3,1,0,0,0,0,64,0,-1--1--1,,1|(846,66)|
+10,32,Agrotechnological Progress,537,628,68,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,4,32,1,0,0,0,0,64,0,-1--1--1,,1|(528,496)|
+1,34,32,19,1,0,0,0,0,64,0,-1--1--1,,1|(656,775)|
+10,36,Agricultural Land Requirement,1164,666,64,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,19,36,1,0,0,0,0,64,0,-1--1--1,,1|(1057,771)|
+1,38,36,7,1,0,0,0,0,64,0,-1--1--1,,1|(1205,487)|
+10,39,Spatial Planning,433,726,34,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,40,4,39,1,0,0,0,0,64,0,-1--1--1,,1|(438,463)|
+10,41,Soil Protection,1118,926,54,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,42,39,41,1,0,0,0,0,64,0,-1--1--1,,1|(701,973)|
+1,43,41,7,1,0,0,0,0,64,0,-1--1--1,,1|(1270,645)|
 ///---\\\
 :L<%^E!@
 1:current.vdfx
@@ -142,7 +175,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,9
 72:0
 73:0
 4:Time
-5:Land Conversion Rate
+5:Urban Land
 35:Date
 36:YYYY-MM-DD
 37:2000
