@@ -1,7 +1,50 @@
 {UTF-8}
-Aggricultural Land= INTEG (-Land Conversion Rate,
-		1.6004e+06)
-	~	km2
+Economic Pressure=
+	(Import Dependence)^2
+	~	
+	~		|
+
+Caloric Baseline Need pP=
+	3400
+	~	kcal / Person
+	~	Ein EU-Kommissionsbericht, der sich auf FAO-Schaetzungen stuetzt, nennt \
+		fuer die EU eine durchschnittliche dietary energy supply von 3’416 kcal \
+		pro Person und Tag.
+	|
+
+Land Conversion Rate=
+	MAX ( (Land Consumption per Capita * Population*Economic Pressure) , Aggricultural Land\
+		 )
+	~	km2/Time
+	~		|
+
+Food Production=
+	Yield *Aggricultural Land
+	~	kcal
+	~		|
+
+Import Dependence=
+	(Population*Caloric Baseline Need pP) / Food Production
+	~	
+	~		|
+
+Yield=
+	1.8e+09
+	~	kcal / km2
+	~	(Population * Pro person Bedarf) / Food Production
+		
+		Eurostat gibt fuer die EU 2023 eine Getreideproduktion von 271.6 Mio. t auf 51.0 \
+		Mio. ha an. Das sind rund 5.33 t/ha. FAO gibt fuer Weizen grob 334 kcal \
+		pro 100 g an, also etwa 3.34 Mio. kcal pro Tonne.
+		
+		
+		es folgt: ≈ 1.8 Milliarden kcal pro km^2 und Jahr
+	|
+
+Aggricultural Land= INTEG (
+	-Land Conversion Rate,
+		1.6004e+06 )
+	~	km2 [0,?]
 	~		|
 
 Economic Growth=0.02 * (Urban Land / 150000)
@@ -13,14 +56,10 @@ Income= INTEG (Income * Economic Growth,
 	~	
 	~		|
 
-Urban Land= INTEG (Land Conversion Rate,
+Urban Land= INTEG (
+	Land Conversion Rate,
 		181700)
-	~	km2
-	~		|
-
-Land Conversion Rate=MIN ( (Land Consumption per Capita * Population) , Aggricultural Land\
-		 )
-	~	km2/Time
+	~	km2 [0,1.7821e+06]
 	~		|
 
 Land Consumption per Capita=0.0003 * Income
@@ -48,12 +87,12 @@ INITIAL TIME  = 2026
 	|
 
 SAVEPER  = 
-        TIME STEP
+        TIME STEP 
 	~	Year [0,?]
 	~	The frequency with which output is stored.
 	|
 
-TIME STEP  = 0.015625
+TIME STEP  = 1
 	~	Year [0,?]
 	~	The time step for the simulation.
 	|
@@ -61,54 +100,64 @@ TIME STEP  = 0.015625
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *View 1
-$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,92,2
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,92,2
 10,1,Economic Growth,486,257,48,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
 10,2,Income,646,201,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
 10,3,Land Consumption per Capita,835,88,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
 10,4,Urban Land,678,304,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,5,2,3,1,0,0,0,0,192,0,-1--1--1,,1|(679,85)|
-10,6,Population,1201,132,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,Population,452,700,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
 10,7,Aggricultural Land,1233,304,49,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,8,10,7,100,0,0,22,0,192,0,-1--1--1,,1|(1063,325)|
 1,9,10,4,4,0,0,22,0,192,0,-1--1--1,,1|(827,325)|
-11,10,0,937,325,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+11,10,200,937,325,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
 10,11,Land Conversion Rate,937,359,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,12,7,11,1,0,0,0,0,192,0,-1--1--1,,1|(1113,469)|
+1,12,7,11,1,0,0,0,0,192,0,-1--1--1,,1|(1096,413)|
 1,13,4,1,1,0,0,0,0,192,0,-1--1--1,,1|(541,368)|
 1,14,1,2,1,0,0,0,0,192,0,-1--1--1,,1|(523,187)|
 1,15,3,10,1,0,0,0,0,192,0,-1--1--1,,1|(941,120)|
-1,16,6,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,16,6,11,0,0,0,0,0,192,0,-1--1--1,,1|(688,533)|
+10,17,Food Production,928,610,41,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,18,7,17,1,0,0,0,0,64,0,-1--1--1,,1|(1158,475)|
+10,19,Yield,921,886,21,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,20,19,17,0,0,0,0,0,64,0,-1--1--1,,1|(923,758)|
+10,21,Import Dependence,763,648,49,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,17,21,0,0,0,0,0,64,0,-1--1--1,,1|(856,625)|
+10,23,Caloric Baseline Need pP,560,815,62,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,23,21,0,0,0,0,0,64,0,-1--1--1,,1|(655,735)|
+1,26,6,21,0,0,0,0,0,64,0,-1--1--1,,1|(599,675)|
+10,27,Economic Pressure,829,521,38,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,28,21,27,0,0,0,0,0,64,0,-1--1--1,,1|(792,590)|
+1,29,27,11,0,0,0,0,0,64,0,-1--1--1,,1|(875,450)|
 ///---\\\
 :L<%^E!@
 1:current.vdfx
-4:Time
-5:Aggricultural Land
 9:current
-19:92,0
-24:2026
-25:2050
-26:2050
 23:0
 15:0,0,0,1,0,0
+19:92,0
 27:0,
 34:0,
 42:0
 72:0
 73:0
-95:0
-96:0
-97:0
+4:Time
+5:Land Conversion Rate
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+76:0
 77:0
 78:0
-102:1
-93:0
-94:0
-92:0
-91:0
-90:0
-87:0
+79:0
+80:0
+81:0
+24:2026
+25:2050
+26:2050
 75:
 43:
-103:8,8,8,3,8
-105:0,0,0,0,0,0,0,0,0,0
-104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

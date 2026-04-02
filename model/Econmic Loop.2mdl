@@ -1,0 +1,114 @@
+{UTF-8}
+Aggricultural Land= INTEG (-Land Conversion Rate,
+		1.6004e+06)
+	~	km2
+	~		|
+
+Economic Growth=0.02 * (Urban Land / 150000)
+	~	
+	~		|
+
+Income= INTEG (Income * Economic Growth,
+		1)
+	~	
+	~		|
+
+Urban Land= INTEG (Land Conversion Rate,
+		181700)
+	~	km2
+	~		|
+
+Land Conversion Rate=MIN ( (Land Consumption per Capita * Population) , Aggricultural Land\
+		 )
+	~	km2/Time
+	~		|
+
+Land Consumption per Capita=0.0003 * Income
+	~	
+	~		|
+
+Population=4.5e+08
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2050
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2026
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.015625
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,92,2
+10,1,Economic Growth,486,257,48,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Income,646,201,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Land Consumption per Capita,835,88,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Urban Land,678,304,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,5,2,3,1,0,0,0,0,192,0,-1--1--1,,1|(679,85)|
+10,6,Population,1201,132,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Aggricultural Land,1233,304,49,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,7,100,0,0,22,0,192,0,-1--1--1,,1|(1063,325)|
+1,9,10,4,4,0,0,22,0,192,0,-1--1--1,,1|(827,325)|
+11,10,0,937,325,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,Land Conversion Rate,937,359,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,7,11,1,0,0,0,0,192,0,-1--1--1,,1|(1113,469)|
+1,13,4,1,1,0,0,0,0,192,0,-1--1--1,,1|(541,368)|
+1,14,1,2,1,0,0,0,0,192,0,-1--1--1,,1|(523,187)|
+1,15,3,10,1,0,0,0,0,192,0,-1--1--1,,1|(941,120)|
+1,16,6,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+///---\\\
+:L<%^E!@
+1:current.vdfx
+4:Time
+5:Aggricultural Land
+9:current
+19:92,0
+24:2026
+25:2050
+26:2050
+23:0
+15:0,0,0,1,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
