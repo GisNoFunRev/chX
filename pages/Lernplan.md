@@ -49,8 +49,6 @@
 - Dynamiken erkennen (z. B. Wachstum, Kipppunkte)
 - Sensitivitätsanalyse
 - Ursache-Wirkungs-Interpretation
-  
-  ---
 - ### TZ5 – Modelle dokumentieren und kommunizieren
   Das Team kann Modelle verständlich dokumentieren und präsentieren.
   
