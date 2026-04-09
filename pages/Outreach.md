@@ -1,14 +1,10 @@
-- Lieber Herr Brändli
-  Besten
-  Dank für Ihre Nachricht - die ferienbedingt erst heute beantwortet 
-  wird: Ihre Anfrage tönt spannend, jedoch bin ich persönlich kein Experte
-  in diesem Themengebiet. Aus meiner Sicht könnten Ihnen evtl. Prof. Esra
-  Suel von der Abteilung “[Urban Analytics](https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.geo.uzh.ch%2Fen%2Funits%2Funa.html&data=05%7C02%7Calexis.bosermakaratzis%40students.fhnw.ch%7Cd623660dd4dd4ece4ded08de8e2fd99e%7C9d1a5fc8321e4101ae63530730711ac2%7C0%7C0%7C639104533326554720%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=XrKwxh%2FbA2fh2yMWGIaJ50PvqR9tCJqi6399wqXw%2BYA%3D&reserved=0)” oder Prof. Ross Purves von der Abt. “[Geocomputation](https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.geo.uzh.ch%2Fen%2Funits%2Fgco.html&data=05%7C02%7Calexis.bosermakaratzis%40students.fhnw.ch%7Cd623660dd4dd4ece4ded08de8e2fd99e%7C9d1a5fc8321e4101ae63530730711ac2%7C0%7C0%7C639104533326595460%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=Fi87uUTZAnQetuljbjYXfYZhieagmFRl0LqNxcno8%2FM%3D&reserved=0)” weiterhelfen.
-  Ich schlage Ihnen vor, dass Sie - oder die Studierenden - die 
-  entsprechenden Gruppeninformationen anschauen und sich dann bei Bedarf 
-  an Esra Suel oder Ross Purves wenden.
+- Mails
+	- [[Mail an Prof. Esra Suel]]
+	- [[Mail an Prof. Ross Purves]]
+	- [[Mail an Centre for Development and Environment (CDE)]]
 - ---
-- UZH Urban Analytics
+- **UZH Urban Analytics**
+  collapsed:: true
 	- Prof. Esra Suel - "Urban Analytics"
 	  background-color:: green
 	  collapsed:: true
@@ -99,7 +95,8 @@
 			- Auf der Teaching-Seite ist BSc Themes als Unterseite sichtbar, aber in der oeffentlich lesbaren Navigation ohne inhaltlich ausgefuehrte Themenliste. :contentReference[oaicite:33]{index=33}
 			- Kommentar: Dazu konnte ich auf Basis der lesbaren Seite keine belastbare thematische Auswahl machen. :contentReference[oaicite:34]{index=34}
 			- Kontakt: giscience-admin@geo.uzh.ch :contentReference[oaicite:35]{index=35}
-- UZH Geocomputation
+- ---
+- **UZH Geocomputation**
 	- Prof. Ross Purves - "Geocomputation"
 	  background-color:: green
 	  collapsed:: true
@@ -108,6 +105,7 @@
 		- Er ist fuer euch wohl die staerkste Einzelperson in dieser Unit, wenn es um Modellierung von Umweltveraenderung, raeumliche Indikatoren und methodische Fragen zu Datenintegration und Unsicherheit geht. Der direkte Urbanisierungsfokus ist hier schwaecher als bei Urban Analytics, aber fuer Landnutzung, Umweltmodellierung und methodische Fundierung ist die Passung gut. :contentReference[oaicite:2]{index=2}
 		- ross.purves@geo.uzh.ch :contentReference[oaicite:3]{index=3}
 	- Louis Moser - "Geocomputation"
+	  background-color:: green
 	  collapsed:: true
 		- PhD candidate, Geocomputation. :contentReference[oaicite:4]{index=4}
 		- Forschungsgebiete: Auf der Staff-Seite ist nur die Rolle als PhD candidate direkt ausgewiesen. Konkret sichtbar ist aber sein laufendes PhD-Projekt "Measuring Multiple Deprivation in the Canton of Zurich", betreut von Purves, Schwiter, Suel und Kaufmann. Das deutet auf einen Schwerpunkt bei raeumlichen Indikatoren, sozialraeumlicher Analyse und urbanen bzw. regionalen Disparitaeten hin. :contentReference[oaicite:5]{index=5}
@@ -120,6 +118,7 @@
 		- Fuer euch potenziell interessant, wenn ihr spaeter Diskurs, Wahrnehmung, Evidenzquellen oder klimabezogene Zusatzdimensionen in euer Systemdenken einbauen wollt. Fuer den Kern eures Modells ist die Passung aber methodisch staerker als inhaltlich. :contentReference[oaicite:10]{index=10}
 		- inhye.kong@geo.uzh.ch :contentReference[oaicite:11]{index=11}
 	- Environmental modelling and indicators - "Geocomputation"
+	  background-color:: green
 	  collapsed:: true
 		- Research theme der Unit.
 			- Fokus: Wie Umweltveraenderung modelliert und beobachtet werden kann. Genannt werden Unsicherheit, geeignete Skalen, reproduzierbare Indikatoren und die Kombination von Datenquellen wie terrain data, land cover, landscape preference, city walking tour videos und bicycle counters ueber verschiedene Raum- und Zeitskalen hinweg. :contentReference[oaicite:12]{index=12}
@@ -150,3 +149,15 @@
 			- Titel: "Land use modelling for an integrated approach to regional development in the Swiss Alps" von Ariane Walz. :contentReference[oaicite:24]{index=24}
 			- Inhaltlich ist das der direkteste Landnutzungs-Treffer auf der GCO-Forschungsseite. Auch wenn die Arbeit alt ist, ist sie fuer euer Thema besonders interessant, weil Landnutzungsmodellierung und regionale Entwicklung explizit zusammenkommen. :contentReference[oaicite:25]{index=25}
 			- Kontakt: giscience-admin@geo.uzh.ch; fachlich naheliegend ist Ross Purves, der als Betreuer aufgefuehrt ist. :contentReference[oaicite:26]{index=26}
+- ---
+- **Quellen**
+  collapsed:: true
+	- Lieber Herr Brändli
+	  Besten
+	  Dank für Ihre Nachricht - die ferienbedingt erst heute beantwortet 
+	  wird: Ihre Anfrage tönt spannend, jedoch bin ich persönlich kein Experte
+	  in diesem Themengebiet. Aus meiner Sicht könnten Ihnen evtl. Prof. Esra
+	  Suel von der Abteilung “[Urban Analytics](https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.geo.uzh.ch%2Fen%2Funits%2Funa.html&data=05%7C02%7Calexis.bosermakaratzis%40students.fhnw.ch%7Cd623660dd4dd4ece4ded08de8e2fd99e%7C9d1a5fc8321e4101ae63530730711ac2%7C0%7C0%7C639104533326554720%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=XrKwxh%2FbA2fh2yMWGIaJ50PvqR9tCJqi6399wqXw%2BYA%3D&reserved=0)” oder Prof. Ross Purves von der Abt. “[Geocomputation](https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.geo.uzh.ch%2Fen%2Funits%2Fgco.html&data=05%7C02%7Calexis.bosermakaratzis%40students.fhnw.ch%7Cd623660dd4dd4ece4ded08de8e2fd99e%7C9d1a5fc8321e4101ae63530730711ac2%7C0%7C0%7C639104533326595460%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=Fi87uUTZAnQetuljbjYXfYZhieagmFRl0LqNxcno8%2FM%3D&reserved=0)” weiterhelfen.
+	  Ich schlage Ihnen vor, dass Sie - oder die Studierenden - die 
+	  entsprechenden Gruppeninformationen anschauen und sich dann bei Bedarf 
+	  an Esra Suel oder Ross Purves wenden.
