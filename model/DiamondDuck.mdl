@@ -1,0 +1,297 @@
+{UTF-8}
+Innovation Small=
+	Ammount Small City* 50000^1.1
+	~	
+	~		|
+
+Innovation very Large=
+	Ammount Very Large City  * 1e+06^2
+	~	
+	~		|
+
+Ammount Large City=
+	Urban Population Total * (Share Large City / 500000)
+	~	
+	~		|
+
+Ammount Medium City=
+	Urban Population Total * (Share Medium City / 250000)
+	~	
+	~		|
+
+Ammount Small City=
+	Urban Population Total * ( Share Small City / 50000)
+	~	
+	~		|
+
+Ammount Very Large City=
+	Urban Population Total * (Share very Large City / 1e+06)
+	~	
+	~		|
+
+Share Medium City=
+	0.07
+	~	City
+	~		|
+
+Share Small City=
+	0.85
+	~	City
+	~		|
+
+Share very Large City=
+	0.04
+	~	City
+	~		|
+
+Innovation=
+	(Innovation Large+Innovation Medium+Innovation Small + Innovation very Large)/1e+12
+	~	
+	~		|
+
+Innovation Large=
+	Ammount Large City * 500000^1.7
+	~	
+	~		|
+
+Innovation Medium=
+	Ammount Medium City* 250000^1.5
+	~	
+	~		|
+
+Yield=
+	1.8e+09 * (1+ Innovation)
+	~	kcal / km2
+	~	(Population * Pro person Bedarf) / Food Production
+		
+		Eurostat gibt fuer die EU 2023 eine Getreideproduktion von 271.6 Mio. t auf 51.0 \
+		Mio. ha an. Das sind rund 5.33 t/ha. FAO gibt fuer Weizen grob 334 kcal \
+		pro 100 g an, also etwa 3.34 Mio. kcal pro Tonne.
+		
+		
+		es folgt: ≈ 1.8 Milliarden kcal pro km^2 und Jahr
+	|
+
+Share Large City=
+	0.04
+	~	City
+	~		|
+
+Urban Population Total=
+	Urban Land / Urban Population Density
+	~	Person
+	~		|
+
+Urban Population Density=
+	1500
+	~	Person/km2
+	~		|
+
+Aggricultural Land= INTEG (
+	-Land Conversion Rate * ( 1 / Agricultural Land Requirement ) * (180000 / Soil Protection\
+		),
+		1.6004e+06)
+	~	km2 [0,?]
+	~		|
+
+Agricultural Land Requirement=
+	Yield / 1.8e+06
+	~	
+	~		|
+
+Soil Protection=
+	Spatial Planning * 1.01
+	~	
+	~		|
+
+Spatial Planning=
+	Urban Land * 1.01
+	~	
+	~		|
+
+Income=
+	1.1 * Economic Growth
+	~	
+	~		|
+
+Land Consumption per Capita=
+	1.0003 * Income
+	~	
+	~		|
+
+Economic Pressure=
+	(Import Dependence)^2
+	~	
+	~		|
+
+Caloric Baseline Need pP=
+	3400*365
+	~	kcal / Person
+	~	Ein EU-Kommissionsbericht, der sich auf FAO-Schaetzungen stuetzt, nennt \
+		fuer die EU eine durchschnittliche dietary energy supply von 3’416 kcal \
+		pro Person und Tag.
+	|
+
+Land Conversion Rate=
+	MIN ( (Land Consumption per Capita * Population*Economic Pressure )/1 , Aggricultural Land\
+		 / 1)
+	~	km2/Time
+	~		|
+
+Food Production=
+	Yield *Aggricultural Land
+	~	kcal
+	~		|
+
+Import Dependence=
+	(Population*Caloric Baseline Need pP) / Food Production
+	~	
+	~		|
+
+Economic Growth=0.02 * (Urban Land / 150000)
+	~	
+	~		|
+
+Urban Land= INTEG (
+	Land Conversion Rate,
+		181700)
+	~	km2 [0,1.7821e+06]
+	~		|
+
+Population=4.5e+08
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2050
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2026
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,112,2
+10,1,Economic Growth,592,129,48,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Land Consumption per Capita,945,168,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Urban Land,672,321,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Population,679,475,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,Aggricultural Land,1227,321,49,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,8,5,100,0,0,22,0,192,0,-1--1--1,,1|(1060,342)|
+1,7,8,3,4,0,0,22,0,192,0,-1--1--1,,1|(824,342)|
+11,8,200,936,342,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,9,Land Conversion Rate,936,376,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,5,9,1,0,0,0,0,192,0,-1--1--1,,1|(1092,427)|
+1,11,3,1,1,0,0,0,0,192,0,-1--1--1,,1|(528,247)|
+1,12,2,8,1,0,0,0,0,192,0,-1--1--1,,1|(980,219)|
+1,13,4,9,0,0,0,0,0,192,0,-1--1--1,,1|(795,430)|
+10,14,Food Production,912,709,41,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,5,14,1,0,0,0,0,64,0,-1--1--1,,1|(1170,534)|
+10,16,Yield,933,825,21,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,17,16,14,0,0,0,0,0,64,0,-1--1--1,,1|(924,777)|
+10,18,Import Dependence,757,600,49,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,14,18,1,0,0,0,0,64,0,-1--1--1,,1|(818,701)|
+10,20,Caloric Baseline Need pP,707,689,62,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,21,20,18,0,0,0,0,0,64,0,-1--1--1,,1|(728,650)|
+1,22,4,18,0,0,0,0,0,64,0,-1--1--1,,1|(716,536)|
+10,23,Economic Pressure,823,538,38,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,18,23,0,0,0,0,0,64,0,-1--1--1,,1|(784,573)|
+1,25,23,9,0,0,0,0,0,64,0,-1--1--1,,1|(871,467)|
+10,26,Income,792,68,33,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,1,26,1,0,0,0,0,64,0,-1--1--1,,1|(664,67)|
+1,28,26,2,1,0,0,0,0,64,0,-1--1--1,,1|(876,83)|
+10,32,Agricultural Land Requirement,1194,683,64,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,16,32,1,0,0,0,0,64,0,-1--1--1,,1|(1087,788)|
+1,34,32,5,1,0,0,0,0,64,0,-1--1--1,,1|(1235,504)|
+10,35,Spatial Planning,711,968,34,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,36,3,35,1,0,0,0,0,64,0,-1--1--1,,1|(479,653)|
+10,37,Soil Protection,1148,961,54,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,38,35,37,1,0,0,0,0,64,0,-1--1--1,,1|(913,981)|
+1,39,37,5,1,0,0,0,0,64,0,-1--1--1,,1|(1300,662)|
+10,40,Urban Population Total,245,415,41,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,41,Urban Population Density,136,322,66,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,42,41,40,0,0,0,0,0,64,0,-1--1--1,,1|(184,363)|
+1,43,3,40,0,0,0,0,0,64,0,-1--1--1,,1|(462,366)|
+10,44,Ammount Small City,111,555,41,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,45,Ammount Medium City,227,561,47,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,46,Ammount Large City,366,559,41,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,47,40,44,0,0,0,0,0,64,0,-1--1--1,,1|(182,479)|
+1,48,40,45,0,0,0,0,0,64,0,-1--1--1,,1|(236,481)|
+1,49,40,46,0,0,0,0,0,64,0,-1--1--1,,1|(300,481)|
+10,50,Innovation Small,95,643,40,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,51,Innovation Medium,219,650,40,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,52,Innovation Large,365,643,40,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,53,44,50,0,0,0,0,0,64,0,-1--1--1,,1|(104,592)|
+1,54,45,51,0,0,0,0,0,64,0,-1--1--1,,1|(223,598)|
+1,55,46,52,0,0,0,0,0,64,0,-1--1--1,,1|(365,594)|
+10,60,Innovation,206,746,39,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,61,50,60,0,0,0,0,0,64,0,-1--1--1,,1|(148,693)|
+1,63,51,60,0,0,0,0,0,64,0,-1--1--1,,1|(213,694)|
+1,64,52,60,0,0,0,0,0,64,0,-1--1--1,,1|(285,694)|
+1,65,60,16,0,0,0,0,0,64,0,-1--1--1,,1|(571,785)|
+10,66,Ammount Very Large City,505,568,59,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,67,40,66,0,0,0,0,0,64,0,-1--1--1,,1|(368,487)|
+10,68,Innovation very Large,497,642,40,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,69,66,68,0,0,0,0,0,64,0,-1--1--1,,1|(502,598)|
+1,71,68,60,0,0,0,0,0,64,0,-1--1--1,,1|(351,693)|
+10,72,Share Small City,55,472,47,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,73,72,44,0,0,0,0,0,64,0,-1--1--1,,1|(78,507)|
+10,74,Share Medium City,189,481,47,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,75,74,45,0,0,0,0,0,64,0,-1--1--1,,1|(204,514)|
+10,76,Share Large City,290,481,47,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,77,76,46,0,0,0,0,0,64,0,-1--1--1,,1|(322,514)|
+10,78,Share very Large City,434,489,41,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,79,78,66,0,0,0,0,0,64,0,-1--1--1,,1|(464,523)|
+///---\\\
+:L<%^E!@
+1:current
+9:current
+23:0
+15:0,0,0,1,0,0
+19:112,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+4:Time
+5:Innovation very Large
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:2026
+25:2050
+26:2050
+75:
+43:
