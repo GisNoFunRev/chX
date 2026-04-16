@@ -56,11 +56,27 @@
 - {{renderer :kanbandnd_69cebd21-61a4-4734-93d9-938b28159242}}
 	- Woche 16
 		- TODO Vensim Loops Modularisieren
-		- TODO Loops auswendig lernen
 	- Woche 17
+		- TODO Magic Numbers eliminieren
+		- TODO Auxiliary für LandConversion Pressure bauen
+		- TODO Recherche für known unknowns bez ökonomischen Bezügen in unserer Modellierung (Salomon)
+		- TODO Loops auswendig lernen
+		- TODO Abgabedatum fixen für Zeitplanung
+		-
 	- Woche 18
+		- TODO Sensitivitätsprüfung ->
+		  Loopamputation
 	- Woche 19
+		- TODO Loopamputation
+		- TODO Für bericht: LateX Pipeline Dependencies in Auxiliaries visualisieren
+		-
+		-
+		-
 	- Woche 20
 		- LATER Bericht schreiben
+		  :LOGBOOK:
+		  CLOCK: [2026-04-16 Thu 15:52:25]--[2026-04-16 Thu 15:52:26] =>  00:00:01
+		  :END:
 	- Woche 21
 		- LATER Bericht schreiben
+-
