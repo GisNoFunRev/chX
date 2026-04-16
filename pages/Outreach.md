@@ -97,6 +97,7 @@
 			- Kontakt: giscience-admin@geo.uzh.ch :contentReference[oaicite:35]{index=35}
 - ---
 - **UZH Geocomputation**
+  collapsed:: true
 	- Prof. Ross Purves - "Geocomputation"
 	  background-color:: green
 	  collapsed:: true
