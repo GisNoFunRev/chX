@@ -1,7 +1,10 @@
 - Mails
 	- [[Mail an Prof. Esra Suel]]
 	- [[Mail an Prof. Ross Purves]]
+		- 2 wochen geben bevor nachfragen
 	- [[Mail an Centre for Development and Environment (CDE)]]
+		- nachhaken
+	- kathrin
 - ---
 - **UZH Urban Analytics**
   collapsed:: true
