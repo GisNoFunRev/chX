@@ -57,11 +57,10 @@
 	- Woche 16
 		- TODO Vensim Loops Modularisieren
 	- Woche 17
-		- TODO Magic Numbers eliminieren
-		- TODO Auxiliary für LandConversion Pressure bauen
-		- TODO Recherche für known unknowns bez ökonomischen Bezügen in unserer Modellierung (Salomon)
-		- TODO Loops auswendig lernen
-		- TODO Abgabedatum fixen für Zeitplanung
+		- DONE Magic Numbers eliminieren
+		- DONE Auxiliary für LandConversion Pressure bauen
+		- DONE Recherche für known unknowns bez ökonomischen Bezügen in unserer Modellierung (Salomon)
+		- DONE Abgabedatum fixen für Zeitplanung
 		-
 	- Woche 18
 		- TODO Sensitivitätsprüfung ->
@@ -73,10 +72,19 @@
 		-
 		-
 	- Woche 20
+		- TODO Loops auswendig lernen
+	- Woche 21
+	- Woche 22
+	- Woche 23
+	- Woche 24
 		- LATER Bericht schreiben
 		  :LOGBOOK:
 		  CLOCK: [2026-04-16 Thu 15:52:25]--[2026-04-16 Thu 15:52:26] =>  00:00:01
 		  :END:
-	- Woche 21
+	- Woche 25
 		- LATER Bericht schreiben
+	- Woche 26
+	- Woche 27
+		- **Verteidigung**
+	-
 -
