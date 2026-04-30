@@ -155,7 +155,6 @@
 			- Kontakt: giscience-admin@geo.uzh.ch; fachlich naheliegend ist Ross Purves, der als Betreuer aufgefuehrt ist. :contentReference[oaicite:26]{index=26}
 - ---
 - **Quellen**
-  collapsed:: true
 	- Lieber Herr Brändli
 	  Besten
 	  Dank für Ihre Nachricht - die ferienbedingt erst heute beantwortet 
@@ -165,3 +164,5 @@
 	  Ich schlage Ihnen vor, dass Sie - oder die Studierenden - die 
 	  entsprechenden Gruppeninformationen anschauen und sich dann bei Bedarf 
 	  an Esra Suel oder Ross Purves wenden.
+- ---
+- [[Präsentation]]
