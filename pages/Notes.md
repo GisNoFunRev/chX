@@ -1,0 +1,32 @@
+- agricultural land -> normtive statment: intensivicaion is part of the problem. in connection with soil degradation.
+- policies and laws:
+	- implementation over upper and lower boundaries
+	- upper limits of law. upper limits ,
+	- policy impact is important to include
+- Food Production:
+	- Recursive to self as food goes also to animals, which in turn produce food
+- enviromentGPT:
+	- https://wesr.unep.org/environmentgpt/
+	-
+- import dependence:
+	- not only driven by food production. but also by markets, as food is also imported
+- general:
+	- social relations and solcial behavior are not modelled
+- land conversion:
+	- rename it more explicitly, as directionality is not self explanatory
+- kilocalories:
+	- another indicator. nutritional values. kcal is outdated. -> Mail follows
+- innovation:
+	- social innovation
+- norman
+	- Reinforcing 2/ Economic Growth:
+		- higher income -> larger homes:
+			- preferneces in decision making. that's a big assumption. question this. some people go into more luxurious smaller homes
+	- Balacing 1/ Agricultural Innovation:
+		- more urbanization leads to more innovation:
+			- combinatorial innovataion. much less siginificant force. probably not dominnant
+- What is our research question
+- Zoe
+	- Soil degradation data:
+	- [https://esdac.jrc.ec.europa.eu/content/un-sustainable-development-goal-1531-assessment-land-degradation-indicator-eu-scale](https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fesdac.jrc.ec.europa.eu%2Fcontent%2Fun-sustainable-development-goal-1531-assessment-land-degradation-indicator-eu-scale&data=05%7C02%7Calexis.bosermakaratzis%40students.fhnw.ch%7Ccec5b49afe0a48ad6a5608deaa8e4139%7C9d1a5fc8321e4101ae63530730711ac2%7C0%7C0%7C639135725148176314%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=ZeH5ptK4trVlbBuNnBIXc71w%2F46sfq3jUzOBYVoN2d8%3D&reserved=0)
+	- [https://esdac.jrc.ec.europa.eu/esdacviewer/euso-dashboard/](https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fesdac.jrc.ec.europa.eu%2Fesdacviewer%2Feuso-dashboard%2F&data=05%7C02%7Calexis.bosermakaratzis%40students.fhnw.ch%7Ccec5b49afe0a48ad6a5608deaa8e4139%7C9d1a5fc8321e4101ae63530730711ac2%7C0%7C0%7C639135725148236760%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=I9r0pirG8cmQPZ53StHnxvC9FkAEqBAmUXMdsKpHIXY%3D&reserved=0)
