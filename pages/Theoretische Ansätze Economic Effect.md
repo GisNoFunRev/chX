@@ -98,8 +98,10 @@
 - `Economic Conversion Demand`: Auxiliary
 - `Urban Expansion Adjustment Time`: Constant
 - `Land Conversion Rate`: Flow
-  
-  ---
+-
+- ### Umsetzung
+	- [[Umsetzung Urban economics / Alonso–Muth–Mills + Sprawl Dokumentation]]
+- ---
 - # Option 2 — Agglomeration economies / Economic geography
 - ## Warum diese Option stark ist
 - Diese Theorie-Familie erklärt, warum wirtschaftliche Aktivität sich räumlich konzentriert und warum Städte Produktivitätsvorteile bieten können. Duranton und Puga unterscheiden drei grosse Mikrofundierungen: sharing, matching und learning. In dichter urbaner Umgebung können Akteure Infrastruktur, spezialisierte Inputs und Märkte besser teilen, passende Partner leichter finden und Wissen schneller austauschen. Gleichzeitig weisen neuere Übersichten und Meta-Analysen darauf hin, dass Agglomerationsvorteile real sind, aber in der Grössenordnung variieren und durch Überlastung, hohe Bodenpreise und Wohnkosten begrenzt werden.
