@@ -87,7 +87,7 @@
 				- TODO implementation of social innovation
 			- ---
 			- TODO Übersicht Modell Refactoring
-				- TODO land conversion factors in km²
+				- TODO land conversion factors in km² (spatial planning und import pressure)
 				  :LOGBOOK:
 				  CLOCK: [2026-05-14 Thu 13:44:20]--[2026-05-14 Thu 13:44:21] =>  00:00:01
 				  :END:
