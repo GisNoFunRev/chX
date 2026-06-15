@@ -1,0 +1,478 @@
+{UTF-8}
+Income=Income Factor * Economic Growth
+	~	
+	~		|
+
+Agricultural Land Requirement=Annual kcal production per km2 / Yield
+	~	
+	~	1.8e+09 kcal/km^2/Jahr repraesentiert die angenommene jaehrliche \
+		Nahrungsenergieproduktion pro Quadratkilometer landwirtschaftlich \
+		genutzter, getreidebasierter Produktionsflaeche in der EU.
+		1.8e+09 kcal/km^2/Jahr ist ein cereal-basierter Proxy fuer die jaehrliche \
+		Nahrungsenergieproduktion pro km^2, abgeleitet aus Eurostat-Daten zur \
+		EU-Getreideproduktion 2023 und einer FAO-Kaloriendichte fuer Weizen.
+		Eurostat: 271.6 Mio. t Getreideproduktion auf 51.0 Mio. ha geernteter \
+		Getreideflaeche in der EU 2023.
+		FAO: Weizen = 334 kcal pro 100 g als Kalorien-Proxy.
+		
+		Daraus folgt:
+		
+		271.6 Mio. t / 51.0 Mio. ha = 5.33 t/ha
+		= 533 t/km^2
+		533 × 3.34 Mio. kcal/t
+		= ca. 1.78 × 10^9 kcal/km^2/Jahr.
+	|
+
+Ammount Large City=Urban Population Total * (Share Large City / Treshold Large City)
+	~	
+	~		|
+
+Ammount Medium City=Urban Population Total * (Share Medium City / Treshold Medium City\
+		)
+	~	
+	~		|
+
+Ammount Small City=Urban Population Total * ( Share Small City / Treshold Small City)
+	~	
+	~		|
+
+Ammount Very Large City=Urban Population Total * (Share very Large City / Treshold Very Large City\
+		)
+	~	
+	~		|
+
+Annual kcal production per km2=1.8e+06
+	~	
+	~		|
+
+Max Ceiling Soil Protection=0.3
+	~	
+	~	Bedingung: 
+		——————
+		Wenn Urban Land nach multiplikation mit Spacial Planing und Soil Protection dreimal \
+		grösser ist, als die Initial Urban Land, tritt dieser Effekt ein.
+		——————
+		Effekt: 
+		Es stellt die Untere Schranke der Soil Protection Effect auf 0.3 \
+		standardmässig ein.
+	|
+
+Economic Growth=Economic Growth Factor * Urban Land Index
+	~	
+	~		|
+
+Economic Growth Factor=1.02
+	~	
+	~		|
+
+Soil Protection Factor=1.001
+	~	
+	~		|
+
+Spacial Planing Factor=1.0001
+	~	
+	~		|
+
+Spatial Planning=Urban Land Index * Spacial Planing Factor
+	~	
+	~		|
+
+Innovation very Large=Ammount Very Large City  * Treshold Very Large City^Urban Scaling Exponent very Large
+	~	
+	~		|
+
+Income Factor=1.1
+	~	
+	~		|
+
+Treshold Medium City=250000
+	~	
+	~		|
+
+Innovation Large=Ammount Large City * Treshold Large City^Urban Scaling Exponent Large
+	~	
+	~		|
+
+Innovation Medium=Ammount Medium City* Treshold Medium City^Urban Scaling Exponent Medium
+	~	
+	~		|
+
+Innovation Small=Ammount Small City* Treshold Small City^Urban Scaling Exponent Small
+	~	
+	~		|
+
+Urban Scaling Exponent very Large=2
+	~	
+	~		|
+
+Urban Scaling Exponent Small=1.1
+	~	
+	~		|
+
+Land Consumption Factor=1.0003
+	~	
+	~		|
+
+Land Consumption per Capita=Land Consumption Factor * Income
+	~	
+	~		|
+
+Land Conversion Pressure=MIN ( Land Conversion Pressure Factors, Aggricultural Land /\
+		 1)
+	~	
+	~		|
+
+Land Conversion Pressure Factors=(Land Consumption per Capita * 
+	Economic Pressure * 
+	Soil Protection Effect * 
+	Agricultural Land Requirement)
+	/1
+	~	
+	~		|
+
+Treshold Very Large City=1e+06
+	~	
+	~		|
+
+Soil Protection=Spatial Planning * Soil Protection Factor
+	~	
+	~		|
+
+Treshold Small City=50000
+	~	
+	~		|
+
+Treshold Large City=500000
+	~	
+	~		|
+
+Soil Protection Effect=MAX(Max Ceiling Soil Protection, 1 / Soil Protection)
+	~	
+	~		|
+
+Urban Scaling Exponent Medium=1.5
+	~	
+	~		|
+
+Urban Scaling Exponent Large=1.7
+	~	
+	~		|
+
+Aggricultural Land= INTEG (
+	-Land Conversion Rate,
+		1.6004e+06)
+	~	km2 [0,?]
+	~		|
+
+Land Conversion Rate=
+	MIN (Land Conversion Pressure, Max Feasible Conversion)
+	~	km2/Time
+	~		|
+
+Max Feasible Conversion=
+	Aggricultural Land / 1
+	~	
+	~		|
+
+"Kcal per km^2 avg per t"=
+	1.8e+09
+	~	
+	~		|
+
+Reference Initial Urban Land= INITIAL(
+	Urban Land)
+	~	
+	~		|
+
+Urban Land Index=
+	Urban Land / Reference Initial Urban Land
+	~	
+	~		|
+
+Yield=
+	"Kcal per km^2 avg per t" * (1+ Innovation Index)
+	~	kcal / km2
+	~	(Population * Pro person Bedarf) / Food Production
+		
+		Eurostat gibt fuer die EU 2023 eine Getreideproduktion von 271.6 Mio. t auf 51.0 \
+		Mio. ha an. Das sind rund 5.33 t/ha. FAO gibt fuer Weizen grob 334 kcal \
+		pro 100 g an, also etwa 3.34 Mio. kcal pro Tonne.
+		
+		
+		es folgt: ≈ 1.8 Milliarden kcal pro km^2 und Jahr
+	|
+
+Share Medium City=
+	0.07
+	~	City
+	~		|
+
+Share Small City=
+	0.85
+	~	City
+	~		|
+
+Share very Large City=
+	0.04
+	~	City
+	~		|
+
+Share Large City=
+	0.04
+	~	City
+	~		|
+
+Total Urban Innovation Potential=
+	(Innovation Large+Innovation Medium+Innovation Small + Innovation very Large)
+	~	
+	~		|
+
+Innovation Index=
+	Total Urban Innovation Potential / Reference Total Innovation Potential
+	~	
+	~		|
+
+Urban Population Density=
+	1500
+	~	Person/km2
+	~		|
+
+Urban Population Total=
+	Urban Land / Urban Population Density
+	~	Person
+	~		|
+
+Reference Total Innovation Potential=
+	INITIAL( Total Urban Innovation Potential )
+	~	
+	~		|
+
+Economic Pressure=
+	1 + (Import Dependence)^2
+	~	
+	~		|
+
+Caloric Baseline Need pP=
+	3400*365
+	~	kcal / Person
+	~	Ein EU-Kommissionsbericht, der sich auf FAO-Schaetzungen stuetzt, nennt \
+		fuer die EU eine durchschnittliche dietary energy supply von 3’416 kcal \
+		pro Person und Tag.
+	|
+
+Food Production=
+	Yield *Aggricultural Land
+	~	kcal
+	~		|
+
+Import Dependence=
+	(Population*Caloric Baseline Need pP) / Food Production
+	~	
+	~		|
+
+Urban Land= INTEG (
+	Land Conversion Rate,
+		181700)
+	~	km2 [0,1.7821e+06]
+	~		|
+
+Population=4.5e+08
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2050
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2026
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,119,2
+10,1,Economic Growth,42,183,38,17,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Land Consumption per Capita,420,140,60,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Urban Land,-194,381,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Population,1225,-25,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,Aggricultural Land,1440,385,49,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,8,5,100,0,0,22,0,192,0,-1--1--1,,1|(1073,402)|
+1,7,8,3,4,0,0,22,0,192,0,-1--1--1,,1|(297,402)|
+11,8,0,749,402,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,9,Land Conversion Rate,749,436,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Food Production,1324,143,41,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,11,5,10,1,0,0,0,0,64,0,-1--1--1,,1|(1442,293)|
+10,12,Yield,1324,667,21,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,13,12,10,1,0,0,0,0,64,0,-1--1--1,,1|(1607,445)|
+10,14,Import Dependence,1012,76,49,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,10,14,1,0,0,0,0,64,0,-1--1--1,,1|(1079,79)|
+10,16,Caloric Baseline Need pP,1053,-54,62,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,17,16,14,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,18,4,14,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,19,Economic Pressure,821,101,38,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,20,14,19,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,21,Income,206,136,33,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,1,21,1,0,0,0,0,64,0,-1--1--1,,1|(175,142)|
+1,23,21,2,1,0,0,0,0,64,0,-1--1--1,,1|(301,143)|
+10,24,Agricultural Land Requirement,591,496,64,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,12,24,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,26,Spatial Planning,93,291,34,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+10,27,Soil Protection,285,283,54,10,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+1,28,26,27,1,0,0,0,0,64,0,-1--1--1,,1|(210,296)|
+10,29,Urban Population Total,-32,561,46,46,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,Urban Population Density,-237,474,66,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,31,30,29,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,32,3,29,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,33,Ammount Small City,-389,776,55,19,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+10,34,Ammount Medium City,-84,794,47,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+10,35,Ammount Large City,165,782,41,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+1,36,29,33,1,0,0,0,0,64,0,-1--1--1,,1|(-254,568)|
+1,37,29,34,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,38,29,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,39,Innovation Small,-380,915,52,52,2,131,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+10,40,Innovation Medium,-76,922,51,51,2,131,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+10,41,Innovation Large,133,923,52,52,2,131,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+1,42,33,39,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,43,34,40,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,44,35,41,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,45,Total Urban Innovation Potential,-5,1248,45,25,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,46,39,45,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,47,40,45,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,48,41,45,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,49,Ammount Very Large City,420,776,59,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+1,50,29,49,1,0,0,0,0,64,0,-1--1--1,,1|(316,684)|
+10,51,Innovation very Large,415,926,55,55,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,52,49,51,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,53,51,45,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,54,Share Small City,-442,632,47,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+1,55,54,33,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,56,Share Medium City,-146,659,47,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+1,57,56,34,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,58,Share Large City,182,681,47,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+1,59,58,35,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,60,Share very Large City,405,674,41,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|||0-0-0,0,0,0,0,0,0
+1,61,60,49,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,62,Reference Total Innovation Potential,782,1053,74,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,63,45,62,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+10,64,Innovation Index,722,882,40,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,65,62,64,1,0,0,0,0,64,0,-1--1--1,,1|(761,987)|
+1,66,45,64,1,0,0,0,0,64,0,-1--1--1,,1|(258,1176)|
+1,67,64,12,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,68,Land Conversion Pressure,748,257,65,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,69,68,9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,70,19,101,1,0,0,0,0,64,0,-1--1--1,,1|(723,71)|
+1,71,5,68,1,0,0,0,0,64,0,-1--1--1,,1|(1145,278)|
+1,72,2,101,1,0,0,0,0,64,0,-1--1--1,,1|(509,119)|
+10,73,Max Feasible Conversion,841,324,51,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,74,5,73,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,75,73,9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,76,24,101,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,77,Urban Land Index,-92,269,45,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,78,Reference Initial Urban Land,-258,203,61,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,79,78,77,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,80,3,77,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,81,77,26,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,82,3,78,0,0,0,0,0,64,1,-1--1--1,,1|(0,0)|
+1,83,77,1,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,84,"Kcal per km^2 avg per t",1428,815,54,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,85,84,12,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,86,Soil Protection Effect,449,281,46,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,87,27,86,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,88,86,101,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,89,Economic Growth Factor,-68,58,51,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,90,89,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,91,Income Factor,123,33,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,92,91,21,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,93,Land Consumption Factor,341,29,53,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,94,93,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,95,Spacial Planing Factor,-56,362,39,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,96,95,26,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,97,Soil Protection Factor,229,357,59,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,98,97,27,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,99,Max Ceiling Soil Protection,396,361,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,100,99,86,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,101,Land Conversion Pressure Factors,601,166,48,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,102,101,68,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,103,Annual kcal production per km2,279,540,63,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,104,103,24,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,105,Treshold Small City,-606,789,44,23,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,106,105,33,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,107,Treshold Medium City,-239,789,40,8,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,108,107,34,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,109,Treshold Large City,47,787,35,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,110,109,35,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,111,Treshold Very Large City,285,783,42,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,112,111,49,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,113,111,51,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,114,109,41,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,115,107,40,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,116,105,39,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,117,Urban Scaling Exponent Small,-528,1014,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,118,117,39,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,119,Urban Scaling Exponent Medium,-201,1021,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,120,119,40,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,121,Urban Scaling Exponent Large,-3,1025,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,122,121,41,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,123,Urban Scaling Exponent very Large,252,977,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,124,123,51,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+///---\\\
+:L<%^E!@
+1:current.vdfx
+4:Time
+5:Agricultural Land Requirement
+9:current
+19:119,0
+24:2026
+25:2050
+26:2050
+23:0
+15:0,0,0,1,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1

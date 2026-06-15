@@ -1,0 +1,627 @@
+{UTF-8}
+Urban Fringe Radius=
+	MAX(0, (Mean Household Income - Other Consumption Per Household - Land per Household\
+		 * Agricultural Rent) / Transport Cost per km)
+	~	km
+	~	x_star = (Y - z - q * R_A) / t Bedeutung:
+		
+		Ursp. Budgetfunktion (auf Hashaltsbasis): Y = z + R(x) * q + t * x
+		Y = Haushaltseinkommen
+		z = sonstiger Konsum
+		R(x) = urbane Bodenrente bei Distanz x
+		q = Landkonsum pro Haushalt
+		t = Transportkosten pro km
+		x = Distanz zum Zentrum
+		
+		Nach R(x) umgestellt:
+		
+		R(x) = (Y - z - t * x) / q
+		
+		An der Stadtgrenze x_star gilt die AMM-Gleichgewichtsbedingung:
+		
+		R(x_star) = R_A
+		
+		mit R_A = Agrarland-Rente.
+		
+		Einsetzen:
+		
+		R_A = (Y - z - t * x_star) / q
+		
+		Nach x_star umgestellt:
+		
+		x_star = (Y - z - q * R_A) / t
+		
+		Diese Variable verwendet x_star als Urban Fringe Radius.
+	|
+
+Other Consumption per Capita  = A FUNCTION OF( )
+	~	
+	~		|
+
+Agricultural Rent  = A FUNCTION OF( )
+	~	
+	~		|
+
+Other Consumption Per Household=A FUNCTION OF(Other Consumption Per Household,Other Consumption per Capita\
+		) ~~|
+Other Consumption Per Household=
+	Other Consumption per Capita * Mean Household Size
+	~	EUR
+	~		|
+
+Land per Household  = A FUNCTION OF( Land per Capita) ~~|
+Land per Household=
+	Land per Capita * Mean Household Size
+	~	
+	~		|
+
+Mean Household Income  = A FUNCTION OF( Income per Capita) ~~|
+Mean Household Income=
+	Income per Capita * Mean Household Size
+	~	
+	~		|
+
+Number of Households=
+	Population / Mean Household Size
+	~	Households
+	~		|
+
+Land per Capita=
+	0.0003
+	~	km2
+	~	0.0003km2  mit 1 m^2 = 0.000001 km^2
+	|
+
+Desired Urban Land=
+	3.141 * (Urban Fringe Radius^2)
+	~	km2
+	~		|
+
+Desired Urban Land Total  = A FUNCTION OF( ) ~~|
+Desired Urban Land Total=Desired Urban Land per Capita*Population
+	~	km2
+	~		|
+
+Economic Land Conversion Demand  = A FUNCTION OF( Desired Urban Land Total,Transition Inertia\
+		,-Urban Land) ~~|
+Economic Land Conversion Demand=MAX ( 0  , (Desired Urban Land Total  - Urban Land) )
+	~	
+	~		|
+
+Urban Expansion Adjustment Time  = A FUNCTION OF( )
+	~	
+	~		|
+
+Urban Land Gap=
+	MAX ( 0 , Desired Urban Land - Urban Land )
+	~	
+	~		|
+
+Transport Cost per km=A FUNCTION OF(Transport Cost per km)
+	~	EUR/km
+	~		|
+
+Mean Household Size=
+	3
+	~	
+	~		|
+
+Income per Capita  = A FUNCTION OF( )
+	~	
+	~		|
+
+Transition Inertia=
+	Urban Land Gap / Urban Expansion Adjustment Time
+	~	
+	~		|
+
+Land Conversion Pressure Factors=Economic Land Conversion Demand
+	~	
+	~		|
+
+Import Dependence=(Population*Caloric Baseline Need pP) / Food Production
+	~	
+	~		|
+
+Aggricultural Land Requirement="Target Value: Populational Need of Kcal in Km2"- Aggricultural Land
+	~	
+	~		|
+
+Ammount Large City=Urban Population Total * (Share Large City / Treshold Large City)
+	~	
+	~		|
+
+Ammount Medium City=Urban Population Total * (Share Medium City / Treshold Medium City\
+		)
+	~	
+	~		|
+
+Ammount Small City=Urban Population Total * ( Share Small City / Treshold Small City)
+	~	
+	~		|
+
+Ammount Very Large City=Urban Population Total * (Share very Large City / Treshold Very Large City\
+		)
+	~	
+	~		|
+
+Births=Population * Crude Birth Rate
+	~	Person
+	~		|
+
+Innovation Small=Ammount Small City* Treshold Small City^Urban Scaling Exponent Small
+	~	
+	~		|
+
+Crude Birth Rate=0.0087
+	~	
+	~	Die 0,0087 in unserem Modell ist die Crude Birth Rate (CBR) – rohe Geburtenziffer:
+			•	Einheit: Geburten pro Person und Jahr (oder ‰ = pro 1000 Personen)
+			•	Beantwortet: "Wie viele Babys werden pro Jahr geboren, bezogen auf die \
+		Gesamtbevölkerung?"
+			•	EU-27 aktuell: ca. 8,7 ‰ = 0,0087
+	|
+
+Crude Death Rate=0.0109
+	~	
+	~	Die Crude Death Rate (CDR):
+			•	Einheit: Sterbefälle pro Person und Jahr (10,9 ‰)
+			•	Berechnung: 451,8 Mio. × 0,0109 ≈ 4,92 Mio. Sterbefälle/Jahr \
+		(EU-Realwert  4,8–5,1 Mio.)
+	|
+
+Deaths=Population * Crude Death Rate
+	~	Person
+	~		|
+
+Spacial Planing Factor=1.0001
+	~	
+	~		|
+
+Spatial Planning=Urban Land Index * Spacial Planing Factor
+	~	
+	~		|
+
+"Target Value: Populational Need of Kcal in Km2"=Population kcal demand / Yield
+	~	
+	~		|
+
+Initial Population=4.518e+08
+	~	
+	~		|
+
+Treshold Small City=50000
+	~	
+	~		|
+
+Innovation Large=Ammount Large City * Treshold Large City^Urban Scaling Exponent Large
+	~	
+	~		|
+
+Innovation Medium=Ammount Medium City* Treshold Medium City^Urban Scaling Exponent Medium
+	~	
+	~		|
+
+Max Ceiling Soil Protection=0.3
+	~	
+	~	Bedingung: 
+		——————
+		Wenn Urban Land nach multiplikation mit Spacial Planing und Soil Protection dreimal \
+		grösser ist, als die Initial Urban Land, tritt dieser Effekt ein.
+		——————
+		Effekt: 
+		Es stellt die Untere Schranke der Soil Protection Effect auf 0.3 \
+		standardmässig ein.
+	|
+
+Innovation very Large=Ammount Very Large City  * Treshold Very Large City^Urban Scaling Exponent very Large
+	~	
+	~		|
+
+net Migration level absolute=1.3e+06
+	~	Person
+	~	"Migrationsniveau" ist etwas unglücklich übersetzt von mir – im Englischen \
+		heisst es net migration level oder einfach net migration. Es ist schlicht:
+		Nettomigration = Zuwanderung − Abwanderung
+			•	Einheit: Personen pro Jahr (absoluter Zustrom, nicht %)
+			•	EU-27 2022–2024: ca. +1,1 bis +1,5 Mio./Jahr im Schnitt
+			•	2022 war Ausreisser wegen Ukraine (deutlich höher)
+		Der Name "Niveau" soll ausdrücken, dass wir den Wert konstant halten \
+		(nicht als Rate der Bevölkerung, sondern als absolute Zahl). Die \
+		Alternative wäre eine Migrationsrate (z. B. 0,003/Jahr × Bevölkerung), \
+		aber das macht demografisch wenig Sinn: Ob 1,3 Mio. Menschen pro Jahr in \
+		die EU ziehen, hängt von Arbeitsmarkt, Kriegen, Klimawandel ab – nicht \
+		davon, wie gross die EU-Bevölkerung gerade ist.
+	|
+
+Land Conversion Rate=MIN (Land Conversion Pressure Factors , Max Feasible Conversion)
+	~	km2/Time
+	~		|
+
+Urban Scaling Exponent very Large=1.6
+	~	
+	~		|
+
+Population kcal demand=Caloric Baseline Need pP * Population
+	~	kcal
+	~		|
+
+Soil Protection Effect=MAX(Max Ceiling Soil Protection, 1 / Soil Protection)
+	~	
+	~		|
+
+Population= INTEG (Births+net Migration level absolute - Deaths,
+		Initial Population)
+	~	Person
+	~		|
+
+Urban Scaling Exponent Small=0.8
+	~	
+	~		|
+
+Soil Protection=Spatial Planning * Soil Protection Factor
+	~	
+	~		|
+
+Treshold Very Large City=1e+06
+	~	
+	~		|
+
+Soil Protection Factor=1.001
+	~	
+	~		|
+
+Urban Scaling Exponent Medium=1.1
+	~	
+	~		|
+
+Treshold Medium City=250000
+	~	
+	~		|
+
+Urban Scaling Exponent Large=1.2
+	~	
+	~		|
+
+Treshold Large City=500000
+	~	
+	~		|
+
+Aggricultural Land= INTEG (
+	-Land Conversion Rate,
+		1.6004e+06)
+	~	km2 [0,?]
+	~		|
+
+Max Feasible Conversion=
+	Aggricultural Land / 1
+	~	
+	~		|
+
+"Kcal per km^2 avg per t"=1.8e+09
+	~	
+	~	(Population * Pro person Bedarf) / Food Production
+		
+		Eurostat gibt fuer die EU 2023 eine Getreideproduktion von 271.6 Mio. t auf 51.0 \
+		Mio. ha an. Das sind rund 5.33 t/ha. FAO gibt fuer Weizen grob 334 kcal \
+		pro 100 g an, also etwa 3.34 Mio. kcal pro Tonne.
+		
+		
+		es folgt: ≈ 1.8 Milliarden kcal pro km^2 und Jahr
+	|
+
+Reference Initial Urban Land= INITIAL(
+	Urban Land)
+	~	
+	~		|
+
+Urban Land Index=
+	Urban Land / Reference Initial Urban Land
+	~	
+	~		|
+
+Yield="Kcal per km^2 avg per t" * Innovation Index
+	~	kcal / km2
+	~		|
+
+Share Medium City=
+	0.07
+	~	City
+	~		|
+
+Share Small City=
+	0.85
+	~	City
+	~		|
+
+Share very Large City=
+	0.04
+	~	City
+	~		|
+
+Share Large City=
+	0.04
+	~	City
+	~		|
+
+Total Urban Innovation Potential=
+	(Innovation Large+Innovation Medium+Innovation Small + Innovation very Large)
+	~	
+	~		|
+
+Innovation Index=
+	Total Urban Innovation Potential / Reference Total Innovation Potential
+	~	
+	~		|
+
+Urban Population Density=1500
+	~	Person/km2
+	~		|
+
+Urban Population Total=
+	Urban Land / Urban Population Density
+	~	Person
+	~		|
+
+Reference Total Innovation Potential=
+	INITIAL( Total Urban Innovation Potential )
+	~	
+	~		|
+
+Economic Pressure=
+	1 + (Import Dependence)^2
+	~	
+	~		|
+
+Caloric Baseline Need pP=
+	3400*365
+	~	kcal / Person
+	~	Ein EU-Kommissionsbericht, der sich auf FAO-Schaetzungen stuetzt, nennt \
+		fuer die EU eine durchschnittliche dietary energy supply von 3’416 kcal \
+		pro Person und Tag.
+	|
+
+Food Production=
+	Yield *Aggricultural Land
+	~	kcal
+	~		|
+
+Urban Land= INTEG (
+	Land Conversion Rate,
+		181700)
+	~	km2 [0,1.7821e+06]
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2050
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2026
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,60,2
+10,1,Urban Land,420,1261,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Aggricultural Land,2010,1280,49,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(1779,1278)|
+1,4,5,1,4,0,0,22,0,192,0,-1--1--1,,1|(1026,1278)|
+11,5,772,1592,1278,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Land Conversion Rate,1592,1312,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Food Production,2562,982,41,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,2,7,1,0,0,0,0,64,0,-1--1--1,,1|(2370,1008)|
+10,9,Yield,2038,1590,21,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,10,9,7,1,0,0,0,0,64,0,-1--1--1,,1|(2594,1628)|
+10,11,Import Dependence,1855,952,49,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,12,7,11,1,0,0,0,0,64,0,-1--1--1,,1|(2531,645)|
+10,13,Caloric Baseline Need pP,2373,1076,62,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,13,11,0,0,0,0,0,64,0,-1--1--1,,1|(2114,1014)|
+10,15,Economic Pressure,1664,977,38,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,16,11,15,0,0,0,0,0,64,0,-1--1--1,,1|(1760,964)|
+10,17,Spatial Planning,936,1167,34,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+10,18,Soil Protection,1128,1159,54,10,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+1,19,17,18,1,0,0,0,0,64,0,-1--1--1,,1|(1053,1172)|
+10,20,Urban Population Total,824,1416,46,46,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,21,Urban Population Density,794,1329,66,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,21,20,0,0,0,0,0,64,0,-1--1--1,,1|(801,1352)|
+1,23,1,20,0,0,0,0,0,64,0,-1--1--1,,1|(616,1335)|
+10,24,Ammount Small City,454,1652,55,19,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+10,25,Ammount Medium City,759,1670,47,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+10,26,Ammount Large City,1008,1658,41,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+1,27,20,24,1,0,0,0,0,64,0,-1--1--1,,1|(601,1411)|
+1,28,20,25,0,0,0,0,0,64,0,-1--1--1,,1|(789,1549)|
+1,29,20,26,0,0,0,0,0,64,0,-1--1--1,,1|(918,1540)|
+10,30,Innovation Small,463,1791,52,52,2,131,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+10,31,Innovation Medium,767,1798,51,51,2,131,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+10,32,Innovation Large,976,1799,52,52,2,131,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+1,33,24,30,0,0,0,0,0,64,0,-1--1--1,,1|(456,1698)|
+1,34,25,31,0,0,0,0,0,64,0,-1--1--1,,1|(761,1710)|
+1,35,26,32,0,0,0,0,0,64,0,-1--1--1,,1|(997,1704)|
+10,36,Total Urban Innovation Potential,838,2124,45,25,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,30,36,0,0,0,0,0,64,0,-1--1--1,,1|(649,1957)|
+1,38,31,36,0,0,0,0,0,64,0,-1--1--1,,1|(803,1966)|
+1,39,32,36,0,0,0,0,0,64,0,-1--1--1,,1|(904,1966)|
+10,40,Ammount Very Large City,1263,1652,59,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+1,41,20,40,1,0,0,0,0,64,0,-1--1--1,,1|(1164,1552)|
+10,42,Innovation very Large,1258,1802,55,55,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,40,42,0,0,0,0,0,64,0,-1--1--1,,1|(1261,1701)|
+1,44,42,36,0,0,0,0,0,64,0,-1--1--1,,1|(1048,1962)|
+10,45,Share Small City,401,1508,47,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+1,46,45,24,0,0,0,0,0,64,0,-1--1--1,,1|(424,1572)|
+10,47,Share Medium City,697,1535,47,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+1,48,47,25,0,0,0,0,0,64,0,-1--1--1,,1|(724,1596)|
+10,49,Share Large City,1025,1557,47,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+1,50,49,26,0,0,0,0,0,64,0,-1--1--1,,1|(1017,1600)|
+10,51,Share very Large City,1248,1550,41,17,8,3,0,4,0,0,0,0,-1--1--1,128-192-0,|12||0-0-0,0,0,0,0,0,0
+1,52,51,40,0,0,0,0,0,64,0,-1--1--1,,1|(1253,1594)|
+10,53,Reference Total Innovation Potential,1625,1929,74,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,54,36,53,0,0,0,0,0,64,1,-1--1--1,,1|(1212,2031)|
+10,55,Innovation Index,1565,1758,40,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,56,53,55,1,0,0,0,0,64,0,-1--1--1,,1|(1604,1863)|
+1,57,36,55,1,0,0,0,0,64,0,-1--1--1,,1|(1101,2052)|
+1,58,55,9,0,0,0,0,0,64,0,-1--1--1,,1|(1804,1672)|
+10,59,Max Feasible Conversion,1684,1200,51,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,60,2,59,0,0,0,0,0,64,0,-1--1--1,,1|(1854,1241)|
+1,61,59,6,0,0,0,0,0,64,0,-1--1--1,,1|(1646,1246)|
+10,62,Urban Land Index,751,1145,45,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,Reference Initial Urban Land,585,1079,61,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,64,63,62,0,0,0,0,0,64,0,-1--1--1,,1|(660,1109)|
+1,65,1,62,0,0,0,0,0,64,0,-1--1--1,,1|(579,1204)|
+1,66,62,17,0,0,0,0,0,64,0,-1--1--1,,1|(842,1155)|
+1,67,1,63,0,0,0,0,0,64,1,-1--1--1,,1|(501,1170)|
+10,68,"Kcal per km^2 avg per t",2047,1757,54,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,69,68,9,0,0,0,0,0,64,0,-1--1--1,,1|(2042,1676)|
+10,70,Soil Protection Effect,1292,1157,46,22,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,71,18,70,0,0,0,0,0,64,0,-1--1--1,,1|(1207,1158)|
+10,72,Spacial Planing Factor,787,1238,39,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,73,72,17,0,0,0,0,0,192,0,-1--1--1,,1|(857,1204)|
+10,74,Soil Protection Factor,1072,1233,59,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,75,74,18,0,0,0,0,0,192,0,-1--1--1,,1|(1101,1193)|
+10,76,Max Ceiling Soil Protection,1239,1237,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,77,76,70,0,0,0,0,0,192,0,-1--1--1,,1|(1262,1200)|
+10,78,Land Conversion Pressure Factors,1444,1042,48,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,79,Treshold Small City,237,1665,44,23,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,80,79,24,0,0,0,0,0,192,0,-1--1--1,,1|(333,1659)|
+10,81,Treshold Medium City,614,1628,40,8,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,82,81,25,0,0,0,0,0,192,0,-1--1--1,,1|(669,1644)|
+10,83,Treshold Large City,890,1663,35,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,84,83,26,0,0,0,0,0,192,0,-1--1--1,,1|(939,1660)|
+10,85,Treshold Very Large City,1128,1659,42,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,86,85,40,0,0,0,0,0,192,0,-1--1--1,,1|(1180,1656)|
+1,87,85,42,0,0,0,0,0,192,0,-1--1--1,,1|(1178,1714)|
+1,88,83,32,0,0,0,0,0,192,0,-1--1--1,,1|(923,1716)|
+1,89,81,31,0,0,0,0,0,192,0,-1--1--1,,1|(671,1692)|
+1,90,79,30,0,0,0,0,0,192,0,-1--1--1,,1|(341,1723)|
+10,91,Urban Scaling Exponent Small,315,1890,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,92,91,30,0,0,0,0,0,192,0,-1--1--1,,1|(380,1845)|
+10,93,Urban Scaling Exponent Medium,642,1897,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,94,93,31,0,0,0,0,0,192,0,-1--1--1,,1|(695,1854)|
+10,95,Urban Scaling Exponent Large,840,1901,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,96,95,32,0,0,0,0,0,192,0,-1--1--1,,1|(898,1856)|
+10,97,Urban Scaling Exponent very Large,1095,1853,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,98,97,42,0,0,0,0,0,192,0,-1--1--1,,1|(1175,1827)|
+10,99,Population,2166,428,46,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,100,48,2457,439,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,101,103,99,100,0,0,22,0,192,0,-1--1--1,,1|(2251,439)|
+1,102,103,100,4,0,0,22,0,192,0,-1--1--1,,1|(2386,439)|
+11,103,48,2308,439,17,20,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,104,Deaths,2308,485,46,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,105,107,99,100,0,0,22,0,192,0,-1--1--1,,1|(1975,428)|
+1,106,107,99,4,0,0,22,0,192,0,-1--1--1,,1|(1975,428)|
+11,107,1212,1975,361,18,19,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,108,Births,2041,361,48,27,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,109,Crude Birth Rate,2043,216,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,110,Crude Death Rate,2502,536,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,111,113,99,100,0,0,22,0,192,0,-1--1--1,,1|(2144,497)|
+1,112,113,99,4,0,0,22,0,192,0,-1--1--1,,1|(2144,497)|
+11,113,1190,2144,559,16,19,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,114,net Migration level absolute,2207,559,47,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,115,109,108,0,0,0,0,0,192,0,-1--1--1,,1|(2042,281)|
+1,116,110,103,0,0,0,0,0,192,0,-1--1--1,,1|(2395,482)|
+10,117,Initial Population,2188,331,48,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,118,117,99,0,0,0,0,0,192,1,-1--1--1,,1|(2178,372)|
+10,119,Population kcal demand,2045,1439,64,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,120,99,119,1,0,0,0,0,192,0,-1--1--1,,1|(2773,1056)|
+1,121,13,119,0,0,0,0,0,192,0,-1--1--1,,1|(2217,1247)|
+10,122,"Target Value: Populational Need of Kcal in Km2",1425,1498,57,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,123,119,122,0,0,0,0,0,192,0,-1--1--1,,1|(1738,1467)|
+1,124,9,122,0,0,0,0,0,192,0,-1--1--1,,1|(1756,1547)|
+10,125,Aggricultural Land Requirement,1428,1398,53,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,126,122,125,0,0,0,0,0,192,0,-1--1--1,,1|(1425,1454)|
+1,127,2,125,0,0,0,0,0,192,0,-1--1--1,,1|(1727,1336)|
+1,128,99,108,0,0,0,0,0,192,0,-1--1--1,,1|(2110,398)|
+1,129,99,104,0,0,0,0,0,192,0,-1--1--1,,1|(2230,453)|
+1,130,99,11,0,0,0,0,0,192,0,-1--1--1,,1|(2011,688)|
+1,131,78,6,0,0,0,0,0,192,0,-1--1--1,,1|(1514,1170)|
+10,132,Desired Urban Land Total,1235,743,65,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,133,Economic Land Conversion Demand,1095,825,56,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,134,132,133,0,0,0,0,0,192,0,-1--1--1,,1|(1171,780)|
+1,135,1,133,1,0,0,0,0,192,0,-1--1--1,,1|(643,937)|
+1,136,133,78,0,0,0,0,0,192,0,-1--1--1,,1|(1263,929)|
+10,137,Number of Households,1742,440,46,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,138,Mean Household Size,1618,273,56,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,139,138,137,0,0,0,0,0,64,0,-1--1--1,,1|(1675,350)|
+1,140,99,137,1,0,0,0,0,64,0,-1--1--1,,1|(1953,466)|
+10,141,Urban Fringe Radius,920,386,50,17,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,142,Income per Capita,1337,127,42,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,143,Land per Capita,1321,255,59,10,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,144,Transport Cost per km,876,198,56,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,145,Mean Household Income,1185,172,60,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,146,Land per Household,1199,322,42,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,147,Other Consumption Per Household,1195,459,66,25,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,148,138,146,1,0,0,0,0,64,0,-1--1--1,,1|(1408,297)|
+1,149,143,146,0,0,0,0,0,64,0,-1--1--1,,1|(1272,281)|
+1,150,138,145,1,0,0,0,0,64,0,-1--1--1,,1|(1459,187)|
+1,151,142,145,0,0,0,0,0,64,0,-1--1--1,,1|(1275,144)|
+1,152,145,141,0,0,0,0,0,64,0,-1--1--1,,1|(1057,274)|
+1,153,146,141,0,0,0,0,0,64,0,-1--1--1,,1|(1070,350)|
+1,154,144,141,0,0,0,0,0,64,0,-1--1--1,,1|(895,285)|
+1,155,147,141,0,0,0,0,0,64,0,-1--1--1,,1|(1056,422)|
+10,156,Desired Urban Land,791,540,55,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,157,141,156,0,0,0,0,0,64,0,-1--1--1,,1|(860,457)|
+10,158,Urban Land Gap,812,640,45,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,159,156,158,0,0,0,0,0,64,0,-1--1--1,,1|(799,583)|
+1,160,1,158,1,0,0,0,0,64,0,-1--1--1,,1|(451,897)|
+10,161,Transition Inertia,891,720,38,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,162,158,161,0,0,0,0,0,64,0,-1--1--1,,1|(846,675)|
+10,163,Urban Expansion Adjustment Time,1102,658,66,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,164,163,161,0,0,0,0,0,64,0,-1--1--1,,1|(993,689)|
+1,165,161,133,0,0,0,0,0,64,0,-1--1--1,,1|(977,764)|
+10,166,Agricultural Rent,1447,674,43,17,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,167,166,141,1,0,0,0,0,64,0,-1--1--1,,1|(1163,571)|
+10,168,Other Consumption per Capita,1356,372,65,25,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,169,168,147,0,0,0,0,0,64,0,-1--1--1,,1|(1281,412)|
+1,170,138,147,1,0,0,0,0,64,0,-1--1--1,,1|(1463,419)|
+///---\\\
+:L<%^E!@
+1:current.vdfx
+9:current
+23:0
+15:0,0,0,1,0,0
+19:60,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+4:Time
+5:Other Consumption Per Household
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:2026
+25:2050
+26:2050
+75:
+43:
