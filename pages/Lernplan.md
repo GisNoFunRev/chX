@@ -140,3 +140,6 @@
 - klare Argumentation
 - Bezug auf Literatur
 - Reflexion (Unsicherheiten erkennen)
+- ---
+- ### PZ9 - Konzises und Präzises Formulieren von Theorie
+- Auseinandersetzung mit bestehenden Frameworks, wie Theorie klar kommuniziert werden kann das in kurze und präziser Form
