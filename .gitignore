@@ -33,3 +33,51 @@ documentation/**/*
 
 # 6. Spezifische Grafiken im Ordner zulassen
 !documentation/experten-breefing/documentation-cld/assets/cld.png
+
+# macOS
+
+.DS_Store
+
+# Python virtual environments
+
+.vensim/
+venv/
+env/
+.venv/
+# Python cache
+
+**pycache**/
+*.py[cod]
+*.pyo
+
+# Jupyter / Quarto cache
+
+.ipynb_checkpoints/
+.jupyter_cache/
+.quarto/
+
+# Quarto rendered outputs
+
+_site/
+*_files/
+*.html
+
+# Quarto / Python execution artifacts
+
+*.log
+*.tmp
+
+# Graphviz generated files
+
+*.gv
+*.dot
+*.svg
+*.pdf
+*.png
+
+# Optional: only ignore model data if it should NOT be pushed
+
+# vensim-doc-demo/data/*.mdl
+
+# vensim-doc-demo/data/*.csv
+
