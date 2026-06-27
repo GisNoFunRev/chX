@@ -1,0 +1,826 @@
+{UTF-8}
+Aggricultural Land= INTEG (-Land Conversion Rate,
+		Initial Aggricultural Land)
+	~	km2
+	~	Aggricultural Land
+		
+		Stock für die landwirtschaftliche Fläche.
+		
+		Aggricultural Land sinkt, wenn Fläche in urbane Nutzung
+		umgewandelt wird. Deshalb geht Land Conversion Rate mit
+		negativem Vorzeichen in diesen Stock ein.
+	|
+
+Average Commuting Distance=14
+	~	km
+	~	Average Commuting Distance
+		
+		Durchschnittliche Pendeldistanz.
+		Diese Distanz wird mit den jährlichen Transportkosten pro
+		Kilometer und Haushalt multipliziert.
+	|
+
+Average Workdays per Capita=230
+	~	Dmnl/Person
+	~	Average Workdays per Capita
+		
+		Annualisierungsfaktor für die Transportkosten.
+		Der Wert gibt an, wie viele Arbeitstage bzw. Pendeltage
+		pro Person und Jahr angenommen werden.
+		
+		Der Faktor 2 in der Transportkostenrechnung steht für
+		Hin- und Rückweg.
+	|
+
+Base Income Growth Rate=0.01
+	~	Dmnl/Year
+	~	Base Income Growth Rate
+		
+		Grundannahme für das jährliche Einkommenswachstum.
+		Dieser Wert gilt unabhängig vom zusätzlichen Produktivitätseffekt.
+	|
+
+Commuters per Household=  Commuting Share of Employed Persons
+	    * Employment Share of Total Population
+	    * Mean Household Size
+	~	Person/Household
+	~	Commuters per Household
+		
+		Berechnete Anzahl pendelnder Personen pro Haushalt.
+		
+		Die Variable kombiniert Haushaltsgrösse, Erwerbsquote und
+		Pendleranteil. Sie bestimmt, wie stark Transportkosten auf
+		einen durchschnittlichen Haushalt wirken.Commuters per Household
+		
+		Berechnete Anzahl pendelnder Personen pro Haushalt.
+		
+		Die Variable kombiniert Haushaltsgrösse, Erwerbsquote und
+		Pendleranteil. Sie bestimmt, wie stark Transportkosten auf
+		einen durchschnittlichen Haushalt wirken.
+	|
+
+Commuting Share of Employed Persons=0.957
+	~	Dmnl
+	~	Commuting Share of Employed Persons
+		
+		Anteil der erwerbstätigen Personen, die regelmässig pendeln.
+		Dieser Wert reduziert die erwerbstätigen Personen auf die
+		tatsächlichen Pendler pro Haushalt.
+	|
+
+Current Urban Land per Household=ZIDZ(Urban Land, Number of Households)
+	~	km2/Household
+	~	Current Urban Land per Household
+		
+		Aktuell verfügbare urbane Fläche pro Haushalt.
+		
+		Diese Variable zeigt, wie viel urbane Fläche im Durchschnitt
+		auf einen Haushalt entfällt. Sie ist der zentrale Input für
+		den Land Tightness Index.
+	|
+
+Desired Mean Household Size=Long Run Mean Household Size
+	~	Person/Household
+	~	Desired Mean Household Size
+		
+		Gewünschte bzw. angestrebte Haushaltsgrösse.
+		In dieser Modellversion entspricht sie direkt dem
+		langfristigen Zielwert Long Run Mean Household Size.
+	|
+
+Desired Mean Urban Rent=Initial Mean Urban Rent
+	    * (Land Tightness Index ^ Urban Rent Sensitivity to Land Tightness)
+	~	EUR/km2
+	~	Desired Mean Urban Rent
+		
+		Gewünschte mittlere urbane Miete.
+		
+		Wenn Land Tightness Index über 1 liegt, steigt der gewünschte
+		Mietwert. Wenn der Index unter 1 liegt, sinkt der gewünschte
+		Mietwert.
+		
+		Die Sensitivität bestimmt, wie stark die Miete auf Knappheit
+		reagiert.
+	|
+
+Desired Transport Cost per km=Long Run Transport Cost per km
+	~	EUR/km
+	~	Desired Transport Cost per km
+		
+		Gewünschter Zielwert der Transportkosten pro Kilometer.
+		In dieser Modellversion entspricht er direkt dem langfristigen
+		Transportkostenwert.
+	|
+
+Employment Share of Total Population=0.439
+	~	Dmnl
+	~	Employment Share of Total Population
+		
+		Anteil der Gesamtbevölkerung, der erwerbstätig ist.
+		Dieser Anteil wird verwendet, um aus der Haushaltsgrösse
+		die potenzielle Anzahl erwerbstätiger Personen pro Haushalt
+		abzuleiten.
+	|
+
+Expected Population=WITH LOOKUP(
+	    Time,
+	    ([(2025,4.4e+08)-(2050,4.6e+08)],
+	    (2025,4.518e+08),
+	    (2029,4.533e+08),
+	    (2030,4.529e+08),
+	    (2035,4.509e+08),
+	    (2040,4.49e+08),
+	    (2045,4.47e+08),
+	    (2050,4.45e+08))
+	)
+	~	Person
+	~	Expected Population
+		
+		Exogener Bevölkerungspfad des Modells.
+		Die Bevölkerung wird nicht mehr endogen durch Geburten,
+		Todesfälle und Migration berechnet.
+		
+		Diese Lookup-Tabelle gibt die erwartete Bevölkerung
+		für den Simulationszeitraum vor.
+	|
+
+Household Size Adjustment Time=8
+	~	Year
+	~	Household Size Adjustment Time
+		
+		Anpassungszeit der mittleren Haushaltsgrösse.
+		Je höher dieser Wert ist, desto langsamer bewegt sich
+		Mean Household Size in Richtung des langfristigen Zielwertes.
+	|
+
+Income per Capita= INTEG (Income per Capita Growth,
+		Initial Income per Capita)
+	~	EUR/Person
+	~	Income per Capita
+		
+		Stock für das durchschnittliche Einkommen pro Person.
+		Die Variable wächst über Income per Capita Growth und wird
+		durch Initial Income per Capita initialisiert.
+		
+		Sie bildet die Grundlage für das Haushaltseinkommen.
+	|
+
+Income per Capita Growth=Income per Capita * Net Income Growth Rate
+	~	(EUR/Person)/Year
+	~	Income per Capita Growth
+		
+		Wachstumsrate des Einkommens pro Person.
+		Sie ergibt sich aus dem aktuellen Einkommen pro Person
+		multipliziert mit der effektiven jährlichen Einkommenswachstumsrate.
+	|
+
+Initial Aggricultural Land=1.6004e+06
+	~	km2
+	~	Initial Aggricultural Land
+		
+		Startwert der landwirtschaftlichen Fläche zu Beginn der Simulation.
+		
+		Dieser Wert initialisiert den Stock Aggricultural Land.
+		Die Fläche sinkt, wenn Land in urbane Nutzung umgewandelt wird.
+	|
+
+Initial Income per Capita=41650
+	~	EUR/Person
+	~	Initial Income per Capita
+		
+		Startwert des durchschnittlichen Einkommens pro Person.
+		Dieser Wert initialisiert den Stock Income per Capita
+		zu Beginn der Simulation.
+	|
+
+Initial Mean Household Size=2.3
+	~	Person/Household
+	~	Initial Mean Household Size
+		
+		Startwert der durchschnittlichen Haushaltsgrösse.
+		Dieser Wert initialisiert den Stock Mean Household Size
+		zu Beginn der Simulation.
+	|
+
+Initial Mean Urban Rent=INITIAL(
+	2        / Reference Initial Land Demand per Household
+	    )
+	~	EUR/km2
+	~	Initial Mean Urban Rent
+		
+		Startwert der mittleren urbanen Miete.
+		
+		Der Wert wird aus dem anfänglichen Wohnbudget pro Haushalt
+		und der anfänglichen Referenz-Landnachfrage pro Haushalt
+		berechnet.
+	|
+
+Initial Transport Cost per km=0.47
+	~	EUR/km
+	~	Initial Transport Cost per km
+		
+		Startwert der Transportkosten pro Kilometer.
+		Dieser Wert initialisiert den Stock Transport Cost per km
+		zu Beginn der Simulation.
+	|
+
+Initial Urban Land=181700
+	~	km2
+	~	Initial Urban Land
+		
+		Startwert der urbanen Fläche zu Beginn der Simulation.
+		Dieser Wert initialisiert den Stock Urban Land.
+	|
+
+Land Conversion Rate=0
+	~	km2/Year
+	~	Land Conversion Rate
+		
+		Temporärer Platzhalter für die Landumwandlungsrate.
+		
+		In dieser View wird nur gezeigt, wie die Rate Urban Land erhöht
+		und Aggricultural Land reduziert.
+		
+		Die detaillierte Berechnung von Land Conversion Rate wird später
+		in der Urban-Land-Conversion-View modelliert.
+	|
+
+Land Tightness Index=ZIDZ(
+	        Reference Initial Land Demand per Household,
+	        Current Urban Land per Household
+	    )
+	~	Dmnl
+	~	Land Tightness Index
+		
+		Dimensionsloser Knappheitsindex für urbane Fläche.
+		
+		Ein Wert von 1 bedeutet, dass die aktuelle urbane Fläche pro
+		Haushalt dem Referenzwert entspricht.
+		
+		Werte über 1 bedeuten höhere Knappheit und erzeugen Druck
+		auf die urbane Miete.
+	|
+
+Long Run Mean Household Size=2.2
+	~	Person/Household
+	~	Long Run Mean Household Size
+		
+		Langfristig angenommene durchschnittliche Haushaltsgrösse.
+		Dieser Wert dient als Zielwert, dem sich Mean Household Size
+		über die Zeit annähert.
+	|
+
+Long Run Transport Cost per km=0.47
+	~	EUR/km
+	~	Long Run Transport Cost per km
+		
+		Langfristig angenommene Transportkosten pro Kilometer.
+		Dieser Wert dient als Zielwert für Transport Cost per km.
+	|
+
+Maximum Income Growth Rate=0.03
+	~	Dmnl/Year
+	~	Maximum Income Growth Rate
+		
+		Obere Grenze für das jährliche Einkommenswachstum.
+		Sie verhindert, dass das Einkommen unrealistisch stark wächst.
+	|
+
+Mean Household Income= Income per Capita * Mean Household Size
+	~	EUR/Household
+	~	Mean Household Income
+		
+		Berechnetes durchschnittliches Haushaltseinkommen.
+		
+		Es ergibt sich aus Income per Capita multipliziert mit
+		Mean Household Size. Diese Variable wird später in der
+		AMM-Budgetlogik verwendet.
+	|
+
+Mean Household Size= INTEG (Mean Household Size Change,
+		Initial Mean Household Size)
+	~	Person/Household
+	~	Mean Household Size
+		
+		Shadow Variable aus View 01.
+		Sie wird hier verwendet, um die Anzahl Pendler pro Haushalt
+		zu berechnen.
+	|
+
+Mean Household Size Change=(Desired Mean Household Size - Mean Household Size)
+	    / Household Size Adjustment Time
+	~	Person/Household/Year
+	~	Mean Household Size Change
+		
+		Anpassungsrate der mittleren Haushaltsgrösse.
+		Sie beschreibt, wie schnell sich Mean Household Size
+		dem gewünschten langfristigen Wert annähert.
+	|
+
+Mean Urban Rent= INTEG (Mean Urban Rent Change,
+		Initial Mean Urban Rent)
+	~	EUR/km2
+	~	Mean Urban Rent
+		
+		Stock für die mittlere urbane Miete.
+		
+		Die Variable passt sich über Mean Urban Rent Change
+		schrittweise an Desired Mean Urban Rent an.
+		
+		Mean Urban Rent wird später in der AMM-Housing-Demand-View
+		verwendet, um die Landnachfrage pro Haushalt zu berechnen.
+	|
+
+Mean Urban Rent Change=(Desired Mean Urban Rent - Mean Urban Rent)
+	    / Urban Rent Adjustment Time
+	~	(EUR/km2)/Year
+	~	Mean Urban Rent Change
+		
+		Anpassungsrate der mittleren urbanen Miete.
+		
+		Sie beschreibt, wie schnell Mean Urban Rent auf den gewünschten
+		Mietwert reagiert.
+	|
+
+Minimum Income Growth Rate=-0.02
+	~	Dmnl/Year
+	~	Minimum Income Growth Rate
+		
+		Untere Grenze für das jährliche Einkommenswachstum.
+		Sie erlaubt negatives Wachstum, begrenzt aber den maximalen Rückgang.
+	|
+
+Net Income Growth Rate=MIN(
+	        Maximum Income Growth Rate,
+	        MAX(
+	            Minimum Income Growth Rate,
+	            Base Income Growth Rate + Urban Productivity Effect
+	        )
+	    )
+	~	Dmnl/Year
+	~	Net Income Growth Rate
+		
+		Effektive jährliche Einkommenswachstumsrate.
+		
+		Die Variable kombiniert die Basiswachstumsrate mit dem
+		Urban Productivity Effect. Durch MIN und MAX wird die
+		Wachstumsrate nach oben und unten begrenzt.
+	|
+
+Number of Households=Expected Population / Mean Household Size
+	~	Household
+	~	Number of Households
+		
+		Berechnete Anzahl Haushalte.
+		
+		Die Variable verbindet den exogenen Bevölkerungspfad
+		mit der Nachfrage nach Wohnfläche und urbanem Land.
+		
+		Je höher die Bevölkerung oder je kleiner die Haushaltsgrösse,
+		desto mehr Haushalte entstehen.
+	|
+
+Reference Initial Land Demand per Capita=0.000498
+	~	km2/Person
+	~	Reference Initial Land Demand per Capita
+		
+		Referenzwert für die urbane Landnachfrage pro Person
+		im Startzustand.
+		
+		0.000498 km2 entspricht 498 m2 pro Person.
+		Dieser Wert dient zur Kalibrierung der anfänglichen
+		Landnachfrage
+	|
+
+Reference Initial Land Demand per Household=INITIAL(
+	        Initial Mean Household Size
+	        * Reference Initial Land Demand per Capita
+	    )
+	~	km2/Household
+	~	Reference Initial Land Demand per Household
+		
+		Referenzwert der urbanen Landnachfrage pro Haushalt
+		zu Beginn der Simulation.
+		
+		Dieser Wert dient als Vergleichswert für die aktuell
+		verfügbare urbane Fläche pro Haushalt.
+	|
+
+Reference Initial Urban Land=INITIAL ( Urban Land )
+	~	km2
+	~	Reference Initial Urban Land
+		
+		Referenzwert der urbanen Fläche zu Beginn der Simulation.
+		
+		Dieser Wert wird verwendet, um relative Veränderungen der
+		urbanen Fläche zu berechnen und spätere Skalierungsfaktoren
+		zu bilden.
+	|
+
+Transport Cost Adjustment Time=5
+	~	Year
+	~	Transport Cost Adjustment Time
+		
+		Anpassungszeit der Transportkosten.
+		Je höher dieser Wert ist, desto langsamer bewegt sich
+		Transport Cost per km in Richtung des langfristigen Zielwertes.
+	|
+
+Transport Cost per Household= Average Commuting Distance
+	    * Transport Cost per km per Household
+	~	EUR/Household
+	~	Transport Cost per Household
+		
+		Jährliche Transportkosten eines durchschnittlichen Haushalts.
+		
+		Diese Variable wird später in der AMM-Budgetlogik vom
+		Haushaltseinkommen abgezogen und beeinflusst dadurch die
+		verfügbare Wohn- und Konsumnachfrage.
+	|
+
+Transport Cost per km= INTEG (Transport Cost per km Change,
+		Initial Transport Cost per km)
+	~	EUR/km
+	~	Transport Cost per km
+		
+		Stock für die durchschnittlichen Transportkosten pro Kilometer.
+		Die Variable verändert sich über die Zeit in Richtung eines
+		langfristigen Zielwertes.
+		
+		Sie bildet die Grundlage für die späteren jährlichen
+		Transportkosten eines Haushalts.
+	|
+
+Transport Cost per km Change=(Desired Transport Cost per km - Transport Cost per km)
+	    / Transport Cost Adjustment Time
+	~	(EUR/km)/Year
+	~	Transport Cost per km Change
+		
+		Anpassungsrate der Transportkosten pro Kilometer.
+		Sie beschreibt, wie schnell sich Transport Cost per km
+		dem gewünschten langfristigen Wert annähert.
+	|
+
+Transport Cost per km per Capita=2 * Average Workdays per Capita * Transport Cost per km
+	~	EUR/km/Person
+	~	Transport Cost per km per Capita
+		
+		Jährliche Transportkosten pro Kilometer und Person.
+		Der Faktor 2 berücksichtigt Hin- und Rückweg.
+		
+		Diese Variable übersetzt die Transportkosten pro Kilometer
+		in eine jährliche Belastung pro pendelnder Person.
+	|
+
+Transport Cost per km per Household= Transport Cost per km per Capita * Commuters per Household
+	~	EUR/km/Household
+	~	Transport Cost per km per Household
+		
+		Jährliche Transportkosten pro Kilometer und Haushalt.
+		Die Kosten pro Person werden mit der Anzahl Pendler pro
+		Haushalt multipliziert.
+	|
+
+Urban Land= INTEG (Land Conversion Rate,
+		Initial Urban Land)
+	~	km2
+	~	Urban Land
+		
+		Stock für die gesamte urbane Fläche.
+		
+		Urban Land steigt, wenn landwirtschaftliche Fläche in urbane
+		Nutzung umgewandelt wird. Die Veränderung erfolgt über
+		Land Conversion Rate.
+	|
+
+Urban Land Index=ZIDZ(
+	    Urban Land,
+	    Reference Initial Urban Land
+	)
+	~	Dmnl
+	~	Urban Land Index
+		
+		Dimensionsloser Index der urbanen Fläche.
+		
+		Ein Wert von 1 bedeutet, dass Urban Land dem Startwert entspricht.
+		Werte über 1 zeigen eine Zunahme der urbanen Fläche gegenüber
+		dem Startzustand.
+	|
+
+Urban Productivity Effect=1 * Urban Productivity Elasticity
+	~	Dmnl/Year
+	~	Urban Productivity Effect
+		
+		Zusätzlicher Produktivitätseffekt auf das Einkommenswachstum.
+		
+		Wenn der Innovation Index über 1 liegt, erhöht sich die
+		Wachstumsrate. Wenn er unter 1 liegt, wird sie reduziert.
+	|
+
+Urban Productivity Elasticity=0.005
+	~	Dmnl/Year
+	~	Urban Productivity Elasticity
+		
+		Sensitivität des Einkommenswachstums gegenüber dem Innovation Index.
+		
+		Je höher dieser Wert ist, desto stärker wirkt sich Innovation
+		auf die Einkommensentwicklung aus.
+	|
+
+Urban Rent Adjustment Time=2
+	~	Year
+	~	Urban Rent Adjustment Time
+		
+		Anpassungszeit der urbanen Miete.
+		
+		Je höher dieser Wert ist, desto langsamer passt sich
+		Mean Urban Rent an Desired Mean Urban Rent an.
+	|
+
+Urban Rent Sensitivity to Land Tightness=1
+	~	Dmnl
+	~	Urban Rent Sensitivity to Land Tightness
+		
+		Sensitivität der urbanen Miete gegenüber Landknappheit.
+		
+		Ein höherer Wert bedeutet, dass Desired Mean Urban Rent stärker
+		auf Änderungen im Land Tightness Index reagiert.
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2050
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2025
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*00_Legend
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,38,2
+12,1,0,1844,-908,264,105,8,7,0,42,-1,5,0,0,0-0-0,0-0-0,Helvetica|24||0-0-0,0,0,0,0,0,0
+Visuelle Legende |<<NnN>>||<<NnN>>||<<NnN>>|Diese View definiert die visuelle Sprache des Modells. Sie enthält keine aktive Modelllogik, sondern dient nur zur Orientierung.|<<NnN>>|
+12,2,0,2100,-605,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+|<<NnN>>||<<NnN>>|Speichert einen Wert über die Zeit.|<<NnN>>|Wird normalerweise mit INTEG(…) definiert.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Population|<<NnN>>|Urban Land|<<NnN>>|Aggricultural Land|<<NnN>>|Mean Urban Rent|<<NnN>>|Income per Capita
+12,3,122,1606,-565,94,52,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,4,0,1846,-605,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+Stock / Zustandsvariable
+12,5,0,1606,-702,80,40,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+Symbol
+12,6,0,1846,-702,80,40,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+Zweck
+12,7,0,2100,-702,80,40,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+Beschreibung / Beispiel
+12,8,137,1606,-416,94,52,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,9,0,1846,-422,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+Flow / Veränderungsrate
+12,10,0,2100,-422,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+Verändert eine Zustandsvariable pro Zeiteinheit.|<<NnN>>|Flows erhöhen oder reduzieren einen Stock.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Births|<<NnN>>|Deaths|<<NnN>>|Land Conversion Rate|<<NnN>>|Income per Capita Growth|<<NnN>>|Transport Cost per km Change
+12,11,0,1606,-224,95,95,6,3,0,4,-1,0,0,0,0-0-0,144-179-255,|||0-0-0,0,0,0,0,0,0
+12,12,0,1846,-228,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+Parameter / Annahme
+12,13,0,2100,-228,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+Fester Wert oder Kalibrierparameter.|<<NnN>>|Diese Werte steuern das Verhalten des Modells,|<<NnN>>|verändern sich aber nicht automatisch über die Zeit.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Housing Preference Share Alpha|<<NnN>>|Urban Expansion Adjustment Time|<<NnN>>|Initial Income per Capita|<<NnN>>|Average Commuting Distance
+12,14,0,1606,11,95,95,6,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+12,15,0,1850,6,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+Lookup / Exogener Input
+12,16,0,2104,6,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+Zeitabhängiger Input oder Szenarioannahme.|<<NnN>>|Wird meist mit WITH LOOKUP(...) definiert.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Expected Population|<<NnN>>|Crude Birth Rate Lookup|<<NnN>>|Crude Death Rate Lookup|<<NnN>>|historische Zielwerte für Population oder Urban Land
+12,17,0,1606,246,95,95,2,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+12,18,0,1848,232,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+Auxiliary / Hilfsvariable
+12,19,0,2102,232,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+Erechnete Zwischenvariable.|<<NnN>>|Speichert keinen Wert über die Zeit,|<<NnN>>|sondern wird direkt aus anderen Variablen berechnet.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Number of Households|<<NnN>>|Urban Fringe Radius|<<NnN>>|Land Demand per Household q|<<NnN>>|Transport Cost per Household|<<NnN>>|Food Production
+12,20,0,1606,481,95,95,11,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+12,21,0,1849,457,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+Begrenzung / Entscheidungslogik
+12,22,0,2103,457,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+Variable mit Begrenzung, Schwellenwert oder Schutzlogik.|<<NnN>>|Wird oft mit MIN(...), MAX(...), ZIDZ(...) oder IF THEN ELSE(...) berechnet.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Max Feasible Conversion|<<NnN>>|Soil Protection Effect|<<NnN>>|Land Conversion Rate|<<NnN>>|Current Fringe Rent Gap
+12,23,125,1606,716,95,95,3,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+12,24,0,1846,690,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+Output / KPI / Validierung
+12,25,0,2100,690,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+Wichtige Zielgrösse oder Auswertungsvariable.|<<NnN>>|Diese Werte werden für Interpretation, Backtesting|<<NnN>>|oder Modellvergleich verwendet.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Population|<<NnN>>|Urban Land|<<NnN>>|Mean Urban Rent|<<NnN>>|Population Error|<<NnN>>|Urban Land Error
+12,26,0,1606,952,95,95,3,3,0,5,-1,2,0,0,0-0-0,0-112-112,|||0-0-0,0,0,0,0,0,0
+12,27,0,1850,952,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+Grau / Shadow Variable
+12,28,0,2104,952,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+Eine bereits existierende Variable wird in dieser View erneut angezeigt.|<<NnN>>|Sie wird nicht neu berechnet, sondern nur zur Übersicht wiederverwendet.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Population in der Agriculture-View|<<NnN>>|Urban Land in der Backtesting-View|<<NnN>>|Innovation Index in der AMM-View
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*01_Population_Household
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,38,2
+12,1,0,1569,636,358,90,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+01 Population & Households|<<NnN>>||<<NnN>>|Diese View zeigt die Bevölkerungs- und Haushaltslogik.|<<NnN>>||<<NnN>>|Die Bevölkerung wird nicht mehr über Geburten, Todesfälle|<<NnN>>|und Migration modelliert, sondern als exogener Lookup-Input|<<NnN>>|vorgegeben.|<<NnN>>||<<NnN>>|Aus Expected Population und Mean Household Size wird|<<NnN>>|Number of Households berechnet. Diese Variable treibt später|<<NnN>>|die Nachfrage nach urbaner Fläche.
+10,2,Time,1330,865,35,26,3,2,0,6,-1,1,0,0,-1--1--1,0-138-137,|||255-255-255,0,0,0,0,0,0
+10,3,Expected Population,1330,1024,65,65,6,3,0,0,-1,1,0,0,0,0,0,0,0,0
+10,4,Number of Households,1534,1024,61,61,2,3,0,1,-1,1,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,5,Mean Household Size,1528,1344,57,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,Desired Mean Household Size,1455,1501,66,66,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Long Run Mean Household Size,1262,1501,65,65,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Household Size Adjustment Time,2050,1269,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,Initial Mean Household Size,1378,1246,60,60,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,2,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,11,13,5,100,0,0,22,0,192,0,-1--1--1,,1|(1698,1344)|
+1,12,13,5,4,0,0,22,0,192,0,-1--1--1,,1|(1698,1344)|
+11,13,0,1698,1276,20,15,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,14,Mean Household Size Change,1775,1276,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,9,5,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,16,6,14,1,0,0,0,0,192,0,-1--1--1,,1|(1696,1503)|
+1,17,8,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,18,7,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,19,5,14,1,0,0,0,0,192,0,-1--1--1,,1|(1575,1232)|
+1,20,5,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,21,3,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*02_Transport_and_Commuting
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,61,2
+12,1,0,943,-63,299,79,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|109-109-109,0,0,256,0,0,0
+02 Transport & Commuting|<<NnN>>||<<NnN>>|Diese View beschreibt die jährlichen Transportkosten eines Haushalts.|<<NnN>>||<<NnN>>|Die Transportkosten pro Kilometer werden als Stock modelliert und|<<NnN>>|passen sich über die Zeit an einen langfristigen Zielwert an.|<<NnN>>||<<NnN>>|Zusätzlich wird berechnet, wie viele Pendler pro Haushalt existieren.|<<NnN>>|Daraus entstehen die Transportkosten pro Haushalt, welche später in|<<NnN>>|der AMM-Budgetlogik vom Haushaltseinkommen abgezogen werden.|<<NnN>>||<<NnN>>||<<NnN>>|
+10,2,Transport Cost per km,1120,697,59,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(1320,697)|
+1,4,5,2,4,0,0,22,0,192,0,-1--1--1,,1|(1320,697)|
+11,5,0,1320,832,32,22,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,6,Transport Cost per km Change,1411,832,59,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Initial Transport Cost per km,1120,549,64,64,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,8,Long Run Transport Cost per km,1029,993,64,64,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,9,Desired Transport Cost per km,1282,992,60,60,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,10,Transport Cost Adjustment Time,1452,994,57,57,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,11,Mean Household Size,403,747,62,20,3,2,0,6,-1,1,0,0,-1--1--1,111-111-111,|||255-255-255,0,0,0,0,0,0
+10,12,Employment Share of Total Population,685,842,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Commuting Share of Employed Persons,515,841,60,60,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Commuters per Household,613,633,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,Average Workdays per Capita,898,843,59,59,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,Transport Cost per km per Capita,904,608,59,59,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,17,Average Commuting Distance,1016,302,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,Transport Cost per Household,1156,418,59,26,3,3,0,4,-1,1,0,0,0-0-0,0-255-122,|||0-0-0,0,0,0,0,0,0
+1,19,8,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,20,9,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,21,2,6,1,0,0,0,0,192,0,-1--1--1,,1|(1404,686)|
+1,22,10,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,23,7,2,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,24,11,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,25,12,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,26,13,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,27,2,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,28,15,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,29,Transport Cost per km per Household,906,437,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,30,16,29,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,31,14,29,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,32,17,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,33,29,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*03_Income_and_Productivity
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,99,2
+12,1,0,563,-301,327,145,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
+03 Income & Productivity|<<NnN>>||<<NnN>>|Diese View beschreibt die Entwicklung des Einkommens.|<<NnN>>||<<NnN>>|Income per Capita wird als Stock modelliert und wächst über|<<NnN>>|Income per Capita Growth. Die Wachstumsrate wird durch eine|<<NnN>>|Basiswachstumsrate und einen Produktivitätseffekt beeinflusst.|<<NnN>>||<<NnN>>|Der Produktivitätseffekt hängt vom Innovation Index ab.|<<NnN>>|Aus Income per Capita und Mean Household Size entsteht|<<NnN>>|Mean Household Income.|<<NnN>>||<<NnN>>|Nach Abzug der Transportkosten ergibt sich|<<NnN>>|Disposable Income after Transport, welches später in der|<<NnN>>|AMM-Budgetlogik verwendet wird.
+10,2,Income per Capita,480,170,60,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(689,170)|
+1,4,5,2,4,0,0,22,0,192,0,-1--1--1,,1|(689,170)|
+11,5,0,689,260,28,22,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,6,Income per Capita Growth,768,260,51,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Initial Income per Capita,134,170,63,63,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,8,Net Income Growth Rate,586,443,85,85,11,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,Base Income Growth Rate,935,443,55,55,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Maximum Income Growth Rate,604,625,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Minimum Income Growth Rate,784,625,78,78,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Urban Productivity Effect,228,443,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Urban Productivity Elasticity,449,625,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Mean Household Size,571,74,62,20,3,2,0,7,-1,1,0,0,128-128-128,128-128-128,|||255-255-255,0,0,0,0,0,0
+10,15,Mean Household Income,898,74,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,Transport Cost per Household,1111,266,64,21,3,2,0,7,-1,1,0,0,128-128-128,113-113-113,|||255-255-255,0,0,0,0,0,0
+1,18,7,2,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,19,2,6,1,0,0,0,0,192,0,-1--1--1,,1|(577,299)|
+1,20,8,6,1,0,0,0,0,192,0,-1--1--1,,1|(728,355)|
+1,21,9,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,22,11,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,23,10,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,24,13,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,25,2,15,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,26,14,15,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,27,15,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,28,16,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,29,12,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*05_AMM_Budget_and_Housing_Demand
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,90,2
+12,1,0,771,24,405,106,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
+04 AMM Budget & Housing Demand|<<NnN>>||<<NnN>>|Diese View beschreibt die Nachfrageseite des AMM-Modells.|<<NnN>>||<<NnN>>|Aus dem verfügbaren Haushaltseinkommen nach Transportkosten|<<NnN>>|wird ein Wohnbudget berechnet. Dieses Wohnbudget wird durch|<<NnN>>|die mittlere urbane Miete geteilt, um die Landnachfrage pro|<<NnN>>|Haushalt zu bestimmen.|<<NnN>>||<<NnN>>|Zusammen mit der Haushaltszahl ergibt sich daraus die gewünschte|<<NnN>>|urbane Fläche auf aggregierter Ebene.
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*04_Urban_Rent_and_Land_Tightness
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,96,2
+12,1,0,386,-806,312,181,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+04 Urban Rent & Land Tightness|<<NnN>>||<<NnN>>|Diese View beschreibt die Dynamik der mittleren urbanen Miete.|<<NnN>>||<<NnN>>|Die Miete reagiert auf die Knappheit urbaner Fläche pro Haushalt.|<<NnN>>|Wenn die verfügbare urbane Fläche pro Haushalt sinkt, steigt der|<<NnN>>|Land Tightness Index. Dadurch erhöht sich Desired Mean Urban Rent.|<<NnN>>||<<NnN>>|Mean Urban Rent passt sich über eine Anpassungszeit schrittweise|<<NnN>>|an den gewünschten Mietwert an.
+10,2,Number of Households,933,431,37,27,3,2,0,7,-1,1,0,0,128-128-128,130-130-130,|||255-255-255,0,0,0,0,0,0
+10,3,Current Urban Land per Household,663,431,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Reference Initial Land Demand per Capita,1176,65,62,62,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,5,Initial Mean Household Size,961,218,77,20,3,2,0,7,-1,1,0,0,128-128-128,118-118-118,|||255-255-255,0,0,0,0,0,0
+10,6,Reference Initial Land Demand per Household,783,65,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Land Tightness Index,663,218,66,66,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,8,Urban Rent Sensitivity to Land Tightness,439,431,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,Initial Mean Urban Rent,783,-166,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Urban Land,663,639,50,20,3,2,0,7,-1,1,0,0,128-128-128,125-125-125,|||255-255-255,0,0,0,0,0,0
+10,11,Desired Mean Urban Rent,442,65,55,55,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Urban Rent Adjustment Time,-36,65,61,61,6,3,0,0,-1,1,0,0,0,0,0,0,0,0
+10,13,Mean Urban Rent,393,-166,58,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,14,16,13,100,0,0,22,0,192,0,-1--1--1,,1|(-36,-166)|
+1,15,16,13,4,0,0,22,0,192,0,-1--1--1,,1|(-36,-166)|
+11,16,0,-36,-117,21,25,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,17,Mean Urban Rent Change,62,-117,77,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,2,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,19,5,6,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,20,4,6,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,21,3,7,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,22,6,7,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,23,6,9,1,0,0,0,0,192,1,-1--1--1,,1|(788,-9)|
+1,24,9,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,25,7,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,26,8,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,27,11,17,1,0,0,0,0,192,0,-1--1--1,,1|(240,94)|
+1,28,12,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,29,9,13,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,30,10,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,31,13,17,1,0,0,0,0,192,0,-1--1--1,,1|(270,-86)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Macro_Ebene
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,109,2
+12,1,0,791,-96,328,144,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+Macro Ebene|<<NnN>>||<<NnN>>|Diese View zeigt die Makro-Ebene der Landflächen.|<<NnN>>||<<NnN>>|Urban Land und Aggricultural Land sind zentrale Bestandsgrössen|<<NnN>>|des Modells. Urban Land steigt durch Land Conversion Rate,|<<NnN>>|während Aggricultural Land durch dieselbe Umwandlungsrate sinkt.|<<NnN>>||<<NnN>>|Die detaillierte Berechnung von Land Conversion Rate wird später|<<NnN>>|in der Urban-Land-Conversion-View modelliert. Diese View zeigt|<<NnN>>|zuerst nur die Veränderung der zentralen Landbestände.
+10,2,Initial Urban Land,512,194,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Urban Land,512,355,61,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Initial Aggricultural Land,1040,191,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,Aggricultural Land,1040,355,59,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,8,5,100,0,0,22,0,192,0,-1--1--1,,1|(892,372)|
+1,7,8,3,4,0,0,22,0,192,0,-1--1--1,,1|(675,372)|
+11,8,0,791,372,13,25,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,9,Land Conversion Rate,791,433,64,36,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Reference Initial Urban Land,512,531,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Urban Land Index,321,355,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,2,3,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,13,4,5,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,14,3,10,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,15,3,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,16,10,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+///---\\\
+:L<%^E!@
+1:current.vdfx
+4:Time
+5:Time
+9:current
+19:96,6
+24:2025
+25:2050
+26:2050
+23:0
+15:0,0,0,1,0,0
+27:0,
+34:32,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|255-255-255|0-0-255|192-192-192|-1--1--1
