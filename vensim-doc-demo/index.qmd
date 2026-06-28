@@ -1,0 +1,59 @@
+---
+title: "Vensim Variablensuche"
+subtitle: "Statischer HTML-Explorer fuer die Modelldokumentation"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-fold: true
+execute:
+  echo: false
+  warning: false
+  message: false
+jupyter: python3
+---
+
+## Zweck der Suche
+
+Diese Seite dient als kompakter Einstieg in die automatisch erzeugte Modelldokumentation. Die Suche ist bewusst einfach gehalten: Man sucht nach einem **Variablennamen**, wählt eine **Fokusvariable** und entscheidet anschliessend, welche Informationsblöcke angezeigt werden sollen.
+
+Die Suche ist statisch in das HTML gerendert. Das bedeutet: Alle Variablendaten und Grafiken werden beim Erzeugen der Dokumentation vorbereitet. Im Browser werden nur noch die vorbereiteten Inhalte gefiltert und ein- oder ausgeblendet.
+
+## Was wird angezeigt?
+
+Die Anzeige besteht aus mehreren Blöcken:
+
+- **Grafik:** Dependency-Umfeld der Fokusvariable. Inputs zeigen auf die Fokusvariable, Outputs gehen von ihr weg.
+- **Einheiten:** Typ und Einheit der Fokusvariable.
+- **Dokumentation:** Kommentar aus dem Vensim-Modell, falls vorhanden.
+- **Gleichung:** Originale Gleichung aus der `.mdl`-Datei.
+- **Verbundene Variablen:** Aufgeteilt in Variablen, welche die Fokusvariable beeinflussen, und Variablen, die von der Fokusvariable beeinflusst werden.
+- **Views:** Vensim-Views, in denen die Fokusvariable vorkommt.
+
+Technische Steuergrössen wie `INITIAL TIME`, `FINAL TIME`, `TIME STEP` und `SAVEPER` werden in der Suche standardmässig ausgeblendet, damit die Ergebnisliste übersichtlich bleibt.
+
+## Variablensuche
+
+<link rel="stylesheet" href="assets/variable_search.css">
+<script src="assets/model_search_data.js"></script>
+
+<div id="vensim-variable-search" class="vensim-search-app">
+  <p>Die Variablensuche wird geladen...</p>
+</div>
+
+<script src="assets/variable_search.js"></script>
+
+## Suchlogik
+
+Eine Dependency bedeutet, dass eine Variable in der Gleichung einer anderen Variable verwendet wird. Wenn zum Beispiel `A` in der Gleichung von `B` vorkommt, dann gilt:
+
+```text
+A -> B
+```
+
+Das heisst: `A` beeinflusst rechnerisch `B`. Die Suche trennt diese Beziehungen deshalb in zwei Richtungen:
+
+```text
+Beeinflusst diese Variable: Inputs -> Fokusvariable
+Wird von dieser Variable beeinflusst: Fokusvariable -> Outputs
+```

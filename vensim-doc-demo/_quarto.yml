@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: _site
+
+execute-dir: project
+
+website:
+  title: "Vensim Variablensuche"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Variablensuche
+
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-tools: true
+    theme: cosmo
+
+resources:
+  - assets/**
