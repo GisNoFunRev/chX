@@ -27,7 +27,7 @@ documentation/**/*
 !documentation/experten-breefing/Strukturvalidierung_Expertinnen.tex
 !documentation/experten-breefing/Strukturvalidierung_Expertinnen.pdf
 
-# 5. Spezifische Dateien im Ordner documenta 
+# 5. Spezifische Dateien im Ordner documenta
 !documentation/experten-breefing/documentation-cld/doc-cld.tex
 !documentation/experten-breefing/documentation-cld/doc-cld.pdf
 
@@ -81,3 +81,6 @@ _site/
 
 # vensim-doc-demo/data/*.csv
 
+
+/.quarto/
+**/*.quarto_ipynb
