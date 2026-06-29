@@ -1,0 +1,25 @@
+# Appendix A – vollständige Vensim-Gleichungsliste {.unnumbered}
+
+Dieser Anhang enthält später die vollständige technische Gleichungsliste des finalen Vensim-Modells.
+
+Die Gleichungsliste wird nach Abschluss des Modells aus Vensim exportiert und hier eingefügt.
+
+## Dokumentationsschema
+
+Für jede Variable werden dokumentiert:
+
+- Variablenname
+- Typ
+- Gleichung
+- Einheit
+- Initialwert
+- Parameterwert
+- Quelle oder Begründung
+- Rolle im Modell
+- Hinweise und Grenzen
+
+## Platzhalter
+
+```text
+Die vollständige Vensim-Gleichungsliste wird hier eingefügt.
+```

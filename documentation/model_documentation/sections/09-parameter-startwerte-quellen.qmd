@@ -1,0 +1,29 @@
+# Parameter, Startwerte und Quellen {#sec-parameter-startwerte-quellen}
+
+Dieses Kapitel dokumentiert die Parameter, Startwerte und Quellen des Modells.
+
+## Ziel
+
+Die Parameterdokumentation soll nachvollziehbar machen, welche Werte im Modell verwendet werden und warum diese Werte plausibel sind.
+
+## Dokumentationsschema
+
+Für jeden Parameter werden später dokumentiert:
+
+- Name
+- Einheit
+- Wert
+- Quelle
+- Begründung
+- Rolle im Modell
+- Unsicherheit
+
+## Platzhalter für Parametertabelle
+
+| Parameter | Einheit | Wert | Quelle | Begründung |
+|---|---:|---:|---|---|
+| Initial Mean Urban Rent | TBD | TBD | TBD | TBD |
+| Urban Rent Adjustment Time | Year | TBD | TBD | TBD |
+| Urban Rent Sensitivity to Land Tightness | dmnl | TBD | TBD | TBD |
+| Minimum Land Demand per Household | km2/Household | TBD | TBD | TBD |
+| Maximum Land Demand per Household | km2/Household | TBD | TBD | TBD |

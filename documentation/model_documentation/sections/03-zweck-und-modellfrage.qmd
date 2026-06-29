@@ -1,0 +1,103 @@
+# Zweck und Modellfrage {#sec-zweck-modellfrage}
+
+Dieses Kapitel beschreibt den Zweck des Modells, die Entwicklung der Fragestellung und die finale Modellfrage. Die Fragestellung wurde im Verlauf der Modellarbeit präzisiert. Ausgangspunkt war eine breite Frage zum Verhältnis von Urbanisierung, landwirtschaftlicher Nutzfläche und Nahrungsmittelproduktion in den EU27. Im Verlauf der Modellierung verschob sich der Fokus stärker auf die methodische Frage, ob ein statischer Alonso-Muth-Mills-Ansatz in ein dynamisches System-Dynamics-Modell übersetzt werden kann.
+
+## Leitfragen des Modells {#sec-leitfragen}
+
+::: {.question-box .q-original}
+**Original Question – ursprüngliche Challenge-Frage**
+
+Wie beeinflussen Urbanisierung, landwirtschaftliche Nutzfläche und Nahrungsmittelproduktion einander langfristig in den EU27, und welche Dynamiken entstehen daraus im Zeitraum 2026 bis 2050?
+:::
+
+::: {.question-box .q-research}
+**Research Question – präzisierte Forschungsfrage**
+
+Lässt sich der statische, gleichgewichtsbasierte Alonso-Muth-Mills-Ansatz so dynamisieren, dass urbanes Flächenwachstum in Europa systemdynamisch plausibel beschrieben und in Szenarien simuliert werden kann?
+:::
+
+::: {.question-box .q-aggregation}
+**Aggregation Question – kritische Aggregationsfrage**
+
+Ist die Aggregation der urbanen Fläche Europas zu einer einzigen idealisierten kreisförmigen Stadt aus Flächenperspektive ausreichend plausibel, um brauchbare Beschreibungen und Szenarien urbaner Landumwandlung zu erzeugen?
+:::
+
+::: {.question-box .q-model}
+**Model Question – konkrete Modellfrage**
+
+Wie übersetzt das entwickelte Vensim-Modell den AMM-basierten ökonomischen Landdruck in eine `Land Conversion Rate` zwischen `Agricultural Land` und `Urban Land`?
+:::
+
+::: {.section-heading-original}
+## Original Question – ursprünglicher Ausgangspunkt {#sec-original-question}
+:::
+
+Die ursprüngliche Fragestellung der Challenge war breit angelegt. Sie fragte danach, wie Urbanisierung, landwirtschaftliche Nutzfläche und Nahrungsmittelproduktion in den EU27 langfristig zusammenwirken.
+
+Diese Frage bildet den thematischen Rahmen des Modells. Sie erklärt, warum urbane Landumwandlung und landwirtschaftliche Flächen gemeinsam betrachtet werden. Im Verlauf der Modellarbeit zeigte sich jedoch, dass die direkte Modellierung von Nahrungsmittelproduktion, Landwirtschaft und Urbanisierung in einem gemeinsamen Modell zu breit geworden wäre.
+
+Der Fokus wurde deshalb eingegrenzt. Im Zentrum steht nun nicht mehr das gesamte Verhältnis zwischen Urbanisierung, Landwirtschaft und Nahrungsmittelproduktion, sondern die Frage, wie urbane Landumwandlung als dynamischer Prozess modelliert werden kann.
+
+::: {.section-heading-research}
+## Research Question – präzisierte Forschungsfrage {#sec-research-question}
+:::
+
+Die finale Forschungsfrage richtet sich auf den methodischen Kern der Arbeit. Sie fragt, ob ein ursprünglich statisches, gleichgewichtsbasiertes Alonso-Muth-Mills-Modell so dynamisiert werden kann, dass daraus ein plausibles System-Dynamics-Modell für urbanes Flächenwachstum entsteht.
+
+Der Alonso-Muth-Mills-Ansatz beschreibt in seiner klassischen Form ein urbanes Gleichgewicht. Die Stadtgrenze ergibt sich aus Haushaltsbudget, Bodenrente, Transportkosten, Landnachfrage und landwirtschaftlicher Alternativrente. Diese Logik ist zunächst statisch.
+
+Die zentrale Forschungsleistung des Modells besteht darin, diese statische Logik in eine dynamische Struktur zu übersetzen. Aus einem Gleichgewichtszusammenhang wird dadurch eine zeitliche Wirkungskette, in der ökonomischer Landdruck eine gewünschte urbane Fläche erzeugt und diese über einen Conversion-Mechanismus auf den Bestand von `Urban Land` wirkt.
+
+::: {.section-heading-aggregation}
+## Aggregation Question – kritische Aggregationsfrage {#sec-aggregation-question}
+:::
+
+Eine zentrale Vereinfachung des Modells ist die Aggregation der urbanen Fläche Europas zu einer idealisierten kreisförmigen Stadt.
+
+Diese Annahme ist theoretisch problematisch, weil Europa nicht aus einer einzigen Stadt besteht. Urbane Landnutzung ist räumlich verteilt, historisch gewachsen und institutionell unterschiedlich reguliert. Eine kreisförmige Stadtfläche kann diese räumliche Vielfalt nicht direkt abbilden.
+
+Die Aggregationsfrage ist deshalb eine kritische Plausibilitätsfrage. Sie prüft, ob die idealisierte AMM-Fläche dennoch als abstrakte Flächengrösse brauchbar ist. Im Modell wird die kreisförmige Stadt nicht als reale Geografie Europas verstanden, sondern als mathematische Hilfskonstruktion. Sie dient dazu, aus ökonomischen Grössen eine gewünschte urbane Fläche abzuleiten.
+
+Die Frage ist also nicht, ob Europa tatsächlich eine runde Stadt ist. Die Frage ist, ob diese Vereinfachung ausreicht, um plausible Szenarien für urbanes Flächenwachstum und Land Conversion zu erzeugen.
+
+::: {.section-heading-model}
+## Model Question – konkrete Modellfrage {#sec-model-question}
+:::
+
+Die Modellfrage ist enger als die Forschungsfrage. Sie bezieht sich direkt auf das Verhalten des entwickelten Vensim-Modells.
+
+Das Modell fragt, wie der AMM-basierte ökonomische Landdruck in eine `Land Conversion Rate` übersetzt wird. Die zentrale Wirkungskette lautet:
+
+```text
+AMM-Kern
+→ Desired Urban Land
+→ Urban Land Gap
+→ Land Conversion Rate
+→ Urban Land
+```
+
+Der AMM-Kern erzeugt zunächst eine gewünschte urbane Fläche. Diese wird mit dem bestehenden Bestand an `Urban Land` verglichen. Wenn die gewünschte Fläche grösser ist als die bestehende urbane Fläche, entsteht ein `Urban Land Gap`. Dieser Gap wird im Conversion-Teil des Modells in eine jährliche Umwandlungsrate übersetzt.
+
+Die Modellfrage richtet sich damit auf die interne Struktur des Vensim-Modells. Sie fragt nicht nur, ob Urbanisierung zunimmt, sondern durch welchen Mechanismus ökonomischer Druck im Modell zu physischer Landumwandlung wird.
+
+## Zweck des Modells {#sec-zweck-des-modells}
+
+Das Modell ist ein exploratives System-Dynamics-Modell. Es dient dazu, die Dynamisierung eines statischen AMM-Ansatzes zu untersuchen und seine Plausibilität im Kontext urbaner Landumwandlung zu prüfen.
+
+Das Modell soll:
+
+- die zentrale Wirkungskette zwischen ökonomischer Landnachfrage und Land Conversion sichtbar machen
+- die Rolle von Einkommen, Transportkosten, Bodenrente und Landnachfrage im AMM-Kern dokumentieren
+- die Umwandlung von `Agricultural Land` zu `Urban Land` als dynamischen Prozess abbilden
+- die Grenzen der räumlichen Aggregation transparent machen
+- Szenarien urbanen Flächenwachstums simulativ vergleichbar machen
+
+Das Modell ist nicht als präzises Prognosemodell gedacht. Es soll keine punktgenauen Vorhersagen für einzelne Städte oder Regionen liefern. Es soll vielmehr zeigen, ob die gewählte theoretische Struktur unter den getroffenen Annahmen plausible Entwicklungspfade erzeugen kann.
+
+## Nicht-Ziele {#sec-nicht-ziele}
+
+Das Modell bildet keine einzelnen Städte, Gemeinden oder Parzellen ab. Es ist kein GIS-Modell und kein räumlich explizites Landnutzungsmodell.
+
+Lokale Zonierung, Eigentumsstrukturen, politische Planungsentscheidungen, regionale Preisunterschiede und reale Flächenrestriktionen werden nicht detailliert modelliert.
+
+Auch der AMM-Kern wird nicht als vollständiges mikroökonomisches Gleichgewichtsmodell implementiert. Er wird so vereinfacht und dynamisiert, dass er als ökonomischer Nachfragekern innerhalb eines System-Dynamics-Modells verwendet werden kann.

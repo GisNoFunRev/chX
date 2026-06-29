@@ -1,0 +1,168 @@
+# Dokumentations-Guide: Wie diese Dokumentation zu lesen ist {#sec-dokumentations-guide}
+
+Diese Dokumentation beschreibt unser Vensim-Systemdynamikmodell aus fachlichen und technischen Perspektive. Sie soll helfen, das Modell schrittweise zu verstehen, einzelne Variablen gezielt nachzuschlagen und die Umsetzung der theoretischen Modelllogik in Vensim nachvollziehbar zu machen.
+
+Das Modell ist stark vernetzt: Viele Variablen beeinflussen sich direkt oder indirekt über mehrere Zwischenschritte. Deshalb ist die Dokumentation nicht nur als linearer Bericht aufgebaut, sondern auch als Nachschlagewerk. Besonders wichtig sind dabei die allgemeine Quarto-Book-Suche und die eigene Vensim-Variablensuche.
+
+Die Dokumentation erfüllt damit drei Funktionen:
+
+- Sie erklärt die fachliche Modelllogik.
+- Sie macht die technische Umsetzung in Vensim nachvollziehbar.
+- Sie unterstützt die Fehlersuche, Erweiterung und Weiterentwicklung des Modells.
+
+Damit ist sie sowohl als Bericht als auch als Arbeitsinstrument für die weitere Modellierung gedacht.
+
+## Aufbau der Dokumentation
+
+Die Dokumentation beginnt mit einer allgemeinen Übersicht über Ziel, Architektur und Modellgrenzen. Danach werden die theoretischen Grundlagen und die empirischen Quellen beschrieben. Anschliessend folgen die einzelnen Submodelle und ihre Übersetzung in Vensim. Am Ende stehen Parameter, Kalibrierung, Simulationen, Sensitivitätsanalyse und Modellgrenzen.
+
+| Kapitelbereich | Zweck |
+|---|---|
+| Systemarchitektur | Gibt eine erste Orientierung über Ziel, Struktur und Leselogik der Dokumentation und wie das Gesamtmodell in Submodelle und Modell- Ansichten gegliedert ist. |
+| Dokumentationsstruktur und Beziehung zum CLD | Erklärt, wie die kausale Modellidee in die dokumentierte Struktur übertragen wurde. |
+| Zweck und Modellfrage | Beschreibt, welche Fragestellung das Modell beantworten soll. |
+| Modellgrenze | Definiert, was im Modell enthalten ist und was bewusst ausgelassen wird. |
+| Gesamtstruktur des Modells | Führt die zentralen Modellbereiche und Schnittstellen zusammen. |
+| Theoretische und empirische Quellenbasis | Beschreibt die fachlichen Grundlagen, Annahmen und verwendeten Datenquellen. |
+| Submodell A bis D | Dokumentiert die einzelnen Modellbereiche mit ihren Variablen, Gleichungen und Annahmen. |
+| Übersetzung der Submodelle in Vensim | Zeigt, wie die theoretischen Konzepte konkret als Vensim-Variablen umgesetzt wurden. |
+| Parameter, Startwerte und Quellen | Listet zentrale Modellwerte, Annahmen und Quellen auf. |
+| Kalibrierung und Plausibilitätsprüfung | Beschreibt, wie das Modell geprüft und angepasst wurde. |
+| Simulation Runs und Szenarien | Erklärt, welche Simulationen durchgeführt werden und wie sie zu interpretieren sind. |
+| Sensitivitätsanalyse | Zeigt, welche Parameter besonders grossen Einfluss auf die Ergebnisse haben. |
+| Grenzen des Modells | Ordnet ein, wo das Modell vereinfacht, unsicher oder nicht vollständig ist. |
+| Appendix | Enthält ergänzende technische Informationen, insbesondere die vollständige Vensim-Gleichungsliste. |
+| References | Enthält die verwendeten Literatur- und Datenquellen. |
+
+## Empfohlene Leselogik
+
+Für ein erstes Verständnis sollte die Dokumentation von vorne nach hinten gelesen werden. Besonders wichtig sind dabei die Kapitel zur Modellfrage, zur Modellgrenze und zur Gesamtstruktur. Diese Kapitel erklären, warum das Modell so aufgebaut ist und welche Ausschnitte der Realität es abbildet.
+
+Für die technische Arbeit am Modell ist eine andere Leselogik sinnvoll. In diesem Fall sollte zuerst die Systemarchitektur betrachtet werden. Danach können die relevanten Submodelle und anschliessend die Übersetzung in Vensim gelesen werden. Die Kapitel zu Parametern, Quellen und Kalibrierung helfen dabei, einzelne Werte und Annahmen zu überprüfen.
+
+Für die Arbeit mit einzelnen Modellvariablen ist die Vensim-Variablensuche der wichtigste Einstiegspunkt.
+
+## Zwei Arten von Suche
+
+Die Dokumentation enthält zwei unterschiedliche Suchmöglichkeiten. Beide erfüllen unterschiedliche Zwecke.
+
+| Suche | Zweck |
+|---|---|
+| Quarto-Book-Suche | Volltextsuche über die gesamte Dokumentation. Sie eignet sich, um Kapitel, Begriffe, Quellen, theoretische Konzepte oder erklärende Textstellen zu finden. |
+| Vensim-Variablensuche | Spezialisierte Suche nach Modellvariablen. Sie reduziert das verzweigte Modell auf eine einzelne Fokusvariable und zeigt deren Inputs, Outputs, Gleichung, Einheit, Dokumentation und Views. |
+
+Die Quarto-Book-Suche eignet sich besonders, wenn ein Thema gesucht wird, zum Beispiel `Alonso-Muth-Mills`, `Kalibrierung`, `Urban Scaling` oder `Sensitivitätsanalyse`.
+
+Die Vensim-Variablensuche eignet sich besonders, wenn eine konkrete Modellvariable untersucht werden soll, zum Beispiel `Urban Fringe Radius`, `Urban Land`, `Agricultural Rent` oder `Mean Household Income`.
+
+## Quarto-Book-Suche
+
+Die Quarto-Book-Suche befindet sich in der linken Seitenleiste der gerenderten Dokumentation. Sie durchsucht die gesamte Dokumentation als Text.
+
+Diese Suche ist hilfreich, wenn unklar ist, in welchem Kapitel ein bestimmtes Konzept erklärt wird. Sie sucht nicht nur nach Variablennamen, sondern auch nach Begriffen aus den Erklärungen, Quellenangaben und Kapiteltexten.
+
+Typische Suchanfragen sind zum Beispiel:
+
+| Suchbegriff | Zweck |
+|---|---|
+| `AMM` | Findet Stellen zum Alonso-Muth-Mills-Modell. |
+| `Kalibrierung` | Findet Erklärungen zur Anpassung und Plausibilitätsprüfung des Modells. |
+| `Urban Scaling` | Findet das Submodell zu Bettencourt-West und Innovation. |
+| `Modellgrenze` | Findet die Beschreibung dessen, was im Modell enthalten oder ausgelassen ist. |
+| `Lookup` | Findet Stellen, an denen externe oder historische Werte eingebunden werden. |
+
+## Vensim-Variablensuche
+
+Zusätzlich zur normalen Quarto-Suche enthält die Dokumentation eine eigene Page für die Vensim-Variablensuche. Diese Seite dient als kompakter HTML-Explorer für die automatisch erzeugte Modelldokumentation.
+
+Die Variablensuche ist speziell dafür gebaut, einzelne Modellvariablen gezielt zu untersuchen. Man sucht nach einem Variablennamen, wählt eine Fokusvariable aus und entscheidet anschliessend, welche Informationsblöcke angezeigt werden sollen.
+
+Die Suche ist statisch in das HTML gerendert. Das bedeutet: Alle Variablendaten und Grafiken werden beim Erzeugen der Dokumentation vorbereitet. Im Browser werden die vorbereiteten Inhalte nur noch gefiltert und ein- oder ausgeblendet.
+
+## Was die Variablensuche anzeigt
+
+Für eine ausgewählte Fokusvariable können mehrere Informationsblöcke angezeigt werden.
+
+| Block | Bedeutung |
+|---|---|
+| Grafik | Zeigt das Dependency-Umfeld der Fokusvariable. Inputs zeigen auf die Fokusvariable, Outputs gehen von ihr weg. |
+| Einheiten | Zeigt Typ und Einheit der Fokusvariable. |
+| Dokumentation | Zeigt Kommentare aus dem Vensim-Modell und ergänzte Dokumentationsfelder aus der CSV-Datei. |
+| Gleichung | Zeigt die originale Gleichung aus der `.mdl`-Datei. |
+| Verbundene Variablen | Zeigt, welche Variablen die Fokusvariable beeinflussen und welche Variablen durch sie beeinflusst werden. |
+| Views | Zeigt, in welchen Vensim-Views die Fokusvariable vorkommt. |
+
+Technische Steuergrössen wie `INITIAL TIME`, `FINAL TIME`, `TIME STEP` und `SAVEPER` werden in der Variablensuche standardmässig ausgeblendet. Dadurch bleibt die Ergebnisliste stärker auf die fachlichen Modellvariablen fokussiert.
+
+## Wie eine Variable gelesen werden soll
+
+Eine einzelne Variable sollte nicht nur als Gleichung gelesen werden. Wichtig ist immer der Zusammenhang aus Bedeutung, Einheit, Input-Variablen, Output-Variablen und Dokumentation.
+
+Beim Lesen einer Variable sollten folgende Fragen gestellt werden:
+
+1. **Was beschreibt die Variable fachlich?**
+   Zuerst wird geprüft, welche reale Grösse oder Annahme durch die Variable abgebildet wird.
+
+2. **Welche Einheit hat die Variable?**
+   Die Einheit zeigt, ob die Variable eine Fläche, Distanz, Rate, Geldgrösse, Personenzahl oder dimensionslose Hilfsgrösse ist.
+
+3. **Welche Inputs verwendet die Variable?**
+   Inputs sind Variablen, die in die Gleichung eingehen. Sie erklären, wovon die betrachtete Variable abhängig ist.
+
+4. **Welche Outputs beeinflusst die Variable?**
+   Outputs zeigen, welche nachgelagerten Modellteile durch die Variable verändert werden.
+
+5. **Gibt es eine Quelle oder Annahme?**
+   Bei Parametern und Startwerten ist wichtig, ob sie empirisch belegt, kalibriert oder modelltheoretisch angenommen wurden.
+
+6. **Ist die Variable aktiv, diagnostisch oder dokumentarisch?**
+   Einige Variablen beeinflussen die Simulation direkt. Andere dienen nur zur Plausibilitätsprüfung, Diagnose oder Dokumentation.
+
+## Umgang mit Views / Ansichten
+
+Das Modell ist in mehrere Ansichten gegliedert. Jede Ansicht beschreibt einen fachlich zusammenhängenden Bereich des Gesamtsystems.
+
+Die Ansichten sollten nicht vollständig isoliert verstanden werden. Sie sind über Schnittstellen miteinander verbunden. Deshalb enthält die Dokumentation zusätzlich Kapitel, welche diese Schnittstellen zusammenfassen und die wichtigsten Übergabevariablen zwischen den Ansichten erklären.
+
+## Umgang mit Diagnosevariablen
+
+Einige Variablen sind als Diagnosevariablen angelegt. Sie dienen nicht primär dazu, das Modellverhalten zu steuern, sondern helfen bei der Interpretation und Prüfung des Modells.
+
+Diagnosevariablen können zum Beispiel zeigen, ob theoretische Bedingungen erfüllt sind, ob ein Wert plausibel bleibt oder ob ein Submodell ein erwartetes Verhalten erzeugt. Sie sind besonders nützlich bei der Fehlersuche, beim Vergleich verschiedener Modellversionen und bei der Kalibrierung.
+
+Solche Variablen sollten deshalb nicht automatisch als überflüssig betrachtet werden. Sie erfüllen eine wichtige Rolle für Transparenz und Nachvollziehbarkeit.
+
+## Umgang mit Quellen, Parametern und Annahmen
+
+Nicht alle Werte im Modell haben die gleiche Sicherheit. Einige Werte stammen direkt aus Quellen, andere wurden aus Quellen abgeleitet, kalibriert oder aus theoretischen Überlegungen angenommen.
+
+Die Dokumentation unterscheidet deshalb zwischen:
+
+| Typ | Bedeutung |
+|---|---|
+| empirischer Wert | Direkt aus einer Quelle übernommen oder aus Daten berechnet. |
+| abgeleiteter Wert | Aus mehreren Grössen berechnet oder transformiert. |
+| kalibrierter Wert | So angepasst, dass das Modell ein plausibles Verhalten zeigt. |
+| Annahme | Modellannahme ohne direkte empirische Messung. |
+| Diagnosewert | Wert zur Prüfung oder Interpretation, nicht zwingend als steuernder Modellparameter. |
+
+Beim Lesen eines Parameters sollte deshalb immer geprüft werden, zu welchem Typ er gehört.
+
+## Pflege der Variablendokumentation
+
+Die fachlichen Zusatzinformationen der Variablensuche stammen aus der Datei:
+
+~~~text
+docs/variable_documentation.csv
+~~~
+
+Diese Datei ergänzt die automatisch aus dem `.mdl`-Modell extrahierten Informationen. Dort können zum Beispiel Zweck, Modelllogik, Annahmen, Quellen, Kalibrierung und Interpretation einer Variable ergänzt werden.
+
+Nach einer Änderung an dieser CSV-Datei müssen die Suchdaten neu erzeugt und das Quarto-Book neu gerendert werden:
+
+~~~bash
+python scripts/build_search_assets.py
+quarto render
+~~~
+
+Erst danach sind die Änderungen in der gerenderten Variablensuche sichtbar.

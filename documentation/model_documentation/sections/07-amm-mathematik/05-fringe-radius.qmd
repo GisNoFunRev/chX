@@ -1,0 +1,103 @@
+### 5. Spatial Size of the City – Stadtrand und räumliche Stadtgrösse
+
+Dieser Schritt beschreibt, wie die Lage des Stadtrandes beziehungsweise die räumliche Stadtgrösse bestimmt wird. In der allgemeinen AMM-Logik ergibt sich die Stadtgrenze nicht aus einer isolierten Radiusformel, sondern aus dem Gleichgewicht von Bevölkerung, Bodenrente, Landkonsum, Pendelkosten und landwirtschaftlicher Bodenrente.
+
+#### Allgemeine Gleichgewichtsform nach Brueckner
+
+::: {.key-equation}
+$$
+\Large
+\bar{x} = g(n, y, t, r_a)
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $\bar{x}$ | Distanz zum Rand der Stadt | Distanz |
+| $g(\cdot)$ | reduzierte Form der Gleichgewichtslösung | funktionale Beziehung |
+| $n$ | Bevölkerung | Personen oder Haushalte |
+| $y$ | Einkommen | Geld pro Person oder Haushalt |
+| $t$ | Pendel- beziehungsweise Transportkosten | Geld pro Distanz und Person oder Haushalt |
+| $r_a$ | landwirtschaftliche Bodenrente | Geld pro Fläche |
+
+Brueckners reduzierte Form zeigt, von welchen Grössen die Stadtgrenze im Gleichgewicht abhängt. Sie ist allgemeiner als eine einzelne ausgerechnete Radiusformel, weil sie das Ergebnis der urbanen Gleichgewichtsbedingungen zusammenfasst. Die Stadt muss ihre Bevölkerung aufnehmen, und am Rand muss die urbane Bodenrente der landwirtschaftlichen Bodenrente entsprechen [@brueckner2001sprawl, pp. 68-69].
+
+Die komparative Statik beschreibt die Richtung dieser Zusammenhänge:
+
+$$
+\frac{\partial \bar{x}}{\partial n} > 0
+$$
+
+$$
+\frac{\partial \bar{x}}{\partial y} > 0
+$$
+
+$$
+\frac{\partial \bar{x}}{\partial t} < 0
+$$
+
+$$
+\frac{\partial \bar{x}}{\partial r_a} < 0
+$$
+
+Das bedeutet: Die räumliche Stadtgrösse steigt mit Bevölkerung und Einkommen. Sie sinkt mit höheren Pendelkosten und höherer landwirtschaftlicher Bodenrente [@brueckner2001sprawl, pp. 69-70].
+
+#### Vereinfachter Spezialfall in der AMM-Notation
+
+::: {.key-equation}
+$$
+\Large
+x^* = \frac{Y - z - q \cdot R_A}{t}
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $x^*$ | vereinfachter Fringe Radius | Distanz |
+| $Y$ | Haushaltseinkommen | Geld pro Haushalt |
+| $z$ | übriger Konsum | Geld pro Haushalt |
+| $q$ | Landkonsum pro Haushalt | Fläche pro Haushalt |
+| $R_A$ | landwirtschaftliche Bodenrente | Geld pro Fläche |
+| $q \cdot R_A$ | Bodenrentenkosten des Haushalts am Rand | Geld pro Haushalt |
+| $t$ | Transportkosten pro Distanzeinheit | Geld pro Distanz und Haushalt |
+
+Diese explizite Form ist ein vereinfachter Spezialfall. Sie entsteht, wenn der übrige Konsum $z$ und der Landkonsum $q$ als gegeben behandelt werden. Dann kann die Fringe Condition direkt in die vereinfachte Bid-Rent-Funktion eingesetzt werden.
+
+Ausgangspunkt ist die vereinfachte Bid-Rent-Funktion:
+
+$$
+R(x) = \frac{Y - z - t \cdot x}{q}
+$$
+
+Am Stadtrand gilt die Fringe Condition:
+
+$$
+R(x^*) = R_A
+$$
+
+Damit folgt:
+
+$$
+R_A = \frac{Y - z - t \cdot x^*}{q}
+$$
+
+Multiplikation mit $q$ ergibt:
+
+$$
+q \cdot R_A = Y - z - t \cdot x^*
+$$
+
+Umstellen nach $x^*$ ergibt:
+
+$$
+x^* = \frac{Y - z - q \cdot R_A}{t}
+$$
+
+Diese Formel ersetzt Brueckners allgemeine Gleichgewichtsform nicht. Sie macht sichtbar, wie sich der Stadtrand in der vereinfachten AMM-Notation algebraisch aus Haushaltseinkommen, übrigem Konsum, Landkonsum, landwirtschaftlicher Bodenrente und Transportkosten ergibt.
+
+Mills arbeitet ebenfalls mit endogenen Randdistanzen. Bei ihm ist $k_1$ die Distanz vom Stadtzentrum zum äusseren Rand der Suburbs. Die Lösung des Modells soll unter anderem $k_0$ und $k_1$ bestimmen [@mills1967aggregative, pp. 204-206]. Damit ist auch bei Mills die Stadtgrenze eine endogene Modellgrösse und nicht ein exogen gesetzter Radius.
+
+Quellen-Notation:
+
+- **Brueckner:** $\bar{x}=g(n,y,t,r_a)$ für die reduzierte Form der Stadtgrenze.
+- **Mills:** $k_1$ für den äusseren Stadtrand, $k_0$ für den Rand des CBD.

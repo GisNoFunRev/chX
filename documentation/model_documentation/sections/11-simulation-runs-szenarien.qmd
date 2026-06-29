@@ -1,0 +1,24 @@
+# Simulation Runs und Szenarien {#sec-simulation-runs-szenarien}
+
+Dieses Kapitel beschreibt die Simulation Runs und Szenarien.
+
+## Basislauf
+
+Der Basislauf zeigt das Verhalten des Modells unter den Standardannahmen.
+
+Er dient als Referenz für alle weiteren Szenarien.
+
+## Szenarien
+
+Mögliche Szenarien sind:
+
+- höheres Einkommen
+- tiefere Transportkosten
+- höhere Transportkosten
+- stärkere Landknappheit
+- langsamere Rentenanpassung
+- schnellere Rentenanpassung
+
+## Ergebnisdarstellung
+
+Die Ergebnisse werden später mit Vensim-Grafiken oder exportierten Daten dargestellt.

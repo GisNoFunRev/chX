@@ -1,0 +1,38 @@
+# Submodell D: Rent, Land Tightness und Adjustment {#sec-rent-land-tightness-adjustment}
+
+Dieses Submodell beschreibt die dynamische Anpassung der mittleren urbanen Bodenrente.
+
+## Ziel des Submodells
+
+Mean Urban Rent soll nicht als fixer Startwert eingefroren sein.
+
+Stattdessen reagiert die Bodenrente träge auf urbane Landknappheit.
+
+## Zentrale Logik
+
+Die zentrale Logik lautet:
+
+```text
+Urban Land
+→ Current Urban Land per Household
+→ Land Tightness Index
+→ Desired Mean Urban Rent
+→ Mean Urban Rent
+```
+
+
+Zentrale Variablen
+
+Die zentralen Variablen sind:
+
+Current Urban Land per Household
+Land Tightness Index
+Desired Mean Urban Rent
+Mean Urban Rent
+Urban Rent Adjustment Time
+Urban Rent Sensitivity to Land Tightness
+Anpassungsverhalten
+
+Die Anpassung erfolgt nicht sofort.
+
+Mean Urban Rent bewegt sich mit einer Verzögerung in Richtung Desired Mean Urban Rent.

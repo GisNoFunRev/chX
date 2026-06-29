@@ -1,0 +1,63 @@
+### 6. Ring Geometry and City Area – Stadtfläche und Ringgeometrie
+
+Dieser Schritt übersetzt den Stadtrand in eine räumliche Fläche. Die einfache Kreisformel reicht aus, wenn nur die gesamte Stadtfläche bis zum Stadtrand berechnet werden soll. Die Ringintegration wird benötigt, wenn die Stadt als räumliche Verteilung von Dichte, Landkonsum oder Haushalten beschrieben wird.
+
+::: {.key-equation}
+$$
+\Large
+A(\bar{x}) = \pi \cdot \bar{x}^2
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $A(\bar{x})$ | Stadtfläche bis zum Rand $\bar{x}$ | Fläche |
+| $\pi$ | Kreiszahl | dimensionslos |
+| $\bar{x}$ | Distanz zum Rand der Stadt | Distanz |
+| $\bar{x}^2$ | quadrierter Radius | Fläche |
+| $\pi \cdot \bar{x}^2$ | Kreisfläche der monozentrischen Stadt | Fläche |
+
+Für die reine Stadtfläche genügt die Kreisformel:
+
+$$
+A(\bar{x}) = \pi \cdot \bar{x}^2
+$$
+
+Die Integration wird erst nötig, wenn nicht nur die Fläche, sondern die räumliche Verteilung innerhalb dieser Fläche beschrieben werden soll. Im AMM-Modell können Landkonsum und Dichte mit der Distanz zum Zentrum variieren. Ein Quadratkilometer nahe am Zentrum kann deshalb mehr Haushalte enthalten als ein Quadratkilometer am Stadtrand. Die Gesamtfläche allein sagt in diesem Fall noch nicht, wie viele Haushalte in der Stadt wohnen.
+
+Darum wird die Stadt für die Gleichgewichtsbedingung in viele dünne Ringe zerlegt. Für jeden Ring wird separat berechnet, wie gross seine Fläche ist und wie viele Haushalte dort wohnen. Erst danach werden alle Ringe zusammengezählt.
+
+Ein infinitesimal schmaler Ring in Distanz $x$ besitzt die Fläche:
+
+$$
+dA = 2\pi x \, dx
+$$
+
+Wenn $q(x)$ der Landkonsum pro Haushalt in Distanz $x$ ist, dann ist $\frac{1}{q(x)}$ die Haushaltsdichte. Die Zahl der Haushalte in einem Ring ergibt sich deshalb aus Dichte mal Ringfläche:
+
+$$
+dH = \frac{1}{q(x)} \cdot 2\pi x \, dx
+$$
+
+Die Gesamtzahl der Haushalte ergibt sich durch Integration über alle Ringe vom Zentrum bis zum Stadtrand:
+
+$$
+H = \int_0^{\bar{x}} \frac{1}{q(x)} \cdot 2\pi x \, dx
+$$
+
+Die Integration ist damit keine kompliziertere Alternative zur Kreisformel. Sie ist die allgemeinere räumliche Summierung. Wenn nur Fläche aufsummiert wird, fällt die Ringintegration wieder auf die Kreisfläche zurück:
+
+$$
+\int_0^{\bar{x}} 2\pi x \, dx
+=
+\pi \cdot \bar{x}^2
+$$
+
+Diese Ringgeometrie ist in den Quellen zentral. Brueckner nutzt $2\pi x\,dx$, um die Zahl der Menschen in einem Ring zu berechnen und über die Stadt zu integrieren [@brueckner2001sprawl, p. 68]. Mills nutzt $2\pi u$ in den Bedingungen, die die Landverwendung innerhalb eines Rings beschreiben [@mills1967aggregative, p. 205]. Damit ist die Kreis- und Ringstruktur kein Implementierungsdetail, sondern Teil der mathematischen Form des monozentrischen Stadtmodells.
+
+Wichtig ist die quadratische Beziehung. Eine Erhöhung des Stadtradius erhöht die Stadtfläche nicht linear, sondern proportional zum Quadrat des Radius. Deshalb wirken Veränderungen der Randdistanz stark auf die beanspruchte Landfläche.
+
+Quellen-Notation:
+
+- **Brueckner:** $2\pi x\,dx$ für die Ringfläche, $\pi\bar{x}^2$ für die Stadtfläche.
+- **Mills:** $2\pi u$ für die verfügbare Ringfläche in Distanz $u$.

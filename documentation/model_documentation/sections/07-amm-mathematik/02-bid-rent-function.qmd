@@ -1,0 +1,52 @@
+### 2. Land Rent Function – Bodenrente am Standort
+
+Dieser Schritt leitet aus der Haushaltsbudgetrestriktion die maximal tragbare Bodenrente am Standort $x$ ab. Dazu wird die Budgetgleichung nach $R(x)$ umgestellt. Die resultierende Funktion zeigt, wie Einkommen, übriger Konsum, Transportkosten und Landkonsum bestimmen, welche Bodenrente ein Haushalt an einem bestimmten Standort zahlen kann.
+
+::: {.key-equation}
+$$
+\Large
+R(x) = \frac{Y - z - t \cdot x}{q}
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $R(x)$ | Bodenrente am Standort $x$ | Geld pro Fläche |
+| $Y$ | Haushaltseinkommen | Geld pro Haushalt |
+| $z$ | übriger Konsum des Haushalts | Geld pro Haushalt |
+| $t$ | Transportkosten pro Distanzeinheit | Geld pro Distanz und Haushalt |
+| $x$ | Distanz zum Stadtzentrum | Distanz |
+| $t \cdot x$ | Transportkosten bei Distanz $x$ | Geld pro Haushalt |
+| $Y - z - t \cdot x$ | verbleibendes Budget für Land oder Wohnfläche | Geld pro Haushalt |
+| $q$ | konsumierte Landmenge pro Haushalt | Fläche pro Haushalt |
+| $\frac{Y - z - t \cdot x}{q}$ | maximal tragbare Bodenrente pro Flächeneinheit | Geld pro Fläche |
+
+Ausgangspunkt ist die Haushaltsbudgetrestriktion:
+
+$$
+Y = z + R(x) \cdot q + t \cdot x
+$$
+
+Durch Subtraktion von $z$ und $t \cdot x$ ergibt sich:
+
+$$
+Y - z - t \cdot x = R(x) \cdot q
+$$
+
+Durch Division durch $q$ folgt:
+
+$$
+R(x) = \frac{Y - z - t \cdot x}{q}
+$$
+
+Die Gleichung ist einheitenkonsistent: Der Zähler $Y - z - t \cdot x$ ist ein Geldbetrag pro Haushalt. Der Nenner $q$ ist eine Fläche pro Haushalt. Daraus ergibt sich eine Bodenrente pro Flächeneinheit.
+
+Ökonomisch beschreibt $R(x)$ die maximale Zahlungsbereitschaft für Land am Standort $x$. Ein längerer Pendelweg muss über tiefere Bodenrenten kompensiert werden. Dadurch fällt die Bodenrente mit zunehmender Distanz zum CBD [@brueckner2001sprawl, p. 68]. Die Umstellung der Budgetgleichung macht diese Logik mathematisch sichtbar. Wenn $x$ steigt, steigt $t \cdot x$, der Zähler wird kleiner und die tragbare Bodenrente $R(x)$ sinkt.
+
+Diese Gleichung ist eine vereinfachte Bid-Rent-Darstellung mit konstant gehaltenem $z$ und $q$. In der allgemeinen Theorie hängen Bodenrente und Landkonsum nicht nur von $x$, sondern auch von Einkommen, Pendelkosten und dem endogenen urbanen Nutzenniveau ab. Diese Grössen werden dort als $r(x,y,t,u)$ und $q(x,y,t,u)$ geschrieben [@brueckner2001sprawl, p. 68].
+
+Quellen-Notation:
+
+- **Brueckner:** $r$ beziehungsweise $r(x,y,t,u)$ für Bodenrente.
+- **Mills:** $R(u)$ für Bodenrente in Distanz $u$.
+

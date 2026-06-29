@@ -1,0 +1,171 @@
+## Submodel C: Cobb-Douglas Utilityfunction
+
+Dieser Abschnitt beschreibt, wie das Cobb-Douglas-Untermodell in die AMM-Logik eingebunden wird. Im AMM-Kern erscheinen **$z$** und $q$ bereits in der Budgetgleichung. Das Cobb-Douglas-Untermodell erklärt, wie diese beiden Grössen aus einer einfachen Präferenzannahme als Budgetaufteilung zwischen Landkonsum und übrigem Konsum gelesen werden können.
+
+
+Für diese Dokumentation ist deshalb wichtig:
+
+-  Cobb-Douglas wirkt in den AMM-Kern hinein, indem es $q$ und $z$ als Ergebnis einer Budgetaufteilung verständlich macht.
+-  Die Verbindung zum AMM-Kern orientiert sich primär an Brueckners Darstellung des monozentrischen Stadtmodells. Dort werden Landkonsum $q$ und ein nicht wohnbezogenes Konsumgut $c$ im einfachsten Modell direkt als Haushaltsgüter verwendet [@brueckner2001sprawl, pp. 67-68]. Brueckner verwendet Cobb-Douglas ausserdem in einem numerischen Stadtbeispiel als Annahme für Nutzenfunktion und Housing Production [@brueckner2001sprawl, pp. 82-83].
+
+---
+### 1. Cobb-Douglas Utility Function – allgemeine Nutzenfunktion und theoretische Einordnung
+
+Dieser Schritt erklärt die Cobb-Douglas-Nutzenfunktion zuerst allgemein. Cobb-Douglas ist eine sehr bekannte und weit verbreitete Funktionsform in der Ökonomie. Sie wird verwendet, weil sie eine einfache Idee mathematisch ausdrückt: Ein Ergebnis entsteht aus der Kombination von zwei Gütern oder zwei Inputs, und beide tragen mit einem bestimmten Gewicht dazu bei.
+
+In der allgemeinsten einfachen Form kann eine Cobb-Douglas-Nutzenfunktion so geschrieben werden:
+
+::: {.key-equation}
+$$
+\Large
+U(A,B) = A^\alpha \cdot B^{1-\alpha}
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $U(A,B)$ | Nutzen aus der Kombination von zwei Gütern | ordinaler Nutzenindex |
+| $A$ | erstes Gut | Mengeneinheit des ersten Guts |
+| $B$ | zweites Gut | Mengeneinheit des zweiten Guts |
+| $\alpha$ | Gewicht des ersten Guts | dimensionslos |
+| $1-\alpha$ | Gewicht des zweiten Guts | dimensionslos |
+
+Die Funktion sagt: Der Nutzen hängt von zwei Gütern ab. Wenn Gut $A$ zunimmt, steigt der Nutzen. Wenn Gut $B$ zunimmt, steigt der Nutzen ebenfalls. Beide Güter sind also positiv bewertet.
+
+Der Parameter $\alpha$ liegt zwischen 0 und 1:
+
+$$
+0 < \alpha < 1
+$$
+
+Wenn $\alpha$ grösser ist, wird Gut $A$ stärker gewichtet. Wenn $\alpha$ kleiner ist, wird Gut $B$ stärker gewichtet. Die Exponenten zeigen also, wie wichtig die beiden Güter relativ zueinander sind.
+
+Die Exponenten summieren sich in dieser einfachen Form zu 1:
+
+$$
+\alpha + (1-\alpha) = 1
+$$
+
+Das macht die Funktion besonders gut lesbar. Bei einer Haushaltsentscheidung kann $\alpha$ als konstanter Budgetanteil interpretiert werden. Der Haushalt gibt dann den Anteil $\alpha$ seines Budgets für Gut $A$ aus und den Anteil $1-\alpha$ für Gut $B$.
+
+Ein einfaches Beispiel:
+
+$$
+U(A,B) = A^{0.3} \cdot B^{0.7}
+$$
+
+Hier ist Gut $B$ stärker gewichtet als Gut $A$. Das bedeutet nicht, dass Gut $A$ unwichtig ist. Es bedeutet nur, dass in dieser Nutzenfunktion Gut $B$ einen höheren relativen Anteil an der Präferenzstruktur hat.
+
+Der Nutzenwert $U$ ist kein direkt messbarer Wert. Er ist ein Ordnungsindex. Wichtig ist nicht, ob der Nutzenwert 10 oder 100 beträgt. Wichtig ist nur, welche Kombination aus $A$ und $B$ gegenüber einer anderen Kombination bevorzugt wird.
+
+Wissenschaftshistorisch stammt die Cobb-Douglas-Form aus der neoklassischen Produktionstheorie. Cobb und Douglas verwendeten sie 1928 als Produktionsfunktion, um Output als Funktion von Arbeit und Kapital zu beschreiben [@cobb1928theory]. In dieser ursprünglichen Form ging es nicht um Haushaltspreferenzen, sondern um Produktion:
+
+$$
+Y = A \cdot K^\alpha \cdot L^{1-\alpha}
+$$
+
+Die Form wurde später weit über die ursprüngliche Produktionsfunktion hinaus verwendet. Sie ist in der Ökonomie deshalb so verbreitet, weil sie mit wenigen Parametern eine gut verständliche Beziehung zwischen Inputs, Gewichten und Ergebnis beschreibt. In der Mikroökonomie wird dieselbe mathematische Form häufig als Nutzenfunktion verwendet. Dort beschreibt sie nicht Produktion, sondern Präferenzen zwischen zwei Gütern [@varian2014intermediate].
+
+In dieser Dokumentation wird sie vor allem über Brueckner eingebunden, der im monozentrischen Stadtmodell Landkonsum $q$ und übrigen Konsum $c$ als Haushaltsgüter verwendet [@brueckner2001sprawl, pp. 67-68, 82-83].
+
+
+Die beiden allgemeinen Güter $A$ und $B$ werden durch die beiden relevanten Haushaltsgüter ersetzt:
+
+$$
+A \rightarrow q
+$$
+
+$$
+B \rightarrow z
+$$
+
+Damit wird aus der allgemeinen Cobb-Douglas-Funktion:
+
+$$
+U(A,B) = A^\alpha \cdot B^{1-\alpha}
+$$
+
+die im Modell verwendete Nutzenfunktion:
+
+$$
+U(q,z) = q^\alpha \cdot z^{1-\alpha}
+$$
+
+Dabei steht $q$ für Land beziehungsweise Wohnfläche und $z$ für übrigen Konsum. Erst ab diesem Punkt wird die allgemeine Cobb-Douglas-Logik in die AMM-Logik übersetzt. Die Funktion beschreibt dann, wie ein Haushalt Landkonsum und übrigen Konsum bewertet.
+
+Quellen-Notation:
+
+- **Cobb-Douglas ursprünglich:** $K$ und $L$ für Kapital und Arbeit in einer Produktionsfunktion.
+- **Mikroökonomie allgemein:** häufig $x_1$ und $x_2$ für zwei Güter.
+- **AMM-Übersetzung:** $q$ für Landkonsum und $z$ für übrigen Konsum.
+
+### 2. Budget Shares, Land Demand and AMM Link – Budgetanteile, Landnachfrage und Rückbindung an AMM
+
+Dieser Schritt fasst die eigentliche Cobb-Douglas-Wirkung im AMM-Kontext zusammen. Cobb-Douglas nimmt ein verfügbares Budget $M$ als gegeben und teilt es zwischen übrigen Konsum $z$ und Land beziehungsweise Wohnen auf. Daraus entsteht die Landnachfrage $q$. Danach gehen $q$ und $z$ zurück in die AMM-Logik.
+
+::: {.key-equation}
+$$
+\Large
+z = (1-\alpha)M
+\qquad
+R\cdot q = \alpha M
+\qquad
+q = \frac{\alpha M}{R}
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $M$ | verfügbares Budget für die Haushaltsentscheidung | Geld pro Haushalt |
+| $z$ | übriger Konsum | Geld pro Haushalt |
+| $q$ | Landnachfrage pro Haushalt | Fläche pro Haushalt |
+| $R$ | Bodenrente oder Preis von Land pro Fläche | Geld pro Fläche |
+| $R\cdot q$ | Ausgaben für Land beziehungsweise Wohnen | Geld pro Haushalt |
+| $\alpha$ | Budgetanteil für Land beziehungsweise Wohnen | dimensionslos |
+| $1-\alpha$ | Budgetanteil für übrigen Konsum | dimensionslos |
+
+Cobb-Douglas beginnt hier nicht mit der Herleitung des verfügbaren Budgets. Im AMM-Kontext stammt dieses Budget aus der AMM-Budgetlogik, in der Pendelkosten bereits berücksichtigt sind. Diese Herleitung steht im [AMM-Haushaltsbudget](07-amm-mathematik/01-household-budget.qmd).
+
+Für den Cobb-Douglas-Schritt wird das verfügbare Budget als $M$ geschrieben:
+
+$$
+M = z + R\cdot q
+$$
+
+Der Ausdruck $R\cdot q$ sind die Ausgaben für Land beziehungsweise Wohnen. $z$ sind die Ausgaben für übrigen Konsum.
+
+Aus der Cobb-Douglas-Nutzenfunktion folgt, dass ein konstanter Budgetanteil für jedes Gut ausgegeben wird. Für Land beziehungsweise Wohnen gilt:
+
+$$
+R\cdot q = \alpha M
+$$
+
+Für übrigen Konsum gilt:
+
+$$
+z = (1-\alpha)M
+$$
+
+Damit ist $z$ direkt bestimmt. Die Landnachfrage $q$ entsteht, indem das Wohnlandbudget durch die Bodenrente geteilt wird:
+
+$$
+q = \frac{\alpha M}{R}
+$$
+
+Die Einheit passt: $\alpha M$ ist Geld pro Haushalt. $R$ ist Geld pro Fläche. Der Quotient ist deshalb Fläche pro Haushalt.
+
+Ökonomisch bedeutet das: Ein höheres verfügbares Budget erhöht $z$ und erhöht auch die mögliche Landnachfrage. Ein höheres $\alpha$ verschiebt Budget von übrigem Konsum zu Land beziehungsweise Wohnen. Eine höhere Bodenrente $R$ senkt die Landnachfrage $q$, weil dasselbe Wohnlandbudget weniger Fläche kaufen kann.
+
+Mit der Rückbindung an AMM endet der Cobb-Douglas-Mechanismus funktional:
+
+- Cobb-Douglas liefert $z$ →
+- Cobb-Douglas liefert $q$ →
+- Der AMM-Kern verwendet $z$ und $q$ in der Budget- und Bid-Rent-Logik →
+
+
+In der allgemeinen AMM-Theorie ist $q$ nicht einfach konstant. Brueckner schreibt die Landnachfrage als $q(x,y,t,u)$, weil sie von Distanz, Einkommen, Pendelkosten und dem endogenen Nutzenniveau abhängt [@brueckner2001sprawl, p. 68]. Die Cobb-Douglas-Form ist hier eine konkrete und einfache Spezifikation dieser Haushaltsseite.
+
+Quellen-Notation:
+
+- **Brueckner:** Landkonsum wird als $q$ beziehungsweise $q(x,y,t,u)$ geschrieben, übriger Konsum als $c$.
+- **Cobb-Douglas-Untermodell:** $z=(1-\alpha)M$ und $q=\frac{\alpha M}{R}$.

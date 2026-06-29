@@ -1,0 +1,88 @@
+# Systemgrenzen {#sec-systemgrenzen}
+
+Diese Modell beschreibt  ein makroskopisches EU27-System, in dem urbane Expansion und landwirtschaftliche Flächennutzung über mehrere Rückkopplungen miteinander verbunden sind. Innerhalb der Systemgrenze liegen Flächenumwandlung, Wohnraumnachfrage, Einkommen, Transportkosten, Bodenrenten, landwirtschaftliche Produktion, Importabhängigkeit, wirtschaftlicher Druck, Bodenschutz, Raumplanung und Innovation.
+
+Ausserhalb der Systemgrenze liegen regionale Unterschiede, globale Märkte, geopolitische Schocks, explizite Klimadynamiken und detaillierte demografische oder agrarökologische Prozesse. Diese Abgrenzung macht das Modell überschaubar und erlaubt eine fokussierte Analyse der zentralen systemdynamischen Strukturen.
+
+## Räumliche Systemgrenze
+
+Die räumliche Systemgrenze umfasst die EU27 als aggregiertes Gesamtsystem. Das Modell unterscheidet nicht zwischen einzelnen Ländern, Regionen oder Städten. Alle Flächen-, Bevölkerungs-, Einkommens- und Produktionsgrössen werden auf makroskopischer Ebene betrachtet.
+
+Diese Aggregation bedeutet, dass regionale Unterschiede bewusst vereinfacht werden. Unterschiedliche Stadtstrukturen, nationale Planungssysteme, Bodenpreise, klimatische Bedingungen oder landwirtschaftliche Produktionssysteme werden nicht separat modelliert. Stattdessen beschreibt das Modell eine durchschnittliche EU27-Dynamik.
+
+Diese Vereinfachung ist für das Ziel des Modells sinnvoll, weil nicht einzelne regionale Entwicklungen prognostiziert werden sollen. Im Zentrum steht die Frage, wie sich zentrale Rückkopplungen zwischen urbanem Wachstum und landwirtschaftlicher Flächenverfügbarkeit auf Systemebene verhalten.
+
+## Zeitliche Systemgrenze
+
+Der inhaltliche Betrachtungszeitraum des Modells liegt zwischen 2026 und 2050. Das Modell selbst wird technisch ab dem Jahr 2025 initialisiert und läuft bis 2050 mit einem jährlichen Zeitschritt. Historische Daten aus dem Zeitraum 2000 bis 2025 dienen nicht als eigentlicher Prognosezeitraum, sondern zur konzeptionellen Kalibrierung und Plausibilisierung der Modellstruktur.
+
+Damit trennt das Modell zwischen zwei Funktionen historischer Daten:
+
+1. Historische Daten helfen, Startwerte und Parameter zu begründen.
+2. Die Simulation ab 2025 beziehungsweise 2026 dient dazu, mögliche zukünftige Dynamiken bis 2050 sichtbar zu machen.
+
+Die Modellresultate sind deshalb nicht als exakte Vorhersage zu lesen. Sie zeigen vielmehr, wie sich das System unter den getroffenen Annahmen entwickeln könnte.
+
+## Sachliche Systemgrenze
+
+Die sachliche Systemgrenze umfasst jene Mechanismen, die für die untersuchte Landnutzungsdynamik als zentral betrachtet werden. Im Modell werden insbesondere folgende Bereiche abgebildet:
+
+* die Umwandlung landwirtschaftlicher Fläche in urbane Fläche,
+* die Entwicklung von urbaner Fläche und landwirtschaftlicher Fläche als Bestandsgrössen,
+* Wohnraumnachfrage und Haushaltsentwicklung,
+* Einkommen, Transportkosten und urbane Bodenrente im Sinne der AMM-Logik,
+* landwirtschaftliche Produktion und Kalorienbedarf,
+* Importabhängigkeit als Indikator für Versorgungslücken,
+* wirtschaftlicher Druck als Folge steigender Importabhängigkeit,
+* agrotechnologischer Fortschritt beziehungsweise Innovation als produktivitätssteigernder Mechanismus.
+
+Die zentrale Bestandslogik des Modells liegt in den Variablen `Urban Land` und `Aggricultural Land`. `Urban Land` steigt durch die `Land Conversion Rate`, während `Aggricultural Land` durch dieselbe Rate sinkt. Damit bildet das Modell die Umwandlung von landwirtschaftlicher Fläche in urbane Nutzung als Kernprozess ab.
+
+## Endogene Modellgrenze
+
+Innerhalb der Systemgrenze werden jene Dynamiken als endogen betrachtet, die durch Rückkopplungen im Modell selbst entstehen. Dazu gehören insbesondere die folgenden Wirkungszusammenhänge:
+
+Erstens erzeugt Urbanisierung zusätzliche wirtschaftliche Aktivität und Wohnraumnachfrage. Über Einkommen, Haushalte, Landnachfrage und urbane Renten entsteht Druck zur weiteren Flächenumwandlung.
+
+Zweitens reduziert Land Conversion die verfügbare landwirtschaftliche Fläche. Dadurch verändert sich die mögliche Nahrungsmittelproduktion. Sinkt die Produktion relativ zum Bedarf, steigt die Importabhängigkeit. Diese kann wiederum wirtschaftlichen und politischen Druck erzeugen.
+
+Drittens können zunehmende Flächenknappheit und steigender Umwandlungsdruck Gegenreaktionen auslösen. Raumplanung und Bodenschutz wirken im Modell als dämpfende Mechanismen, welche die weitere Umwandlung landwirtschaftlicher Fläche begrenzen.
+
+Viertens kann Knappheit landwirtschaftlicher Fläche Innovation und agrotechnologischen Fortschritt fördern. Höhere Erträge pro Fläche reduzieren den benötigten Flächenbedarf für eine gegebene Nahrungsmittelproduktion.
+
+Das Modell enthält damit sowohl verstärkende als auch ausgleichende Rückkopplungen. Die Systemgrenze ist so gewählt, dass genau diese Feedback-Strukturen analysiert werden können.
+
+## Exogene Grössen
+
+Nicht alle relevanten Grössen werden endogen berechnet. Einige Variablen werden als externe Annahmen gesetzt, weil sie zwar auf das System wirken, aber nicht selbst im Modell erklärt werden.
+
+Eine zentrale exogene Grösse ist die Bevölkerung. Im Modell wird `Expected Population` über eine Lookup-Tabelle vorgegeben. Geburten, Todesfälle und Migration werden nicht als eigenes demografisches Teilmodell abgebildet. Die Bevölkerung wirkt stattdessen als externer Treiber auf Haushaltszahl, Wohnraumnachfrage und Kalorienbedarf.
+
+Auch mehrere Parameter wie initiale Flächenwerte, Transportkosten, Mietwerte, Schutzfaktoren, Haushaltsgrössen oder Produktivitätsannahmen werden als Modellannahmen gesetzt. Sie gehören zur Parametrisierung des Modells, nicht zur endogenen Struktur.
+
+## Bewusst ausgeschlossene Systembereiche
+
+Mehrere reale Einflussbereiche liegen ausserhalb der Systemgrenze. Sie werden im Modell nicht explizit abgebildet:
+
+| Ausgeschlossener Bereich      | Bedeutung für die Modellgrenze                                                                                                     |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Explizite Klimadynamiken      | Klimawandel, Extremwetter, Dürren oder Ertragsverluste durch Klimaeffekte werden nicht als eigener Wirkungsmechanismus modelliert. |
+| Geopolitische Schocks         | Kriege, Handelskonflikte, Energiekrisen oder abrupte politische Ereignisse werden nicht endogen berücksichtigt.                    |
+| Globale Marktdynamiken        | Weltmarktpreise, internationale Handelsströme und globale Angebots-Nachfrage-Dynamiken werden nicht detailliert modelliert.        |
+| Regionale Differenzierung     | Unterschiede zwischen EU-Ländern, Städten, Regionen oder Agrarräumen werden aggregiert.                                            |
+| Rückumwandlung urbaner Fläche | Eine systematische Rückumwandlung von urbaner Fläche in landwirtschaftliche Fläche wird nicht als dominanter Trend angenommen.     |
+| Verteilungsfragen             | Unterschiede zwischen Einkommensgruppen, Haushaltstypen oder sozialen Gruppen werden nicht separat modelliert.                     |
+| Detaillierte Agrarsysteme     | Kulturarten, Tierhaltung, Bodenqualität oder unterschiedliche Produktionssysteme werden nicht einzeln abgebildet.                  |
+
+Diese Ausschlüsse bedeuten nicht, dass die Faktoren unwichtig sind. Sie liegen lediglich ausserhalb des gewählten Modellzwecks. Das Modell fokussiert nicht auf vollständige Realitätsabbildung, sondern auf eine nachvollziehbare Struktur zur Analyse ausgewählter Rückkopplungen.
+
+## Bedeutung der Systemgrenze für die Interpretation
+
+Die gewählte Systemgrenze hat direkte Konsequenzen für die Interpretation der Ergebnisse. Aussagen des Modells beziehen sich auf die EU27 als aggregiertes System und nicht auf einzelne Länder oder Regionen. Ebenso zeigen die Ergebnisse keine kurzfristigen Schocks, sondern längerfristige strukturelle Entwicklungen.
+
+Besonders wichtig ist, dass das Modell keine präzise Prognose zukünftiger Flächennutzung liefert. Es zeigt vielmehr, wie sich urbane Expansion, landwirtschaftliche Flächenverfügbarkeit, Nahrungsmittelproduktion und regulierende Gegenmechanismen unter bestimmten Annahmen gegenseitig beeinflussen können.
+
+Die Resultate sollten daher als Szenario- und Strukturinformation gelesen werden. Sie helfen zu verstehen, welche Rückkopplungen im System stark wirken könnten, welche Annahmen kritisch sind und an welchen Stellen politische oder technologische Gegenkräfte eine dämpfende Rolle spielen.
+
+
+

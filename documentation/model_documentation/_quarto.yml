@@ -1,0 +1,51 @@
+project:
+  type: book
+
+book:
+  title: "Dokumentation eines systemdynamischen Modells der urbanen Landnutzungsdynamik"
+  subtitle: "Challenge X, Data Science and AI, FS 26 FHNW 2026"
+  author: "Alexis Boser Makaratzis"
+  date: "June 30, 2026"
+
+  sidebar:
+    collapse-level: 2
+
+  chapters:
+    - index.qmd
+    - sections/01-systemarchitektur.qmd
+    - sections/03-zweck-und-modellfrage.qmd
+    - sections/04-modellgrenze.qmd
+    - sections/05-gesamtstruktur.qmd
+    - sections/06-theoretical-empirical-basis.qmd
+    - sections/06-land-stocks-und-conversion.qmd
+    - sections/07-alonso-muth-mills-amm.qmd
+    - sections/08-cobb-douglas-untermodell.qmd
+    - sections/08b-bettencourt-west-submodell.qmd
+    - sections/08c-translation-into-vensim.qmd
+    - sections/09-parameter-startwerte-quellen.qmd
+    - sections/10-kalibrierung-plausibilitaet.qmd
+    - sections/11-simulation-runs-szenarien.qmd
+    - sections/12-sensitivitaetsanalyse.qmd
+
+    - appendix/A-vensim-gleichungsliste.qmd
+    - sections/14-verwendung-von-ki.qmd
+    - sections/14-references.qmd
+
+bibliography: references.bib
+
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    number-depth: 4
+
+  pdf:
+    documentclass: scrreprt
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    number-depth: 4

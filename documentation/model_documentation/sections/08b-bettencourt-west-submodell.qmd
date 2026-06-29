@@ -1,0 +1,70 @@
+## Submodell D: Bettencourt-West Urban Scaling und Innovation
+
+Dieses Submodell bildet einen einfachen Innovationsmechanismus. Es ist kein eigenes Land- oder Stadtmodell. Es übersetzt urbane Bevölkerung in ein relatives Innovationspotenzial und gibt dieses als dimensionslosen $Innovation Index$ an das restliche Modell weiter.
+
+
+Die Theorie der urbanen Skalierung beschreibt städtische Outputs als Potenzfunktion der Stadtbevölkerung [@bettencourt2007growth].
+
+::: {.key-equation}
+$$
+\Large
+Y = Y_0 \cdot N^\beta
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $Y$ | urbaner Output, hier Innovationspotenzial | Output-Grösse |
+| $Y_0$ | Skalierungskonstante | abhängig von $Y$ |
+| $N$ | Bevölkerung einer Stadt | Personen |
+| $\beta$ | Urban Scaling Exponent | dimensionslos |
+
+Für Innovationsgrössen wie Patente wird typischerweise ein superlinearer Zusammenhang beschrieben:
+
+$$
+\beta > 1
+$$
+
+Das bedeutet: Grössere Städte erzeugen überproportional mehr Innovationsoutput. Eine Verdoppelung der Bevölkerung führt dann zu mehr als einer Verdoppelung des Outputs. Wichtig ist: Das ist keine Exponentialfunktion, sondern eine Potenzfunktion.
+
+**Übertragung ins Modell**
+
+Die ursprüngliche Theorie bezieht sich auf einzelne Städte. Das Modell arbeitet aber auf aggregierter EU-Ebene. Deshalb darf die gesamte urbane Bevölkerung nicht einfach direkt potenziert werden:
+
+$$
+(N_1 + N_2 + N_3)^\beta \neq N_1^\beta + N_2^\beta + N_3^\beta
+$$
+
+Darum wird die Theorie im Modell über vereinfachte Stadtklassen umgesetzt:
+
+
+- Die urbane Bevölkerung wird nicht als eine einzige Stadt behandelt, sondern auf Stadtklassen verteilt. Jede Stadtklasse steht für eine angenäherte Anzahl von Städten mit einer typischen Stadtgrösse.
+- Es werden keine einzelnen Städte modelliert, sondern nur Stadtklassen
+- Auch Stadtgrenzen und Stadtklassenzuordnung bleiben stark vereinfacht
+- Die Exponenten sind Modellannahmen
+
+
+
+
+::: {.key-equation}
+$$
+\Large
+Innovation_i = Amount_i \cdot Threshold_i^{\beta_i}
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $Innovation_i$ | Innovationspotenzial einer Stadtklasse | Indexgrösse |
+| $Amount_i$ | angenäherte Anzahl Städte in Klasse $i$ | Städte |
+| $Threshold_i$ | typische Stadtgrösse der Klasse $i$ | Personen |
+| $\beta_i$ | Skalierungsexponent der Klasse $i$ | dimensionslos |
+
+Die Innovationsbeiträge der Stadtklassen werden anschliessend addiert. Daraus entsteht das gesamte urbane Innovationspotenzial. Dieses wird auf den Startwert normiert, sodass ein dimensionsloser `Innovation Index` entsteht.
+
+Der Index bedeutet nicht, dass reale Patente oder reale Forschungsleistung direkt gemessen werden. Er zeigt nur, ob das modellierte Innovationspotenzial relativ zum Startwert steigt oder fällt.
+
+Quellen-Notation:
+
+- **Bettencourt/West:** allgemeine Form $Y = Y_0 N^\beta$.
+- **Diese Dokumentation:** klassenspezifische Form $Innovation_i = Amount_i \cdot Threshold_i^{\beta_i}$.

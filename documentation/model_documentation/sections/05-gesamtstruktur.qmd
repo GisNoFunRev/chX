@@ -1,0 +1,72 @@
+# Gesamtstruktur des Modells {#sec-gesamtstruktur}
+
+Dieses Kapitel beschreibt die Gesamtstruktur des Vensim-Modells.
+
+Das Modell wird in zwei zentrale Modellbereiche und ein eingebettetes Untermodell gegliedert:
+
+1. Land Stocks und Land Conversion
+2. Alonso-Muth-Mills-Kern
+3. Cobb-Douglas-Untermodell innerhalb des AMM-Kerns
+
+Diese Gliederung trennt die physische Landumwandlung von der ökonomischen Erklärung der urbanen Landnachfrage.
+
+## Zentrale Modelllogik
+
+Die zentrale Modelllogik lautet:
+
+```text
+AMM-Kern
+→ Desired Urban Land
+→ Urban Land Gap
+→ Land Conversion Rate
+→ Urban Land
+```
+
+Der AMM-Kern erzeugt eine ökonomisch begründete gewünschte urbane Fläche. Die Conversion-Struktur übersetzt diese gewünschte Fläche in eine physische Veränderung der Land Stocks.
+
+## Submodell A: Land Stocks und Land Conversion
+
+Dieses Submodell beschreibt die physische Seite des Modells.
+
+Es enthält insbesondere:
+
+- Urban Land
+- Agricultural Land
+- Urban Land Gap
+- Land Conversion Rate
+
+Die zentrale Aufgabe dieses Submodells ist die Umwandlung von Agricultural Land in Urban Land.
+
+## Submodell B: Alonso-Muth-Mills-Kern
+
+Dieses Submodell beschreibt die ökonomische Seite des Modells.
+
+Es enthält insbesondere:
+
+- Haushaltsbudget
+- Bid-Rent-Logik
+- Transportkosteneffekt
+- Fringe Condition
+- Urban Fringe Radius
+- Desired Urban Land
+
+Der AMM-Kern erklärt, warum sich eine bestimmte gewünschte urbane Fläche ergibt.
+
+## Cobb-Douglas-Untermodell im AMM-Kern
+
+Das Cobb-Douglas-Untermodell ist kein gleichrangiges Hauptsubmodell.
+
+Es ist ein eingebettetes Untermodell innerhalb des AMM-Kerns. Es liefert die Grössen, mit denen Haushalte zwischen Landkonsum und anderem Konsum aufgeteilt werden.
+
+Im Modell betrifft dies insbesondere:
+
+- Land Demand per Household q
+- Other Consumption per Household z
+
+## Hilfsmechanismen
+
+Weitere Variablen wie Mean Urban Rent, Land Tightness Index oder Adjustment Times werden nicht als eigenständige Submodelle behandelt.
+
+Sie sind Hilfsmechanismen innerhalb der AMM-Logik oder der Kalibrierung.
+
+Ihre Funktion wird dort dokumentiert, wo sie in die Modelllogik eingreifen.

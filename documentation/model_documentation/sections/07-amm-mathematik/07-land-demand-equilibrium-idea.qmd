@@ -1,0 +1,58 @@
+### 7. Urban Equilibrium Conditions – Stadtgleichgewichtsbedingungen
+
+Dieser Schritt fasst die theoretische Gleichgewichtsstruktur des monozentrischen AMM-Modells zusammen. Die Stadtgrösse ist erst dann bestimmt, wenn zwei Bedingungen gleichzeitig erfüllt sind: Erstens muss die Stadtfläche genügend Raum für die Bevölkerung bieten. Zweitens muss am Stadtrand urbane Bodenrente gleich landwirtschaftlicher Bodenrente sein.
+
+::: {.key-equation}
+$$
+\Large
+n
+=
+\int_0^{\bar{x}}
+\frac{1}{q(x,y,t,u)}
+\cdot
+2\pi x
+\, dx
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $n$ | Bevölkerung der Stadt | Personen oder Haushalte |
+| $\bar{x}$ | Distanz zum Rand der Stadt | Distanz |
+| $q(x,y,t,u)$ | Landkonsum pro Person oder Haushalt | Fläche pro Person oder Haushalt |
+| $\frac{1}{q(x,y,t,u)}$ | Bevölkerungsdichte | Personen oder Haushalte pro Fläche |
+| $2\pi x \, dx$ | Fläche eines dünnen Rings | Fläche |
+| $\frac{1}{q(x,y,t,u)} \cdot 2\pi x \, dx$ | Bevölkerung im Ring | Personen oder Haushalte |
+
+Die erste Gleichgewichtsbedingung ist die Population-fitting condition. Sie sagt, dass die Summe der in allen Ringen wohnenden Personen oder Haushalte der Gesamtbevölkerung $n$ entsprechen muss:
+
+$$
+n
+=
+\int_0^{\bar{x}}
+\frac{1}{q(x,y,t,u)}
+\cdot
+2\pi x
+\, dx
+$$
+
+Die zweite Gleichgewichtsbedingung ist die Fringe Condition:
+
+$$
+r(\bar{x},y,t,u)=r_a
+$$
+
+Die erste Bedingung sorgt dafür, dass die Stadt ihre Bevölkerung aufnehmen kann. Da $q$ Land pro Person oder Haushalt misst, ist $\frac{1}{q}$ die entsprechende Dichte. Wird diese Dichte mit der Fläche eines Rings multipliziert, erhält man die Personen oder Haushalte in diesem Ring. Die Integration summiert alle Ringe vom Zentrum bis zum Stadtrand.
+
+Die zweite Bedingung sorgt dafür, dass die Stadt genau dort endet, wo urbane und landwirtschaftliche Bodenrente gleich sind. Innerhalb der Stadt ist die urbane Bodenrente höher als $r_a$. Am Rand gilt Gleichheit. Ausserhalb kann die landwirtschaftliche Nutzung bestehen bleiben [@brueckner2001sprawl, p. 68].
+
+Diese beiden Bedingungen bestimmen im Brueckner-Modell gemeinsam das urbane Nutzenniveau $u$ und die Randdistanz $\bar{x}$ für gegebene Werte von Bevölkerung $n$, Einkommen $y$, Pendelkosten $t$ und landwirtschaftlicher Bodenrente $r_a$ [@brueckner2001sprawl, pp. 68-69]. Damit ist das AMM-Gleichgewicht kein einzelner Flächengap, sondern ein simultanes räumliches Gleichgewicht aus Dichte, Landkonsum, Rentenverlauf und Stadtgrenze.
+
+Mills beschreibt eine verwandte Gleichgewichtsstruktur aus Sicht eines aggregierten Stadtmodells. Er formuliert, dass die Landverwendung in den Ringen vollständig auf die modellierten Nutzungen aufgeteilt wird und dass alle Arbeiter irgendwo wohnen müssen [@mills1967aggregative, pp. 205-206]. Auch hier ist die Stadtstruktur eine simultane Lösung aus Landverwendung, Bodenrente, Wohnstandorten und Randdistanzen.
+
+Dieser siebte Schritt schliesst die theoretische AMM-Beschreibung ab. Er zeigt, dass Haushaltsbudget, Bid-Rent-Funktion, Transportkostengradient, Fringe Condition, Stadtgrösse und Ringgeometrie nicht unabhängig nebeneinanderstehen. Sie bilden zusammen das Gleichgewicht des monozentrischen Stadtmodells.
+
+Quellen-Notation:
+
+- **Brueckner:** *urban equilibrium conditions* mit $n$, $\bar{x}$, $q(x,y,t,u)$ und $r_a$.
+- **Mills:** verwandte Gleichgewichtsbedingungen mit $N(u)$, $k_0$ und $k_1$.

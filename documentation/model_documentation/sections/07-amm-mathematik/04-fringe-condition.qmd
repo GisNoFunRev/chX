@@ -1,0 +1,46 @@
+### 4. Edge-of-City Condition – Gleichgewichtsbedingung am Stadtrand
+
+Dieser Schritt bestimmt die Stadtgrenze über die Konkurrenz zwischen urbaner und landwirtschaftlicher Landnutzung. Die Stadt endet dort, wo die urbane Bodenrente gerade der landwirtschaftlichen Bodenrente entspricht. Innerhalb dieser Grenze können urbane Nutzer mehr für Land zahlen als landwirtschaftliche Nutzer. Ausserhalb ist die landwirtschaftliche Nutzung mindestens gleich wertvoll.
+
+::: {.key-equation}
+$$
+\Large
+R(x^*) = R_A
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $R(x)$ | urbane Bodenrente am Standort $x$ | Geld pro Fläche |
+| $x$ | Distanz zum Stadtzentrum | Distanz |
+| $x^*$ | Distanz der Stadtgrenze vom Zentrum | Distanz |
+| $R(x^*)$ | urbane Bodenrente am Stadtrand | Geld pro Fläche |
+| $R_A$ | landwirtschaftliche Bodenrente beziehungsweise Opportunitätskosten der urbanen Landnutzung | Geld pro Fläche |
+| $R(x^*) = R_A$ | Gleichheit von urbaner und landwirtschaftlicher Bodenrente am Rand der Stadt | Geld pro Fläche |
+
+Die Bedingung baut auf der fallenden Bodenrentenfunktion auf. Solange die urbane Bodenrente höher ist als die landwirtschaftliche Bodenrente, kann urbane Nutzung die landwirtschaftliche Nutzung verdrängen:
+
+$$
+R(x) > R_A
+$$
+
+Wenn die urbane Bodenrente tiefer ist als die landwirtschaftliche Bodenrente, bleibt Land ausserhalb der Stadt landwirtschaftlich genutzt:
+
+$$
+R(x) < R_A
+$$
+
+Die Stadtgrenze liegt deshalb genau an jenem Punkt $x^*$, an dem beide Nutzungen gleich viel für Land zahlen können:
+
+$$
+R(x^*) = R_A
+$$
+
+Diese Gleichung ist eine Randbedingung. Sie bestimmt nicht die gesamte Rentenfunktion, sondern den Punkt, an dem die urbane Landnutzung endet. Brueckner erklärt, dass diese Bedingung sicherstellt, dass die urbane Bodenrente innerhalb der Stadt über der landwirtschaftlichen Bodenrente liegt [@brueckner2001sprawl, p. 68]. Mills beschreibt $R_A$ als Opportunitätskosten der urbanen Landnutzung und setzt am äusseren Rand der Stadt $R(k_1)=R_A$ [@mills1967aggregative, p. 205].
+
+Mathematisch ist die Gleichung dimensionskonsistent, weil beide Seiten Bodenrenten pro Flächeneinheit sind. Ökonomisch ist sie eine Indifferenzbedingung. Bei $R(x^*) > R_A$ könnte die Stadt weiter wachsen. Bei $R(x^*) < R_A$ wäre der Rand zu weit aussen. Nur bei $R(x^*) = R_A$ ist die Grenze zwischen urbaner und landwirtschaftlicher Nutzung stabil.
+
+Quellen-Notation:
+
+- **Brueckner:** $\bar{x}$ für den Stadtrand, $r_a$ für landwirtschaftliche Bodenrente.
+- **Mills:** $k_1$ für den äusseren Stadtrand, $R(k_1)=R_A$ als Randbedingung.

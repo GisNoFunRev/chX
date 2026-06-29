@@ -1,0 +1,752 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Dokumentation eines systemdynamischen Modells der urbanen Landnutzungsdynamik",
+    "section": "",
+    "text": "Überblick\nDiese Dokumentation beschreibt ein in Vensim entwickeltes Systemdynamikmodell zur urbanen Landnutzungsdynamik.\nDie Dokumentation hat zwei Ziele:\n\nDie Modellstruktur verständlich erklären.\nDie technische Reproduzierbarkeit des Modells sichern.\n\nDer Hauptteil beschreibt die Modelllogik, die Submodelle, die Kalibrierung und die Grenzen des Modells.\nDer technische Anhang enthält die vollständige Vensim-Gleichungsliste.",
+    "crumbs": [
+      "Überblick"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html",
+    "href": "sections/01-systemarchitektur.html",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "",
+    "text": "2.1 Aufbau der Dokumentation\nDiese Dokumentation beschreibt unser Vensim-Systemdynamikmodell aus fachlichen und technischen Perspektive. Sie soll helfen, das Modell schrittweise zu verstehen, einzelne Variablen gezielt nachzuschlagen und die Umsetzung der theoretischen Modelllogik in Vensim nachvollziehbar zu machen.\nDas Modell ist stark vernetzt: Viele Variablen beeinflussen sich direkt oder indirekt über mehrere Zwischenschritte. Deshalb ist die Dokumentation nicht nur als linearer Bericht aufgebaut, sondern auch als Nachschlagewerk. Besonders wichtig sind dabei die allgemeine Quarto-Book-Suche und die eigene Vensim-Variablensuche.\nDie Dokumentation erfüllt damit drei Funktionen:\nDamit ist sie sowohl als Bericht als auch als Arbeitsinstrument für die weitere Modellierung gedacht.\nDie Dokumentation beginnt mit einer allgemeinen Übersicht über Ziel, Architektur und Modellgrenzen. Danach werden die theoretischen Grundlagen und die empirischen Quellen beschrieben. Anschliessend folgen die einzelnen Submodelle und ihre Übersetzung in Vensim. Am Ende stehen Parameter, Kalibrierung, Simulationen, Sensitivitätsanalyse und Modellgrenzen.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#aufbau-der-dokumentation",
+    "href": "sections/01-systemarchitektur.html#aufbau-der-dokumentation",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "",
+    "text": "Kapitelbereich\nZweck\n\n\n\n\nSystemarchitektur\nGibt eine erste Orientierung über Ziel, Struktur und Leselogik der Dokumentation und wie das Gesamtmodell in Submodelle und Modell- Ansichten gegliedert ist.\n\n\nDokumentationsstruktur und Beziehung zum CLD\nErklärt, wie die kausale Modellidee in die dokumentierte Struktur übertragen wurde.\n\n\nZweck und Modellfrage\nBeschreibt, welche Fragestellung das Modell beantworten soll.\n\n\nModellgrenze\nDefiniert, was im Modell enthalten ist und was bewusst ausgelassen wird.\n\n\nGesamtstruktur des Modells\nFührt die zentralen Modellbereiche und Schnittstellen zusammen.\n\n\nTheoretische und empirische Quellenbasis\nBeschreibt die fachlichen Grundlagen, Annahmen und verwendeten Datenquellen.\n\n\nSubmodell A bis D\nDokumentiert die einzelnen Modellbereiche mit ihren Variablen, Gleichungen und Annahmen.\n\n\nÜbersetzung der Submodelle in Vensim\nZeigt, wie die theoretischen Konzepte konkret als Vensim-Variablen umgesetzt wurden.\n\n\nParameter, Startwerte und Quellen\nListet zentrale Modellwerte, Annahmen und Quellen auf.\n\n\nKalibrierung und Plausibilitätsprüfung\nBeschreibt, wie das Modell geprüft und angepasst wurde.\n\n\nSimulation Runs und Szenarien\nErklärt, welche Simulationen durchgeführt werden und wie sie zu interpretieren sind.\n\n\nSensitivitätsanalyse\nZeigt, welche Parameter besonders grossen Einfluss auf die Ergebnisse haben.\n\n\nGrenzen des Modells\nOrdnet ein, wo das Modell vereinfacht, unsicher oder nicht vollständig ist.\n\n\nAppendix\nEnthält ergänzende technische Informationen, insbesondere die vollständige Vensim-Gleichungsliste.\n\n\nReferences\nEnthält die verwendeten Literatur- und Datenquellen.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#empfohlene-leselogik",
+    "href": "sections/01-systemarchitektur.html#empfohlene-leselogik",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "2.2 Empfohlene Leselogik",
+    "text": "2.2 Empfohlene Leselogik\nFür ein erstes Verständnis sollte die Dokumentation von vorne nach hinten gelesen werden. Besonders wichtig sind dabei die Kapitel zur Modellfrage, zur Modellgrenze und zur Gesamtstruktur. Diese Kapitel erklären, warum das Modell so aufgebaut ist und welche Ausschnitte der Realität es abbildet.\nFür die technische Arbeit am Modell ist eine andere Leselogik sinnvoll. In diesem Fall sollte zuerst die Systemarchitektur betrachtet werden. Danach können die relevanten Submodelle und anschliessend die Übersetzung in Vensim gelesen werden. Die Kapitel zu Parametern, Quellen und Kalibrierung helfen dabei, einzelne Werte und Annahmen zu überprüfen.\nFür die Arbeit mit einzelnen Modellvariablen ist die Vensim-Variablensuche der wichtigste Einstiegspunkt.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#zwei-arten-von-suche",
+    "href": "sections/01-systemarchitektur.html#zwei-arten-von-suche",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "2.3 Zwei Arten von Suche",
+    "text": "2.3 Zwei Arten von Suche\nDie Dokumentation enthält zwei unterschiedliche Suchmöglichkeiten. Beide erfüllen unterschiedliche Zwecke.\n\n\n\n\n\n\n\nSuche\nZweck\n\n\n\n\nQuarto-Book-Suche\nVolltextsuche über die gesamte Dokumentation. Sie eignet sich, um Kapitel, Begriffe, Quellen, theoretische Konzepte oder erklärende Textstellen zu finden.\n\n\nVensim-Variablensuche\nSpezialisierte Suche nach Modellvariablen. Sie reduziert das verzweigte Modell auf eine einzelne Fokusvariable und zeigt deren Inputs, Outputs, Gleichung, Einheit, Dokumentation und Views.\n\n\n\nDie Quarto-Book-Suche eignet sich besonders, wenn ein Thema gesucht wird, zum Beispiel Alonso-Muth-Mills, Kalibrierung, Urban Scaling oder Sensitivitätsanalyse.\nDie Vensim-Variablensuche eignet sich besonders, wenn eine konkrete Modellvariable untersucht werden soll, zum Beispiel Urban Fringe Radius, Urban Land, Agricultural Rent oder Mean Household Income.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#quarto-book-suche",
+    "href": "sections/01-systemarchitektur.html#quarto-book-suche",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "2.4 Quarto-Book-Suche",
+    "text": "2.4 Quarto-Book-Suche\nDie Quarto-Book-Suche befindet sich in der linken Seitenleiste der gerenderten Dokumentation. Sie durchsucht die gesamte Dokumentation als Text.\nDiese Suche ist hilfreich, wenn unklar ist, in welchem Kapitel ein bestimmtes Konzept erklärt wird. Sie sucht nicht nur nach Variablennamen, sondern auch nach Begriffen aus den Erklärungen, Quellenangaben und Kapiteltexten.\nTypische Suchanfragen sind zum Beispiel:\n\n\n\n\n\n\n\nSuchbegriff\nZweck\n\n\n\n\nAMM\nFindet Stellen zum Alonso-Muth-Mills-Modell.\n\n\nKalibrierung\nFindet Erklärungen zur Anpassung und Plausibilitätsprüfung des Modells.\n\n\nUrban Scaling\nFindet das Submodell zu Bettencourt-West und Innovation.\n\n\nModellgrenze\nFindet die Beschreibung dessen, was im Modell enthalten oder ausgelassen ist.\n\n\nLookup\nFindet Stellen, an denen externe oder historische Werte eingebunden werden.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#vensim-variablensuche",
+    "href": "sections/01-systemarchitektur.html#vensim-variablensuche",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "2.5 Vensim-Variablensuche",
+    "text": "2.5 Vensim-Variablensuche\nZusätzlich zur normalen Quarto-Suche enthält die Dokumentation eine eigene Page für die Vensim-Variablensuche. Diese Seite dient als kompakter HTML-Explorer für die automatisch erzeugte Modelldokumentation.\nDie Variablensuche ist speziell dafür gebaut, einzelne Modellvariablen gezielt zu untersuchen. Man sucht nach einem Variablennamen, wählt eine Fokusvariable aus und entscheidet anschliessend, welche Informationsblöcke angezeigt werden sollen.\nDie Suche ist statisch in das HTML gerendert. Das bedeutet: Alle Variablendaten und Grafiken werden beim Erzeugen der Dokumentation vorbereitet. Im Browser werden die vorbereiteten Inhalte nur noch gefiltert und ein- oder ausgeblendet.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#was-die-variablensuche-anzeigt",
+    "href": "sections/01-systemarchitektur.html#was-die-variablensuche-anzeigt",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "2.6 Was die Variablensuche anzeigt",
+    "text": "2.6 Was die Variablensuche anzeigt\nFür eine ausgewählte Fokusvariable können mehrere Informationsblöcke angezeigt werden.\n\n\n\n\n\n\n\nBlock\nBedeutung\n\n\n\n\nGrafik\nZeigt das Dependency-Umfeld der Fokusvariable. Inputs zeigen auf die Fokusvariable, Outputs gehen von ihr weg.\n\n\nEinheiten\nZeigt Typ und Einheit der Fokusvariable.\n\n\nDokumentation\nZeigt Kommentare aus dem Vensim-Modell und ergänzte Dokumentationsfelder aus der CSV-Datei.\n\n\nGleichung\nZeigt die originale Gleichung aus der .mdl-Datei.\n\n\nVerbundene Variablen\nZeigt, welche Variablen die Fokusvariable beeinflussen und welche Variablen durch sie beeinflusst werden.\n\n\nViews\nZeigt, in welchen Vensim-Views die Fokusvariable vorkommt.\n\n\n\nTechnische Steuergrössen wie INITIAL TIME, FINAL TIME, TIME STEP und SAVEPER werden in der Variablensuche standardmässig ausgeblendet. Dadurch bleibt die Ergebnisliste stärker auf die fachlichen Modellvariablen fokussiert.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#wie-eine-variable-gelesen-werden-soll",
+    "href": "sections/01-systemarchitektur.html#wie-eine-variable-gelesen-werden-soll",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "2.7 Wie eine Variable gelesen werden soll",
+    "text": "2.7 Wie eine Variable gelesen werden soll\nEine einzelne Variable sollte nicht nur als Gleichung gelesen werden. Wichtig ist immer der Zusammenhang aus Bedeutung, Einheit, Input-Variablen, Output-Variablen und Dokumentation.\nBeim Lesen einer Variable sollten folgende Fragen gestellt werden:\n\nWas beschreibt die Variable fachlich? Zuerst wird geprüft, welche reale Grösse oder Annahme durch die Variable abgebildet wird.\nWelche Einheit hat die Variable? Die Einheit zeigt, ob die Variable eine Fläche, Distanz, Rate, Geldgrösse, Personenzahl oder dimensionslose Hilfsgrösse ist.\nWelche Inputs verwendet die Variable? Inputs sind Variablen, die in die Gleichung eingehen. Sie erklären, wovon die betrachtete Variable abhängig ist.\nWelche Outputs beeinflusst die Variable? Outputs zeigen, welche nachgelagerten Modellteile durch die Variable verändert werden.\nGibt es eine Quelle oder Annahme? Bei Parametern und Startwerten ist wichtig, ob sie empirisch belegt, kalibriert oder modelltheoretisch angenommen wurden.\nIst die Variable aktiv, diagnostisch oder dokumentarisch? Einige Variablen beeinflussen die Simulation direkt. Andere dienen nur zur Plausibilitätsprüfung, Diagnose oder Dokumentation.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#umgang-mit-views-ansichten",
+    "href": "sections/01-systemarchitektur.html#umgang-mit-views-ansichten",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "2.8 Umgang mit Views / Ansichten",
+    "text": "2.8 Umgang mit Views / Ansichten\nDas Modell ist in mehrere Ansichten gegliedert. Jede Ansicht beschreibt einen fachlich zusammenhängenden Bereich des Gesamtsystems.\nDie Ansichten sollten nicht vollständig isoliert verstanden werden. Sie sind über Schnittstellen miteinander verbunden. Deshalb enthält die Dokumentation zusätzlich Kapitel, welche diese Schnittstellen zusammenfassen und die wichtigsten Übergabevariablen zwischen den Ansichten erklären.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#umgang-mit-diagnosevariablen",
+    "href": "sections/01-systemarchitektur.html#umgang-mit-diagnosevariablen",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "2.9 Umgang mit Diagnosevariablen",
+    "text": "2.9 Umgang mit Diagnosevariablen\nEinige Variablen sind als Diagnosevariablen angelegt. Sie dienen nicht primär dazu, das Modellverhalten zu steuern, sondern helfen bei der Interpretation und Prüfung des Modells.\nDiagnosevariablen können zum Beispiel zeigen, ob theoretische Bedingungen erfüllt sind, ob ein Wert plausibel bleibt oder ob ein Submodell ein erwartetes Verhalten erzeugt. Sie sind besonders nützlich bei der Fehlersuche, beim Vergleich verschiedener Modellversionen und bei der Kalibrierung.\nSolche Variablen sollten deshalb nicht automatisch als überflüssig betrachtet werden. Sie erfüllen eine wichtige Rolle für Transparenz und Nachvollziehbarkeit.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#umgang-mit-quellen-parametern-und-annahmen",
+    "href": "sections/01-systemarchitektur.html#umgang-mit-quellen-parametern-und-annahmen",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "2.10 Umgang mit Quellen, Parametern und Annahmen",
+    "text": "2.10 Umgang mit Quellen, Parametern und Annahmen\nNicht alle Werte im Modell haben die gleiche Sicherheit. Einige Werte stammen direkt aus Quellen, andere wurden aus Quellen abgeleitet, kalibriert oder aus theoretischen Überlegungen angenommen.\nDie Dokumentation unterscheidet deshalb zwischen:\n\n\n\n\n\n\n\nTyp\nBedeutung\n\n\n\n\nempirischer Wert\nDirekt aus einer Quelle übernommen oder aus Daten berechnet.\n\n\nabgeleiteter Wert\nAus mehreren Grössen berechnet oder transformiert.\n\n\nkalibrierter Wert\nSo angepasst, dass das Modell ein plausibles Verhalten zeigt.\n\n\nAnnahme\nModellannahme ohne direkte empirische Messung.\n\n\nDiagnosewert\nWert zur Prüfung oder Interpretation, nicht zwingend als steuernder Modellparameter.\n\n\n\nBeim Lesen eines Parameters sollte deshalb immer geprüft werden, zu welchem Typ er gehört.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/01-systemarchitektur.html#pflege-der-variablendokumentation",
+    "href": "sections/01-systemarchitektur.html#pflege-der-variablendokumentation",
+    "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
+    "section": "2.11 Pflege der Variablendokumentation",
+    "text": "2.11 Pflege der Variablendokumentation\nDie fachlichen Zusatzinformationen der Variablensuche stammen aus der Datei:\ndocs/variable_documentation.csv\nDiese Datei ergänzt die automatisch aus dem .mdl-Modell extrahierten Informationen. Dort können zum Beispiel Zweck, Modelllogik, Annahmen, Quellen, Kalibrierung und Interpretation einer Variable ergänzt werden.\nNach einer Änderung an dieser CSV-Datei müssen die Suchdaten neu erzeugt und das Quarto-Book neu gerendert werden:\npython scripts/build_search_assets.py\nquarto render\nErst danach sind die Änderungen in der gerenderten Variablensuche sichtbar.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
+    ]
+  },
+  {
+    "objectID": "sections/02-dokumentation-struktur-beziehung-cld.html",
+    "href": "sections/02-dokumentation-struktur-beziehung-cld.html",
+    "title": "3  Dokumentationsstruktur und Beziehung zum CLD",
+    "section": "",
+    "text": "3.1 Rolle des CLD\nDieses Kapitel beschreibt, wie die spätere Modelldokumentation mit dem Causal Loop Diagramm verbunden wird.\nDas Causal Loop Diagramm dient als qualitative Vorstruktur des Modells. Die Vensim-Implementierung übersetzt diese Struktur in Stocks, Flows, Auxiliaries und Parameter.\nDas CLD zeigt die wichtigsten Rückkopplungen des Modells.\nIn der Dokumentation wird das CLD verwendet, um die Gesamtlogik des Modells zu erklären, bevor die technischen Gleichungen beschrieben werden.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Dokumentationsstruktur und Beziehung zum CLD</span>"
+    ]
+  },
+  {
+    "objectID": "sections/02-dokumentation-struktur-beziehung-cld.html#beziehung-zur-vensim-struktur",
+    "href": "sections/02-dokumentation-struktur-beziehung-cld.html#beziehung-zur-vensim-struktur",
+    "title": "3  Dokumentationsstruktur und Beziehung zum CLD",
+    "section": "3.2 Beziehung zur Vensim-Struktur",
+    "text": "3.2 Beziehung zur Vensim-Struktur\nDie spätere Dokumentation soll für jedes zentrale Submodell zeigen:\n\nWelche Logik im CLD dargestellt ist.\nWie diese Logik in Vensim umgesetzt wurde.\nWelche Gleichungen und Parameter dafür verwendet werden.\nWelche Annahmen und Grenzen damit verbunden sind.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Dokumentationsstruktur und Beziehung zum CLD</span>"
+    ]
+  },
+  {
+    "objectID": "sections/03-zweck-und-modellfrage.html",
+    "href": "sections/03-zweck-und-modellfrage.html",
+    "title": "3  Zweck und Modellfrage",
+    "section": "",
+    "text": "3.1 Leitfragen des Modells\nDieses Kapitel beschreibt den Zweck des Modells, die Entwicklung der Fragestellung und die finale Modellfrage. Die Fragestellung wurde im Verlauf der Modellarbeit präzisiert. Ausgangspunkt war eine breite Frage zum Verhältnis von Urbanisierung, landwirtschaftlicher Nutzfläche und Nahrungsmittelproduktion in den EU27. Im Verlauf der Modellierung verschob sich der Fokus stärker auf die methodische Frage, ob ein statischer Alonso-Muth-Mills-Ansatz in ein dynamisches System-Dynamics-Modell übersetzt werden kann.\nDie ursprüngliche Fragestellung der Challenge war breit angelegt. Sie fragte danach, wie Urbanisierung, landwirtschaftliche Nutzfläche und Nahrungsmittelproduktion in den EU27 langfristig zusammenwirken.\nDiese Frage bildet den thematischen Rahmen des Modells. Sie erklärt, warum urbane Landumwandlung und landwirtschaftliche Flächen gemeinsam betrachtet werden. Im Verlauf der Modellarbeit zeigte sich jedoch, dass die direkte Modellierung von Nahrungsmittelproduktion, Landwirtschaft und Urbanisierung in einem gemeinsamen Modell zu breit geworden wäre.\nDer Fokus wurde deshalb eingegrenzt. Im Zentrum steht nun nicht mehr das gesamte Verhältnis zwischen Urbanisierung, Landwirtschaft und Nahrungsmittelproduktion, sondern die Frage, wie urbane Landumwandlung als dynamischer Prozess modelliert werden kann.\nDie finale Forschungsfrage richtet sich auf den methodischen Kern der Arbeit. Sie fragt, ob ein ursprünglich statisches, gleichgewichtsbasiertes Alonso-Muth-Mills-Modell so dynamisiert werden kann, dass daraus ein plausibles System-Dynamics-Modell für urbanes Flächenwachstum entsteht.\nDer Alonso-Muth-Mills-Ansatz beschreibt in seiner klassischen Form ein urbanes Gleichgewicht. Die Stadtgrenze ergibt sich aus Haushaltsbudget, Bodenrente, Transportkosten, Landnachfrage und landwirtschaftlicher Alternativrente. Diese Logik ist zunächst statisch.\nDie zentrale Forschungsleistung des Modells besteht darin, diese statische Logik in eine dynamische Struktur zu übersetzen. Aus einem Gleichgewichtszusammenhang wird dadurch eine zeitliche Wirkungskette, in der ökonomischer Landdruck eine gewünschte urbane Fläche erzeugt und diese über einen Conversion-Mechanismus auf den Bestand von Urban Land wirkt.\nEine zentrale Vereinfachung des Modells ist die Aggregation der urbanen Fläche Europas zu einer idealisierten kreisförmigen Stadt.\nDiese Annahme ist theoretisch problematisch, weil Europa nicht aus einer einzigen Stadt besteht. Urbane Landnutzung ist räumlich verteilt, historisch gewachsen und institutionell unterschiedlich reguliert. Eine kreisförmige Stadtfläche kann diese räumliche Vielfalt nicht direkt abbilden.\nDie Aggregationsfrage ist deshalb eine kritische Plausibilitätsfrage. Sie prüft, ob die idealisierte AMM-Fläche dennoch als abstrakte Flächengrösse brauchbar ist. Im Modell wird die kreisförmige Stadt nicht als reale Geografie Europas verstanden, sondern als mathematische Hilfskonstruktion. Sie dient dazu, aus ökonomischen Grössen eine gewünschte urbane Fläche abzuleiten.\nDie Frage ist also nicht, ob Europa tatsächlich eine runde Stadt ist. Die Frage ist, ob diese Vereinfachung ausreicht, um plausible Szenarien für urbanes Flächenwachstum und Land Conversion zu erzeugen.\nDie Modellfrage ist enger als die Forschungsfrage. Sie bezieht sich direkt auf das Verhalten des entwickelten Vensim-Modells.\nDas Modell fragt, wie der AMM-basierte ökonomische Landdruck in eine Land Conversion Rate übersetzt wird. Die zentrale Wirkungskette lautet:\nDer AMM-Kern erzeugt zunächst eine gewünschte urbane Fläche. Diese wird mit dem bestehenden Bestand an Urban Land verglichen. Wenn die gewünschte Fläche grösser ist als die bestehende urbane Fläche, entsteht ein Urban Land Gap. Dieser Gap wird im Conversion-Teil des Modells in eine jährliche Umwandlungsrate übersetzt.\nDie Modellfrage richtet sich damit auf die interne Struktur des Vensim-Modells. Sie fragt nicht nur, ob Urbanisierung zunimmt, sondern durch welchen Mechanismus ökonomischer Druck im Modell zu physischer Landumwandlung wird.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Zweck und Modellfrage</span>"
+    ]
+  },
+  {
+    "objectID": "sections/03-zweck-und-modellfrage.html#sec-leitfragen",
+    "href": "sections/03-zweck-und-modellfrage.html#sec-leitfragen",
+    "title": "3  Zweck und Modellfrage",
+    "section": "",
+    "text": "Original Question – ursprüngliche Challenge-Frage\nWie beeinflussen Urbanisierung, landwirtschaftliche Nutzfläche und Nahrungsmittelproduktion einander langfristig in den EU27, und welche Dynamiken entstehen daraus im Zeitraum 2026 bis 2050?\n\n\nResearch Question – präzisierte Forschungsfrage\nLässt sich der statische, gleichgewichtsbasierte Alonso-Muth-Mills-Ansatz so dynamisieren, dass urbanes Flächenwachstum in Europa systemdynamisch plausibel beschrieben und in Szenarien simuliert werden kann?\n\n\nAggregation Question – kritische Aggregationsfrage\nIst die Aggregation der urbanen Fläche Europas zu einer einzigen idealisierten kreisförmigen Stadt aus Flächenperspektive ausreichend plausibel, um brauchbare Beschreibungen und Szenarien urbaner Landumwandlung zu erzeugen?\n\n\nModel Question – konkrete Modellfrage\nWie übersetzt das entwickelte Vensim-Modell den AMM-basierten ökonomischen Landdruck in eine Land Conversion Rate zwischen Agricultural Land und Urban Land?",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Zweck und Modellfrage</span>"
+    ]
+  },
+  {
+    "objectID": "sections/03-zweck-und-modellfrage.html#sec-original-question",
+    "href": "sections/03-zweck-und-modellfrage.html#sec-original-question",
+    "title": "3  Zweck und Modellfrage",
+    "section": "3.2 Original Question – ursprünglicher Ausgangspunkt",
+    "text": "3.2 Original Question – ursprünglicher Ausgangspunkt",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Zweck und Modellfrage</span>"
+    ]
+  },
+  {
+    "objectID": "sections/03-zweck-und-modellfrage.html#sec-research-question",
+    "href": "sections/03-zweck-und-modellfrage.html#sec-research-question",
+    "title": "3  Zweck und Modellfrage",
+    "section": "3.3 Research Question – präzisierte Forschungsfrage",
+    "text": "3.3 Research Question – präzisierte Forschungsfrage",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Zweck und Modellfrage</span>"
+    ]
+  },
+  {
+    "objectID": "sections/03-zweck-und-modellfrage.html#sec-aggregation-question",
+    "href": "sections/03-zweck-und-modellfrage.html#sec-aggregation-question",
+    "title": "3  Zweck und Modellfrage",
+    "section": "3.4 Aggregation Question – kritische Aggregationsfrage",
+    "text": "3.4 Aggregation Question – kritische Aggregationsfrage",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Zweck und Modellfrage</span>"
+    ]
+  },
+  {
+    "objectID": "sections/03-zweck-und-modellfrage.html#sec-model-question",
+    "href": "sections/03-zweck-und-modellfrage.html#sec-model-question",
+    "title": "3  Zweck und Modellfrage",
+    "section": "3.5 Model Question – konkrete Modellfrage",
+    "text": "3.5 Model Question – konkrete Modellfrage",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Zweck und Modellfrage</span>"
+    ]
+  },
+  {
+    "objectID": "sections/03-zweck-und-modellfrage.html#sec-zweck-des-modells",
+    "href": "sections/03-zweck-und-modellfrage.html#sec-zweck-des-modells",
+    "title": "3  Zweck und Modellfrage",
+    "section": "3.6 Zweck des Modells",
+    "text": "3.6 Zweck des Modells\nDas Modell ist ein exploratives System-Dynamics-Modell. Es dient dazu, die Dynamisierung eines statischen AMM-Ansatzes zu untersuchen und seine Plausibilität im Kontext urbaner Landumwandlung zu prüfen.\nDas Modell soll:\n\ndie zentrale Wirkungskette zwischen ökonomischer Landnachfrage und Land Conversion sichtbar machen\ndie Rolle von Einkommen, Transportkosten, Bodenrente und Landnachfrage im AMM-Kern dokumentieren\ndie Umwandlung von Agricultural Land zu Urban Land als dynamischen Prozess abbilden\ndie Grenzen der räumlichen Aggregation transparent machen\nSzenarien urbanen Flächenwachstums simulativ vergleichbar machen\n\nDas Modell ist nicht als präzises Prognosemodell gedacht. Es soll keine punktgenauen Vorhersagen für einzelne Städte oder Regionen liefern. Es soll vielmehr zeigen, ob die gewählte theoretische Struktur unter den getroffenen Annahmen plausible Entwicklungspfade erzeugen kann.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Zweck und Modellfrage</span>"
+    ]
+  },
+  {
+    "objectID": "sections/03-zweck-und-modellfrage.html#sec-nicht-ziele",
+    "href": "sections/03-zweck-und-modellfrage.html#sec-nicht-ziele",
+    "title": "3  Zweck und Modellfrage",
+    "section": "3.7 Nicht-Ziele",
+    "text": "3.7 Nicht-Ziele\nDas Modell bildet keine einzelnen Städte, Gemeinden oder Parzellen ab. Es ist kein GIS-Modell und kein räumlich explizites Landnutzungsmodell.\nLokale Zonierung, Eigentumsstrukturen, politische Planungsentscheidungen, regionale Preisunterschiede und reale Flächenrestriktionen werden nicht detailliert modelliert.\nAuch der AMM-Kern wird nicht als vollständiges mikroökonomisches Gleichgewichtsmodell implementiert. Er wird so vereinfacht und dynamisiert, dass er als ökonomischer Nachfragekern innerhalb eines System-Dynamics-Modells verwendet werden kann.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Zweck und Modellfrage</span>"
+    ]
+  },
+  {
+    "objectID": "sections/04-modellgrenze.html",
+    "href": "sections/04-modellgrenze.html",
+    "title": "4  Systemgrenzen",
+    "section": "",
+    "text": "4.1 Räumliche Systemgrenze\nDiese Modell beschreibt ein makroskopisches EU27-System, in dem urbane Expansion und landwirtschaftliche Flächennutzung über mehrere Rückkopplungen miteinander verbunden sind. Innerhalb der Systemgrenze liegen Flächenumwandlung, Wohnraumnachfrage, Einkommen, Transportkosten, Bodenrenten, landwirtschaftliche Produktion, Importabhängigkeit, wirtschaftlicher Druck, Bodenschutz, Raumplanung und Innovation.\nAusserhalb der Systemgrenze liegen regionale Unterschiede, globale Märkte, geopolitische Schocks, explizite Klimadynamiken und detaillierte demografische oder agrarökologische Prozesse. Diese Abgrenzung macht das Modell überschaubar und erlaubt eine fokussierte Analyse der zentralen systemdynamischen Strukturen.\nDie räumliche Systemgrenze umfasst die EU27 als aggregiertes Gesamtsystem. Das Modell unterscheidet nicht zwischen einzelnen Ländern, Regionen oder Städten. Alle Flächen-, Bevölkerungs-, Einkommens- und Produktionsgrössen werden auf makroskopischer Ebene betrachtet.\nDiese Aggregation bedeutet, dass regionale Unterschiede bewusst vereinfacht werden. Unterschiedliche Stadtstrukturen, nationale Planungssysteme, Bodenpreise, klimatische Bedingungen oder landwirtschaftliche Produktionssysteme werden nicht separat modelliert. Stattdessen beschreibt das Modell eine durchschnittliche EU27-Dynamik.\nDiese Vereinfachung ist für das Ziel des Modells sinnvoll, weil nicht einzelne regionale Entwicklungen prognostiziert werden sollen. Im Zentrum steht die Frage, wie sich zentrale Rückkopplungen zwischen urbanem Wachstum und landwirtschaftlicher Flächenverfügbarkeit auf Systemebene verhalten.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Systemgrenzen</span>"
+    ]
+  },
+  {
+    "objectID": "sections/04-modellgrenze.html#zeitliche-systemgrenze",
+    "href": "sections/04-modellgrenze.html#zeitliche-systemgrenze",
+    "title": "4  Systemgrenzen",
+    "section": "4.2 Zeitliche Systemgrenze",
+    "text": "4.2 Zeitliche Systemgrenze\nDer inhaltliche Betrachtungszeitraum des Modells liegt zwischen 2026 und 2050. Das Modell selbst wird technisch ab dem Jahr 2025 initialisiert und läuft bis 2050 mit einem jährlichen Zeitschritt. Historische Daten aus dem Zeitraum 2000 bis 2025 dienen nicht als eigentlicher Prognosezeitraum, sondern zur konzeptionellen Kalibrierung und Plausibilisierung der Modellstruktur.\nDamit trennt das Modell zwischen zwei Funktionen historischer Daten:\n\nHistorische Daten helfen, Startwerte und Parameter zu begründen.\nDie Simulation ab 2025 beziehungsweise 2026 dient dazu, mögliche zukünftige Dynamiken bis 2050 sichtbar zu machen.\n\nDie Modellresultate sind deshalb nicht als exakte Vorhersage zu lesen. Sie zeigen vielmehr, wie sich das System unter den getroffenen Annahmen entwickeln könnte.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Systemgrenzen</span>"
+    ]
+  },
+  {
+    "objectID": "sections/04-modellgrenze.html#sachliche-systemgrenze",
+    "href": "sections/04-modellgrenze.html#sachliche-systemgrenze",
+    "title": "4  Systemgrenzen",
+    "section": "4.3 Sachliche Systemgrenze",
+    "text": "4.3 Sachliche Systemgrenze\nDie sachliche Systemgrenze umfasst jene Mechanismen, die für die untersuchte Landnutzungsdynamik als zentral betrachtet werden. Im Modell werden insbesondere folgende Bereiche abgebildet:\n\ndie Umwandlung landwirtschaftlicher Fläche in urbane Fläche,\ndie Entwicklung von urbaner Fläche und landwirtschaftlicher Fläche als Bestandsgrössen,\nWohnraumnachfrage und Haushaltsentwicklung,\nEinkommen, Transportkosten und urbane Bodenrente im Sinne der AMM-Logik,\nlandwirtschaftliche Produktion und Kalorienbedarf,\nImportabhängigkeit als Indikator für Versorgungslücken,\nwirtschaftlicher Druck als Folge steigender Importabhängigkeit,\nagrotechnologischer Fortschritt beziehungsweise Innovation als produktivitätssteigernder Mechanismus.\n\nDie zentrale Bestandslogik des Modells liegt in den Variablen Urban Land und Aggricultural Land. Urban Land steigt durch die Land Conversion Rate, während Aggricultural Land durch dieselbe Rate sinkt. Damit bildet das Modell die Umwandlung von landwirtschaftlicher Fläche in urbane Nutzung als Kernprozess ab.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Systemgrenzen</span>"
+    ]
+  },
+  {
+    "objectID": "sections/04-modellgrenze.html#endogene-modellgrenze",
+    "href": "sections/04-modellgrenze.html#endogene-modellgrenze",
+    "title": "4  Systemgrenzen",
+    "section": "4.4 Endogene Modellgrenze",
+    "text": "4.4 Endogene Modellgrenze\nInnerhalb der Systemgrenze werden jene Dynamiken als endogen betrachtet, die durch Rückkopplungen im Modell selbst entstehen. Dazu gehören insbesondere die folgenden Wirkungszusammenhänge:\nErstens erzeugt Urbanisierung zusätzliche wirtschaftliche Aktivität und Wohnraumnachfrage. Über Einkommen, Haushalte, Landnachfrage und urbane Renten entsteht Druck zur weiteren Flächenumwandlung.\nZweitens reduziert Land Conversion die verfügbare landwirtschaftliche Fläche. Dadurch verändert sich die mögliche Nahrungsmittelproduktion. Sinkt die Produktion relativ zum Bedarf, steigt die Importabhängigkeit. Diese kann wiederum wirtschaftlichen und politischen Druck erzeugen.\nDrittens können zunehmende Flächenknappheit und steigender Umwandlungsdruck Gegenreaktionen auslösen. Raumplanung und Bodenschutz wirken im Modell als dämpfende Mechanismen, welche die weitere Umwandlung landwirtschaftlicher Fläche begrenzen.\nViertens kann Knappheit landwirtschaftlicher Fläche Innovation und agrotechnologischen Fortschritt fördern. Höhere Erträge pro Fläche reduzieren den benötigten Flächenbedarf für eine gegebene Nahrungsmittelproduktion.\nDas Modell enthält damit sowohl verstärkende als auch ausgleichende Rückkopplungen. Die Systemgrenze ist so gewählt, dass genau diese Feedback-Strukturen analysiert werden können.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Systemgrenzen</span>"
+    ]
+  },
+  {
+    "objectID": "sections/04-modellgrenze.html#exogene-grössen",
+    "href": "sections/04-modellgrenze.html#exogene-grössen",
+    "title": "4  Systemgrenzen",
+    "section": "4.5 Exogene Grössen",
+    "text": "4.5 Exogene Grössen\nNicht alle relevanten Grössen werden endogen berechnet. Einige Variablen werden als externe Annahmen gesetzt, weil sie zwar auf das System wirken, aber nicht selbst im Modell erklärt werden.\nEine zentrale exogene Grösse ist die Bevölkerung. Im Modell wird Expected Population über eine Lookup-Tabelle vorgegeben. Geburten, Todesfälle und Migration werden nicht als eigenes demografisches Teilmodell abgebildet. Die Bevölkerung wirkt stattdessen als externer Treiber auf Haushaltszahl, Wohnraumnachfrage und Kalorienbedarf.\nAuch mehrere Parameter wie initiale Flächenwerte, Transportkosten, Mietwerte, Schutzfaktoren, Haushaltsgrössen oder Produktivitätsannahmen werden als Modellannahmen gesetzt. Sie gehören zur Parametrisierung des Modells, nicht zur endogenen Struktur.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Systemgrenzen</span>"
+    ]
+  },
+  {
+    "objectID": "sections/04-modellgrenze.html#bewusst-ausgeschlossene-systembereiche",
+    "href": "sections/04-modellgrenze.html#bewusst-ausgeschlossene-systembereiche",
+    "title": "4  Systemgrenzen",
+    "section": "4.6 Bewusst ausgeschlossene Systembereiche",
+    "text": "4.6 Bewusst ausgeschlossene Systembereiche\nMehrere reale Einflussbereiche liegen ausserhalb der Systemgrenze. Sie werden im Modell nicht explizit abgebildet:\n\n\n\n\n\n\n\nAusgeschlossener Bereich\nBedeutung für die Modellgrenze\n\n\n\n\nExplizite Klimadynamiken\nKlimawandel, Extremwetter, Dürren oder Ertragsverluste durch Klimaeffekte werden nicht als eigener Wirkungsmechanismus modelliert.\n\n\nGeopolitische Schocks\nKriege, Handelskonflikte, Energiekrisen oder abrupte politische Ereignisse werden nicht endogen berücksichtigt.\n\n\nGlobale Marktdynamiken\nWeltmarktpreise, internationale Handelsströme und globale Angebots-Nachfrage-Dynamiken werden nicht detailliert modelliert.\n\n\nRegionale Differenzierung\nUnterschiede zwischen EU-Ländern, Städten, Regionen oder Agrarräumen werden aggregiert.\n\n\nRückumwandlung urbaner Fläche\nEine systematische Rückumwandlung von urbaner Fläche in landwirtschaftliche Fläche wird nicht als dominanter Trend angenommen.\n\n\nVerteilungsfragen\nUnterschiede zwischen Einkommensgruppen, Haushaltstypen oder sozialen Gruppen werden nicht separat modelliert.\n\n\nDetaillierte Agrarsysteme\nKulturarten, Tierhaltung, Bodenqualität oder unterschiedliche Produktionssysteme werden nicht einzeln abgebildet.\n\n\n\nDiese Ausschlüsse bedeuten nicht, dass die Faktoren unwichtig sind. Sie liegen lediglich ausserhalb des gewählten Modellzwecks. Das Modell fokussiert nicht auf vollständige Realitätsabbildung, sondern auf eine nachvollziehbare Struktur zur Analyse ausgewählter Rückkopplungen.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Systemgrenzen</span>"
+    ]
+  },
+  {
+    "objectID": "sections/04-modellgrenze.html#bedeutung-der-systemgrenze-für-die-interpretation",
+    "href": "sections/04-modellgrenze.html#bedeutung-der-systemgrenze-für-die-interpretation",
+    "title": "4  Systemgrenzen",
+    "section": "4.7 Bedeutung der Systemgrenze für die Interpretation",
+    "text": "4.7 Bedeutung der Systemgrenze für die Interpretation\nDie gewählte Systemgrenze hat direkte Konsequenzen für die Interpretation der Ergebnisse. Aussagen des Modells beziehen sich auf die EU27 als aggregiertes System und nicht auf einzelne Länder oder Regionen. Ebenso zeigen die Ergebnisse keine kurzfristigen Schocks, sondern längerfristige strukturelle Entwicklungen.\nBesonders wichtig ist, dass das Modell keine präzise Prognose zukünftiger Flächennutzung liefert. Es zeigt vielmehr, wie sich urbane Expansion, landwirtschaftliche Flächenverfügbarkeit, Nahrungsmittelproduktion und regulierende Gegenmechanismen unter bestimmten Annahmen gegenseitig beeinflussen können.\nDie Resultate sollten daher als Szenario- und Strukturinformation gelesen werden. Sie helfen zu verstehen, welche Rückkopplungen im System stark wirken könnten, welche Annahmen kritisch sind und an welchen Stellen politische oder technologische Gegenkräfte eine dämpfende Rolle spielen.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Systemgrenzen</span>"
+    ]
+  },
+  {
+    "objectID": "sections/05-gesamtstruktur.html",
+    "href": "sections/05-gesamtstruktur.html",
+    "title": "5  Gesamtstruktur des Modells",
+    "section": "",
+    "text": "5.1 Zentrale Modelllogik\nDieses Kapitel beschreibt die Gesamtstruktur des Vensim-Modells.\nDas Modell wird in zwei zentrale Modellbereiche und ein eingebettetes Untermodell gegliedert:\nDiese Gliederung trennt die physische Landumwandlung von der ökonomischen Erklärung der urbanen Landnachfrage.\nDie zentrale Modelllogik lautet:\nDer AMM-Kern erzeugt eine ökonomisch begründete gewünschte urbane Fläche. Die Conversion-Struktur übersetzt diese gewünschte Fläche in eine physische Veränderung der Land Stocks.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+    ]
+  },
+  {
+    "objectID": "sections/05-gesamtstruktur.html#zentrale-modelllogik",
+    "href": "sections/05-gesamtstruktur.html#zentrale-modelllogik",
+    "title": "5  Gesamtstruktur des Modells",
+    "section": "",
+    "text": "AMM-Kern\n→ Desired Urban Land\n→ Urban Land Gap\n→ Land Conversion Rate\n→ Urban Land",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+    ]
+  },
+  {
+    "objectID": "sections/05-gesamtstruktur.html#submodell-a-land-stocks-und-land-conversion",
+    "href": "sections/05-gesamtstruktur.html#submodell-a-land-stocks-und-land-conversion",
+    "title": "5  Gesamtstruktur des Modells",
+    "section": "5.2 Submodell A: Land Stocks und Land Conversion",
+    "text": "5.2 Submodell A: Land Stocks und Land Conversion\nDieses Submodell beschreibt die physische Seite des Modells.\nEs enthält insbesondere:\n\nUrban Land\nAgricultural Land\nUrban Land Gap\nLand Conversion Rate\n\nDie zentrale Aufgabe dieses Submodells ist die Umwandlung von Agricultural Land in Urban Land.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+    ]
+  },
+  {
+    "objectID": "sections/05-gesamtstruktur.html#submodell-b-alonso-muth-mills-kern",
+    "href": "sections/05-gesamtstruktur.html#submodell-b-alonso-muth-mills-kern",
+    "title": "5  Gesamtstruktur des Modells",
+    "section": "5.3 Submodell B: Alonso-Muth-Mills-Kern",
+    "text": "5.3 Submodell B: Alonso-Muth-Mills-Kern\nDieses Submodell beschreibt die ökonomische Seite des Modells.\nEs enthält insbesondere:\n\nHaushaltsbudget\nBid-Rent-Logik\nTransportkosteneffekt\nFringe Condition\nUrban Fringe Radius\nDesired Urban Land\n\nDer AMM-Kern erklärt, warum sich eine bestimmte gewünschte urbane Fläche ergibt.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+    ]
+  },
+  {
+    "objectID": "sections/05-gesamtstruktur.html#cobb-douglas-untermodell-im-amm-kern",
+    "href": "sections/05-gesamtstruktur.html#cobb-douglas-untermodell-im-amm-kern",
+    "title": "5  Gesamtstruktur des Modells",
+    "section": "5.4 Cobb-Douglas-Untermodell im AMM-Kern",
+    "text": "5.4 Cobb-Douglas-Untermodell im AMM-Kern\nDas Cobb-Douglas-Untermodell ist kein gleichrangiges Hauptsubmodell.\nEs ist ein eingebettetes Untermodell innerhalb des AMM-Kerns. Es liefert die Grössen, mit denen Haushalte zwischen Landkonsum und anderem Konsum aufgeteilt werden.\nIm Modell betrifft dies insbesondere:\n\nLand Demand per Household q\nOther Consumption per Household z",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+    ]
+  },
+  {
+    "objectID": "sections/05-gesamtstruktur.html#hilfsmechanismen",
+    "href": "sections/05-gesamtstruktur.html#hilfsmechanismen",
+    "title": "5  Gesamtstruktur des Modells",
+    "section": "5.5 Hilfsmechanismen",
+    "text": "5.5 Hilfsmechanismen\nWeitere Variablen wie Mean Urban Rent, Land Tightness Index oder Adjustment Times werden nicht als eigenständige Submodelle behandelt.\nSie sind Hilfsmechanismen innerhalb der AMM-Logik oder der Kalibrierung.\nIhre Funktion wird dort dokumentiert, wo sie in die Modelllogik eingreifen.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+    ]
+  },
+  {
+    "objectID": "sections/06-theoretical-empirical-basis.html",
+    "href": "sections/06-theoretical-empirical-basis.html",
+    "title": "6  Theoretical and Empirical Basis – theoretische und empirische Quellenbasis",
+    "section": "",
+    "text": "6.1 AMM-Quellen\nDieses Kapitel gibt einen kurzen Überblick über die Quellenbasis des Modells. Ziel ist nicht eine vollständige Literaturdiskussion, sondern eine transparente Einordnung der Quellen, die für die Modellstruktur tatsächlich verwendet wurden.\nDie wichtigste Arbeitsquelle für die mathematische AMM-Dokumentation ist Brueckner. Seine Darstellung fasst die zentralen Bestandteile des Muth-Mills-Modells kompakt zusammen: Haushaltsbudget, Bid-Rent-Funktion, Transportkosten, Stadtgrenze, landwirtschaftliche Alternativrente und urbane Gleichgewichtsstruktur (brueckner1996structure?; Brueckner 2001).\nDer theoretische Kern des Modells basiert auf dem Alonso-Muth-Mills-Modell. Die Originalquellen von Alonso, Mills und Muth wurden als historische Grundlage des monozentrischen Stadtmodells verstanden. In der vorliegenden Dokumentation wurde jedoch vor allem Mills etwas genauer betrachtet, weil seine Arbeit eine stark aggregierte Stadtstruktur beschreibt und damit gut zur Modellperspektive passt (Mills 1967).\nFujita wurde ergänzend gelesen. Die Quelle dient als theoretischer Hintergrund für Urban Economic Theory, steht in dieser Dokumentation aber nicht im Zentrum (Fujita 1989).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Theoretical and Empirical Basis – theoretische und empirische Quellenbasis</span>"
+    ]
+  },
+  {
+    "objectID": "sections/06-theoretical-empirical-basis.html#cobb-douglas-quellen",
+    "href": "sections/06-theoretical-empirical-basis.html#cobb-douglas-quellen",
+    "title": "6  Theoretical and Empirical Basis – theoretische und empirische Quellenbasis",
+    "section": "6.2 Cobb-Douglas-Quellen",
+    "text": "6.2 Cobb-Douglas-Quellen\nCobb und Douglas wurden vor allem zur historischen Einordnung der Funktionsform berücksichtigt (Cobb and Douglas 1928). Die ursprüngliche Quelle beschreibt eine Produktionsfunktion und nicht direkt die hier verwendete Haushaltsentscheidung. Deshalb wird Cobb-Douglas in dieser Dokumentation nicht als eigenständige Theorie des Stadtmodells behandelt, sondern als vereinfachte funktionale Form innerhalb des AMM-Submodells.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Theoretical and Empirical Basis – theoretische und empirische Quellenbasis</span>"
+    ]
+  },
+  {
+    "objectID": "sections/06-theoretical-empirical-basis.html#bettencourt-west-quellen",
+    "href": "sections/06-theoretical-empirical-basis.html#bettencourt-west-quellen",
+    "title": "6  Theoretical and Empirical Basis – theoretische und empirische Quellenbasis",
+    "section": "6.3 Bettencourt-West-Quellen",
+    "text": "6.3 Bettencourt-West-Quellen\nDas Bettencourt-West-Submodell spielt im Gesamtmodell eine untergeordnete Rolle. Es wird verwendet, um einen einfachen Innovationsindex auf Basis urbaner Skalierung abzuleiten.\nDie zentrale Idee stammt aus der Urban-Scaling-Literatur: bestimmte städtische Outputs, etwa Innovation, können mit Stadtgrösse überproportional wachsen. Diese Idee wird im Modell stark vereinfacht übernommen (Bettencourt et al. 2007; Bettencourt and West 2010).\n\n\n\n\nBettencourt, Luís M. A., José Lobo, Dirk Helbing, Christian Kühnert, and Geoffrey B. West. 2007. “Growth, Innovation, Scaling, and the Pace of Life in Cities.” Proceedings of the National Academy of Sciences 104 (17): 7301–6. https://doi.org/10.1073/pnas.0610172104.\n\n\nBettencourt, Luís M. A., and Geoffrey B. West. 2010. “A Unified Theory of Urban Living.” Nature 467 (7318): 912–13. https://doi.org/10.1038/467912a.\n\n\nBrueckner, Jan K. 2001. “Urban Sprawl: Lessons from Urban Economics.” In Brookings-Wharton Papers on Urban Affairs: 2001, edited by William G. Gale and Janet Rothenberg Pack. Brookings Institution Press. https://doi.org/10.1353/urb.2001.0003.\n\n\nCobb, Charles W., and Paul H. Douglas. 1928. “A Theory of Production.” The American Economic Review 18 (1): 139–65. https://www.jstor.org/stable/1811556.\n\n\nFujita, Masahisa. 1989. Urban Economic Theory: Land Use and City Size. Cambridge University Press.\n\n\nMills, Edwin S. 1967. “An Aggregative Model of Resource Allocation in a Metropolitan Area.” The American Economic Review 57 (2): 197–210. https://www.jstor.org/stable/1821621.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Theoretical and Empirical Basis – theoretische und empirische Quellenbasis</span>"
+    ]
+  },
+  {
+    "objectID": "sections/06-land-stocks-und-conversion.html",
+    "href": "sections/06-land-stocks-und-conversion.html",
+    "title": "7  Submodell A: Stadt und Landbestände und Landumwandlung",
+    "section": "",
+    "text": "Dieses Submodell bildet die physische Landbilanz des Modells. Es enthält keine eigene mathematische oder ökonomische Theorie. Es speichert nur, wie Land zwischen zwei Beständen verschoben wird.\nDie Struktur besteht aus zwei Stocks und einem Flow:\n\\[\n\\text{Agricultural Land}\n\\rightarrow\n\\text{Land Conversion Rate}\n\\rightarrow\n\\text{Urban Land}\n\\]\nDie Land Conversion Rate kommt aus anderen Modellteilen. Sie beschreibt, wie viel landwirtschaftliche Fläche pro Jahr in urbane Fläche umgewandelt wird.\n\nUrban Land nimmt durch die Land Conversion Rate zu.\nAgricultural Land nimmt durch dieselbe Land Conversion Rate ab.\nDie gesamte betrachtete Landfläche bleibt dadurch konstant.\n\nDas Submodell selbst entscheidet nicht, wie stark Land umgewandelt wird. Es nimmt den Umwandlungsdruck aus anderen Modellteilen auf und speichert die daraus folgende physische Veränderung.\nEine Rückumwandlung von Urban Land zu Agricultural Land ist in diesem Submodell nicht enthalten.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Submodell A: Stadt und  Landbestände und Landumwandlung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/07-alonso-muth-mills-amm.html",
+    "href": "sections/07-alonso-muth-mills-amm.html",
+    "title": "8  Submodell B: Alonso-Muth-Mills – urbane Flächenberechnung",
+    "section": "",
+    "text": "Dieses Kapitel dokumentiert den Alonso-Muth-Mills-Kern des Modells. Diese beschreibt die mathematische Grundlogik in sieben Schritten und bildet die ökonomische Logik ab, aus der im Modell eine gewünschte urbane Fläche entsteht. Er verbindet Haushaltsbudget, Bodenrente, Transportkosten, Landnachfrage und Stadtgrenze.\nJedes Unterkapitel ist gleich aufgebaut:\n\nEin kurzer Einstieg erklärt, was der mathematische Schritt aussagt.\nDie zentrale Gleichung steht in einem hervorgehobenen Formelblock.\nEine Symboltabelle erklärt die verwendeten Grössen und ihre Dimension.\nDie anschliessende Herleitung zeigt, warum die Gleichung gilt und wie sie ökonomisch gelesen wird.\nAm Ende steht eine kurze Quellen-Notation: Sie nennt nur dann analoge Begriffe, wenn wichtige Quellen andere Symbole oder Begriffe für denselben mathematischen Schritt verwenden.\n\nDie sieben Schritte bilden eine Kette:\n\nDas Haushaltsbudget setzt den mikroökonomischen Rahmen. →\nDaraus folgt die Bodenrentenfunktion. →\nDie Pendelkosten erzeugen einen räumlichen Rentengradienten. →\nDie Stadt endet dort, wo urbane und landwirtschaftliche Bodenrente gleich sind. →\nAus dieser Randbedingung entsteht die räumliche Stadtgrösse. →\nDie Ringgeometrie übersetzt den Radius in Fläche. →\nDie Gleichgewichtsbedingungen verbinden Bevölkerung, Dichte, Bodenrente und Stadtrand.\n\n\n\n8.0.1 1. Household Budget Constraint – Haushaltsbudget des Haushalts\nDieser Schritt beschreibt die Budgetrestriktion eines Haushalts im monozentrischen Stadtmodell. Ein Haushalt erzielt Einkommen im Zentrum und verwendet dieses Einkommen für übrigen Konsum, Land beziehungsweise Wohnfläche und Transportkosten. Die Gleichung bildet den mikroökonomischen Ausgangspunkt, aus dem die räumliche Bodenrentenlogik abgeleitet wird.\n\n\\[\n\\Large\nY = z + R(x) \\cdot q + t \\cdot x\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(Y\\)\nHaushaltseinkommen\nGeld pro Haushalt\n\n\n\\(z\\)\nübriger Konsum des Haushalts\nGeld pro Haushalt\n\n\n\\(R(x)\\)\nBodenrente am Standort \\(x\\)\nGeld pro Fläche\n\n\n\\(q\\)\nkonsumierte Landmenge pro Haushalt\nFläche pro Haushalt\n\n\n\\(x\\)\nDistanz zum Stadtzentrum\nDistanz\n\n\n\\(t\\)\nTransportkosten pro Distanzeinheit\nGeld pro Distanz und Haushalt\n\n\n\\(R(x) \\cdot q\\)\nAusgaben für Land oder Wohnfläche am Standort \\(x\\)\nGeld pro Haushalt\n\n\n\\(t \\cdot x\\)\nTransportkosten bei Distanz \\(x\\)\nGeld pro Haushalt\n\n\n\nDie Gleichung ist eine Budgetrestriktion. Alle Terme müssen in derselben monetären Einheit gemessen werden. Das Einkommen \\(Y\\) wird auf übrigen Konsum \\(z\\), Land- oder Wohnflächenausgaben \\(R(x) \\cdot q\\) und Transportkosten \\(t \\cdot x\\) verteilt.\nBrueckner formuliert die gleiche Logik in einer leicht anderen Notation. Haushalte verdienen im CBD ein Einkommen \\(y\\), zahlen bei Distanz \\(x\\) Pendelkosten \\(tx\\), und verwenden das verbleibende Einkommen für Land \\(q\\) und ein nicht-wohnbezogenes Konsumgut \\(c\\) (Brueckner 2001, 67–68). In der hier verwendeten Notation entspricht \\(z\\) diesem übrigen Konsum.\nMathematisch ist \\(R(x) \\cdot q\\) ein Geldbetrag pro Haushalt, weil eine Bodenrente pro Fläche mit einer Fläche pro Haushalt multipliziert wird. Ebenso ist \\(t \\cdot x\\) ein Geldbetrag pro Haushalt, weil Transportkosten pro Distanzeinheit mit einer Distanz multipliziert werden. Damit ist die Gleichung dimensionskonsistent.\nÖkonomisch beschreibt die Gleichung den grundlegenden Trade-off des monozentrischen Modells. Bei gegebenem Einkommen kann ein Haushalt nicht gleichzeitig beliebig viel übrigen Konsum, viel Land, hohe Bodenrente und hohe Transportkosten tragen. Diese Budgetlogik ist die Grundlage für die anschliessende Umstellung nach \\(R(x)\\).\nHinweis zur Rolle des Cobb-Douglas-Untermodells. Die Grössen \\(z\\) und \\(q\\) werden in diesem AMM-Schritt als Bestandteile der Haushaltsentscheidung verwendet. Die AMM-Budgetgleichung zeigt zunächst nur, dass übriger Konsum, Landkonsum, Bodenrente und Transportkosten gemeinsam im Haushaltsbudget stehen. Wie der Haushalt die Aufteilung zwischen übrigem Konsum \\(z\\) und Landkonsum \\(q\\) wählt, wird im anschliessenden Cobb-Douglas-Untermodell separat hergeleitet. Dort wird die Präferenzstruktur des Haushalts beschrieben, zum Beispiel über eine Nutzenfunktion der Form \\(U = q^\\alpha z^{1-\\alpha}\\).\nQuellen-Notation:\n\nBrueckner: \\(y\\) für Einkommen, \\(c\\) für übrigen Konsum, \\(q\\) für Landkonsum.\n\n\n\n8.0.2 2. Land Rent Function – Bodenrente am Standort\nDieser Schritt leitet aus der Haushaltsbudgetrestriktion die maximal tragbare Bodenrente am Standort \\(x\\) ab. Dazu wird die Budgetgleichung nach \\(R(x)\\) umgestellt. Die resultierende Funktion zeigt, wie Einkommen, übriger Konsum, Transportkosten und Landkonsum bestimmen, welche Bodenrente ein Haushalt an einem bestimmten Standort zahlen kann.\n\n\\[\n\\Large\nR(x) = \\frac{Y - z - t \\cdot x}{q}\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(R(x)\\)\nBodenrente am Standort \\(x\\)\nGeld pro Fläche\n\n\n\\(Y\\)\nHaushaltseinkommen\nGeld pro Haushalt\n\n\n\\(z\\)\nübriger Konsum des Haushalts\nGeld pro Haushalt\n\n\n\\(t\\)\nTransportkosten pro Distanzeinheit\nGeld pro Distanz und Haushalt\n\n\n\\(x\\)\nDistanz zum Stadtzentrum\nDistanz\n\n\n\\(t \\cdot x\\)\nTransportkosten bei Distanz \\(x\\)\nGeld pro Haushalt\n\n\n\\(Y - z - t \\cdot x\\)\nverbleibendes Budget für Land oder Wohnfläche\nGeld pro Haushalt\n\n\n\\(q\\)\nkonsumierte Landmenge pro Haushalt\nFläche pro Haushalt\n\n\n\\(\\frac{Y - z - t \\cdot x}{q}\\)\nmaximal tragbare Bodenrente pro Flächeneinheit\nGeld pro Fläche\n\n\n\nAusgangspunkt ist die Haushaltsbudgetrestriktion:\n\\[\nY = z + R(x) \\cdot q + t \\cdot x\n\\]\nDurch Subtraktion von \\(z\\) und \\(t \\cdot x\\) ergibt sich:\n\\[\nY - z - t \\cdot x = R(x) \\cdot q\n\\]\nDurch Division durch \\(q\\) folgt:\n\\[\nR(x) = \\frac{Y - z - t \\cdot x}{q}\n\\]\nDie Gleichung ist einheitenkonsistent: Der Zähler \\(Y - z - t \\cdot x\\) ist ein Geldbetrag pro Haushalt. Der Nenner \\(q\\) ist eine Fläche pro Haushalt. Daraus ergibt sich eine Bodenrente pro Flächeneinheit.\nÖkonomisch beschreibt \\(R(x)\\) die maximale Zahlungsbereitschaft für Land am Standort \\(x\\). Ein längerer Pendelweg muss über tiefere Bodenrenten kompensiert werden. Dadurch fällt die Bodenrente mit zunehmender Distanz zum CBD (Brueckner 2001, 68). Die Umstellung der Budgetgleichung macht diese Logik mathematisch sichtbar. Wenn \\(x\\) steigt, steigt \\(t \\cdot x\\), der Zähler wird kleiner und die tragbare Bodenrente \\(R(x)\\) sinkt.\nDiese Gleichung ist eine vereinfachte Bid-Rent-Darstellung mit konstant gehaltenem \\(z\\) und \\(q\\). In der allgemeinen Theorie hängen Bodenrente und Landkonsum nicht nur von \\(x\\), sondern auch von Einkommen, Pendelkosten und dem endogenen urbanen Nutzenniveau ab. Diese Grössen werden dort als \\(r(x,y,t,u)\\) und \\(q(x,y,t,u)\\) geschrieben (Brueckner 2001, 68).\nQuellen-Notation:\n\nBrueckner: \\(r\\) beziehungsweise \\(r(x,y,t,u)\\) für Bodenrente.\nMills: \\(R(u)\\) für Bodenrente in Distanz \\(u\\).\n\n\n\n8.0.3 3. Commuting Cost Effect – Distanzwirkung der Pendelkosten\nDieser Schritt zeigt, wie Transportkosten die räumliche Bodenrente verändern. Aus der Bid-Rent-Funktion folgt in der vereinfachten Darstellung, dass die maximal tragbare Bodenrente mit zunehmender Distanz zum Zentrum sinkt. Mathematisch entspricht dies der Ableitung der Bodenrente nach der Distanz \\(x\\).\n\n\\[\n\\Large\n\\frac{dR(x)}{dx} = -\\frac{t}{q}\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(R(x)\\)\nBodenrente am Standort \\(x\\)\nGeld pro Fläche\n\n\n\\(x\\)\nDistanz zum Stadtzentrum\nDistanz\n\n\n\\(\\frac{dR(x)}{dx}\\)\nVeränderung der Bodenrente bei zusätzlicher Distanz\nGeld pro Fläche und Distanz\n\n\n\\(t\\)\nTransportkosten pro Distanzeinheit\nGeld pro Distanz und Haushalt\n\n\n\\(q\\)\nkonsumierte Landmenge pro Haushalt\nFläche pro Haushalt\n\n\n\\(-\\frac{t}{q}\\)\nRentenrückgang pro zusätzlicher Distanzeinheit\nGeld pro Fläche und Distanz\n\n\n\nDie Ableitung wird verwendet, weil dieser Schritt nicht die Höhe der Bodenrente an einem einzelnen Ort beschreibt, sondern die Veränderung der Bodenrente bei zusätzlicher Distanz zum Zentrum.\nAusgangspunkt ist die vereinfachte Bid-Rent-Funktion:\n\\[\nR(x) = \\frac{Y - z - t \\cdot x}{q}\n\\]\nWenn \\(Y\\), \\(z\\), \\(t\\) und \\(q\\) konstant gehalten werden, hängt \\(R(x)\\) nur über den Term \\(t \\cdot x\\) von der Distanz \\(x\\) ab. Die Ableitung nach \\(x\\) lautet:\n\\[\n\\frac{dR(x)}{dx}\n=\n\\frac{d}{dx}\n\\left(\n\\frac{Y - z - t \\cdot x}{q}\n\\right)\n\\]\nDa \\(q\\) als konstant angenommen wird, kann der Faktor \\(\\frac{1}{q}\\) vor die Ableitung gezogen werden:\n\\[\n\\frac{dR(x)}{dx}\n=\n\\frac{1}{q}\n\\cdot\n\\frac{d}{dx}\n\\left(\nY - z - t \\cdot x\n\\right)\n\\]\nDie Terme \\(Y\\) und \\(z\\) sind in dieser lokalen Ableitung konstant. Der einzige distanzabhängige Term ist \\(-t \\cdot x\\). Seine Ableitung nach \\(x\\) ist \\(-t\\). Daraus folgt:\n\\[\n\\frac{dR(x)}{dx}\n=\n-\\frac{t}{q}\n\\]\nDie negative Steigung beschreibt den Rentengradienten. Höhere Distanz erhöht die Pendelkosten. Damit ein Haushalt bei gleichem Einkommen und gleichem Landkonsum an einem weiter entfernten Standort wohnen kann, muss die Bodenrente pro Fläche tiefer sein.\nDie Einheit der Ableitung passt: \\(t\\) misst Geld pro Distanz und Haushalt. \\(q\\) misst Fläche pro Haushalt. Der Quotient \\(\\frac{t}{q}\\) ergibt deshalb Geld pro Distanz und Fläche. Genau diese Einheit beschreibt, um wie viel die Bodenrente pro Flächeneinheit sinkt, wenn die Distanz zum Zentrum um eine Einheit zunimmt.\nMills formuliert die Distanzwirkung nicht in dieser vereinfachten Ableitung, sondern als räumliche Gleichgewichtsbedingung der Wohnstandortwahl. Dort muss die Veränderung der Transportkosten bei einer kleinen Bewegung durch eine entgegengesetzte Veränderung der Wohnkosten ausgeglichen werden (Mills 1967, 204–5). Das ist die allgemeinere Gleichgewichtsidee hinter dem hier dargestellten Rentengradienten.\nQuellen-Notation:\n\nBrueckner: \\(x\\) für Distanz zum CBD, \\(t\\) für Pendelkosten pro Distanz.\nMills: \\(u\\) als Distanzvariable.\n\n\n\n8.0.4 4. Edge-of-City Condition – Gleichgewichtsbedingung am Stadtrand\nDieser Schritt bestimmt die Stadtgrenze über die Konkurrenz zwischen urbaner und landwirtschaftlicher Landnutzung. Die Stadt endet dort, wo die urbane Bodenrente gerade der landwirtschaftlichen Bodenrente entspricht. Innerhalb dieser Grenze können urbane Nutzer mehr für Land zahlen als landwirtschaftliche Nutzer. Ausserhalb ist die landwirtschaftliche Nutzung mindestens gleich wertvoll.\n\n\\[\n\\Large\nR(x^*) = R_A\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(R(x)\\)\nurbane Bodenrente am Standort \\(x\\)\nGeld pro Fläche\n\n\n\\(x\\)\nDistanz zum Stadtzentrum\nDistanz\n\n\n\\(x^*\\)\nDistanz der Stadtgrenze vom Zentrum\nDistanz\n\n\n\\(R(x^*)\\)\nurbane Bodenrente am Stadtrand\nGeld pro Fläche\n\n\n\\(R_A\\)\nlandwirtschaftliche Bodenrente beziehungsweise Opportunitätskosten der urbanen Landnutzung\nGeld pro Fläche\n\n\n\\(R(x^*) = R_A\\)\nGleichheit von urbaner und landwirtschaftlicher Bodenrente am Rand der Stadt\nGeld pro Fläche\n\n\n\nDie Bedingung baut auf der fallenden Bodenrentenfunktion auf. Solange die urbane Bodenrente höher ist als die landwirtschaftliche Bodenrente, kann urbane Nutzung die landwirtschaftliche Nutzung verdrängen:\n\\[\nR(x) &gt; R_A\n\\]\nWenn die urbane Bodenrente tiefer ist als die landwirtschaftliche Bodenrente, bleibt Land ausserhalb der Stadt landwirtschaftlich genutzt:\n\\[\nR(x) &lt; R_A\n\\]\nDie Stadtgrenze liegt deshalb genau an jenem Punkt \\(x^*\\), an dem beide Nutzungen gleich viel für Land zahlen können:\n\\[\nR(x^*) = R_A\n\\]\nDiese Gleichung ist eine Randbedingung. Sie bestimmt nicht die gesamte Rentenfunktion, sondern den Punkt, an dem die urbane Landnutzung endet. Brueckner erklärt, dass diese Bedingung sicherstellt, dass die urbane Bodenrente innerhalb der Stadt über der landwirtschaftlichen Bodenrente liegt (Brueckner 2001, 68). Mills beschreibt \\(R_A\\) als Opportunitätskosten der urbanen Landnutzung und setzt am äusseren Rand der Stadt \\(R(k_1)=R_A\\) (Mills 1967, 205).\nMathematisch ist die Gleichung dimensionskonsistent, weil beide Seiten Bodenrenten pro Flächeneinheit sind. Ökonomisch ist sie eine Indifferenzbedingung. Bei \\(R(x^*) &gt; R_A\\) könnte die Stadt weiter wachsen. Bei \\(R(x^*) &lt; R_A\\) wäre der Rand zu weit aussen. Nur bei \\(R(x^*) = R_A\\) ist die Grenze zwischen urbaner und landwirtschaftlicher Nutzung stabil.\nQuellen-Notation:\n\nBrueckner: \\(\\bar{x}\\) für den Stadtrand, \\(r_a\\) für landwirtschaftliche Bodenrente.\nMills: \\(k_1\\) für den äusseren Stadtrand, \\(R(k_1)=R_A\\) als Randbedingung.\n\n\n\n8.0.5 5. Spatial Size of the City – Stadtrand und räumliche Stadtgrösse\nDieser Schritt beschreibt, wie die Lage des Stadtrandes beziehungsweise die räumliche Stadtgrösse bestimmt wird. In der allgemeinen AMM-Logik ergibt sich die Stadtgrenze nicht aus einer isolierten Radiusformel, sondern aus dem Gleichgewicht von Bevölkerung, Bodenrente, Landkonsum, Pendelkosten und landwirtschaftlicher Bodenrente.\n\n8.0.5.1 Allgemeine Gleichgewichtsform nach Brueckner\n\n\\[\n\\Large\n\\bar{x} = g(n, y, t, r_a)\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(\\bar{x}\\)\nDistanz zum Rand der Stadt\nDistanz\n\n\n\\(g(\\cdot)\\)\nreduzierte Form der Gleichgewichtslösung\nfunktionale Beziehung\n\n\n\\(n\\)\nBevölkerung\nPersonen oder Haushalte\n\n\n\\(y\\)\nEinkommen\nGeld pro Person oder Haushalt\n\n\n\\(t\\)\nPendel- beziehungsweise Transportkosten\nGeld pro Distanz und Person oder Haushalt\n\n\n\\(r_a\\)\nlandwirtschaftliche Bodenrente\nGeld pro Fläche\n\n\n\nBrueckners reduzierte Form zeigt, von welchen Grössen die Stadtgrenze im Gleichgewicht abhängt. Sie ist allgemeiner als eine einzelne ausgerechnete Radiusformel, weil sie das Ergebnis der urbanen Gleichgewichtsbedingungen zusammenfasst. Die Stadt muss ihre Bevölkerung aufnehmen, und am Rand muss die urbane Bodenrente der landwirtschaftlichen Bodenrente entsprechen (Brueckner 2001, 68–69).\nDie komparative Statik beschreibt die Richtung dieser Zusammenhänge:\n\\[\n\\frac{\\partial \\bar{x}}{\\partial n} &gt; 0\n\\]\n\\[\n\\frac{\\partial \\bar{x}}{\\partial y} &gt; 0\n\\]\n\\[\n\\frac{\\partial \\bar{x}}{\\partial t} &lt; 0\n\\]\n\\[\n\\frac{\\partial \\bar{x}}{\\partial r_a} &lt; 0\n\\]\nDas bedeutet: Die räumliche Stadtgrösse steigt mit Bevölkerung und Einkommen. Sie sinkt mit höheren Pendelkosten und höherer landwirtschaftlicher Bodenrente (Brueckner 2001, 69–70).\n\n\n8.0.5.2 Vereinfachter Spezialfall in der AMM-Notation\n\n\\[\n\\Large\nx^* = \\frac{Y - z - q \\cdot R_A}{t}\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(x^*\\)\nvereinfachter Fringe Radius\nDistanz\n\n\n\\(Y\\)\nHaushaltseinkommen\nGeld pro Haushalt\n\n\n\\(z\\)\nübriger Konsum\nGeld pro Haushalt\n\n\n\\(q\\)\nLandkonsum pro Haushalt\nFläche pro Haushalt\n\n\n\\(R_A\\)\nlandwirtschaftliche Bodenrente\nGeld pro Fläche\n\n\n\\(q \\cdot R_A\\)\nBodenrentenkosten des Haushalts am Rand\nGeld pro Haushalt\n\n\n\\(t\\)\nTransportkosten pro Distanzeinheit\nGeld pro Distanz und Haushalt\n\n\n\nDiese explizite Form ist ein vereinfachter Spezialfall. Sie entsteht, wenn der übrige Konsum \\(z\\) und der Landkonsum \\(q\\) als gegeben behandelt werden. Dann kann die Fringe Condition direkt in die vereinfachte Bid-Rent-Funktion eingesetzt werden.\nAusgangspunkt ist die vereinfachte Bid-Rent-Funktion:\n\\[\nR(x) = \\frac{Y - z - t \\cdot x}{q}\n\\]\nAm Stadtrand gilt die Fringe Condition:\n\\[\nR(x^*) = R_A\n\\]\nDamit folgt:\n\\[\nR_A = \\frac{Y - z - t \\cdot x^*}{q}\n\\]\nMultiplikation mit \\(q\\) ergibt:\n\\[\nq \\cdot R_A = Y - z - t \\cdot x^*\n\\]\nUmstellen nach \\(x^*\\) ergibt:\n\\[\nx^* = \\frac{Y - z - q \\cdot R_A}{t}\n\\]\nDiese Formel ersetzt Brueckners allgemeine Gleichgewichtsform nicht. Sie macht sichtbar, wie sich der Stadtrand in der vereinfachten AMM-Notation algebraisch aus Haushaltseinkommen, übrigem Konsum, Landkonsum, landwirtschaftlicher Bodenrente und Transportkosten ergibt.\nMills arbeitet ebenfalls mit endogenen Randdistanzen. Bei ihm ist \\(k_1\\) die Distanz vom Stadtzentrum zum äusseren Rand der Suburbs. Die Lösung des Modells soll unter anderem \\(k_0\\) und \\(k_1\\) bestimmen (Mills 1967, 204–6). Damit ist auch bei Mills die Stadtgrenze eine endogene Modellgrösse und nicht ein exogen gesetzter Radius.\nQuellen-Notation:\n\nBrueckner: \\(\\bar{x}=g(n,y,t,r_a)\\) für die reduzierte Form der Stadtgrenze.\nMills: \\(k_1\\) für den äusseren Stadtrand, \\(k_0\\) für den Rand des CBD.\n\n\n\n\n8.0.6 6. Ring Geometry and City Area – Stadtfläche und Ringgeometrie\nDieser Schritt übersetzt den Stadtrand in eine räumliche Fläche. Die einfache Kreisformel reicht aus, wenn nur die gesamte Stadtfläche bis zum Stadtrand berechnet werden soll. Die Ringintegration wird benötigt, wenn die Stadt als räumliche Verteilung von Dichte, Landkonsum oder Haushalten beschrieben wird.\n\n\\[\n\\Large\nA(\\bar{x}) = \\pi \\cdot \\bar{x}^2\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(A(\\bar{x})\\)\nStadtfläche bis zum Rand \\(\\bar{x}\\)\nFläche\n\n\n\\(\\pi\\)\nKreiszahl\ndimensionslos\n\n\n\\(\\bar{x}\\)\nDistanz zum Rand der Stadt\nDistanz\n\n\n\\(\\bar{x}^2\\)\nquadrierter Radius\nFläche\n\n\n\\(\\pi \\cdot \\bar{x}^2\\)\nKreisfläche der monozentrischen Stadt\nFläche\n\n\n\nFür die reine Stadtfläche genügt die Kreisformel:\n\\[\nA(\\bar{x}) = \\pi \\cdot \\bar{x}^2\n\\]\nDie Integration wird erst nötig, wenn nicht nur die Fläche, sondern die räumliche Verteilung innerhalb dieser Fläche beschrieben werden soll. Im AMM-Modell können Landkonsum und Dichte mit der Distanz zum Zentrum variieren. Ein Quadratkilometer nahe am Zentrum kann deshalb mehr Haushalte enthalten als ein Quadratkilometer am Stadtrand. Die Gesamtfläche allein sagt in diesem Fall noch nicht, wie viele Haushalte in der Stadt wohnen.\nDarum wird die Stadt für die Gleichgewichtsbedingung in viele dünne Ringe zerlegt. Für jeden Ring wird separat berechnet, wie gross seine Fläche ist und wie viele Haushalte dort wohnen. Erst danach werden alle Ringe zusammengezählt.\nEin infinitesimal schmaler Ring in Distanz \\(x\\) besitzt die Fläche:\n\\[\ndA = 2\\pi x \\, dx\n\\]\nWenn \\(q(x)\\) der Landkonsum pro Haushalt in Distanz \\(x\\) ist, dann ist \\(\\frac{1}{q(x)}\\) die Haushaltsdichte. Die Zahl der Haushalte in einem Ring ergibt sich deshalb aus Dichte mal Ringfläche:\n\\[\ndH = \\frac{1}{q(x)} \\cdot 2\\pi x \\, dx\n\\]\nDie Gesamtzahl der Haushalte ergibt sich durch Integration über alle Ringe vom Zentrum bis zum Stadtrand:\n\\[\nH = \\int_0^{\\bar{x}} \\frac{1}{q(x)} \\cdot 2\\pi x \\, dx\n\\]\nDie Integration ist damit keine kompliziertere Alternative zur Kreisformel. Sie ist die allgemeinere räumliche Summierung. Wenn nur Fläche aufsummiert wird, fällt die Ringintegration wieder auf die Kreisfläche zurück:\n\\[\n\\int_0^{\\bar{x}} 2\\pi x \\, dx\n=\n\\pi \\cdot \\bar{x}^2\n\\]\nDiese Ringgeometrie ist in den Quellen zentral. Brueckner nutzt \\(2\\pi x\\,dx\\), um die Zahl der Menschen in einem Ring zu berechnen und über die Stadt zu integrieren (Brueckner 2001, 68). Mills nutzt \\(2\\pi u\\) in den Bedingungen, die die Landverwendung innerhalb eines Rings beschreiben (Mills 1967, 205). Damit ist die Kreis- und Ringstruktur kein Implementierungsdetail, sondern Teil der mathematischen Form des monozentrischen Stadtmodells.\nWichtig ist die quadratische Beziehung. Eine Erhöhung des Stadtradius erhöht die Stadtfläche nicht linear, sondern proportional zum Quadrat des Radius. Deshalb wirken Veränderungen der Randdistanz stark auf die beanspruchte Landfläche.\nQuellen-Notation:\n\nBrueckner: \\(2\\pi x\\,dx\\) für die Ringfläche, \\(\\pi\\bar{x}^2\\) für die Stadtfläche.\nMills: \\(2\\pi u\\) für die verfügbare Ringfläche in Distanz \\(u\\).\n\n\n\n8.0.7 7. Urban Equilibrium Conditions – Stadtgleichgewichtsbedingungen\nDieser Schritt fasst die theoretische Gleichgewichtsstruktur des monozentrischen AMM-Modells zusammen. Die Stadtgrösse ist erst dann bestimmt, wenn zwei Bedingungen gleichzeitig erfüllt sind: Erstens muss die Stadtfläche genügend Raum für die Bevölkerung bieten. Zweitens muss am Stadtrand urbane Bodenrente gleich landwirtschaftlicher Bodenrente sein.\n\n\\[\n\\Large\nn\n=\n\\int_0^{\\bar{x}}\n\\frac{1}{q(x,y,t,u)}\n\\cdot\n2\\pi x\n\\, dx\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(n\\)\nBevölkerung der Stadt\nPersonen oder Haushalte\n\n\n\\(\\bar{x}\\)\nDistanz zum Rand der Stadt\nDistanz\n\n\n\\(q(x,y,t,u)\\)\nLandkonsum pro Person oder Haushalt\nFläche pro Person oder Haushalt\n\n\n\\(\\frac{1}{q(x,y,t,u)}\\)\nBevölkerungsdichte\nPersonen oder Haushalte pro Fläche\n\n\n\\(2\\pi x \\, dx\\)\nFläche eines dünnen Rings\nFläche\n\n\n\\(\\frac{1}{q(x,y,t,u)} \\cdot 2\\pi x \\, dx\\)\nBevölkerung im Ring\nPersonen oder Haushalte\n\n\n\nDie erste Gleichgewichtsbedingung ist die Population-fitting condition. Sie sagt, dass die Summe der in allen Ringen wohnenden Personen oder Haushalte der Gesamtbevölkerung \\(n\\) entsprechen muss:\n\\[\nn\n=\n\\int_0^{\\bar{x}}\n\\frac{1}{q(x,y,t,u)}\n\\cdot\n2\\pi x\n\\, dx\n\\]\nDie zweite Gleichgewichtsbedingung ist die Fringe Condition:\n\\[\nr(\\bar{x},y,t,u)=r_a\n\\]\nDie erste Bedingung sorgt dafür, dass die Stadt ihre Bevölkerung aufnehmen kann. Da \\(q\\) Land pro Person oder Haushalt misst, ist \\(\\frac{1}{q}\\) die entsprechende Dichte. Wird diese Dichte mit der Fläche eines Rings multipliziert, erhält man die Personen oder Haushalte in diesem Ring. Die Integration summiert alle Ringe vom Zentrum bis zum Stadtrand.\nDie zweite Bedingung sorgt dafür, dass die Stadt genau dort endet, wo urbane und landwirtschaftliche Bodenrente gleich sind. Innerhalb der Stadt ist die urbane Bodenrente höher als \\(r_a\\). Am Rand gilt Gleichheit. Ausserhalb kann die landwirtschaftliche Nutzung bestehen bleiben (Brueckner 2001, 68).\nDiese beiden Bedingungen bestimmen im Brueckner-Modell gemeinsam das urbane Nutzenniveau \\(u\\) und die Randdistanz \\(\\bar{x}\\) für gegebene Werte von Bevölkerung \\(n\\), Einkommen \\(y\\), Pendelkosten \\(t\\) und landwirtschaftlicher Bodenrente \\(r_a\\) (Brueckner 2001, 68–69). Damit ist das AMM-Gleichgewicht kein einzelner Flächengap, sondern ein simultanes räumliches Gleichgewicht aus Dichte, Landkonsum, Rentenverlauf und Stadtgrenze.\nMills beschreibt eine verwandte Gleichgewichtsstruktur aus Sicht eines aggregierten Stadtmodells. Er formuliert, dass die Landverwendung in den Ringen vollständig auf die modellierten Nutzungen aufgeteilt wird und dass alle Arbeiter irgendwo wohnen müssen (Mills 1967, 205–6). Auch hier ist die Stadtstruktur eine simultane Lösung aus Landverwendung, Bodenrente, Wohnstandorten und Randdistanzen.\nDieser siebte Schritt schliesst die theoretische AMM-Beschreibung ab. Er zeigt, dass Haushaltsbudget, Bid-Rent-Funktion, Transportkostengradient, Fringe Condition, Stadtgrösse und Ringgeometrie nicht unabhängig nebeneinanderstehen. Sie bilden zusammen das Gleichgewicht des monozentrischen Stadtmodells.\nQuellen-Notation:\n\nBrueckner: urban equilibrium conditions mit \\(n\\), \\(\\bar{x}\\), \\(q(x,y,t,u)\\) und \\(r_a\\).\nMills: verwandte Gleichgewichtsbedingungen mit \\(N(u)\\), \\(k_0\\) und \\(k_1\\).\n\n\n\n\n\nBrueckner, Jan K. 2001. “Urban Sprawl: Lessons from Urban Economics.” In Brookings-Wharton Papers on Urban Affairs: 2001, edited by William G. Gale and Janet Rothenberg Pack. Brookings Institution Press. https://doi.org/10.1353/urb.2001.0003.\n\n\nMills, Edwin S. 1967. “An Aggregative Model of Resource Allocation in a Metropolitan Area.” The American Economic Review 57 (2): 197–210. https://www.jstor.org/stable/1821621.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Submodell B: Alonso-Muth-Mills  – urbane Flächenberechnung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/08-cobb-douglas-untermodell.html",
+    "href": "sections/08-cobb-douglas-untermodell.html",
+    "title": "9  Submodel C: Cobb-Douglas Utilityfunction",
+    "section": "",
+    "text": "Dieser Abschnitt beschreibt, wie das Cobb-Douglas-Untermodell in die AMM-Logik eingebunden wird. Im AMM-Kern erscheinen \\(z\\) und \\(q\\) bereits in der Budgetgleichung. Das Cobb-Douglas-Untermodell erklärt, wie diese beiden Grössen aus einer einfachen Präferenzannahme als Budgetaufteilung zwischen Landkonsum und übrigem Konsum gelesen werden können.\nFür diese Dokumentation ist deshalb wichtig:\n\nCobb-Douglas wirkt in den AMM-Kern hinein, indem es \\(q\\) und \\(z\\) als Ergebnis einer Budgetaufteilung verständlich macht.\nDie Verbindung zum AMM-Kern orientiert sich primär an Brueckners Darstellung des monozentrischen Stadtmodells. Dort werden Landkonsum \\(q\\) und ein nicht wohnbezogenes Konsumgut \\(c\\) im einfachsten Modell direkt als Haushaltsgüter verwendet (Brueckner 2001, 67–68). Brueckner verwendet Cobb-Douglas ausserdem in einem numerischen Stadtbeispiel als Annahme für Nutzenfunktion und Housing Production (Brueckner 2001, 82–83).\n\n\n\n9.0.1 1. Cobb-Douglas Utility Function – allgemeine Nutzenfunktion und theoretische Einordnung\nDieser Schritt erklärt die Cobb-Douglas-Nutzenfunktion zuerst allgemein. Cobb-Douglas ist eine sehr bekannte und weit verbreitete Funktionsform in der Ökonomie. Sie wird verwendet, weil sie eine einfache Idee mathematisch ausdrückt: Ein Ergebnis entsteht aus der Kombination von zwei Gütern oder zwei Inputs, und beide tragen mit einem bestimmten Gewicht dazu bei.\nIn der allgemeinsten einfachen Form kann eine Cobb-Douglas-Nutzenfunktion so geschrieben werden:\n\n\\[\n\\Large\nU(A,B) = A^\\alpha \\cdot B^{1-\\alpha}\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(U(A,B)\\)\nNutzen aus der Kombination von zwei Gütern\nordinaler Nutzenindex\n\n\n\\(A\\)\nerstes Gut\nMengeneinheit des ersten Guts\n\n\n\\(B\\)\nzweites Gut\nMengeneinheit des zweiten Guts\n\n\n\\(\\alpha\\)\nGewicht des ersten Guts\ndimensionslos\n\n\n\\(1-\\alpha\\)\nGewicht des zweiten Guts\ndimensionslos\n\n\n\nDie Funktion sagt: Der Nutzen hängt von zwei Gütern ab. Wenn Gut \\(A\\) zunimmt, steigt der Nutzen. Wenn Gut \\(B\\) zunimmt, steigt der Nutzen ebenfalls. Beide Güter sind also positiv bewertet.\nDer Parameter \\(\\alpha\\) liegt zwischen 0 und 1:\n\\[\n0 &lt; \\alpha &lt; 1\n\\]\nWenn \\(\\alpha\\) grösser ist, wird Gut \\(A\\) stärker gewichtet. Wenn \\(\\alpha\\) kleiner ist, wird Gut \\(B\\) stärker gewichtet. Die Exponenten zeigen also, wie wichtig die beiden Güter relativ zueinander sind.\nDie Exponenten summieren sich in dieser einfachen Form zu 1:\n\\[\n\\alpha + (1-\\alpha) = 1\n\\]\nDas macht die Funktion besonders gut lesbar. Bei einer Haushaltsentscheidung kann \\(\\alpha\\) als konstanter Budgetanteil interpretiert werden. Der Haushalt gibt dann den Anteil \\(\\alpha\\) seines Budgets für Gut \\(A\\) aus und den Anteil \\(1-\\alpha\\) für Gut \\(B\\).\nEin einfaches Beispiel:\n\\[\nU(A,B) = A^{0.3} \\cdot B^{0.7}\n\\]\nHier ist Gut \\(B\\) stärker gewichtet als Gut \\(A\\). Das bedeutet nicht, dass Gut \\(A\\) unwichtig ist. Es bedeutet nur, dass in dieser Nutzenfunktion Gut \\(B\\) einen höheren relativen Anteil an der Präferenzstruktur hat.\nDer Nutzenwert \\(U\\) ist kein direkt messbarer Wert. Er ist ein Ordnungsindex. Wichtig ist nicht, ob der Nutzenwert 10 oder 100 beträgt. Wichtig ist nur, welche Kombination aus \\(A\\) und \\(B\\) gegenüber einer anderen Kombination bevorzugt wird.\nWissenschaftshistorisch stammt die Cobb-Douglas-Form aus der neoklassischen Produktionstheorie. Cobb und Douglas verwendeten sie 1928 als Produktionsfunktion, um Output als Funktion von Arbeit und Kapital zu beschreiben (Cobb and Douglas 1928). In dieser ursprünglichen Form ging es nicht um Haushaltspreferenzen, sondern um Produktion:\n\\[\nY = A \\cdot K^\\alpha \\cdot L^{1-\\alpha}\n\\]\nDie Form wurde später weit über die ursprüngliche Produktionsfunktion hinaus verwendet. Sie ist in der Ökonomie deshalb so verbreitet, weil sie mit wenigen Parametern eine gut verständliche Beziehung zwischen Inputs, Gewichten und Ergebnis beschreibt. In der Mikroökonomie wird dieselbe mathematische Form häufig als Nutzenfunktion verwendet. Dort beschreibt sie nicht Produktion, sondern Präferenzen zwischen zwei Gütern (varian2014intermediate?).\nIn dieser Dokumentation wird sie vor allem über Brueckner eingebunden, der im monozentrischen Stadtmodell Landkonsum \\(q\\) und übrigen Konsum \\(c\\) als Haushaltsgüter verwendet (Brueckner 2001, 67–68, 82–83).\nDie beiden allgemeinen Güter \\(A\\) und \\(B\\) werden durch die beiden relevanten Haushaltsgüter ersetzt:\n\\[\nA \\rightarrow q\n\\]\n\\[\nB \\rightarrow z\n\\]\nDamit wird aus der allgemeinen Cobb-Douglas-Funktion:\n\\[\nU(A,B) = A^\\alpha \\cdot B^{1-\\alpha}\n\\]\ndie im Modell verwendete Nutzenfunktion:\n\\[\nU(q,z) = q^\\alpha \\cdot z^{1-\\alpha}\n\\]\nDabei steht \\(q\\) für Land beziehungsweise Wohnfläche und \\(z\\) für übrigen Konsum. Erst ab diesem Punkt wird die allgemeine Cobb-Douglas-Logik in die AMM-Logik übersetzt. Die Funktion beschreibt dann, wie ein Haushalt Landkonsum und übrigen Konsum bewertet.\nQuellen-Notation:\n\nCobb-Douglas ursprünglich: \\(K\\) und \\(L\\) für Kapital und Arbeit in einer Produktionsfunktion.\nMikroökonomie allgemein: häufig \\(x_1\\) und \\(x_2\\) für zwei Güter.\nAMM-Übersetzung: \\(q\\) für Landkonsum und \\(z\\) für übrigen Konsum.\n\n\n\n9.0.2 2. Budget Shares, Land Demand and AMM Link – Budgetanteile, Landnachfrage und Rückbindung an AMM\nDieser Schritt fasst die eigentliche Cobb-Douglas-Wirkung im AMM-Kontext zusammen. Cobb-Douglas nimmt ein verfügbares Budget \\(M\\) als gegeben und teilt es zwischen übrigen Konsum \\(z\\) und Land beziehungsweise Wohnen auf. Daraus entsteht die Landnachfrage \\(q\\). Danach gehen \\(q\\) und \\(z\\) zurück in die AMM-Logik.\n\n\\[\n\\Large\nz = (1-\\alpha)M\n\\qquad\nR\\cdot q = \\alpha M\n\\qquad\nq = \\frac{\\alpha M}{R}\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(M\\)\nverfügbares Budget für die Haushaltsentscheidung\nGeld pro Haushalt\n\n\n\\(z\\)\nübriger Konsum\nGeld pro Haushalt\n\n\n\\(q\\)\nLandnachfrage pro Haushalt\nFläche pro Haushalt\n\n\n\\(R\\)\nBodenrente oder Preis von Land pro Fläche\nGeld pro Fläche\n\n\n\\(R\\cdot q\\)\nAusgaben für Land beziehungsweise Wohnen\nGeld pro Haushalt\n\n\n\\(\\alpha\\)\nBudgetanteil für Land beziehungsweise Wohnen\ndimensionslos\n\n\n\\(1-\\alpha\\)\nBudgetanteil für übrigen Konsum\ndimensionslos\n\n\n\nCobb-Douglas beginnt hier nicht mit der Herleitung des verfügbaren Budgets. Im AMM-Kontext stammt dieses Budget aus der AMM-Budgetlogik, in der Pendelkosten bereits berücksichtigt sind. Diese Herleitung steht im AMM-Haushaltsbudget.\nFür den Cobb-Douglas-Schritt wird das verfügbare Budget als \\(M\\) geschrieben:\n\\[\nM = z + R\\cdot q\n\\]\nDer Ausdruck \\(R\\cdot q\\) sind die Ausgaben für Land beziehungsweise Wohnen. \\(z\\) sind die Ausgaben für übrigen Konsum.\nAus der Cobb-Douglas-Nutzenfunktion folgt, dass ein konstanter Budgetanteil für jedes Gut ausgegeben wird. Für Land beziehungsweise Wohnen gilt:\n\\[\nR\\cdot q = \\alpha M\n\\]\nFür übrigen Konsum gilt:\n\\[\nz = (1-\\alpha)M\n\\]\nDamit ist \\(z\\) direkt bestimmt. Die Landnachfrage \\(q\\) entsteht, indem das Wohnlandbudget durch die Bodenrente geteilt wird:\n\\[\nq = \\frac{\\alpha M}{R}\n\\]\nDie Einheit passt: \\(\\alpha M\\) ist Geld pro Haushalt. \\(R\\) ist Geld pro Fläche. Der Quotient ist deshalb Fläche pro Haushalt.\nÖkonomisch bedeutet das: Ein höheres verfügbares Budget erhöht \\(z\\) und erhöht auch die mögliche Landnachfrage. Ein höheres \\(\\alpha\\) verschiebt Budget von übrigem Konsum zu Land beziehungsweise Wohnen. Eine höhere Bodenrente \\(R\\) senkt die Landnachfrage \\(q\\), weil dasselbe Wohnlandbudget weniger Fläche kaufen kann.\nMit der Rückbindung an AMM endet der Cobb-Douglas-Mechanismus funktional:\n\nCobb-Douglas liefert \\(z\\) →\nCobb-Douglas liefert \\(q\\) →\nDer AMM-Kern verwendet \\(z\\) und \\(q\\) in der Budget- und Bid-Rent-Logik →\n\nIn der allgemeinen AMM-Theorie ist \\(q\\) nicht einfach konstant. Brueckner schreibt die Landnachfrage als \\(q(x,y,t,u)\\), weil sie von Distanz, Einkommen, Pendelkosten und dem endogenen Nutzenniveau abhängt (Brueckner 2001, 68). Die Cobb-Douglas-Form ist hier eine konkrete und einfache Spezifikation dieser Haushaltsseite.\nQuellen-Notation:\n\nBrueckner: Landkonsum wird als \\(q\\) beziehungsweise \\(q(x,y,t,u)\\) geschrieben, übriger Konsum als \\(c\\).\nCobb-Douglas-Untermodell: \\(z=(1-\\alpha)M\\) und \\(q=\\frac{\\alpha M}{R}\\).\n\n\n\n\n\nBrueckner, Jan K. 2001. “Urban Sprawl: Lessons from Urban Economics.” In Brookings-Wharton Papers on Urban Affairs: 2001, edited by William G. Gale and Janet Rothenberg Pack. Brookings Institution Press. https://doi.org/10.1353/urb.2001.0003.\n\n\nCobb, Charles W., and Paul H. Douglas. 1928. “A Theory of Production.” The American Economic Review 18 (1): 139–65. https://www.jstor.org/stable/1811556.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Submodel C: Cobb-Douglas Utilityfunction</span>"
+    ]
+  },
+  {
+    "objectID": "sections/08b-bettencourt-west-submodell.html",
+    "href": "sections/08b-bettencourt-west-submodell.html",
+    "title": "10  Submodell D: Bettencourt-West Urban Scaling und Innovation",
+    "section": "",
+    "text": "Dieses Submodell bildet einen einfachen Innovationsmechanismus. Es ist kein eigenes Land- oder Stadtmodell. Es übersetzt urbane Bevölkerung in ein relatives Innovationspotenzial und gibt dieses als dimensionslosen \\(Innovation Index\\) an das restliche Modell weiter.\nDie Theorie der urbanen Skalierung beschreibt städtische Outputs als Potenzfunktion der Stadtbevölkerung (Bettencourt et al. 2007).\n\n\\[\n\\Large\nY = Y_0 \\cdot N^\\beta\n\\]\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(Y\\)\nurbaner Output, hier Innovationspotenzial\nOutput-Grösse\n\n\n\\(Y_0\\)\nSkalierungskonstante\nabhängig von \\(Y\\)\n\n\n\\(N\\)\nBevölkerung einer Stadt\nPersonen\n\n\n\\(\\beta\\)\nUrban Scaling Exponent\ndimensionslos\n\n\n\nFür Innovationsgrössen wie Patente wird typischerweise ein superlinearer Zusammenhang beschrieben:\n\\[\n\\beta &gt; 1\n\\]\nDas bedeutet: Grössere Städte erzeugen überproportional mehr Innovationsoutput. Eine Verdoppelung der Bevölkerung führt dann zu mehr als einer Verdoppelung des Outputs. Wichtig ist: Das ist keine Exponentialfunktion, sondern eine Potenzfunktion.\nÜbertragung ins Modell\nDie ursprüngliche Theorie bezieht sich auf einzelne Städte. Das Modell arbeitet aber auf aggregierter EU-Ebene. Deshalb darf die gesamte urbane Bevölkerung nicht einfach direkt potenziert werden:\n\\[\n(N_1 + N_2 + N_3)^\\beta \\neq N_1^\\beta + N_2^\\beta + N_3^\\beta\n\\]\nDarum wird die Theorie im Modell über vereinfachte Stadtklassen umgesetzt:\n\nDie urbane Bevölkerung wird nicht als eine einzige Stadt behandelt, sondern auf Stadtklassen verteilt. Jede Stadtklasse steht für eine angenäherte Anzahl von Städten mit einer typischen Stadtgrösse.\nEs werden keine einzelnen Städte modelliert, sondern nur Stadtklassen\nAuch Stadtgrenzen und Stadtklassenzuordnung bleiben stark vereinfacht\nDie Exponenten sind Modellannahmen\n\n\n\\[\n\\Large\nInnovation_i = Amount_i \\cdot Threshold_i^{\\beta_i}\n\\]\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nEinheit / Dimension\n\n\n\n\n\\(Innovation_i\\)\nInnovationspotenzial einer Stadtklasse\nIndexgrösse\n\n\n\\(Amount_i\\)\nangenäherte Anzahl Städte in Klasse \\(i\\)\nStädte\n\n\n\\(Threshold_i\\)\ntypische Stadtgrösse der Klasse \\(i\\)\nPersonen\n\n\n\\(\\beta_i\\)\nSkalierungsexponent der Klasse \\(i\\)\ndimensionslos\n\n\n\nDie Innovationsbeiträge der Stadtklassen werden anschliessend addiert. Daraus entsteht das gesamte urbane Innovationspotenzial. Dieses wird auf den Startwert normiert, sodass ein dimensionsloser Innovation Index entsteht.\nDer Index bedeutet nicht, dass reale Patente oder reale Forschungsleistung direkt gemessen werden. Er zeigt nur, ob das modellierte Innovationspotenzial relativ zum Startwert steigt oder fällt.\nQuellen-Notation:\n\nBettencourt/West: allgemeine Form \\(Y = Y_0 N^\\beta\\).\nDiese Dokumentation: klassenspezifische Form \\(Innovation_i = Amount_i \\cdot Threshold_i^{\\beta_i}\\).\n\n\n\n\n\nBettencourt, Luís M. A., José Lobo, Dirk Helbing, Christian Kühnert, and Geoffrey B. West. 2007. “Growth, Innovation, Scaling, and the Pace of Life in Cities.” Proceedings of the National Academy of Sciences 104 (17): 7301–6. https://doi.org/10.1073/pnas.0610172104.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Submodell D: Bettencourt-West Urban Scaling und Innovation</span>"
+    ]
+  },
+  {
+    "objectID": "sections/08c-translation-into-vensim.html",
+    "href": "sections/08c-translation-into-vensim.html",
+    "title": "11  Übersetzung Submodelle zu Vensim",
+    "section": "",
+    "text": "11.1 Submodell A: Land Stocks and Conversion\nDieses Kapitel beschreibt, wie die theoretischen Submodelle in Vensim-Code übersetzt wurden. Es geht nicht darum, die Theorie erneut herzuleiten. Entscheidend ist, was mit den mathematischen Schritten im Modell passiert.\nDie Übersetzung wird auf drei Ebenen sichtbar gemacht:\nBei Cobb-Douglas und Bettencourt/West meint die blaue Box die theoretische Form des jeweiligen Untermodells. Die Unterscheidung bleibt dieselbe: Theorie, modellinterne Übersetzung und Vensim-Code werden getrennt gezeigt.\nDie Vensim-Views werden hier als Vensim-Modell-Layer bezeichnet. Sie dienen als Orientierung. Ein mathematischer Schritt kann über mehrere Layer verteilt sein. Umgekehrt kann ein Layer Variablen enthalten, die nur der Diagnose oder Interpretation dienen.\nSubmodell A bildet die physische Landbilanz. Es enthält keine eigene ökonomische Theorie, ist aber für die Modellübersetzung wichtig, weil hier die berechnete Umwandlungsrate tatsächlich in Bestandsveränderungen übersetzt wird.\nRelevante Vensim-Modell-Layer:",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Übersetzung Submodelle zu Vensim</span>"
+    ]
+  },
+  {
+    "objectID": "sections/08c-translation-into-vensim.html#submodell-a-land-stocks-and-conversion",
+    "href": "sections/08c-translation-into-vensim.html#submodell-a-land-stocks-and-conversion",
+    "title": "11  Übersetzung Submodelle zu Vensim",
+    "section": "",
+    "text": "Macro_Ebene\n09_Urban_Land_Conversion_Logic\n\n\n11.1.1 Zentrale Terme des Submodells\n\nModellinterne Transformation\n\\[\n\\small\n\\Delta L_A=-C\n\\qquad\n\\Delta L_U=C\n\\]\n\nDieser Term beschreibt die physische Bilanz: derselbe Umwandlungsfluss senkt den landwirtschaftlichen Bestand und erhöht den urbanen Bestand.\n\nModellinterne Transformation\n\\[\n\\small\nC=\\min(P,\\ C_{max})\n\\]\n\nDieser Term begrenzt die tatsächliche Landumwandlung. Der modellierte Umwandlungsdruck kann nur wirksam werden, wenn genug landwirtschaftliche Fläche verfügbar ist.\n\nModellinterne Transformation\n\\[\n\\small\nC_{max}=\\frac{L_A}{\\tau_C}\n\\]\n\nDieser Term übersetzt verfügbare landwirtschaftliche Fläche in eine maximal mögliche jährliche Umwandlung.\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(L_A\\)\nlandwirtschaftlicher Landbestand\nAgricultural Land\n\n\n\\(L_U\\)\nurbaner Landbestand\nUrban Land\n\n\n\\(C\\)\nUmwandlungsfluss\nLand Conversion Rate\n\n\n\\(P\\)\nUmwandlungsdruck\nLand Conversion Pressure Factors\n\n\n\\(C_{max}\\)\nmaximal mögliche Umwandlung\nMax Feasible Conversion\n\n\n\\(\\tau_C\\)\nminimale Umwandlungszeit\nLand Conversion Time Minimum\n\n\n\n\n\n11.1.2 A1 Stock-Flow Balance Translation\nStatus: direkt umgesetzt\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\nLandbestand und Umwandlungsfluss\nein Bestand nimmt ab, der andere nimmt im gleichen Umfang zu\nkonstante Gesamtfläche\n\n\nVensim-Rekonstruktion\nAgricultural Land, Urban Land, Land Conversion Rate\nINTEG-Struktur mit entgegengesetztem Vorzeichen\nAgricultural Land sinkt, Urban Land steigt\n\n\n\nIn Vensim wird die Bilanzlogik als Stock-Flow-Struktur mit INTEG umgesetzt:\n\nVensim-Umsetzung\n\\[\n\\small\nL_A=INTEG(-C,\\ L_{A,0})\n\\]\n\nDiese Gleichung speichert die Abnahme von Agricultural Land.\n\nVensim-Umsetzung\n\\[\n\\small\nL_U=INTEG(C,\\ L_{U,0})\n\\]\n\nDiese Gleichung speichert die Zunahme von Urban Land.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(L_A\\)\nlandwirtschaftlicher Landbestand\nAgricultural Land\n\n\n\\(L_U\\)\nurbaner Landbestand\nUrban Land\n\n\n\\(C\\)\nUmwandlungsfluss\nLand Conversion Rate\n\n\n\\(L_{A,0}\\)\nAnfangswert landwirtschaftliche Fläche\nInitial Agricultural Land\n\n\n\\(L_{U,0}\\)\nAnfangswert urbane Fläche\nInitial Urban Land\n\n\n\n\n\n11.1.3 A2 Conversion Rate Limit Translation\nStatus: direkt umgesetzt\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\nUmwandlungsdruck und verfügbare Fläche\nUmwandlungsrate darf nicht grösser sein als physisch möglich\nbegrenzte Conversion Rate\n\n\nVensim-Rekonstruktion\nLand Conversion Pressure Factors, Max Feasible Conversion\nMIN-Funktion\nLand Conversion Rate\n\n\n\nIn Vensim wird die Begrenzungslogik mit MIN umgesetzt:\n\nVensim-Umsetzung\n\\[\n\\small\nLand\\ Conversion\\ Rate\n=\nMIN(Land\\ Conversion\\ Pressure\\ Factors,\\ Max\\ Feasible\\ Conversion)\n\\]\n\nDiese Gleichung macht aus dem modellierten Umwandlungsdruck eine physisch begrenzte jährliche Umwandlungsrate.\n\n\n11.1.4 Variablenübersetzung\n\n\n\n\n\n\n\n\n\nModellterm\nVensim-Variable\nFunktion\nVensim-Modell-Layer\n\n\n\n\nlandwirtschaftlicher Landbestand \\(L_A\\)\nAgricultural Land\nStock, nimmt durch Land Conversion Rate ab\nMacro_Ebene, 08_Agriculture_and_Scarcity\n\n\nurbaner Landbestand \\(L_U\\)\nUrban Land\nStock, nimmt durch Land Conversion Rate zu\nMacro_Ebene, mehrere Layer\n\n\nUmwandlungsfluss \\(C\\)\nLand Conversion Rate\nzentraler Flow zwischen den beiden Landbeständen\nMacro_Ebene\n\n\nUmwandlungsdruck \\(P\\)\nLand Conversion Pressure Factors\nübernimmt aktuell die AMM-Umwandlungsnachfrage\n09_Urban_Land_Conversion_Logic\n\n\nmaximale Umwandlung \\(C_{max}\\)\nMax Feasible Conversion\nverhindert, dass mehr Fläche umgewandelt wird als verfügbar ist\nMacro_Ebene\n\n\nminimale Umwandlungszeit \\(\\tau_C\\)\nLand Conversion Time Minimum\nZeitbasis für Max Feasible Conversion\nMacro_Ebene\n\n\n\n\n\n11.1.5 Weglassungen und Diagnose\nEine Rückumwandlung von Urban Land zu Agricultural Land ist nicht modelliert. Weitere Landtypen werden nicht abgebildet. Soil-Protection-Grössen werden zwar berechnet, wirken im aktuellen Modell aber nicht auf die Land Conversion Rate zurück.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Übersetzung Submodelle zu Vensim</span>"
+    ]
+  },
+  {
+    "objectID": "sections/08c-translation-into-vensim.html#submodell-b-amm-core",
+    "href": "sections/08c-translation-into-vensim.html#submodell-b-amm-core",
+    "title": "11  Übersetzung Submodelle zu Vensim",
+    "section": "11.2 Submodell B: AMM-Core",
+    "text": "11.2 Submodell B: AMM-Core\nSubmodell B übersetzt die AMM-Logik in eine dynamische Vensim-Struktur. Die mathematischen AMM-Schritte erscheinen dabei nicht immer als einzelne Nodes. Mehrere Schritte werden zusammengelegt, besonders bei Budgetfunktion, Bid-Rent-Funktion und Fringe Condition.\nRelevante Vensim-Modell-Layer:\n\n02_Transport_and_Commuting\n03_Income_and_Productivity\n04_Urban_Rent_and_Land_Tightness\n05_AMM_Budget_and_Housing_Demand\n08_Agriculture_and_Scarcity\n09_Urban_Land_Conversion_Logic\n\n\n11.2.1 Zentrale Terme des Submodells\n\nTheoretische AMM-Form\n\\[\n\\small\nY=z+R(x)q+t x\n\\]\n\nDiese Gleichung beschreibt das Haushaltsbudget. Einkommen wird auf übrigen Konsum, Landkosten und Transportkosten verteilt. In Vensim wird diese Budgetlogik nicht als ein einzelner Node geführt, sondern in mehreren Modellteilen rekonstruiert.\n\nTheoretische AMM-Form\n\\[\n\\small\nR(x)=\\frac{Y-z-tx}{q}\n\\]\n\nDiese Gleichung transformiert das Budget in eine Bodenrentenfunktion. Sie zeigt, welche Bodenrente ein Haushalt an einem Standort maximal tragen kann.\n\nTheoretische AMM-Form\n\\[\n\\small\nR(x^*)=R_A\n\\]\n\nDiese Gleichung ist die Randbedingung. Die Stadt endet dort, wo urbane Bodenrente und landwirtschaftliche Bodenrente gleich sind.\n\nTheoretische AMM-Form\n\\[\n\\small\nx^*=\\frac{Y-z-qR_A}{t}\n\\]\n\nDiese Gleichung entsteht durch Einsetzen der Randbedingung in die Bid-Rent-Funktion. Sie macht den theoretischen Stadtrand als Radius berechenbar.\n\nTheoretische AMM-Form\n\\[\n\\small\nA^*=\\pi(x^*)^2\n\\]\n\nDiese Gleichung transformiert den Fringe Radius in eine theoretische Stadtfläche.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(Y\\)\nHaushaltseinkommen\nMean Household Income\n\n\n\\(z\\)\nübriger Konsum\nOther Consumption Per Household z\n\n\n\\(R(x)\\)\nBodenrente am Standort \\(x\\)\nMean Urban Rent als aggregierter Preisinput\n\n\n\\(q\\)\nLandkonsum pro Haushalt\nLand Demand per Household q\n\n\n\\(t\\)\nTransportkosten pro Distanzeinheit\nTransport Cost per km per Household\n\n\n\\(x\\)\nDistanz zum Zentrum\nim Modell über Urban Fringe Radius rekonstruiert\n\n\n\\(x^*\\)\nFringe Radius\nUrban Fringe Radius\n\n\n\\(R_A\\)\nlandwirtschaftliche Bodenrente\nAgricultural Rent\n\n\n\\(A^*\\)\ntheoretische Stadtfläche\nDesired Urban Land\n\n\n\n\n\n11.2.2 B1 Household Budget Translation\nStatus: zusammengelegt\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\n\\(Y\\), \\(z\\), \\(R(x)\\), \\(q\\), \\(t\\), \\(x\\)\nHaushaltsbudget \\(Y=z+R(x)q+t x\\)\nBudgetrestriktion\n\n\nVensim-Rekonstruktion\nMean Household Income, Transport Cost per Household, Housing Preference Share Alpha, Mean Urban Rent\nBudget wird zerlegt in verfügbares Einkommen, Cobb-Douglas-Aufteilung und Fringe-Radius-Term\nDisposable Income after Transport, z, q, Urban Fringe Radius\n\n\n\nDie theoretische AMM-Budgetgleichung lautet:\n\nTheoretische AMM-Form\n\\[\n\\small\nY=z+R(x)q+t x\n\\]\n\nDiese Gleichung wird in Vensim nicht als ein einzelner Node umgesetzt. Sie wird auf mehrere Modellteile verteilt.\nZuerst werden Transportkosten vom Einkommen abgezogen:\n\nVensim-Umsetzung\n\\[\n\\small\nM=MAX(0,\\ Y-TC)\n\\]\n\nDiese Gleichung erzeugt das verfügbare Budget nach Transportkosten.\nDann teilt Cobb-Douglas dieses verfügbare Budget in \\(z\\) und Wohnlandbudget auf:\n\nVensim-Umsetzung\n\\[\n\\small\nz=(1-\\alpha)M\n\\]\n\nDiese Gleichung erzeugt den übrigen Konsum.\n\nVensim-Umsetzung\n\\[\n\\small\nE_H=\\alpha M\n\\]\n\nDiese Gleichung erzeugt das Budget für Wohnland.\nDaraus entsteht \\(q\\):\n\nVensim-Umsetzung\n\\[\n\\small\nq=ZIDZ(E_H,\\ R)\n\\]\n\nDiese Gleichung erzeugt die Landnachfrage pro Haushalt. ZIDZ gibt 0 zurück, falls der Nenner 0 ist, sonst den Quotienten.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(M\\)\nverfügbares Budget nach Transportkosten\nDisposable Income after Transport\n\n\n\\(TC\\)\nTransportkosten pro Haushalt\nTransport Cost per Household\n\n\n\\(\\alpha\\)\nWohnlandanteil\nHousing Preference Share Alpha\n\n\n\\(E_H\\)\nWohnlandbudget\nHousing Land Expenditure\n\n\n\\(R\\)\nmittlere urbane Rente\nMean Urban Rent\n\n\n\\(q\\)\nLandnachfrage pro Haushalt\nLand Demand per Household q\n\n\n\\(z\\)\nübriger Konsum\nOther Consumption Per Household z\n\n\n\\(ZIDZ(E_H,R)\\)\nVensim-Schutzfunktion\ngibt 0 zurück, falls \\(R=0\\), sonst \\(E_H/R\\)\n\n\n\n\n\n11.2.3 B2 Bid-Rent and Fringe Translation\nStatus: zusammengelegt\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\n\\(Y\\), \\(z\\), \\(t\\), \\(x\\), \\(q\\), \\(R_A\\)\nBid-Rent-Funktion und Fringe Condition werden kombiniert\n\\(x^*\\)\n\n\nVensim-Rekonstruktion\nMean Household Income, Other Consumption Per Household z, Land Demand per Household q, Agricultural Rent, Transport Cost per km per Household\ndirekter Term im Urban Fringe Radius\nUrban Fringe Radius\n\n\n\nTheoretisch wird zuerst die Bid-Rent-Funktion geschrieben:\n\nTheoretische AMM-Form\n\\[\n\\small\nR(x)=\\frac{Y-z-tx}{q}\n\\]\n\nDiese Gleichung transformiert die Budgetgleichung in eine Bodenrente pro Flächeneinheit.\nAm Stadtrand gilt:\n\nTheoretische AMM-Form\n\\[\n\\small\nR(x^*)=R_A\n\\]\n\nDiese Gleichung setzt urbane und landwirtschaftliche Bodenrente am Stadtrand gleich.\nDurch Einsetzen und Umstellen entsteht die Radiusform:\n\nTheoretische AMM-Form\n\\[\n\\small\nx^*=\\frac{Y-z-qR_A}{t}\n\\]\n\nDiese Gleichung transformiert die Randbedingung in einen berechenbaren Stadtradius.\nIn Vensim wird diese kombinierte Form direkt als Urban Fringe Radius umgesetzt:\n\nVensim-Umsetzung\n\\[\n\\small\nx^*=MAX\\left(0,\\frac{Y-z-qR_A}{t}\\right)\n\\]\n\nDiese Gleichung bildet den theoretischen Radius ab und verhindert negative Radien.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(x^*\\)\ntheoretischer Stadtrand\nUrban Fringe Radius\n\n\n\\(Y\\)\nHaushaltseinkommen\nMean Household Income\n\n\n\\(z\\)\nübriger Konsum\nOther Consumption Per Household z\n\n\n\\(q\\)\nLandnachfrage pro Haushalt\nLand Demand per Household q\n\n\n\\(R_A\\)\nlandwirtschaftliche Bodenrente\nAgricultural Rent\n\n\n\\(t\\)\nTransportkosten pro km pro Haushalt\nTransport Cost per km per Household\n\n\n\n\n\n11.2.4 B3 Transport Gradient Translation\nStatus: implizit umgesetzt\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\n\\(t\\), \\(q\\)\nAbleitung der Bid-Rent-Funktion nach Distanz\nnegativer Rentengradient \\(\\frac{dR}{dx}=-\\frac{t}{q}\\)\n\n\nVensim-Rekonstruktion\nTransport Cost per km per Household, Land Demand per Household q\nkein eigener Ableitungs-Node, sondern Wirkung über Transportkostenterm im Urban Fringe Radius\nhöhere Transportkosten senken Urban Fringe Radius\n\n\n\nDer theoretische Gradient lautet:\n\nTheoretische AMM-Form\n\\[\n\\small\n\\frac{dR(x)}{dx}=-\\frac{t}{q}\n\\]\n\nDiese Ableitung beschreibt die Veränderung der Bodenrente bei zusätzlicher Distanz zum Zentrum.\nIn Vensim wird dieser Gradient nicht als eigene Ableitung modelliert. Die Distanzwirkung steckt implizit in den Transportkosten:\n\nTransport Cost per Household reduziert das verfügbare Budget.\nTransport Cost per km per Household steht im Nenner des Urban Fringe Radius.\n\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(R(x)\\)\nBodenrente am Standort \\(x\\)\nMean Urban Rent als aggregierter Preisinput\n\n\n\\(x\\)\nDistanz zum Zentrum\nim Modell über Urban Fringe Radius rekonstruiert\n\n\n\\(t\\)\nTransportkosten pro Distanzeinheit\nTransport Cost per km per Household\n\n\n\\(q\\)\nLandkonsum pro Haushalt\nLand Demand per Household q\n\n\n\\(\\frac{dR(x)}{dx}\\)\nRentenänderung pro zusätzlicher Distanzeinheit\nkein eigener Node, implizit über Transportkosten umgesetzt\n\n\n\n\n\n11.2.5 B4 Rent and Land Tightness Translation\nStatus: dynamische Erweiterung\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\nkein ursprünglicher AMM-Schritt\nFlächenverfügbarkeit wird als Knappheitsindex gelesen\ngewünschte urbane Rente\n\n\nVensim-Rekonstruktion\nUrban Land, Number of Households, Reference Initial Land Demand per Household\nCurrent Urban Land per Household → Land Tightness Index → Desired Mean Urban Rent → Mean Urban Rent\nMean Urban Rent\n\n\n\nDieser Schritt ist keine ursprüngliche AMM-Gleichung. Er ist eine modellinterne Dynamisierung, damit Mean Urban Rent nicht konstant bleibt.\n\nModellinterne Transformation\n\\[\n\\small\nu_h=\\frac{L_U}{H}\n\\]\n\nDiese Gleichung transformiert urbane Gesamtfläche in urbane Fläche pro Haushalt.\n\nModellinterne Transformation\n\\[\n\\small\nT=\\frac{q_{ref}}{u_h}\n\\]\n\nDiese Gleichung transformiert Fläche pro Haushalt in einen Knappheitsindex.\n\nModellinterne Transformation\n\\[\n\\small\nR_{des}=R_0\\cdot T^\\epsilon\n\\]\n\nDiese Gleichung transformiert Landknappheit in eine gewünschte urbane Rente.\nIn Vensim wird diese Zielrente träge angepasst:\n\nVensim-Umsetzung\n\\[\n\\small\nR=INTEG(\\Delta R,\\ R_0)\n\\]\n\nDiese Gleichung speichert Mean Urban Rent als Stock.\n\nVensim-Umsetzung\n\\[\n\\small\n\\Delta R=\\frac{R_{des}-R}{\\tau_R}\n\\]\n\nDiese Gleichung übersetzt die Lücke zwischen Zielrente und aktueller Rente in eine jährliche Anpassung.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(u_h\\)\naktuelle urbane Fläche pro Haushalt\nCurrent Urban Land per Household\n\n\n\\(L_U\\)\nurbane Fläche\nUrban Land\n\n\n\\(H\\)\nAnzahl Haushalte\nNumber of Households\n\n\n\\(T\\)\nLandknappheitsindex\nLand Tightness Index\n\n\n\\(q_{ref}\\)\nReferenzlandbedarf pro Haushalt\nReference Initial Land Demand per Household\n\n\n\\(R_{des}\\)\ngewünschte urbane Rente\nDesired Mean Urban Rent\n\n\n\\(R_0\\)\nanfängliche urbane Rente\nInitial Mean Urban Rent\n\n\n\\(\\epsilon\\)\nSensitivität der Rente auf Landknappheit\nUrban Rent Sensitivity to Land Tightness\n\n\n\\(R\\)\nmittlere urbane Rente\nMean Urban Rent\n\n\n\\(\\Delta R\\)\nVeränderung der mittleren urbanen Rente\nMean Urban Rent Change\n\n\n\\(\\tau_R\\)\nRentenanpassungszeit\nUrban Rent Adjustment Time\n\n\n\n\n\n11.2.6 B5 Radius-to-Land Translation\nStatus: direkt umgesetzt mit Skalierungsproxy\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\n\\(x^*\\)\nKreisflächenformel\n\\(A^*=\\pi(x^*)^2\\)\n\n\nVensim-Rekonstruktion\nUrban Fringe Radius\nDesired Urban Land wird berechnet und auf aggregierte Modellgrösse skaliert\nDesired Urban Land Total\n\n\n\nAus dem Radius wird mathematisch eine theoretische Stadtfläche:\n\nTheoretische AMM-Form\n\\[\n\\small\nA^*=\\pi(x^*)^2\n\\]\n\nDiese Gleichung transformiert Randdistanz in Fläche.\nIn Vensim wird diese Kreisflächenlogik direkt umgesetzt:\n\nVensim-Umsetzung\n\\[\n\\small\nDesired\\ Urban\\ Land=3.141\\cdot Urban\\ Fringe\\ Radius^2\n\\]\n\nDiese Gleichung berechnet die theoretische urbane Zielstadtfläche.\nDanach wird die Fläche auf das aggregierte Modellniveau skaliert:\n\nModellinterne Transformation\n\\[\n\\small\nA^*_{total}=A^*\\cdot s_U\\cdot s_H\n\\]\n\nDiese Gleichung transformiert die theoretische Kreisfläche in eine aggregierte Zielgrösse für das Gesamtmodell.\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(A^*\\)\ntheoretische Stadtfläche\nDesired Urban Land\n\n\n\\(x^*\\)\nFringe Radius\nUrban Fringe Radius\n\n\n\\(A^*_{total}\\)\nskalierte Zielstadtfläche\nDesired Urban Land Total\n\n\n\\(s_U\\)\nAggregationsfaktor\nUrban Aggregate Scale Factor\n\n\n\\(s_H\\)\nHaushalts-Skalierungsfaktor\nHousehold Scaling Factor\n\n\n\nDie Ringintegration aus der Theorie wird nicht explizit umgesetzt. Sie wird durch die aggregierte Kreisfläche und Skalierungsfaktoren ersetzt.\n\n\n11.2.7 B6 Land Gap-to-Conversion Translation\nStatus: direkt umgesetzt\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\nkein ursprünglicher AMM-Schritt\ngewünschte Fläche wird mit aktueller Fläche verglichen\nLandlücke\n\n\nVensim-Rekonstruktion\nDesired Urban Land Total, Urban Land, Urban Expansion Adjustment Time\nUrban Land Gap → AMM Consistent Economic Land Conversion Demand\nAMM-Umwandlungsdruck\n\n\n\nDieser Schritt ist keine ursprüngliche AMM-Gleichung. Er übersetzt die AMM-Zielfläche in eine dynamische Umwandlungsnachfrage.\n\nModellinterne Transformation\n\\[\n\\small\nG=MAX(0,\\ A^*_{total}-L_U)\n\\]\n\nDiese Gleichung transformiert die Differenz zwischen gewünschter und aktueller urbaner Fläche in eine nicht-negative Landlücke.\n\nModellinterne Transformation\n\\[\n\\small\nD_{AMM}=\\frac{G}{\\tau_U}\n\\]\n\nDiese Gleichung transformiert die Landlücke in eine jährliche Umwandlungsnachfrage.\nIn Vensim werden diese beiden Terme als Urban Land Gap und AMM Consistent Economic Land Conversion Demand umgesetzt:\n\nVensim-Umsetzung\n\\[\n\\small\nUrban\\ Land\\ Gap\n=\nMAX(0,\\ Desired\\ Urban\\ Land\\ Total-Urban\\ Land)\n\\]\n\nDiese Gleichung berechnet die aktive Landlücke im Vensim-Modell.\n\nVensim-Umsetzung\n\\[\n\\small\nAMM\\ Consistent\\ Economic\\ Land\\ Conversion\\ Demand\n=\n\\frac{Urban\\ Land\\ Gap}{Urban\\ Expansion\\ Adjustment\\ Time}\n\\]\n\nDiese Gleichung berechnet den jährlichen AMM-basierten Umwandlungsdruck.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(G\\)\nurbane Landlücke\nUrban Land Gap\n\n\n\\(A^*_{total}\\)\nskalierte Zielstadtfläche\nDesired Urban Land Total\n\n\n\\(L_U\\)\naktuelle urbane Fläche\nUrban Land\n\n\n\\(D_{AMM}\\)\nAMM-basierte Umwandlungsnachfrage\nAMM Consistent Economic Land Conversion Demand\n\n\n\\(\\tau_U\\)\nAnpassungszeit der urbanen Expansion\nUrban Expansion Adjustment Time\n\n\n\nDiese Umwandlungsnachfrage wird an die Conversion-Logik weitergegeben und wirkt dann über Land Conversion Rate auf die Landbestände.\n\n\n11.2.8 Variablenübersetzung\n\n\n\n\n\n\n\n\n\nModellterm\nVensim-Variable\nFunktion\nVensim-Modell-Layer\n\n\n\n\nEinkommen \\(Y\\)\nMean Household Income\nHaushaltseinkommen im AMM-Budget\n03_Income_and_Productivity, 05_AMM_Budget_and_Housing_Demand\n\n\nübriger Konsum \\(z\\)\nOther Consumption Per Household z\nCD-Ergebnis und AMM-Budgetterm\n05_AMM_Budget_and_Housing_Demand, 07_Cobb_Douglas_Utility\n\n\nLandkonsum \\(q\\)\nLand Demand per Household q\nCD-Ergebnis und AMM-Landbedarf\n05_AMM_Budget_and_Housing_Demand, 09_Urban_Land_Conversion_Logic\n\n\nurbane Bodenrente \\(R\\)\nMean Urban Rent\ndynamische urbane Rente\n04_Urban_Rent_and_Land_Tightness, 05_AMM_Budget_and_Housing_Demand\n\n\nlandwirtschaftliche Rente \\(R_A\\)\nAgricultural Rent\nRandwert der landwirtschaftlichen Alternative\n08_Agriculture_and_Scarcity, 05_AMM_Budget_and_Housing_Demand\n\n\nTransportkosten \\(t\\)\nTransport Cost per km per Household\nTransportkostenterm des AMM\n02_Transport_and_Commuting, 05_AMM_Budget_and_Housing_Demand\n\n\nStadtrand \\(x^*\\)\nUrban Fringe Radius\nAMM-Fringe-Radius\n05_AMM_Budget_and_Housing_Demand\n\n\ntheoretische Stadtfläche \\(A^*\\)\nDesired Urban Land\nKreisfläche aus Fringe Radius\n05_AMM_Budget_and_Housing_Demand\n\n\nskalierte Zielstadtfläche \\(A^*_{total}\\)\nDesired Urban Land Total\naggregierte Zielfläche\n05_AMM_Budget_and_Housing_Demand, 09_Urban_Land_Conversion_Logic\n\n\nLandlücke \\(G\\)\nUrban Land Gap\nDifferenz zwischen Ziel- und Istfläche\n09_Urban_Land_Conversion_Logic\n\n\nUmwandlungsnachfrage \\(D_{AMM}\\)\nAMM Consistent Economic Land Conversion Demand\njährlicher AMM-Druck auf Landumwandlung\n09_Urban_Land_Conversion_Logic\n\n\n\n\n\n11.2.9 Weglassungen und Diagnose\nUrban Rent at Fringe und AMM Fringe Condition Gap prüfen, ob die Randbedingung ungefähr erfüllt ist. Sie wirken nicht aktiv auf die Land Conversion Rate zurück.\nCurrent Urban Radius und Urban Rent at Current Fringe beschreiben die aktuelle Ist-Situation. Auch sie sind Diagnosegrössen.\nHousehold Clearing Gap und Additional Urban Land Needed for Clearing berechnen eine zusätzliche Haushaltslücke, sind aber aktuell nicht Teil der aktiven Landumwandlung.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Übersetzung Submodelle zu Vensim</span>"
+    ]
+  },
+  {
+    "objectID": "sections/08c-translation-into-vensim.html#submodell-c-cobb-douglas",
+    "href": "sections/08c-translation-into-vensim.html#submodell-c-cobb-douglas",
+    "title": "11  Übersetzung Submodelle zu Vensim",
+    "section": "11.3 Submodell C: Cobb-Douglas",
+    "text": "11.3 Submodell C: Cobb-Douglas\nSubmodell C übersetzt die Cobb-Douglas-Haushaltslogik in Vensim. Es bestimmt \\(z\\) und \\(q\\). Diese beiden Grössen werden danach im AMM-Core weiterverwendet.\nRelevante Vensim-Modell-Layer:\n\n05_AMM_Budget_and_Housing_Demand\n07_Cobb_Douglas_Utility\n\n\n11.3.1 Zentrale Terme des Submodells\n\nTheoretische Form\n\\[\n\\small\nU(q,z)=q^\\alpha z^{1-\\alpha}\n\\]\n\nDiese Gleichung beschreibt die Präferenzstruktur zwischen Landkonsum und übrigem Konsum.\n\nModellinterne Transformation\n\\[\n\\small\nE_H=\\alpha M\n\\qquad\nz=(1-\\alpha)M\n\\]\n\nDiese Gleichung transformiert verfügbares Budget in Wohnlandbudget und übrigen Konsum.\n\nModellinterne Transformation\n\\[\n\\small\nq=\\frac{E_H}{R}\n\\]\n\nDiese Gleichung transformiert Wohnlandbudget und Landpreis in Landnachfrage.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(U(q,z)\\)\nNutzenfunktion\nCobb Douglas Utility Index als relative Diagnose\n\n\n\\(q\\)\nLandnachfrage pro Haushalt\nLand Demand per Household q\n\n\n\\(z\\)\nübriger Konsum\nOther Consumption Per Household z\n\n\n\\(\\alpha\\)\nWohnlandanteil\nHousing Preference Share Alpha\n\n\n\\(M\\)\nverfügbares Budget\nDisposable Income after Transport\n\n\n\\(E_H\\)\nWohnlandbudget\nHousing Land Expenditure\n\n\n\\(R\\)\nmittlere urbane Rente\nMean Urban Rent\n\n\n\n\n\n11.3.2 C1 Budget Share Translation\nStatus: direkt umgesetzt\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\n\\(M\\), \\(\\alpha\\)\nCobb-Douglas-Budgetanteile\n\\(z\\) und Wohnlandbudget\n\n\nVensim-Rekonstruktion\nDisposable Income after Transport, Housing Preference Share Alpha\nHousing Land Expenditure und Other Consumption Per Household z\nHousing Land Expenditure, Other Consumption Per Household z\n\n\n\nIn Vensim stammt \\(M\\) aus dem Einkommen nach Transportkosten:\n\nVensim-Umsetzung\n\\[\n\\small\nM=MAX(0,\\ Y-TC)\n\\]\n\nDanach werden die Budgetanteile berechnet:\n\nVensim-Umsetzung\n\\[\n\\small\nHousing\\ Land\\ Expenditure\n=\nHousing\\ Preference\\ Share\\ Alpha\n\\cdot\nDisposable\\ Income\\ after\\ Transport\n\\]\n\n\nVensim-Umsetzung\n\\[\n\\small\nOther\\ Consumption\\ Per\\ Household\\ z\n=\n(1-Housing\\ Preference\\ Share\\ Alpha)\n\\cdot\nDisposable\\ Income\\ after\\ Transport\n\\]\n\nDiese Gleichungen setzen die Cobb-Douglas-Budgetanteile in Vensim-Variablen um.\n\n\n11.3.3 C2 Housing Budget-to-q Translation\nStatus: direkt umgesetzt\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\n\\(E_H\\), \\(R\\)\nWohnlandbudget wird durch Landpreis geteilt\n\\(q\\)\n\n\nVensim-Rekonstruktion\nHousing Land Expenditure, Mean Urban Rent\nZIDZ schützt Division durch Null\nLand Demand per Household q\n\n\n\nDie Landnachfrage entsteht mathematisch aus Wohnlandbudget geteilt durch urbane Rente:\n\nModellinterne Transformation\n\\[\n\\small\nq=\\frac{E_H}{R}\n\\]\n\nDiese Gleichung transformiert Geldbudget in Fläche pro Haushalt.\nIn Vensim wird die gleiche Division mit ZIDZ geschützt:\n\nVensim-Umsetzung\n\\[\n\\small\nq=ZIDZ(E_H,\\ R)\n\\]\n\nDiese Gleichung verhindert undefinierte Werte bei einer Mean Urban Rent von 0.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(q\\)\nLandnachfrage pro Haushalt\nLand Demand per Household q\n\n\n\\(E_H\\)\nWohnlandbudget\nHousing Land Expenditure\n\n\n\\(R\\)\nmittlere urbane Rente\nMean Urban Rent\n\n\n\\(ZIDZ(E_H,R)\\)\nVensim-Schutzfunktion für Division durch null\ngibt 0 zurück, falls \\(R=0\\), sonst \\(E_H/R\\)\n\n\n\nDamit endet der aktive Cobb-Douglas-Mechanismus bei \\(q\\) und \\(z\\).\n\n\n11.3.4 C3 Utility Index Translation\nStatus: diagnostisch umgesetzt\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\n\\(rel_z\\), \\(rel_q\\), \\(\\alpha\\)\nrelative Cobb-Douglas-Nutzenfunktion\nNutzenindex\n\n\nVensim-Rekonstruktion\nRelative Other Consumption per Household, Relative Land Demand per Household, Housing Preference Share Alpha\nCobb Douglas Utility Index\nDiagnosevariable\n\n\n\nMathematisch entspricht der Index einer relativen Cobb-Douglas-Funktion:\n\nTheoretische Form\n\\[\n\\small\nU_{CD}=rel_z^{1-\\alpha}\\cdot rel_q^\\alpha\n\\]\n\nDiese Gleichung transformiert relative Änderungen von \\(q\\) und \\(z\\) in einen relativen Nutzenindex.\nIn Vensim wird diese Formel als diagnostischer Cobb Douglas Utility Index berechnet:\n\nVensim-Umsetzung\n\\[\n\\small\nCobb\\ Douglas\\ Utility\\ Index\n=\nRelative\\ Other\\ Consumption^{1-\\alpha}\n\\cdot\nRelative\\ Land\\ Demand^\\alpha\n\\]\n\nDiese Gleichung erzeugt eine Interpretationsgrösse. Sie wirkt nicht aktiv zurück.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(U_{CD}\\)\nCobb-Douglas-Index\nCobb Douglas Utility Index\n\n\n\\(rel_z\\)\nrelativer übriger Konsum\nRelative Other Consumption per Household\n\n\n\\(rel_q\\)\nrelative Landnachfrage\nRelative Land Demand per Household\n\n\n\\(\\alpha\\)\nWohnlandanteil\nHousing Preference Share Alpha\n\n\n\n\n\n11.3.5 Variablenübersetzung\n\n\n\n\n\n\n\n\n\nModellterm\nVensim-Variable\nFunktion\nVensim-Modell-Layer\n\n\n\n\nverfügbares Budget \\(M\\)\nDisposable Income after Transport\nEinkommen nach Transportkosten\n03_Income_and_Productivity, 05_AMM_Budget_and_Housing_Demand\n\n\nPräferenzanteil \\(\\alpha\\)\nHousing Preference Share Alpha\nAnteil des Budgets für Wohnland\n05_AMM_Budget_and_Housing_Demand, 07_Cobb_Douglas_Utility\n\n\nWohnlandbudget \\(E_H=\\alpha M\\)\nHousing Land Expenditure\nBudget für Land oder Wohnen\n05_AMM_Budget_and_Housing_Demand\n\n\nübriger Konsum \\(z\\)\nOther Consumption Per Household z\nrestlicher Budgetanteil\n05_AMM_Budget_and_Housing_Demand, 07_Cobb_Douglas_Utility\n\n\nLandnachfrage \\(q\\)\nLand Demand per Household q\nWohnlandbudget geteilt durch Mean Urban Rent\n05_AMM_Budget_and_Housing_Demand, 09_Urban_Land_Conversion_Logic\n\n\nNutzenindex \\(U_{CD}\\)\nCobb Douglas Utility Index\nDiagnose und Interpretation\n07_Cobb_Douglas_Utility\n\n\n\n\n\n11.3.6 Weglassungen und Diagnose\nDer Cobb Douglas Utility Index ist kein aktiver Treiber im Modell. Die relativen \\(q\\)- und \\(z\\)-Variablen dienen nur seiner Berechnung.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Übersetzung Submodelle zu Vensim</span>"
+    ]
+  },
+  {
+    "objectID": "sections/08c-translation-into-vensim.html#submodell-d-bettencourtwest-urban-scaling",
+    "href": "sections/08c-translation-into-vensim.html#submodell-d-bettencourtwest-urban-scaling",
+    "title": "11  Übersetzung Submodelle zu Vensim",
+    "section": "11.4 Submodell D: Bettencourt/West Urban Scaling",
+    "text": "11.4 Submodell D: Bettencourt/West Urban Scaling\nSubmodell D übersetzt Urban Scaling in einen relativen Innovation Index. Wegen der aggregierten EU-Ebene wird die Theorie nicht auf eine einzige Stadt angewendet, sondern über vereinfachte Stadtklassen umgesetzt.\nRelevante Vensim-Modell-Layer:\n\n11_Innovation_and_City_Size\n03_Income_and_Productivity\n08_Agriculture_and_Scarcity\n\n\n11.4.1 Zentrale Terme des Submodells\n\nTheoretische Form\n\\[\n\\small\nY=Y_0N^\\beta\n\\]\n\nDiese Gleichung beschreibt Urban Scaling: ein städtischer Output wächst als Potenz der Stadtbevölkerung.\n\nModellinterne Transformation\n\\[\n\\small\nn_i=N_U\\cdot\\frac{s_i}{N_i}\n\\]\n\nDiese Gleichung übersetzt aggregierte urbane Bevölkerung in äquivalente Stadtklassen.\n\nModellinterne Transformation\n\\[\n\\small\nI_i=n_i\\cdot N_i^{\\beta_i}\n\\]\n\nDiese Gleichung transformiert jede Stadtklasse in einen Innovationsbeitrag.\n\nModellinterne Transformation\n\\[\n\\small\nIndex_I=\\frac{I_{total}}{I_{ref}}\n\\]\n\nDiese Gleichung normiert das gesamte Innovationspotenzial auf den Startwert.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(Y\\)\nurbaner Output in der Theorie\nhier als Innovationspotenzial interpretiert\n\n\n\\(Y_0\\)\nSkalierungskonstante\nnicht als eigener aktiver Node geführt\n\n\n\\(N\\)\nBevölkerung einer Stadt\nüber Stadtklassen angenähert\n\n\n\\(\\beta\\)\nSkalierungsexponent\nUrban Scaling Exponent\n\n\n\\(N_U\\)\nurbane Bevölkerung\nUrban Population Total\n\n\n\\(n_i\\)\näquivalente Städte je Klasse\nEquivalent Number of Cities\n\n\n\\(s_i\\)\nAnteil der Stadtklasse\nShare City Class\n\n\n\\(N_i\\)\ntypische Stadtgrösse\nRepresentative City Size\n\n\n\\(I_i\\)\nInnovationsbeitrag je Klasse\nInnovation Small, Medium, Large or Very Large\n\n\n\\(I_{total}\\)\ngesamtes Innovationspotenzial\nTotal Urban Innovation Potential\n\n\n\\(I_{ref}\\)\nReferenzpotenzial\nReference Total Innovation Potential\n\n\n\\(Index_I\\)\nrelativer Innovationsindex\nInnovation Index\n\n\n\n\n\n11.4.2 D1 Urban Population-to-City-Class Translation\nStatus: Proxy-Umsetzung\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\n\\(N\\), Stadtgrössenstruktur\nBevölkerung wird in Stadtklassen zerlegt\nAnzahl Städte je Klasse\n\n\nVensim-Rekonstruktion\nUrban Land, Urban Population Density, Share City Class, Representative City Size\nUrban Population Total und Equivalent Number of Cities\nEquivalent Number of Small, Medium, Large and Very Large Cities\n\n\n\nMathematisch wird zuerst eine urbane Bevölkerung als Proxy bestimmt:\n\nModellinterne Transformation\n\\[\n\\small\nN_U=\\frac{L_U}{d_U}\n\\]\n\nDiese Gleichung transformiert urbane Fläche und Dichte in eine approximierte urbane Bevölkerung.\nDanach wird diese Bevölkerung auf Stadtklassen verteilt:\n\nModellinterne Transformation\n\\[\n\\small\nn_i=N_U\\cdot\\frac{s_i}{N_i}\n\\]\n\nDiese Gleichung transformiert aggregierte Bevölkerung in eine äquivalente Anzahl Städte je Klasse.\nIn Vensim werden diese Terme als Urban Population Total und Equivalent Number of ... Cities umgesetzt.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(N_U\\)\nurbane Bevölkerung\nUrban Population Total\n\n\n\\(L_U\\)\nurbane Fläche\nUrban Land\n\n\n\\(d_U\\)\nurbane Bevölkerungsdichte\nUrban Population Density\n\n\n\\(n_i\\)\näquivalente Städte je Klasse\nEquivalent Number of Small, Medium, Large or Very Large Cities\n\n\n\\(s_i\\)\nAnteil der Stadtklasse\nShare Small, Medium, Large or Very Large City\n\n\n\\(N_i\\)\ntypische Stadtgrösse\nRepresentative City Size\n\n\n\n\n\n11.4.3 D2 City-Class-to-Innovation Translation\nStatus: direkt umgesetzt als vereinfachte Power-Law-Logik\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\n\\(n_i\\), \\(N_i\\), \\(\\beta_i\\)\nstadtklassenspezifische Potenzfunktion\n\\(I_i\\)\n\n\nVensim-Rekonstruktion\nEquivalent Number of Cities, Representative City Size, Urban Scaling Exponent\nInnovation Small, Medium, Large, very Large\nInnovationsbeiträge je Stadtklasse\n\n\n\nMathematisch wird für jede Stadtklasse ein Innovationsbeitrag berechnet:\n\nModellinterne Transformation\n\\[\n\\small\nI_i=n_i\\cdot N_i^{\\beta_i}\n\\]\n\nDiese Gleichung transformiert eine Stadtklasse in einen Innovationsbeitrag.\nDie Beiträge werden addiert:\n\nModellinterne Transformation\n\\[\n\\small\nI_{total}=I_S+I_M+I_L+I_{VL}\n\\]\n\nDiese Gleichung transformiert alle Stadtklassenbeiträge in ein gesamtes Innovationspotenzial.\nIn Vensim entsprechen diese Beiträge den Innovationsvariablen pro Stadtklasse und der Summe Total Urban Innovation Potential.\n\n\n11.4.4 D3 Innovation Index-to-Model Feedback Translation\nStatus: direkt umgesetzt\n\n\n\n\n\n\n\n\n\nEbene\nInput\nTransformation\nOutput\n\n\n\n\nMathematischer Schritt\n\\(I_{total}\\), \\(I_{ref}\\)\nNormierung auf Startwert\nrelativer Innovationsindex\n\n\nVensim-Rekonstruktion\nTotal Urban Innovation Potential, Reference Total Innovation Potential\nInnovation Index wirkt auf Urban Productivity Effect und Yield\nUrban Productivity Effect, Yield\n\n\n\nMathematisch wird das Innovationspotenzial auf den Startwert normiert:\n\nModellinterne Transformation\n\\[\n\\small\nIndex_I=\\frac{I_{total}}{I_{ref}}\n\\]\n\nDiese Gleichung transformiert absolutes Innovationspotenzial in einen dimensionslosen relativen Index.\nIn Vensim wird dieser Index an zwei Stellen weiterverwendet.\nProduktivitätseffekt:\n\nVensim-Umsetzung\n\\[\n\\small\nP_U=e_U(Index_I-1)\n\\]\n\nDiese Gleichung transformiert den Innovationsindex in einen Produktivitätseffekt.\nYield-Effekt:\n\nVensim-Umsetzung\n\\[\n\\small\nYield=K\\cdot Index_I\n\\]\n\nDiese Gleichung transformiert den Innovationsindex in einen landwirtschaftlichen Ertragseffekt.\n\n\n\n\n\n\n\n\nSymbol\nBedeutung\nVensim-Variable\n\n\n\n\n\\(Index_I\\)\nrelativer Innovationsindex\nInnovation Index\n\n\n\\(I_{total}\\)\ngesamtes Innovationspotenzial\nTotal Urban Innovation Potential\n\n\n\\(I_{ref}\\)\nReferenzpotenzial\nReference Total Innovation Potential\n\n\n\\(P_U\\)\nProduktivitätseffekt\nUrban Productivity Effect\n\n\n\\(e_U\\)\nProduktivitätselastizität\nUrban Productivity Elasticity\n\n\n\\(Yield\\)\nlandwirtschaftlicher Ertrag\nYield\n\n\n\\(K\\)\nBasisertrag\nKcal per km² avg per t\n\n\n\nDas Submodell verändert Urban Land nicht direkt. Es beeinflusst Einkommenswachstum und landwirtschaftliche Produktivität über den Innovation Index.\n\n\n11.4.5 Variablenübersetzung\n\n\n\n\n\n\n\n\n\nModellterm\nVensim-Variable\nFunktion\nVensim-Modell-Layer\n\n\n\n\nurbane Bevölkerung \\(N_U\\)\nUrban Population Total\naggregierter Bevölkerungsproxy\n11_Innovation_and_City_Size\n\n\nAnteil Stadtklasse \\(s_i\\)\nShare Small City, Share Medium City, Share Large City, Share very Large City\nAufteilung der urbanen Bevölkerung\n11_Innovation_and_City_Size\n\n\ntypische Stadtgrösse \\(N_i\\)\nRepresentative Small City Size, Representative Medium City Size, Representative Large City Size, Representative Very Large City Size\ntypische Grösse je Klasse\n11_Innovation_and_City_Size\n\n\näquivalente Stadtzahl \\(n_i\\)\nEquivalent Number of Small/Medium/Large/Very Large Cities\nangenäherte Stadtzahl je Klasse\n11_Innovation_and_City_Size\n\n\nExponent \\(\\beta_i\\)\nUrban Scaling Exponent Small/Medium/Large/very Large\nklassenspezifischer Skalierungsexponent\n11_Innovation_and_City_Size\n\n\nInnovationsbeitrag \\(I_i\\)\nInnovation Small, Innovation Medium, Innovation Large, Innovation very Large\nPotenzfunktion je Klasse\n11_Innovation_and_City_Size\n\n\nGesamtpotenzial \\(I_{total}\\)\nTotal Urban Innovation Potential\nSumme der Klassen\n11_Innovation_and_City_Size\n\n\nReferenzpotenzial \\(I_{ref}\\)\nReference Total Innovation Potential\nStartwert für Normierung\n11_Innovation_and_City_Size\n\n\nInnovationsindex \\(Index_I\\)\nInnovation Index\nwirkt auf Produktivität und Yield\n03_Income_and_Productivity, 08_Agriculture_and_Scarcity, 11_Innovation_and_City_Size\n\n\nProduktivitätseffekt \\(P_U\\)\nUrban Productivity Effect\nbeeinflusst Net Income Growth Rate\n03_Income_and_Productivity\n\n\nErtrag \\(Yield\\)\nYield\nbeeinflusst Food Production und Agricultural Scarcity\n08_Agriculture_and_Scarcity\n\n\n\n\n\n11.4.6 Weglassungen und Vereinfachungen\nEs werden keine einzelnen Städte modelliert. Die Stadtklassen sind eine vereinfachte Übersetzung der Theorie in ein aggregiertes EU-Modell. Es werden keine realen Patent- oder F&E-Daten simuliert. Der Innovation Index ist ein relativer Modellindex und keine direkte Messgrösse.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Übersetzung Submodelle zu Vensim</span>"
+    ]
+  },
+  {
+    "objectID": "sections/08c-translation-into-vensim.html#zusammenfassung-der-aktiven-schnittstellen",
+    "href": "sections/08c-translation-into-vensim.html#zusammenfassung-der-aktiven-schnittstellen",
+    "title": "11  Übersetzung Submodelle zu Vensim",
+    "section": "11.5 Zusammenfassung der aktiven Schnittstellen",
+    "text": "11.5 Zusammenfassung der aktiven Schnittstellen\n\n\n\n\n\n\n\n\n\nVon\nNach\nÜbergabevariable\nFunktion\n\n\n\n\nSubmodell C: Cobb-Douglas\nSubmodell B: AMM\nOther Consumption Per Household z\nBudgetterm im AMM\n\n\nSubmodell C: Cobb-Douglas\nSubmodell B: AMM\nLand Demand per Household q\nLandbedarf im AMM\n\n\nSubmodell B: AMM\nSubmodell A: Land Stocks and Conversion\nAMM Consistent Economic Land Conversion Demand\nerzeugt Umwandlungsdruck\n\n\nSubmodell A: Land Stocks and Conversion\nSubmodell B: AMM\nUrban Land\nbestimmt Landknappheit\n\n\nSubmodell A: Land Stocks and Conversion\nSubmodell D: Bettencourt/West\nUrban Land\nGrundlage für Urban Population Total\n\n\nSubmodell D: Bettencourt/West\nIncome and Productivity\nInnovation Index\nProduktivitätseffekt\n\n\nSubmodell D: Bettencourt/West\nAgriculture and Scarcity\nInnovation Index\nYield-Effekt\n\n\nAgriculture and Scarcity\nSubmodell B: AMM\nAgricultural Rent\nRandwert der landwirtschaftlichen Nutzung\n\n\n\nDie zentrale Hauptkette lautet:\n\nSubmodell C: Cobb-Douglas liefert \\(q\\) und \\(z\\).\nSubmodell B: AMM nutzt \\(q\\) und \\(z\\) für Fringe Radius und Desired Urban Land.\nDaraus entsteht Urban Land Gap.\nDaraus entsteht eine Umwandlungsnachfrage.\nSubmodell A: Land Stocks and Conversion speichert die Änderung von Urban Land und Agricultural Land.\nUrban Land wirkt wieder auf AMM und Bettencourt/West zurück.\nSubmodell D: Bettencourt/West liefert den Innovation Index für Produktivität und Yield.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Übersetzung Submodelle zu Vensim</span>"
+    ]
+  },
+  {
+    "objectID": "sections/08c-translation-into-vensim.html#gesamtübersicht-modellterme-und-vensim-variablen",
+    "href": "sections/08c-translation-into-vensim.html#gesamtübersicht-modellterme-und-vensim-variablen",
+    "title": "11  Übersetzung Submodelle zu Vensim",
+    "section": "11.6 Gesamtübersicht: Modellterme und Vensim-Variablen",
+    "text": "11.6 Gesamtübersicht: Modellterme und Vensim-Variablen\n\n\n\n\n\n\n\n\n\n\nSubmodell\nModellterm\nVensim-Variable\nFunktion\nAktiv\n\n\n\n\nA\nlandwirtschaftlicher Landbestand \\(L_A\\)\nAgricultural Land\nStock, nimmt durch Umwandlung ab\nja\n\n\nA\nurbaner Landbestand \\(L_U\\)\nUrban Land\nStock, nimmt durch Umwandlung zu\nja\n\n\nA\nLandumwandlung \\(C\\)\nLand Conversion Rate\nFlow zwischen beiden Stocks\nja\n\n\nB\nBudgetrestriktion \\(Y=z+Rq+tx\\)\nverteilt auf mehrere Nodes\ntheoretischer Schritt wird zusammengelegt\nja\n\n\nB\nmittlere urbane Rente \\(R\\)\nMean Urban Rent\nPreisinput für q und AMM\nja\n\n\nB\nlandwirtschaftliche Rente \\(R_A\\)\nAgricultural Rent\nRandwert der landwirtschaftlichen Alternative\nja\n\n\nB\nTransportkosten \\(t\\)\nTransport Cost per km per Household\nbestimmt Fringe Radius mit\nja\n\n\nB\nStadtrand \\(x^*\\)\nUrban Fringe Radius\ntheoretische Randdistanz\nja\n\n\nB\nZielstadtfläche \\(A^*_{total}\\)\nDesired Urban Land Total\nskalierte Zielgrösse\nja\n\n\nB\nLandlücke \\(G\\)\nUrban Land Gap\nDifferenz zwischen Ziel- und Istfläche\nja\n\n\nC\nverfügbares Budget \\(M\\)\nDisposable Income after Transport\nBudget nach Transportkosten\nja\n\n\nC\nübriger Konsum \\(z\\)\nOther Consumption Per Household z\nCD-Ergebnis, geht in AMM\nja\n\n\nC\nLandnachfrage \\(q\\)\nLand Demand per Household q\nCD-Ergebnis, geht in AMM\nja\n\n\nC\nNutzenindex \\(U_{CD}\\)\nCobb Douglas Utility Index\nDiagnose\nnein\n\n\nD\nurbane Bevölkerung \\(N_U\\)\nUrban Population Total\nBevölkerungsproxy für Scaling\nja\n\n\nD\nInnovationspotenzial \\(I_{total}\\)\nTotal Urban Innovation Potential\nSumme der Stadtklassen\nja\n\n\nD\nInnovationsindex \\(Index_I\\)\nInnovation Index\nrelativer Innovationsfaktor\nja\n\n\nD\nProduktivitätseffekt \\(P_U\\)\nUrban Productivity Effect\nWirkung auf Einkommen\nja\n\n\nD\nErtrag \\(Yield\\)\nYield\nWirkung auf Agrarproduktion\nja",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Übersetzung Submodelle zu Vensim</span>"
+    ]
+  },
+  {
+    "objectID": "sections/09-parameter-startwerte-quellen.html",
+    "href": "sections/09-parameter-startwerte-quellen.html",
+    "title": "12  Parameter, Startwerte und Quellen",
+    "section": "",
+    "text": "12.1 Ziel\nDieses Kapitel dokumentiert die Parameter, Startwerte und Quellen des Modells.\nDie Parameterdokumentation soll nachvollziehbar machen, welche Werte im Modell verwendet werden und warum diese Werte plausibel sind.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Parameter, Startwerte und Quellen</span>"
+    ]
+  },
+  {
+    "objectID": "sections/09-parameter-startwerte-quellen.html#dokumentationsschema",
+    "href": "sections/09-parameter-startwerte-quellen.html#dokumentationsschema",
+    "title": "12  Parameter, Startwerte und Quellen",
+    "section": "12.2 Dokumentationsschema",
+    "text": "12.2 Dokumentationsschema\nFür jeden Parameter werden später dokumentiert:\n\nName\nEinheit\nWert\nQuelle\nBegründung\nRolle im Modell\nUnsicherheit",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Parameter, Startwerte und Quellen</span>"
+    ]
+  },
+  {
+    "objectID": "sections/09-parameter-startwerte-quellen.html#platzhalter-für-parametertabelle",
+    "href": "sections/09-parameter-startwerte-quellen.html#platzhalter-für-parametertabelle",
+    "title": "12  Parameter, Startwerte und Quellen",
+    "section": "12.3 Platzhalter für Parametertabelle",
+    "text": "12.3 Platzhalter für Parametertabelle\n\n\n\nParameter\nEinheit\nWert\nQuelle\nBegründung\n\n\n\n\nInitial Mean Urban Rent\nTBD\nTBD\nTBD\nTBD\n\n\nUrban Rent Adjustment Time\nYear\nTBD\nTBD\nTBD\n\n\nUrban Rent Sensitivity to Land Tightness\ndmnl\nTBD\nTBD\nTBD\n\n\nMinimum Land Demand per Household\nkm2/Household\nTBD\nTBD\nTBD\n\n\nMaximum Land Demand per Household\nkm2/Household\nTBD\nTBD\nTBD",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Parameter, Startwerte und Quellen</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10-kalibrierung-plausibilitaet.html",
+    "href": "sections/10-kalibrierung-plausibilitaet.html",
+    "title": "13  Kalibrierung und Plausibilitätsprüfung",
+    "section": "",
+    "text": "13.1 Ziel der Kalibrierung\nDieses Kapitel beschreibt die Kalibrierung und Plausibilitätsprüfung des Modells.\nDie Kalibrierung soll sicherstellen, dass das Modell im Basislauf plausible Werte erzeugt.\nDas Ziel ist keine perfekte historische Reproduktion, sondern eine glaubwürdige Ausgangsdynamik.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10-kalibrierung-plausibilitaet.html#plausibilitätsprüfungen",
+    "href": "sections/10-kalibrierung-plausibilitaet.html#plausibilitätsprüfungen",
+    "title": "13  Kalibrierung und Plausibilitätsprüfung",
+    "section": "13.2 Plausibilitätsprüfungen",
+    "text": "13.2 Plausibilitätsprüfungen\nGeprüft werden später insbesondere:\n\nStartwerte\nEinheitenkonsistenz\nGrössenordnungen\nVerhalten im Basislauf\nVerhalten bei Extremwerten\nVerhalten bei Parameteränderungen",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10-kalibrierung-plausibilitaet.html#dokumentationsstand",
+    "href": "sections/10-kalibrierung-plausibilitaet.html#dokumentationsstand",
+    "title": "13  Kalibrierung und Plausibilitätsprüfung",
+    "section": "13.3 Dokumentationsstand",
+    "text": "13.3 Dokumentationsstand\nDie Kalibrierung wird nach Abschluss des finalen Modells ergänzt.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/11-simulation-runs-szenarien.html",
+    "href": "sections/11-simulation-runs-szenarien.html",
+    "title": "14  Simulation Runs und Szenarien",
+    "section": "",
+    "text": "14.1 Basislauf\nDieses Kapitel beschreibt die Simulation Runs und Szenarien.\nDer Basislauf zeigt das Verhalten des Modells unter den Standardannahmen.\nEr dient als Referenz für alle weiteren Szenarien.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Simulation Runs und Szenarien</span>"
+    ]
+  },
+  {
+    "objectID": "sections/11-simulation-runs-szenarien.html#szenarien",
+    "href": "sections/11-simulation-runs-szenarien.html#szenarien",
+    "title": "14  Simulation Runs und Szenarien",
+    "section": "14.2 Szenarien",
+    "text": "14.2 Szenarien\nMögliche Szenarien sind:\n\nhöheres Einkommen\ntiefere Transportkosten\nhöhere Transportkosten\nstärkere Landknappheit\nlangsamere Rentenanpassung\nschnellere Rentenanpassung",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Simulation Runs und Szenarien</span>"
+    ]
+  },
+  {
+    "objectID": "sections/11-simulation-runs-szenarien.html#ergebnisdarstellung",
+    "href": "sections/11-simulation-runs-szenarien.html#ergebnisdarstellung",
+    "title": "14  Simulation Runs und Szenarien",
+    "section": "14.3 Ergebnisdarstellung",
+    "text": "14.3 Ergebnisdarstellung\nDie Ergebnisse werden später mit Vensim-Grafiken oder exportierten Daten dargestellt.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Simulation Runs und Szenarien</span>"
+    ]
+  },
+  {
+    "objectID": "sections/12-sensitivitaetsanalyse.html",
+    "href": "sections/12-sensitivitaetsanalyse.html",
+    "title": "15  Sensitivitätsanalyse",
+    "section": "",
+    "text": "15.1 Ziel\nDieses Kapitel beschreibt die Sensitivitätsanalyse.\nDie Sensitivitätsanalyse zeigt, welche Parameter das Modellverhalten besonders stark beeinflussen.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Sensitivitätsanalyse</span>"
+    ]
+  },
+  {
+    "objectID": "sections/12-sensitivitaetsanalyse.html#mögliche-sensitivitätsparameter",
+    "href": "sections/12-sensitivitaetsanalyse.html#mögliche-sensitivitätsparameter",
+    "title": "15  Sensitivitätsanalyse",
+    "section": "15.2 Mögliche Sensitivitätsparameter",
+    "text": "15.2 Mögliche Sensitivitätsparameter\nBesonders relevante Parameter sind:\n\nUrban Rent Adjustment Time\nUrban Rent Sensitivity to Land Tightness\nMinimum Land Demand per Household\nMaximum Land Demand per Household\nUrban Expansion Adjustment Time\nTransport Cost per km\nAgricultural Rent",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Sensitivitätsanalyse</span>"
+    ]
+  },
+  {
+    "objectID": "sections/12-sensitivitaetsanalyse.html#ergebnisdarstellung",
+    "href": "sections/12-sensitivitaetsanalyse.html#ergebnisdarstellung",
+    "title": "15  Sensitivitätsanalyse",
+    "section": "15.3 Ergebnisdarstellung",
+    "text": "15.3 Ergebnisdarstellung\nDie Ergebnisse werden später als Bandbreiten, Szenariovergleiche oder Vensim-Sensitivitätsgrafiken dokumentiert.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Sensitivitätsanalyse</span>"
+    ]
+  },
+  {
+    "objectID": "sections/13-grenzen-des-modells.html",
+    "href": "sections/13-grenzen-des-modells.html",
+    "title": "16  Grenzen des Modells",
+    "section": "",
+    "text": "16.1 Räumliche Vereinfachung\nDieses Kapitel beschreibt die Grenzen des Modells.\nDas Modell bildet keine echte räumliche Struktur ab.\nDie Stadt wird über aggregierte Grössen beschrieben, nicht über einzelne Standorte oder Parzellen.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Grenzen des Modells</span>"
+    ]
+  },
+  {
+    "objectID": "sections/13-grenzen-des-modells.html#ökonomische-vereinfachung",
+    "href": "sections/13-grenzen-des-modells.html#ökonomische-vereinfachung",
+    "title": "16  Grenzen des Modells",
+    "section": "16.2 Ökonomische Vereinfachung",
+    "text": "16.2 Ökonomische Vereinfachung\nDer AMM-Kern wird stark vereinfacht.\nDas Modell nutzt zentrale Beziehungen zwischen Einkommen, Transportkosten, Bodenrente und Landnachfrage, aber es bildet keinen vollständigen Wohnungsmarkt ab.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Grenzen des Modells</span>"
+    ]
+  },
+  {
+    "objectID": "sections/13-grenzen-des-modells.html#politische-und-institutionelle-vereinfachung",
+    "href": "sections/13-grenzen-des-modells.html#politische-und-institutionelle-vereinfachung",
+    "title": "16  Grenzen des Modells",
+    "section": "16.3 Politische und institutionelle Vereinfachung",
+    "text": "16.3 Politische und institutionelle Vereinfachung\nPlanungsrecht, Zonierung, Steuern, Eigentum und politische Konflikte werden nicht explizit modelliert.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Grenzen des Modells</span>"
+    ]
+  },
+  {
+    "objectID": "sections/13-grenzen-des-modells.html#datenbezogene-grenzen",
+    "href": "sections/13-grenzen-des-modells.html#datenbezogene-grenzen",
+    "title": "16  Grenzen des Modells",
+    "section": "16.4 Datenbezogene Grenzen",
+    "text": "16.4 Datenbezogene Grenzen\nEinige Parameter müssen aus Literaturwerten, Näherungen oder plausibilisierten Annahmen abgeleitet werden.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Grenzen des Modells</span>"
+    ]
+  },
+  {
+    "objectID": "appendix/A-vensim-gleichungsliste.html",
+    "href": "appendix/A-vensim-gleichungsliste.html",
+    "title": "Appendix A – vollständige Vensim-Gleichungsliste",
+    "section": "",
+    "text": "Dokumentationsschema\nDieser Anhang enthält später die vollständige technische Gleichungsliste des finalen Vensim-Modells.\nDie Gleichungsliste wird nach Abschluss des Modells aus Vensim exportiert und hier eingefügt.\nFür jede Variable werden dokumentiert:",
+    "crumbs": [
+      "Appendix A – vollständige Vensim-Gleichungsliste"
+    ]
+  },
+  {
+    "objectID": "appendix/A-vensim-gleichungsliste.html#dokumentationsschema",
+    "href": "appendix/A-vensim-gleichungsliste.html#dokumentationsschema",
+    "title": "Appendix A – vollständige Vensim-Gleichungsliste",
+    "section": "",
+    "text": "Variablenname\nTyp\nGleichung\nEinheit\nInitialwert\nParameterwert\nQuelle oder Begründung\nRolle im Modell\nHinweise und Grenzen",
+    "crumbs": [
+      "Appendix A – vollständige Vensim-Gleichungsliste"
+    ]
+  },
+  {
+    "objectID": "appendix/A-vensim-gleichungsliste.html#platzhalter",
+    "href": "appendix/A-vensim-gleichungsliste.html#platzhalter",
+    "title": "Appendix A – vollständige Vensim-Gleichungsliste",
+    "section": "Platzhalter",
+    "text": "Platzhalter\nDie vollständige Vensim-Gleichungsliste wird hier eingefügt.",
+    "crumbs": [
+      "Appendix A – vollständige Vensim-Gleichungsliste"
+    ]
+  },
+  {
+    "objectID": "sections/14-references.html",
+    "href": "sections/14-references.html",
+    "title": "References – Literaturverzeichnis",
+    "section": "",
+    "text": "Bettencourt, Luís M. A., José Lobo, Dirk Helbing, Christian Kühnert, and\nGeoffrey B. West. 2007. “Growth, Innovation, Scaling, and the Pace\nof Life in Cities.” Proceedings of the National Academy of\nSciences 104 (17): 7301–6. https://doi.org/10.1073/pnas.0610172104.\n\n\nBettencourt, Luís M. A., and Geoffrey B. West. 2010. “A Unified\nTheory of Urban Living.” Nature 467 (7318): 912–13. https://doi.org/10.1038/467912a.\n\n\nBrueckner, Jan K. 2001. “Urban Sprawl: Lessons from Urban\nEconomics.” In Brookings-Wharton Papers on Urban Affairs:\n2001, edited by William G. Gale and Janet Rothenberg Pack.\nBrookings Institution Press. https://doi.org/10.1353/urb.2001.0003.\n\n\nCobb, Charles W., and Paul H. Douglas. 1928. “A Theory of\nProduction.” The American Economic Review 18 (1):\n139–65. https://www.jstor.org/stable/1811556.\n\n\nFujita, Masahisa. 1989. Urban Economic Theory: Land Use and City\nSize. Cambridge University Press.\n\n\nMills, Edwin S. 1967. “An Aggregative Model of Resource Allocation\nin a Metropolitan Area.” The American Economic Review 57\n(2): 197–210. https://www.jstor.org/stable/1821621.",
+    "crumbs": [
+      "References – Literaturverzeichnis"
+    ]
+  },
+  {
+    "objectID": "sections/14-verwendung-von-ki.html",
+    "href": "sections/14-verwendung-von-ki.html",
+    "title": "18  Verwendung von KI",
+    "section": "",
+    "text": "18.1 Zweck der KI-Nutzung\nBei der Erstellung dieser Dokumentation wurde ChatGPT punktuell als unterstützendes Werkzeug eingesetzt. Die Nutzung der KI erfolgte dabei nicht als Ersatz für die eigene fachliche Arbeit, sondern als technische und sprachliche Unterstützung im Arbeitsprozess.\nDie inhaltliche Verantwortung für die Modellierung, die Auswahl der Systemgrenzen, die Interpretation der Ergebnisse, die Prüfung der Quellen sowie die finale Ausarbeitung liegt vollständig bei den Verfassenden dieser Arbeit. Die KI wurde nicht verwendet, um zentrale fachliche Entscheidungen zu treffen oder die Argumentation des Berichts eigenständig zu entwickeln.\nDie KI wurde insbesondere für unterstützende Tätigkeiten verwendet, welche den Schreib- und Dokumentationsprozess erleichtert haben. Dazu gehörten:\nDie KI wurde damit vor allem als Werkzeug zur Effizienzsteigerung eingesetzt. Sie half dabei, bestehende Gedanken klarer zu formulieren, technische Probleme schneller einzuordnen und die Dokumentation konsistenter aufzubauen.",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Verwendung von KI</span>"
+    ]
+  },
+  {
+    "objectID": "sections/14-verwendung-von-ki.html#zweck-der-ki-nutzung",
+    "href": "sections/14-verwendung-von-ki.html#zweck-der-ki-nutzung",
+    "title": "18  Verwendung von KI",
+    "section": "",
+    "text": "sprachliche Überarbeitung einzelner Textabschnitte,\nFormulierungsvorschläge für verständlichere und präzisere Beschreibungen,\nUnterstützung bei der Strukturierung einzelner Kapitel,\nHilfe bei der Erstellung von Quarto- und Markdown-Texten,\nLaTeX-Unterstützung bei mathematischen Formulierungen,\ntechnische Unterstützung bei Code- und Skriptproblemen,\nHinweise auf mögliche Quellen und Datenpunkte,\nUnterstützung bei der Formulierung von Dokumentationsbausteinen,\nHilfe bei der Erklärung einzelner Vensim- oder Systemdynamik-Konzepte,\nUnterstützung beim Debugging und bei der Interpretation technischer Fehlermeldungen.",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Verwendung von KI</span>"
+    ]
+  },
+  {
+    "objectID": "sections/14-verwendung-von-ki.html#abgrenzung-der-ki-nutzung",
+    "href": "sections/14-verwendung-von-ki.html#abgrenzung-der-ki-nutzung",
+    "title": "18  Verwendung von KI",
+    "section": "18.2 Abgrenzung der KI-Nutzung",
+    "text": "18.2 Abgrenzung der KI-Nutzung\nWichtig ist, dass die KI nicht als inhaltliche Denkhilfe im Sinne einer eigenständigen fachlichen Bewertung verwendet wurde. Die zentralen Entscheidungen der Arbeit wurden durch die Verfassenden getroffen.\nNicht durch KI übernommen wurden insbesondere:\n\ndie Festlegung der Forschungs- und Modellierungsziele,\ndie Auswahl der relevanten Modellvariablen,\ndie Entscheidung über die Systemgrenzen,\ndie Bewertung der Modellstruktur,\ndie Interpretation der Simulationsergebnisse,\ndie fachliche Prüfung der Modellannahmen,\ndie finale Auswahl und Bewertung der Quellen,\ndie Entscheidung, welche Inhalte in die Dokumentation aufgenommen werden,\ndie Verantwortung für Korrektheit, Nachvollziehbarkeit und Vollständigkeit des Berichts.\n\nDie von der KI vorgeschlagenen Inhalte wurden jeweils geprüft, angepasst und nur dann übernommen, wenn sie zur eigenen Argumentation und zum tatsächlichen Stand des Projekts passten.",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Verwendung von KI</span>"
+    ]
+  },
+  {
+    "objectID": "sections/14-verwendung-von-ki.html#rolle-der-verfassenden",
+    "href": "sections/14-verwendung-von-ki.html#rolle-der-verfassenden",
+    "title": "18  Verwendung von KI",
+    "section": "18.3 Rolle der Verfassenden",
+    "text": "18.3 Rolle der Verfassenden\nDie Verfassenden haben die fachliche Arbeit eigenständig durchgeführt. Dazu gehören insbesondere die Arbeit am Vensim-Modell, die Strukturierung der Dokumentation, die Auswahl der relevanten Kapitel, die Bewertung der Modelllogik sowie die Interpretation der Resultate.\nKI-generierte Vorschläge wurden nicht ungeprüft übernommen. Sie dienten als Ausgangspunkt für sprachliche Verbesserungen, technische Korrekturen oder alternative Formulierungen. Die finale Fassung wurde durch die Verfassenden kontrolliert und verantwortet.",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Verwendung von KI</span>"
+    ]
+  },
+  {
+    "objectID": "sections/14-verwendung-von-ki.html#transparenzhinweis",
+    "href": "sections/14-verwendung-von-ki.html#transparenzhinweis",
+    "title": "18  Verwendung von KI",
+    "section": "18.4 Transparenzhinweis",
+    "text": "18.4 Transparenzhinweis\nZusammenfassend wurde KI in dieser Arbeit als unterstützendes Werkzeug für Sprache, Technik und Dokumentation verwendet. Die inhaltliche Konzeption, die fachliche Bewertung und die finale Verantwortung liegen vollständig bei den Verfassenden.\nDie Verwendung von KI entspricht damit einer technischen Unterstützung im Arbeitsprozess und nicht einer Auslagerung der eigentlichen wissenschaftlichen oder modellbezogenen Denkleistung.",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Verwendung von KI</span>"
+    ]
+  }
+]

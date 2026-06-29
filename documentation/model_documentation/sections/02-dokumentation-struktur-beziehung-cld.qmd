@@ -1,0 +1,20 @@
+# Dokumentationsstruktur und Beziehung zum CLD {#sec-dokumentationsstruktur-cld}
+
+Dieses Kapitel beschreibt, wie die spätere Modelldokumentation mit dem Causal Loop Diagramm verbunden wird.
+
+Das Causal Loop Diagramm dient als qualitative Vorstruktur des Modells. Die Vensim-Implementierung übersetzt diese Struktur in Stocks, Flows, Auxiliaries und Parameter.
+
+## Rolle des CLD
+
+Das CLD zeigt die wichtigsten Rückkopplungen des Modells.
+
+In der Dokumentation wird das CLD verwendet, um die Gesamtlogik des Modells zu erklären, bevor die technischen Gleichungen beschrieben werden.
+
+## Beziehung zur Vensim-Struktur
+
+Die spätere Dokumentation soll für jedes zentrale Submodell zeigen:
+
+1. Welche Logik im CLD dargestellt ist.
+2. Wie diese Logik in Vensim umgesetzt wurde.
+3. Welche Gleichungen und Parameter dafür verwendet werden.
+4. Welche Annahmen und Grenzen damit verbunden sind.

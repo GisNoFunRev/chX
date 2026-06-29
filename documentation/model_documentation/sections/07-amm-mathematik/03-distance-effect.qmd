@@ -1,0 +1,70 @@
+### 3. Commuting Cost Effect – Distanzwirkung der Pendelkosten
+
+Dieser Schritt zeigt, wie Transportkosten die räumliche Bodenrente verändern. Aus der Bid-Rent-Funktion folgt in der vereinfachten Darstellung, dass die maximal tragbare Bodenrente mit zunehmender Distanz zum Zentrum sinkt. Mathematisch entspricht dies der Ableitung der Bodenrente nach der Distanz $x$.
+
+::: {.key-equation}
+$$
+\Large
+\frac{dR(x)}{dx} = -\frac{t}{q}
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $R(x)$ | Bodenrente am Standort $x$ | Geld pro Fläche |
+| $x$ | Distanz zum Stadtzentrum | Distanz |
+| $\frac{dR(x)}{dx}$ | Veränderung der Bodenrente bei zusätzlicher Distanz | Geld pro Fläche und Distanz |
+| $t$ | Transportkosten pro Distanzeinheit | Geld pro Distanz und Haushalt |
+| $q$ | konsumierte Landmenge pro Haushalt | Fläche pro Haushalt |
+| $-\frac{t}{q}$ | Rentenrückgang pro zusätzlicher Distanzeinheit | Geld pro Fläche und Distanz |
+
+Die Ableitung wird verwendet, weil dieser Schritt nicht die Höhe der Bodenrente an einem einzelnen Ort beschreibt, sondern die Veränderung der Bodenrente bei zusätzlicher Distanz zum Zentrum.
+
+Ausgangspunkt ist die vereinfachte Bid-Rent-Funktion:
+
+$$
+R(x) = \frac{Y - z - t \cdot x}{q}
+$$
+
+Wenn $Y$, $z$, $t$ und $q$ konstant gehalten werden, hängt $R(x)$ nur über den Term $t \cdot x$ von der Distanz $x$ ab. Die Ableitung nach $x$ lautet:
+
+$$
+\frac{dR(x)}{dx}
+=
+\frac{d}{dx}
+\left(
+\frac{Y - z - t \cdot x}{q}
+\right)
+$$
+
+Da $q$ als konstant angenommen wird, kann der Faktor $\frac{1}{q}$ vor die Ableitung gezogen werden:
+
+$$
+\frac{dR(x)}{dx}
+=
+\frac{1}{q}
+\cdot
+\frac{d}{dx}
+\left(
+Y - z - t \cdot x
+\right)
+$$
+
+Die Terme $Y$ und $z$ sind in dieser lokalen Ableitung konstant. Der einzige distanzabhängige Term ist $-t \cdot x$. Seine Ableitung nach $x$ ist $-t$. Daraus folgt:
+
+$$
+\frac{dR(x)}{dx}
+=
+-\frac{t}{q}
+$$
+
+Die negative Steigung beschreibt den Rentengradienten. Höhere Distanz erhöht die Pendelkosten. Damit ein Haushalt bei gleichem Einkommen und gleichem Landkonsum an einem weiter entfernten Standort wohnen kann, muss die Bodenrente pro Fläche tiefer sein.
+
+Die Einheit der Ableitung passt: $t$ misst Geld pro Distanz und Haushalt. $q$ misst Fläche pro Haushalt. Der Quotient $\frac{t}{q}$ ergibt deshalb Geld pro Distanz und Fläche. Genau diese Einheit beschreibt, um wie viel die Bodenrente pro Flächeneinheit sinkt, wenn die Distanz zum Zentrum um eine Einheit zunimmt.
+
+Mills formuliert die Distanzwirkung nicht in dieser vereinfachten Ableitung, sondern als räumliche Gleichgewichtsbedingung der Wohnstandortwahl. Dort muss die Veränderung der Transportkosten bei einer kleinen Bewegung durch eine entgegengesetzte Veränderung der Wohnkosten ausgeglichen werden [@mills1967aggregative, pp. 204-205]. Das ist die allgemeinere Gleichgewichtsidee hinter dem hier dargestellten Rentengradienten.
+
+Quellen-Notation:
+
+- **Brueckner:** $x$ für Distanz zum CBD, $t$ für Pendelkosten pro Distanz.
+- **Mills:** $u$ als Distanzvariable.

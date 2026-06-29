@@ -1,0 +1,459 @@
+## 8.2.1 Mathematical AMM Processes – mathematische AMM-Prozesse
+
+Dieser Abschnitt beschreibt die mathematische Grundlogik des Alonso-Muth-Mills-Modells in sieben Schritten. Die englischen Titel der Unterkapitel orientieren sich primär an Brueckners zusammenfassender Darstellung des monozentrischen Stadtmodells. Die Formeln verwenden eine einheitliche Notation, damit die Schritte als zusammenhängende Herleitung lesbar bleiben.
+
+Jedes Unterkapitel ist gleich aufgebaut:
+
+1. Ein kurzer Einstieg erklärt, was der mathematische Schritt aussagt.
+2. Die zentrale Gleichung steht in einem hervorgehobenen Formelblock.
+3. Eine Symboltabelle erklärt die verwendeten Grössen und ihre Dimension.
+4. Die anschliessende Herleitung zeigt, warum die Gleichung gilt und wie sie ökonomisch gelesen wird.
+5. Am Ende steht eine kurze Quellen-Notation: Sie nennt nur dann analoge Begriffe, wenn wichtige Quellen andere Symbole oder Begriffe für denselben mathematischen Schritt verwenden.
+
+Die sieben Schritte bilden eine Kette:
+
+→ Das Haushaltsbudget setzt den mikroökonomischen Rahmen.  
+→ Daraus folgt die Bodenrentenfunktion.  
+→ Die Pendelkosten erzeugen einen räumlichen Rentengradienten.  
+→ Die Stadt endet dort, wo urbane und landwirtschaftliche Bodenrente gleich sind.  
+→ Aus dieser Randbedingung entsteht die räumliche Stadtgrösse.  
+→ Die Ringgeometrie übersetzt den Radius in Fläche.  
+→ Die Gleichgewichtsbedingungen verbinden Bevölkerung, Dichte, Bodenrente und Stadtrand.
+
+### 1. Household Budget Constraint – Haushaltsbudget des Haushalts
+
+Dieser Schritt beschreibt die Budgetrestriktion eines Haushalts im monozentrischen Stadtmodell. Ein Haushalt erzielt Einkommen im Zentrum und verwendet dieses Einkommen für übrigen Konsum, Land beziehungsweise Wohnfläche und Transportkosten. Die Gleichung bildet den mikroökonomischen Ausgangspunkt, aus dem die räumliche Bodenrentenlogik abgeleitet wird.
+
+::: {.key-equation}
+$$
+\Large
+Y = z + R(x) \cdot q + t \cdot x
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $Y$ | Haushaltseinkommen | Geld pro Haushalt |
+| $z$ | übriger Konsum des Haushalts | Geld pro Haushalt |
+| $R(x)$ | Bodenrente am Standort $x$ | Geld pro Fläche |
+| $q$ | konsumierte Landmenge pro Haushalt | Fläche pro Haushalt |
+| $x$ | Distanz zum Stadtzentrum | Distanz |
+| $t$ | Transportkosten pro Distanzeinheit | Geld pro Distanz und Haushalt |
+| $R(x) \cdot q$ | Ausgaben für Land oder Wohnfläche am Standort $x$ | Geld pro Haushalt |
+| $t \cdot x$ | Transportkosten bei Distanz $x$ | Geld pro Haushalt |
+
+Die Gleichung ist eine Budgetrestriktion. Alle Terme müssen in derselben monetären Einheit gemessen werden. Das Einkommen $Y$ wird auf übrigen Konsum $z$, Land- oder Wohnflächenausgaben $R(x) \cdot q$ und Transportkosten $t \cdot x$ verteilt.
+
+Brueckner formuliert die gleiche Logik in einer leicht anderen Notation. Haushalte verdienen im CBD ein Einkommen $y$, zahlen bei Distanz $x$ Pendelkosten $tx$, und verwenden das verbleibende Einkommen für Land $q$ und ein nicht-wohnbezogenes Konsumgut $c$ [@brueckner2001sprawl, pp. 67-68]. In der hier verwendeten Notation entspricht $z$ diesem übrigen Konsum.
+
+Mathematisch ist $R(x) \cdot q$ ein Geldbetrag pro Haushalt, weil eine Bodenrente pro Fläche mit einer Fläche pro Haushalt multipliziert wird. Ebenso ist $t \cdot x$ ein Geldbetrag pro Haushalt, weil Transportkosten pro Distanzeinheit mit einer Distanz multipliziert werden. Damit ist die Gleichung dimensionskonsistent.
+
+Ökonomisch beschreibt die Gleichung den grundlegenden Trade-off des monozentrischen Modells. Bei gegebenem Einkommen kann ein Haushalt nicht gleichzeitig beliebig viel übrigen Konsum, viel Land, hohe Bodenrente und hohe Transportkosten tragen. Diese Budgetlogik ist die Grundlage für die anschliessende Umstellung nach $R(x)$.
+
+**Hinweis zur Rolle des Cobb-Douglas-Untermodells.**  
+Die Grössen $z$ und $q$ werden in diesem AMM-Schritt als Bestandteile der Haushaltsentscheidung verwendet. Die AMM-Budgetgleichung zeigt zunächst nur, dass übriger Konsum, Landkonsum, Bodenrente und Transportkosten gemeinsam im Haushaltsbudget stehen. Wie der Haushalt die Aufteilung zwischen übrigem Konsum $z$ und Landkonsum $q$ wählt, wird im anschliessenden Cobb-Douglas-Untermodell separat hergeleitet. Dort wird die Präferenzstruktur des Haushalts beschrieben, zum Beispiel über eine Nutzenfunktion der Form $U = q^\alpha z^{1-\alpha}$.
+
+Quellen-Notation:
+
+- **Brueckner:** $y$ für Einkommen, $c$ für übrigen Konsum, $q$ für Landkonsum.
+
+
+### 2. Land Rent Function – Bodenrente am Standort
+
+Dieser Schritt leitet aus der Haushaltsbudgetrestriktion die maximal tragbare Bodenrente am Standort $x$ ab. Dazu wird die Budgetgleichung nach $R(x)$ umgestellt. Die resultierende Funktion zeigt, wie Einkommen, übriger Konsum, Transportkosten und Landkonsum bestimmen, welche Bodenrente ein Haushalt an einem bestimmten Standort zahlen kann.
+
+::: {.key-equation}
+$$
+\Large
+R(x) = \frac{Y - z - t \cdot x}{q}
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $R(x)$ | Bodenrente am Standort $x$ | Geld pro Fläche |
+| $Y$ | Haushaltseinkommen | Geld pro Haushalt |
+| $z$ | übriger Konsum des Haushalts | Geld pro Haushalt |
+| $t$ | Transportkosten pro Distanzeinheit | Geld pro Distanz und Haushalt |
+| $x$ | Distanz zum Stadtzentrum | Distanz |
+| $t \cdot x$ | Transportkosten bei Distanz $x$ | Geld pro Haushalt |
+| $Y - z - t \cdot x$ | verbleibendes Budget für Land oder Wohnfläche | Geld pro Haushalt |
+| $q$ | konsumierte Landmenge pro Haushalt | Fläche pro Haushalt |
+| $\frac{Y - z - t \cdot x}{q}$ | maximal tragbare Bodenrente pro Flächeneinheit | Geld pro Fläche |
+
+Ausgangspunkt ist die Haushaltsbudgetrestriktion:
+
+$$
+Y = z + R(x) \cdot q + t \cdot x
+$$
+
+Durch Subtraktion von $z$ und $t \cdot x$ ergibt sich:
+
+$$
+Y - z - t \cdot x = R(x) \cdot q
+$$
+
+Durch Division durch $q$ folgt:
+
+$$
+R(x) = \frac{Y - z - t \cdot x}{q}
+$$
+
+Die Gleichung ist einheitenkonsistent: Der Zähler $Y - z - t \cdot x$ ist ein Geldbetrag pro Haushalt. Der Nenner $q$ ist eine Fläche pro Haushalt. Daraus ergibt sich eine Bodenrente pro Flächeneinheit.
+
+Ökonomisch beschreibt $R(x)$ die maximale Zahlungsbereitschaft für Land am Standort $x$. Ein längerer Pendelweg muss über tiefere Bodenrenten kompensiert werden. Dadurch fällt die Bodenrente mit zunehmender Distanz zum CBD [@brueckner2001sprawl, p. 68]. Die Umstellung der Budgetgleichung macht diese Logik mathematisch sichtbar. Wenn $x$ steigt, steigt $t \cdot x$, der Zähler wird kleiner und die tragbare Bodenrente $R(x)$ sinkt.
+
+Diese Gleichung ist eine vereinfachte Bid-Rent-Darstellung mit konstant gehaltenem $z$ und $q$. In der allgemeinen Theorie hängen Bodenrente und Landkonsum nicht nur von $x$, sondern auch von Einkommen, Pendelkosten und dem endogenen urbanen Nutzenniveau ab. Diese Grössen werden dort als $r(x,y,t,u)$ und $q(x,y,t,u)$ geschrieben [@brueckner2001sprawl, p. 68].
+
+Quellen-Notation:
+
+- **Brueckner:** $r$ beziehungsweise $r(x,y,t,u)$ für Bodenrente.
+- **Mills:** $R(u)$ für Bodenrente in Distanz $u$.
+
+
+### 3. Commuting Cost Effect – Distanzwirkung der Pendelkosten
+
+Dieser Schritt zeigt, wie Transportkosten die räumliche Bodenrente verändern. Aus der Bid-Rent-Funktion folgt in der vereinfachten Darstellung, dass die maximal tragbare Bodenrente mit zunehmender Distanz zum Zentrum sinkt. Mathematisch entspricht dies der Ableitung der Bodenrente nach der Distanz $x$.
+
+::: {.key-equation}
+$$
+\Large
+\frac{dR(x)}{dx} = -\frac{t}{q}
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $R(x)$ | Bodenrente am Standort $x$ | Geld pro Fläche |
+| $x$ | Distanz zum Stadtzentrum | Distanz |
+| $\frac{dR(x)}{dx}$ | Veränderung der Bodenrente bei zusätzlicher Distanz | Geld pro Fläche und Distanz |
+| $t$ | Transportkosten pro Distanzeinheit | Geld pro Distanz und Haushalt |
+| $q$ | konsumierte Landmenge pro Haushalt | Fläche pro Haushalt |
+| $-\frac{t}{q}$ | Rentenrückgang pro zusätzlicher Distanzeinheit | Geld pro Fläche und Distanz |
+
+Die Ableitung wird verwendet, weil dieser Schritt nicht die Höhe der Bodenrente an einem einzelnen Ort beschreibt, sondern die Veränderung der Bodenrente bei zusätzlicher Distanz zum Zentrum.
+
+Ausgangspunkt ist die vereinfachte Bid-Rent-Funktion:
+
+$$
+R(x) = \frac{Y - z - t \cdot x}{q}
+$$
+
+Wenn $Y$, $z$, $t$ und $q$ konstant gehalten werden, hängt $R(x)$ nur über den Term $t \cdot x$ von der Distanz $x$ ab. Die Ableitung nach $x$ lautet:
+
+$$
+\frac{dR(x)}{dx}
+=
+\frac{d}{dx}
+\left(
+\frac{Y - z - t \cdot x}{q}
+\right)
+$$
+
+Da $q$ als konstant angenommen wird, kann der Faktor $\frac{1}{q}$ vor die Ableitung gezogen werden:
+
+$$
+\frac{dR(x)}{dx}
+=
+\frac{1}{q}
+\cdot
+\frac{d}{dx}
+\left(
+Y - z - t \cdot x
+\right)
+$$
+
+Die Terme $Y$ und $z$ sind in dieser lokalen Ableitung konstant. Der einzige distanzabhängige Term ist $-t \cdot x$. Seine Ableitung nach $x$ ist $-t$. Daraus folgt:
+
+$$
+\frac{dR(x)}{dx}
+=
+-\frac{t}{q}
+$$
+
+Die negative Steigung beschreibt den Rentengradienten. Höhere Distanz erhöht die Pendelkosten. Damit ein Haushalt bei gleichem Einkommen und gleichem Landkonsum an einem weiter entfernten Standort wohnen kann, muss die Bodenrente pro Fläche tiefer sein.
+
+Die Einheit der Ableitung passt: $t$ misst Geld pro Distanz und Haushalt. $q$ misst Fläche pro Haushalt. Der Quotient $\frac{t}{q}$ ergibt deshalb Geld pro Distanz und Fläche. Genau diese Einheit beschreibt, um wie viel die Bodenrente pro Flächeneinheit sinkt, wenn die Distanz zum Zentrum um eine Einheit zunimmt.
+
+Mills formuliert die Distanzwirkung nicht in dieser vereinfachten Ableitung, sondern als räumliche Gleichgewichtsbedingung der Wohnstandortwahl. Dort muss die Veränderung der Transportkosten bei einer kleinen Bewegung durch eine entgegengesetzte Veränderung der Wohnkosten ausgeglichen werden [@mills1967aggregative, pp. 204-205]. Das ist die allgemeinere Gleichgewichtsidee hinter dem hier dargestellten Rentengradienten.
+
+Quellen-Notation:
+
+- **Brueckner:** $x$ für Distanz zum CBD, $t$ für Pendelkosten pro Distanz.
+- **Mills:** $u$ als Distanzvariable.
+
+
+### 4. Edge-of-City Condition – Gleichgewichtsbedingung am Stadtrand
+
+Dieser Schritt bestimmt die Stadtgrenze über die Konkurrenz zwischen urbaner und landwirtschaftlicher Landnutzung. Die Stadt endet dort, wo die urbane Bodenrente gerade der landwirtschaftlichen Bodenrente entspricht. Innerhalb dieser Grenze können urbane Nutzer mehr für Land zahlen als landwirtschaftliche Nutzer. Ausserhalb ist die landwirtschaftliche Nutzung mindestens gleich wertvoll.
+
+::: {.key-equation}
+$$
+\Large
+R(x^*) = R_A
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $R(x)$ | urbane Bodenrente am Standort $x$ | Geld pro Fläche |
+| $x$ | Distanz zum Stadtzentrum | Distanz |
+| $x^*$ | Distanz der Stadtgrenze vom Zentrum | Distanz |
+| $R(x^*)$ | urbane Bodenrente am Stadtrand | Geld pro Fläche |
+| $R_A$ | landwirtschaftliche Bodenrente beziehungsweise Opportunitätskosten der urbanen Landnutzung | Geld pro Fläche |
+| $R(x^*) = R_A$ | Gleichheit von urbaner und landwirtschaftlicher Bodenrente am Rand der Stadt | Geld pro Fläche |
+
+Die Bedingung baut auf der fallenden Bodenrentenfunktion auf. Solange die urbane Bodenrente höher ist als die landwirtschaftliche Bodenrente, kann urbane Nutzung die landwirtschaftliche Nutzung verdrängen:
+
+$$
+R(x) > R_A
+$$
+
+Wenn die urbane Bodenrente tiefer ist als die landwirtschaftliche Bodenrente, bleibt Land ausserhalb der Stadt landwirtschaftlich genutzt:
+
+$$
+R(x) < R_A
+$$
+
+Die Stadtgrenze liegt deshalb genau an jenem Punkt $x^*$, an dem beide Nutzungen gleich viel für Land zahlen können:
+
+$$
+R(x^*) = R_A
+$$
+
+Diese Gleichung ist eine Randbedingung. Sie bestimmt nicht die gesamte Rentenfunktion, sondern den Punkt, an dem die urbane Landnutzung endet. Brueckner erklärt, dass diese Bedingung sicherstellt, dass die urbane Bodenrente innerhalb der Stadt über der landwirtschaftlichen Bodenrente liegt [@brueckner2001sprawl, p. 68]. Mills beschreibt $R_A$ als Opportunitätskosten der urbanen Landnutzung und setzt am äusseren Rand der Stadt $R(k_1)=R_A$ [@mills1967aggregative, p. 205].
+
+Mathematisch ist die Gleichung dimensionskonsistent, weil beide Seiten Bodenrenten pro Flächeneinheit sind. Ökonomisch ist sie eine Indifferenzbedingung. Bei $R(x^*) > R_A$ könnte die Stadt weiter wachsen. Bei $R(x^*) < R_A$ wäre der Rand zu weit aussen. Nur bei $R(x^*) = R_A$ ist die Grenze zwischen urbaner und landwirtschaftlicher Nutzung stabil.
+
+Quellen-Notation:
+
+- **Brueckner:** $\bar{x}$ für den Stadtrand, $r_a$ für landwirtschaftliche Bodenrente.
+- **Mills:** $k_1$ für den äusseren Stadtrand, $R(k_1)=R_A$ als Randbedingung.
+
+
+### 5. Spatial Size of the City – Stadtrand und räumliche Stadtgrösse
+
+Dieser Schritt beschreibt, wie die Lage des Stadtrandes beziehungsweise die räumliche Stadtgrösse bestimmt wird. In der allgemeinen AMM-Logik ergibt sich die Stadtgrenze nicht aus einer isolierten Radiusformel, sondern aus dem Gleichgewicht von Bevölkerung, Bodenrente, Landkonsum, Pendelkosten und landwirtschaftlicher Bodenrente.
+
+#### Allgemeine Gleichgewichtsform nach Brueckner
+
+::: {.key-equation}
+$$
+\Large
+\bar{x} = g(n, y, t, r_a)
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $\bar{x}$ | Distanz zum Rand der Stadt | Distanz |
+| $g(\cdot)$ | reduzierte Form der Gleichgewichtslösung | funktionale Beziehung |
+| $n$ | Bevölkerung | Personen oder Haushalte |
+| $y$ | Einkommen | Geld pro Person oder Haushalt |
+| $t$ | Pendel- beziehungsweise Transportkosten | Geld pro Distanz und Person oder Haushalt |
+| $r_a$ | landwirtschaftliche Bodenrente | Geld pro Fläche |
+
+Brueckners reduzierte Form zeigt, von welchen Grössen die Stadtgrenze im Gleichgewicht abhängt. Sie ist allgemeiner als eine einzelne ausgerechnete Radiusformel, weil sie das Ergebnis der urbanen Gleichgewichtsbedingungen zusammenfasst. Die Stadt muss ihre Bevölkerung aufnehmen, und am Rand muss die urbane Bodenrente der landwirtschaftlichen Bodenrente entsprechen [@brueckner2001sprawl, pp. 68-69].
+
+Die komparative Statik beschreibt die Richtung dieser Zusammenhänge:
+
+$$
+\frac{\partial \bar{x}}{\partial n} > 0
+$$
+
+$$
+\frac{\partial \bar{x}}{\partial y} > 0
+$$
+
+$$
+\frac{\partial \bar{x}}{\partial t} < 0
+$$
+
+$$
+\frac{\partial \bar{x}}{\partial r_a} < 0
+$$
+
+Das bedeutet: Die räumliche Stadtgrösse steigt mit Bevölkerung und Einkommen. Sie sinkt mit höheren Pendelkosten und höherer landwirtschaftlicher Bodenrente [@brueckner2001sprawl, pp. 69-70].
+
+#### Vereinfachter Spezialfall in der AMM-Notation
+
+::: {.key-equation}
+$$
+\Large
+x^* = \frac{Y - z - q \cdot R_A}{t}
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $x^*$ | vereinfachter Fringe Radius | Distanz |
+| $Y$ | Haushaltseinkommen | Geld pro Haushalt |
+| $z$ | übriger Konsum | Geld pro Haushalt |
+| $q$ | Landkonsum pro Haushalt | Fläche pro Haushalt |
+| $R_A$ | landwirtschaftliche Bodenrente | Geld pro Fläche |
+| $q \cdot R_A$ | Bodenrentenkosten des Haushalts am Rand | Geld pro Haushalt |
+| $t$ | Transportkosten pro Distanzeinheit | Geld pro Distanz und Haushalt |
+
+Diese explizite Form ist ein vereinfachter Spezialfall. Sie entsteht, wenn der übrige Konsum $z$ und der Landkonsum $q$ als gegeben behandelt werden. Dann kann die Fringe Condition direkt in die vereinfachte Bid-Rent-Funktion eingesetzt werden.
+
+Ausgangspunkt ist die vereinfachte Bid-Rent-Funktion:
+
+$$
+R(x) = \frac{Y - z - t \cdot x}{q}
+$$
+
+Am Stadtrand gilt die Fringe Condition:
+
+$$
+R(x^*) = R_A
+$$
+
+Damit folgt:
+
+$$
+R_A = \frac{Y - z - t \cdot x^*}{q}
+$$
+
+Multiplikation mit $q$ ergibt:
+
+$$
+q \cdot R_A = Y - z - t \cdot x^*
+$$
+
+Umstellen nach $x^*$ ergibt:
+
+$$
+x^* = \frac{Y - z - q \cdot R_A}{t}
+$$
+
+Diese Formel ersetzt Brueckners allgemeine Gleichgewichtsform nicht. Sie macht sichtbar, wie sich der Stadtrand in der vereinfachten AMM-Notation algebraisch aus Haushaltseinkommen, übrigem Konsum, Landkonsum, landwirtschaftlicher Bodenrente und Transportkosten ergibt.
+
+Mills arbeitet ebenfalls mit endogenen Randdistanzen. Bei ihm ist $k_1$ die Distanz vom Stadtzentrum zum äusseren Rand der Suburbs. Die Lösung des Modells soll unter anderem $k_0$ und $k_1$ bestimmen [@mills1967aggregative, pp. 204-206]. Damit ist auch bei Mills die Stadtgrenze eine endogene Modellgrösse und nicht ein exogen gesetzter Radius.
+
+Quellen-Notation:
+
+- **Brueckner:** $\bar{x}=g(n,y,t,r_a)$ für die reduzierte Form der Stadtgrenze.
+- **Mills:** $k_1$ für den äusseren Stadtrand, $k_0$ für den Rand des CBD.
+
+### 6. Ring Geometry and City Area – Stadtfläche und Ringgeometrie
+
+Dieser Schritt übersetzt den Stadtrand in eine räumliche Fläche. Die einfache Kreisformel reicht aus, wenn nur die gesamte Stadtfläche bis zum Stadtrand berechnet werden soll. Die Ringintegration wird benötigt, wenn die Stadt als räumliche Verteilung von Dichte, Landkonsum oder Haushalten beschrieben wird.
+
+::: {.key-equation}
+$$
+\Large
+A(\bar{x}) = \pi \cdot \bar{x}^2
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $A(\bar{x})$ | Stadtfläche bis zum Rand $\bar{x}$ | Fläche |
+| $\pi$ | Kreiszahl | dimensionslos |
+| $\bar{x}$ | Distanz zum Rand der Stadt | Distanz |
+| $\bar{x}^2$ | quadrierter Radius | Fläche |
+| $\pi \cdot \bar{x}^2$ | Kreisfläche der monozentrischen Stadt | Fläche |
+
+Für die reine Stadtfläche genügt die Kreisformel:
+
+$$
+A(\bar{x}) = \pi \cdot \bar{x}^2
+$$
+
+Die Integration wird erst nötig, wenn nicht nur die Fläche, sondern die räumliche Verteilung innerhalb dieser Fläche beschrieben werden soll. Im AMM-Modell können Landkonsum und Dichte mit der Distanz zum Zentrum variieren. Ein Quadratkilometer nahe am Zentrum kann deshalb mehr Haushalte enthalten als ein Quadratkilometer am Stadtrand. Die Gesamtfläche allein sagt in diesem Fall noch nicht, wie viele Haushalte in der Stadt wohnen.
+
+Darum wird die Stadt für die Gleichgewichtsbedingung in viele dünne Ringe zerlegt. Für jeden Ring wird separat berechnet, wie gross seine Fläche ist und wie viele Haushalte dort wohnen. Erst danach werden alle Ringe zusammengezählt.
+
+Ein infinitesimal schmaler Ring in Distanz $x$ besitzt die Fläche:
+
+$$
+dA = 2\pi x \, dx
+$$
+
+Wenn $q(x)$ der Landkonsum pro Haushalt in Distanz $x$ ist, dann ist $\frac{1}{q(x)}$ die Haushaltsdichte. Die Zahl der Haushalte in einem Ring ergibt sich deshalb aus Dichte mal Ringfläche:
+
+$$
+dH = \frac{1}{q(x)} \cdot 2\pi x \, dx
+$$
+
+Die Gesamtzahl der Haushalte ergibt sich durch Integration über alle Ringe vom Zentrum bis zum Stadtrand:
+
+$$
+H = \int_0^{\bar{x}} \frac{1}{q(x)} \cdot 2\pi x \, dx
+$$
+
+Die Integration ist damit keine kompliziertere Alternative zur Kreisformel. Sie ist die allgemeinere räumliche Summierung. Wenn nur Fläche aufsummiert wird, fällt die Ringintegration wieder auf die Kreisfläche zurück:
+
+$$
+\int_0^{\bar{x}} 2\pi x \, dx
+=
+\pi \cdot \bar{x}^2
+$$
+
+Diese Ringgeometrie ist in den Quellen zentral. Brueckner nutzt $2\pi x\,dx$, um die Zahl der Menschen in einem Ring zu berechnen und über die Stadt zu integrieren [@brueckner2001sprawl, p. 68]. Mills nutzt $2\pi u$ in den Bedingungen, die die Landverwendung innerhalb eines Rings beschreiben [@mills1967aggregative, p. 205]. Damit ist die Kreis- und Ringstruktur kein Implementierungsdetail, sondern Teil der mathematischen Form des monozentrischen Stadtmodells.
+
+Wichtig ist die quadratische Beziehung. Eine Erhöhung des Stadtradius erhöht die Stadtfläche nicht linear, sondern proportional zum Quadrat des Radius. Deshalb wirken Veränderungen der Randdistanz stark auf die beanspruchte Landfläche.
+
+Quellen-Notation:
+
+- **Brueckner:** $2\pi x\,dx$ für die Ringfläche, $\pi\bar{x}^2$ für die Stadtfläche.
+- **Mills:** $2\pi u$ für die verfügbare Ringfläche in Distanz $u$.
+
+### 7. Urban Equilibrium Conditions – Stadtgleichgewichtsbedingungen
+
+Dieser Schritt fasst die theoretische Gleichgewichtsstruktur des monozentrischen AMM-Modells zusammen. Die Stadtgrösse ist erst dann bestimmt, wenn zwei Bedingungen gleichzeitig erfüllt sind: Erstens muss die Stadtfläche genügend Raum für die Bevölkerung bieten. Zweitens muss am Stadtrand urbane Bodenrente gleich landwirtschaftlicher Bodenrente sein.
+
+::: {.key-equation}
+$$
+\Large
+n
+=
+\int_0^{\bar{x}}
+\frac{1}{q(x,y,t,u)}
+\cdot
+2\pi x
+\, dx
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $n$ | Bevölkerung der Stadt | Personen oder Haushalte |
+| $\bar{x}$ | Distanz zum Rand der Stadt | Distanz |
+| $q(x,y,t,u)$ | Landkonsum pro Person oder Haushalt | Fläche pro Person oder Haushalt |
+| $\frac{1}{q(x,y,t,u)}$ | Bevölkerungsdichte | Personen oder Haushalte pro Fläche |
+| $2\pi x \, dx$ | Fläche eines dünnen Rings | Fläche |
+| $\frac{1}{q(x,y,t,u)} \cdot 2\pi x \, dx$ | Bevölkerung im Ring | Personen oder Haushalte |
+
+Die erste Gleichgewichtsbedingung ist die Population-fitting condition. Sie sagt, dass die Summe der in allen Ringen wohnenden Personen oder Haushalte der Gesamtbevölkerung $n$ entsprechen muss:
+
+$$
+n
+=
+\int_0^{\bar{x}}
+\frac{1}{q(x,y,t,u)}
+\cdot
+2\pi x
+\, dx
+$$
+
+Die zweite Gleichgewichtsbedingung ist die Fringe Condition:
+
+$$
+r(\bar{x},y,t,u)=r_a
+$$
+
+Die erste Bedingung sorgt dafür, dass die Stadt ihre Bevölkerung aufnehmen kann. Da $q$ Land pro Person oder Haushalt misst, ist $\frac{1}{q}$ die entsprechende Dichte. Wird diese Dichte mit der Fläche eines Rings multipliziert, erhält man die Personen oder Haushalte in diesem Ring. Die Integration summiert alle Ringe vom Zentrum bis zum Stadtrand.
+
+Die zweite Bedingung sorgt dafür, dass die Stadt genau dort endet, wo urbane und landwirtschaftliche Bodenrente gleich sind. Innerhalb der Stadt ist die urbane Bodenrente höher als $r_a$. Am Rand gilt Gleichheit. Ausserhalb kann die landwirtschaftliche Nutzung bestehen bleiben [@brueckner2001sprawl, p. 68].
+
+Diese beiden Bedingungen bestimmen im Brueckner-Modell gemeinsam das urbane Nutzenniveau $u$ und die Randdistanz $\bar{x}$ für gegebene Werte von Bevölkerung $n$, Einkommen $y$, Pendelkosten $t$ und landwirtschaftlicher Bodenrente $r_a$ [@brueckner2001sprawl, pp. 68-69]. Damit ist das AMM-Gleichgewicht kein einzelner Flächengap, sondern ein simultanes räumliches Gleichgewicht aus Dichte, Landkonsum, Rentenverlauf und Stadtgrenze.
+
+Mills beschreibt eine verwandte Gleichgewichtsstruktur aus Sicht eines aggregierten Stadtmodells. Er formuliert, dass die Landverwendung in den Ringen vollständig auf die modellierten Nutzungen aufgeteilt wird und dass alle Arbeiter irgendwo wohnen müssen [@mills1967aggregative, pp. 205-206]. Auch hier ist die Stadtstruktur eine simultane Lösung aus Landverwendung, Bodenrente, Wohnstandorten und Randdistanzen.
+
+Dieser siebte Schritt schliesst die theoretische AMM-Beschreibung ab. Er zeigt, dass Haushaltsbudget, Bid-Rent-Funktion, Transportkostengradient, Fringe Condition, Stadtgrösse und Ringgeometrie nicht unabhängig nebeneinanderstehen. Sie bilden zusammen das Gleichgewicht des monozentrischen Stadtmodells.
+
+Quellen-Notation:
+
+- **Brueckner:** *urban equilibrium conditions* mit $n$, $\bar{x}$, $q(x,y,t,u)$ und $r_a$.
+- **Mills:** verwandte Gleichgewichtsbedingungen mit $N(u)$, $k_0$ und $k_1$.

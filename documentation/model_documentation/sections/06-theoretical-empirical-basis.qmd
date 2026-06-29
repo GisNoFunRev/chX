@@ -1,0 +1,34 @@
+# Theoretical and Empirical Basis – theoretische und empirische Quellenbasis {#sec-theoretical-empirical-basis}
+
+Dieses Kapitel gibt einen kurzen Überblick über die Quellenbasis des Modells. Ziel ist nicht eine vollständige Literaturdiskussion, sondern eine transparente Einordnung der Quellen, die für die Modellstruktur tatsächlich verwendet wurden.
+
+
+
+
+| Bereich             | Quelle                                 | Rolle im Modell                                                       |
+| ------------------- | -------------------------------------- | --------------------------------------------------------------------- |
+| AMM-Ursprung        | Mills                                  | historische und theoretische Einordnung des aggregierten Stadtmodells |
+| AMM-Hauptquelle     | Brueckner                              | wichtigste Quelle für die mathematische AMM-Struktur                  |
+| AMM-Ergänzung       | Fujita                                 | ergänzende Theoriequelle zur Urban Economic Theory                    |
+| Cobb-Douglas        | Cobb & Douglas                         | historische Einordnung der Funktionsform                              |
+| Urban Scaling       | Bettencourt/West                       | Grundlage des kleinen Innovations-Submodells                          |
+| Modelldokumentation | Rahmandad & Sterman, En-ROADS, C-ROADS | Orientierung für Aufbau und Transparenz der Dokumentation             |
+
+## AMM-Quellen
+
+Die wichtigste Arbeitsquelle für die mathematische AMM-Dokumentation ist Brueckner. Seine Darstellung fasst die zentralen Bestandteile des Muth-Mills-Modells kompakt zusammen: Haushaltsbudget, Bid-Rent-Funktion, Transportkosten, Stadtgrenze, landwirtschaftliche Alternativrente und urbane Gleichgewichtsstruktur [@brueckner1996structure; @brueckner2001sprawl].
+
+Der theoretische Kern des Modells basiert auf dem Alonso-Muth-Mills-Modell. Die Originalquellen von Alonso, Mills und Muth wurden als historische Grundlage des monozentrischen Stadtmodells verstanden. In der vorliegenden Dokumentation wurde jedoch vor allem Mills etwas genauer betrachtet, weil seine Arbeit eine stark aggregierte Stadtstruktur beschreibt und damit gut zur Modellperspektive passt [@mills1967aggregative].
+
+Fujita wurde ergänzend gelesen. Die Quelle dient als theoretischer Hintergrund für Urban Economic Theory, steht in dieser Dokumentation aber nicht im Zentrum [@fujita1989urban].
+
+## Cobb-Douglas-Quellen
+
+Cobb und Douglas wurden vor allem zur historischen Einordnung der Funktionsform berücksichtigt [@cobb1928theory]. Die ursprüngliche Quelle beschreibt eine Produktionsfunktion und nicht direkt die hier verwendete Haushaltsentscheidung. Deshalb wird Cobb-Douglas in dieser Dokumentation nicht als eigenständige Theorie des Stadtmodells behandelt, sondern als vereinfachte funktionale Form innerhalb des AMM-Submodells.
+
+## Bettencourt-West-Quellen
+
+Das Bettencourt-West-Submodell spielt im Gesamtmodell eine untergeordnete Rolle. Es wird verwendet, um einen einfachen Innovationsindex auf Basis urbaner Skalierung abzuleiten.
+
+Die zentrale Idee stammt aus der Urban-Scaling-Literatur: bestimmte städtische Outputs, etwa Innovation, können mit Stadtgrösse überproportional wachsen. Diese Idee wird im Modell stark vereinfacht übernommen [@bettencourt2007growth; @bettencourt2010unified].
+

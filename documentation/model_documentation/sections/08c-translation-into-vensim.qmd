@@ -1,0 +1,1171 @@
+## Übersetzung Submodelle zu Vensim
+
+Dieses Kapitel beschreibt, wie die theoretischen Submodelle in Vensim-Code übersetzt wurden. Es geht nicht darum, die Theorie erneut herzuleiten. Entscheidend ist, was mit den mathematischen Schritten im Modell passiert.
+
+Die Übersetzung wird auf drei Ebenen sichtbar gemacht:
+
+<table class="formula-legend">
+<thead>
+<tr>
+<th>Kategorie</th>
+<th>Verwendung</th>
+<th>Farbe</th>
+</tr>
+</thead>
+<tbody>
+<tr class="legend-theory">
+<td><strong>Theoretische AMM-Form</strong></td>
+<td>echte Gleichungen aus dem AMM-Kern</td>
+<td><span class="legend-pill theory-pill">blau</span></td>
+</tr>
+<tr class="legend-model">
+<td><strong>Modellinterne Transformation</strong></td>
+<td>selbst gebaute Übersetzung, Proxy, Index, Skalierung</td>
+<td><span class="legend-pill model-pill">grün</span></td>
+</tr>
+<tr class="legend-vensim">
+<td><strong>Vensim-Umsetzung</strong></td>
+<td>konkrete Stock-, Flow- oder Schutzfunktion</td>
+<td><span class="legend-pill vensim-pill">orange</span></td>
+</tr>
+</tbody>
+</table>
+
+Bei Cobb-Douglas und Bettencourt/West meint die blaue Box die theoretische Form des jeweiligen Untermodells. Die Unterscheidung bleibt dieselbe: Theorie, modellinterne Übersetzung und Vensim-Code werden getrennt gezeigt.
+
+Die Vensim-Views werden hier als **Vensim-Modell-Layer** bezeichnet. Sie dienen als Orientierung. Ein mathematischer Schritt kann über mehrere Layer verteilt sein. Umgekehrt kann ein Layer Variablen enthalten, die nur der Diagnose oder Interpretation dienen.
+
+
+## Submodell A: Land Stocks and Conversion
+
+Submodell A bildet die physische Landbilanz. Es enthält keine eigene ökonomische Theorie, ist aber für die Modellübersetzung wichtig, weil hier die berechnete Umwandlungsrate tatsächlich in Bestandsveränderungen übersetzt wird.
+
+Relevante Vensim-Modell-Layer:
+
+- **Macro_Ebene**
+- **09_Urban_Land_Conversion_Logic**
+
+### Zentrale Terme des Submodells
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+\Delta L_A=-C
+\qquad
+\Delta L_U=C
+$$
+:::
+
+Dieser Term beschreibt die physische Bilanz: derselbe Umwandlungsfluss senkt den landwirtschaftlichen Bestand und erhöht den urbanen Bestand.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+C=\min(P,\ C_{max})
+$$
+:::
+
+Dieser Term begrenzt die tatsächliche Landumwandlung. Der modellierte Umwandlungsdruck kann nur wirksam werden, wenn genug landwirtschaftliche Fläche verfügbar ist.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+C_{max}=\frac{L_A}{\tau_C}
+$$
+:::
+
+Dieser Term übersetzt verfügbare landwirtschaftliche Fläche in eine maximal mögliche jährliche Umwandlung.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $L_A$ | landwirtschaftlicher Landbestand | Agricultural Land |
+| $L_U$ | urbaner Landbestand | Urban Land |
+| $C$ | Umwandlungsfluss | Land Conversion Rate |
+| $P$ | Umwandlungsdruck | Land Conversion Pressure Factors |
+| $C_{max}$ | maximal mögliche Umwandlung | Max Feasible Conversion |
+| $\tau_C$ | minimale Umwandlungszeit | Land Conversion Time Minimum |
+
+### A1 Stock-Flow Balance Translation
+
+**Status:** direkt umgesetzt
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | Landbestand und Umwandlungsfluss | ein Bestand nimmt ab, der andere nimmt im gleichen Umfang zu | konstante Gesamtfläche |
+| Vensim-Rekonstruktion | Agricultural Land, Urban Land, Land Conversion Rate | INTEG-Struktur mit entgegengesetztem Vorzeichen | Agricultural Land sinkt, Urban Land steigt |
+
+In Vensim wird die Bilanzlogik als Stock-Flow-Struktur mit `INTEG` umgesetzt:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+L_A=INTEG(-C,\ L_{A,0})
+$$
+:::
+
+Diese Gleichung speichert die Abnahme von `Agricultural Land`.
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+L_U=INTEG(C,\ L_{U,0})
+$$
+:::
+
+Diese Gleichung speichert die Zunahme von `Urban Land`.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $L_A$ | landwirtschaftlicher Landbestand | Agricultural Land |
+| $L_U$ | urbaner Landbestand | Urban Land |
+| $C$ | Umwandlungsfluss | Land Conversion Rate |
+| $L_{A,0}$ | Anfangswert landwirtschaftliche Fläche | Initial Agricultural Land |
+| $L_{U,0}$ | Anfangswert urbane Fläche | Initial Urban Land |
+
+### A2 Conversion Rate Limit Translation
+
+**Status:** direkt umgesetzt
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | Umwandlungsdruck und verfügbare Fläche | Umwandlungsrate darf nicht grösser sein als physisch möglich | begrenzte Conversion Rate |
+| Vensim-Rekonstruktion | Land Conversion Pressure Factors, Max Feasible Conversion | MIN-Funktion | Land Conversion Rate |
+
+In Vensim wird die Begrenzungslogik mit `MIN` umgesetzt:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+Land\ Conversion\ Rate
+=
+MIN(Land\ Conversion\ Pressure\ Factors,\ Max\ Feasible\ Conversion)
+$$
+:::
+
+Diese Gleichung macht aus dem modellierten Umwandlungsdruck eine physisch begrenzte jährliche Umwandlungsrate.
+
+### Variablenübersetzung
+
+| Modellterm | Vensim-Variable | Funktion | Vensim-Modell-Layer |
+|---|---|---|---|
+| landwirtschaftlicher Landbestand $L_A$ | Agricultural Land | Stock, nimmt durch Land Conversion Rate ab | Macro_Ebene, 08_Agriculture_and_Scarcity |
+| urbaner Landbestand $L_U$ | Urban Land | Stock, nimmt durch Land Conversion Rate zu | Macro_Ebene, mehrere Layer |
+| Umwandlungsfluss $C$ | Land Conversion Rate | zentraler Flow zwischen den beiden Landbeständen | Macro_Ebene |
+| Umwandlungsdruck $P$ | Land Conversion Pressure Factors | übernimmt aktuell die AMM-Umwandlungsnachfrage | 09_Urban_Land_Conversion_Logic |
+| maximale Umwandlung $C_{max}$ | Max Feasible Conversion | verhindert, dass mehr Fläche umgewandelt wird als verfügbar ist | Macro_Ebene |
+| minimale Umwandlungszeit $\tau_C$ | Land Conversion Time Minimum | Zeitbasis für Max Feasible Conversion | Macro_Ebene |
+
+### Weglassungen und Diagnose
+
+Eine Rückumwandlung von Urban Land zu Agricultural Land ist nicht modelliert. Weitere Landtypen werden nicht abgebildet. Soil-Protection-Grössen werden zwar berechnet, wirken im aktuellen Modell aber nicht auf die Land Conversion Rate zurück.
+
+## Submodell B: AMM-Core
+
+Submodell B übersetzt die AMM-Logik in eine dynamische Vensim-Struktur. Die mathematischen AMM-Schritte erscheinen dabei nicht immer als einzelne Nodes. Mehrere Schritte werden zusammengelegt, besonders bei Budgetfunktion, Bid-Rent-Funktion und Fringe Condition.
+
+Relevante Vensim-Modell-Layer:
+
+- **02_Transport_and_Commuting**
+- **03_Income_and_Productivity**
+- **04_Urban_Rent_and_Land_Tightness**
+- **05_AMM_Budget_and_Housing_Demand**
+- **08_Agriculture_and_Scarcity**
+- **09_Urban_Land_Conversion_Logic**
+
+### Zentrale Terme des Submodells
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+Y=z+R(x)q+t x
+$$
+:::
+
+Diese Gleichung beschreibt das Haushaltsbudget. Einkommen wird auf übrigen Konsum, Landkosten und Transportkosten verteilt. In Vensim wird diese Budgetlogik nicht als ein einzelner Node geführt, sondern in mehreren Modellteilen rekonstruiert.
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+R(x)=\frac{Y-z-tx}{q}
+$$
+:::
+
+Diese Gleichung transformiert das Budget in eine Bodenrentenfunktion. Sie zeigt, welche Bodenrente ein Haushalt an einem Standort maximal tragen kann.
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+R(x^*)=R_A
+$$
+:::
+
+Diese Gleichung ist die Randbedingung. Die Stadt endet dort, wo urbane Bodenrente und landwirtschaftliche Bodenrente gleich sind.
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+x^*=\frac{Y-z-qR_A}{t}
+$$
+:::
+
+Diese Gleichung entsteht durch Einsetzen der Randbedingung in die Bid-Rent-Funktion. Sie macht den theoretischen Stadtrand als Radius berechenbar.
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+A^*=\pi(x^*)^2
+$$
+:::
+
+Diese Gleichung transformiert den Fringe Radius in eine theoretische Stadtfläche.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $Y$ | Haushaltseinkommen | Mean Household Income |
+| $z$ | übriger Konsum | Other Consumption Per Household z |
+| $R(x)$ | Bodenrente am Standort $x$ | Mean Urban Rent als aggregierter Preisinput |
+| $q$ | Landkonsum pro Haushalt | Land Demand per Household q |
+| $t$ | Transportkosten pro Distanzeinheit | Transport Cost per km per Household |
+| $x$ | Distanz zum Zentrum | im Modell über Urban Fringe Radius rekonstruiert |
+| $x^*$ | Fringe Radius | Urban Fringe Radius |
+| $R_A$ | landwirtschaftliche Bodenrente | Agricultural Rent |
+| $A^*$ | theoretische Stadtfläche | Desired Urban Land |
+
+### B1 Household Budget Translation
+
+**Status:** zusammengelegt
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | $Y$, $z$, $R(x)$, $q$, $t$, $x$ | Haushaltsbudget $Y=z+R(x)q+t x$ | Budgetrestriktion |
+| Vensim-Rekonstruktion | Mean Household Income, Transport Cost per Household, Housing Preference Share Alpha, Mean Urban Rent | Budget wird zerlegt in verfügbares Einkommen, Cobb-Douglas-Aufteilung und Fringe-Radius-Term | Disposable Income after Transport, z, q, Urban Fringe Radius |
+
+Die theoretische AMM-Budgetgleichung lautet:
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+Y=z+R(x)q+t x
+$$
+:::
+
+Diese Gleichung wird in Vensim **nicht** als ein einzelner Node umgesetzt. Sie wird auf mehrere Modellteile verteilt.
+
+Zuerst werden Transportkosten vom Einkommen abgezogen:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+M=MAX(0,\ Y-TC)
+$$
+:::
+
+Diese Gleichung erzeugt das verfügbare Budget nach Transportkosten.
+
+Dann teilt Cobb-Douglas dieses verfügbare Budget in $z$ und Wohnlandbudget auf:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+z=(1-\alpha)M
+$$
+:::
+
+Diese Gleichung erzeugt den übrigen Konsum.
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+E_H=\alpha M
+$$
+:::
+
+Diese Gleichung erzeugt das Budget für Wohnland.
+
+Daraus entsteht $q$:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+q=ZIDZ(E_H,\ R)
+$$
+:::
+
+Diese Gleichung erzeugt die Landnachfrage pro Haushalt. `ZIDZ` gibt 0 zurück, falls der Nenner 0 ist, sonst den Quotienten.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $M$ | verfügbares Budget nach Transportkosten | Disposable Income after Transport |
+| $TC$ | Transportkosten pro Haushalt | Transport Cost per Household |
+| $\alpha$ | Wohnlandanteil | Housing Preference Share Alpha |
+| $E_H$ | Wohnlandbudget | Housing Land Expenditure |
+| $R$ | mittlere urbane Rente | Mean Urban Rent |
+| $q$ | Landnachfrage pro Haushalt | Land Demand per Household q |
+| $z$ | übriger Konsum | Other Consumption Per Household z |
+| $ZIDZ(E_H,R)$ | Vensim-Schutzfunktion | gibt 0 zurück, falls $R=0$, sonst $E_H/R$ |
+
+### B2 Bid-Rent and Fringe Translation
+
+**Status:** zusammengelegt
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | $Y$, $z$, $t$, $x$, $q$, $R_A$ | Bid-Rent-Funktion und Fringe Condition werden kombiniert | $x^*$ |
+| Vensim-Rekonstruktion | Mean Household Income, Other Consumption Per Household z, Land Demand per Household q, Agricultural Rent, Transport Cost per km per Household | direkter Term im Urban Fringe Radius | Urban Fringe Radius |
+
+Theoretisch wird zuerst die Bid-Rent-Funktion geschrieben:
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+R(x)=\frac{Y-z-tx}{q}
+$$
+:::
+
+Diese Gleichung transformiert die Budgetgleichung in eine Bodenrente pro Flächeneinheit.
+
+Am Stadtrand gilt:
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+R(x^*)=R_A
+$$
+:::
+
+Diese Gleichung setzt urbane und landwirtschaftliche Bodenrente am Stadtrand gleich.
+
+Durch Einsetzen und Umstellen entsteht die Radiusform:
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+x^*=\frac{Y-z-qR_A}{t}
+$$
+:::
+
+Diese Gleichung transformiert die Randbedingung in einen berechenbaren Stadtradius.
+
+In Vensim wird diese kombinierte Form direkt als `Urban Fringe Radius` umgesetzt:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+x^*=MAX\left(0,\frac{Y-z-qR_A}{t}\right)
+$$
+:::
+
+Diese Gleichung bildet den theoretischen Radius ab und verhindert negative Radien.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $x^*$ | theoretischer Stadtrand | Urban Fringe Radius |
+| $Y$ | Haushaltseinkommen | Mean Household Income |
+| $z$ | übriger Konsum | Other Consumption Per Household z |
+| $q$ | Landnachfrage pro Haushalt | Land Demand per Household q |
+| $R_A$ | landwirtschaftliche Bodenrente | Agricultural Rent |
+| $t$ | Transportkosten pro km pro Haushalt | Transport Cost per km per Household |
+
+### B3 Transport Gradient Translation
+
+**Status:** implizit umgesetzt
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | $t$, $q$ | Ableitung der Bid-Rent-Funktion nach Distanz | negativer Rentengradient $\frac{dR}{dx}=-\frac{t}{q}$ |
+| Vensim-Rekonstruktion | Transport Cost per km per Household, Land Demand per Household q | kein eigener Ableitungs-Node, sondern Wirkung über Transportkostenterm im Urban Fringe Radius | höhere Transportkosten senken Urban Fringe Radius |
+
+Der theoretische Gradient lautet:
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+\frac{dR(x)}{dx}=-\frac{t}{q}
+$$
+:::
+
+Diese Ableitung beschreibt die Veränderung der Bodenrente bei zusätzlicher Distanz zum Zentrum.
+
+In Vensim wird dieser Gradient nicht als eigene Ableitung modelliert. Die Distanzwirkung steckt implizit in den Transportkosten:
+
+- `Transport Cost per Household` reduziert das verfügbare Budget.
+- `Transport Cost per km per Household` steht im Nenner des `Urban Fringe Radius`.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $R(x)$ | Bodenrente am Standort $x$ | Mean Urban Rent als aggregierter Preisinput |
+| $x$ | Distanz zum Zentrum | im Modell über Urban Fringe Radius rekonstruiert |
+| $t$ | Transportkosten pro Distanzeinheit | Transport Cost per km per Household |
+| $q$ | Landkonsum pro Haushalt | Land Demand per Household q |
+| $\frac{dR(x)}{dx}$ | Rentenänderung pro zusätzlicher Distanzeinheit | kein eigener Node, implizit über Transportkosten umgesetzt |
+
+### B4 Rent and Land Tightness Translation
+
+**Status:** dynamische Erweiterung
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | kein ursprünglicher AMM-Schritt | Flächenverfügbarkeit wird als Knappheitsindex gelesen | gewünschte urbane Rente |
+| Vensim-Rekonstruktion | Urban Land, Number of Households, Reference Initial Land Demand per Household | Current Urban Land per Household → Land Tightness Index → Desired Mean Urban Rent → Mean Urban Rent | Mean Urban Rent |
+
+Dieser Schritt ist keine ursprüngliche AMM-Gleichung. Er ist eine modellinterne Dynamisierung, damit `Mean Urban Rent` nicht konstant bleibt.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+u_h=\frac{L_U}{H}
+$$
+:::
+
+Diese Gleichung transformiert urbane Gesamtfläche in urbane Fläche pro Haushalt.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+T=\frac{q_{ref}}{u_h}
+$$
+:::
+
+Diese Gleichung transformiert Fläche pro Haushalt in einen Knappheitsindex.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+R_{des}=R_0\cdot T^\epsilon
+$$
+:::
+
+Diese Gleichung transformiert Landknappheit in eine gewünschte urbane Rente.
+
+In Vensim wird diese Zielrente träge angepasst:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+R=INTEG(\Delta R,\ R_0)
+$$
+:::
+
+Diese Gleichung speichert `Mean Urban Rent` als Stock.
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+\Delta R=\frac{R_{des}-R}{\tau_R}
+$$
+:::
+
+Diese Gleichung übersetzt die Lücke zwischen Zielrente und aktueller Rente in eine jährliche Anpassung.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $u_h$ | aktuelle urbane Fläche pro Haushalt | Current Urban Land per Household |
+| $L_U$ | urbane Fläche | Urban Land |
+| $H$ | Anzahl Haushalte | Number of Households |
+| $T$ | Landknappheitsindex | Land Tightness Index |
+| $q_{ref}$ | Referenzlandbedarf pro Haushalt | Reference Initial Land Demand per Household |
+| $R_{des}$ | gewünschte urbane Rente | Desired Mean Urban Rent |
+| $R_0$ | anfängliche urbane Rente | Initial Mean Urban Rent |
+| $\epsilon$ | Sensitivität der Rente auf Landknappheit | Urban Rent Sensitivity to Land Tightness |
+| $R$ | mittlere urbane Rente | Mean Urban Rent |
+| $\Delta R$ | Veränderung der mittleren urbanen Rente | Mean Urban Rent Change |
+| $\tau_R$ | Rentenanpassungszeit | Urban Rent Adjustment Time |
+
+### B5 Radius-to-Land Translation
+
+**Status:** direkt umgesetzt mit Skalierungsproxy
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | $x^*$ | Kreisflächenformel | $A^*=\pi(x^*)^2$ |
+| Vensim-Rekonstruktion | Urban Fringe Radius | Desired Urban Land wird berechnet und auf aggregierte Modellgrösse skaliert | Desired Urban Land Total |
+
+Aus dem Radius wird mathematisch eine theoretische Stadtfläche:
+
+::: {.formula-box .theory-formula}
+**Theoretische AMM-Form**
+
+$$
+\small
+A^*=\pi(x^*)^2
+$$
+:::
+
+Diese Gleichung transformiert Randdistanz in Fläche.
+
+In Vensim wird diese Kreisflächenlogik direkt umgesetzt:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+Desired\ Urban\ Land=3.141\cdot Urban\ Fringe\ Radius^2
+$$
+:::
+
+Diese Gleichung berechnet die theoretische urbane Zielstadtfläche.
+
+Danach wird die Fläche auf das aggregierte Modellniveau skaliert:
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+A^*_{total}=A^*\cdot s_U\cdot s_H
+$$
+:::
+
+Diese Gleichung transformiert die theoretische Kreisfläche in eine aggregierte Zielgrösse für das Gesamtmodell.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $A^*$ | theoretische Stadtfläche | Desired Urban Land |
+| $x^*$ | Fringe Radius | Urban Fringe Radius |
+| $A^*_{total}$ | skalierte Zielstadtfläche | Desired Urban Land Total |
+| $s_U$ | Aggregationsfaktor | Urban Aggregate Scale Factor |
+| $s_H$ | Haushalts-Skalierungsfaktor | Household Scaling Factor |
+
+Die Ringintegration aus der Theorie wird nicht explizit umgesetzt. Sie wird durch die aggregierte Kreisfläche und Skalierungsfaktoren ersetzt.
+
+### B6 Land Gap-to-Conversion Translation
+
+**Status:** direkt umgesetzt
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | kein ursprünglicher AMM-Schritt | gewünschte Fläche wird mit aktueller Fläche verglichen | Landlücke |
+| Vensim-Rekonstruktion | Desired Urban Land Total, Urban Land, Urban Expansion Adjustment Time | Urban Land Gap → AMM Consistent Economic Land Conversion Demand | AMM-Umwandlungsdruck |
+
+Dieser Schritt ist keine ursprüngliche AMM-Gleichung. Er übersetzt die AMM-Zielfläche in eine dynamische Umwandlungsnachfrage.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+G=MAX(0,\ A^*_{total}-L_U)
+$$
+:::
+
+Diese Gleichung transformiert die Differenz zwischen gewünschter und aktueller urbaner Fläche in eine nicht-negative Landlücke.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+D_{AMM}=\frac{G}{\tau_U}
+$$
+:::
+
+Diese Gleichung transformiert die Landlücke in eine jährliche Umwandlungsnachfrage.
+
+In Vensim werden diese beiden Terme als `Urban Land Gap` und `AMM Consistent Economic Land Conversion Demand` umgesetzt:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+Urban\ Land\ Gap
+=
+MAX(0,\ Desired\ Urban\ Land\ Total-Urban\ Land)
+$$
+:::
+
+Diese Gleichung berechnet die aktive Landlücke im Vensim-Modell.
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+AMM\ Consistent\ Economic\ Land\ Conversion\ Demand
+=
+\frac{Urban\ Land\ Gap}{Urban\ Expansion\ Adjustment\ Time}
+$$
+:::
+
+Diese Gleichung berechnet den jährlichen AMM-basierten Umwandlungsdruck.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $G$ | urbane Landlücke | Urban Land Gap |
+| $A^*_{total}$ | skalierte Zielstadtfläche | Desired Urban Land Total |
+| $L_U$ | aktuelle urbane Fläche | Urban Land |
+| $D_{AMM}$ | AMM-basierte Umwandlungsnachfrage | AMM Consistent Economic Land Conversion Demand |
+| $\tau_U$ | Anpassungszeit der urbanen Expansion | Urban Expansion Adjustment Time |
+
+Diese Umwandlungsnachfrage wird an die Conversion-Logik weitergegeben und wirkt dann über `Land Conversion Rate` auf die Landbestände.
+
+### Variablenübersetzung
+
+| Modellterm | Vensim-Variable | Funktion | Vensim-Modell-Layer |
+|---|---|---|---|
+| Einkommen $Y$ | Mean Household Income | Haushaltseinkommen im AMM-Budget | 03_Income_and_Productivity, 05_AMM_Budget_and_Housing_Demand |
+| übriger Konsum $z$ | Other Consumption Per Household z | CD-Ergebnis und AMM-Budgetterm | 05_AMM_Budget_and_Housing_Demand, 07_Cobb_Douglas_Utility |
+| Landkonsum $q$ | Land Demand per Household q | CD-Ergebnis und AMM-Landbedarf | 05_AMM_Budget_and_Housing_Demand, 09_Urban_Land_Conversion_Logic |
+| urbane Bodenrente $R$ | Mean Urban Rent | dynamische urbane Rente | 04_Urban_Rent_and_Land_Tightness, 05_AMM_Budget_and_Housing_Demand |
+| landwirtschaftliche Rente $R_A$ | Agricultural Rent | Randwert der landwirtschaftlichen Alternative | 08_Agriculture_and_Scarcity, 05_AMM_Budget_and_Housing_Demand |
+| Transportkosten $t$ | Transport Cost per km per Household | Transportkostenterm des AMM | 02_Transport_and_Commuting, 05_AMM_Budget_and_Housing_Demand |
+| Stadtrand $x^*$ | Urban Fringe Radius | AMM-Fringe-Radius | 05_AMM_Budget_and_Housing_Demand |
+| theoretische Stadtfläche $A^*$ | Desired Urban Land | Kreisfläche aus Fringe Radius | 05_AMM_Budget_and_Housing_Demand |
+| skalierte Zielstadtfläche $A^*_{total}$ | Desired Urban Land Total | aggregierte Zielfläche | 05_AMM_Budget_and_Housing_Demand, 09_Urban_Land_Conversion_Logic |
+| Landlücke $G$ | Urban Land Gap | Differenz zwischen Ziel- und Istfläche | 09_Urban_Land_Conversion_Logic |
+| Umwandlungsnachfrage $D_{AMM}$ | AMM Consistent Economic Land Conversion Demand | jährlicher AMM-Druck auf Landumwandlung | 09_Urban_Land_Conversion_Logic |
+
+### Weglassungen und Diagnose
+
+`Urban Rent at Fringe` und `AMM Fringe Condition Gap` prüfen, ob die Randbedingung ungefähr erfüllt ist. Sie wirken nicht aktiv auf die Land Conversion Rate zurück.
+
+`Current Urban Radius` und `Urban Rent at Current Fringe` beschreiben die aktuelle Ist-Situation. Auch sie sind Diagnosegrössen.
+
+`Household Clearing Gap` und `Additional Urban Land Needed for Clearing` berechnen eine zusätzliche Haushaltslücke, sind aber aktuell nicht Teil der aktiven Landumwandlung.
+
+## Submodell C: Cobb-Douglas
+
+Submodell C übersetzt die Cobb-Douglas-Haushaltslogik in Vensim. Es bestimmt $z$ und $q$. Diese beiden Grössen werden danach im AMM-Core weiterverwendet.
+
+Relevante Vensim-Modell-Layer:
+
+- **05_AMM_Budget_and_Housing_Demand**
+- **07_Cobb_Douglas_Utility**
+
+### Zentrale Terme des Submodells
+
+::: {.formula-box .theory-formula}
+**Theoretische Form**
+
+$$
+\small
+U(q,z)=q^\alpha z^{1-\alpha}
+$$
+:::
+
+Diese Gleichung beschreibt die Präferenzstruktur zwischen Landkonsum und übrigem Konsum.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+E_H=\alpha M
+\qquad
+z=(1-\alpha)M
+$$
+:::
+
+Diese Gleichung transformiert verfügbares Budget in Wohnlandbudget und übrigen Konsum.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+q=\frac{E_H}{R}
+$$
+:::
+
+Diese Gleichung transformiert Wohnlandbudget und Landpreis in Landnachfrage.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $U(q,z)$ | Nutzenfunktion | Cobb Douglas Utility Index als relative Diagnose |
+| $q$ | Landnachfrage pro Haushalt | Land Demand per Household q |
+| $z$ | übriger Konsum | Other Consumption Per Household z |
+| $\alpha$ | Wohnlandanteil | Housing Preference Share Alpha |
+| $M$ | verfügbares Budget | Disposable Income after Transport |
+| $E_H$ | Wohnlandbudget | Housing Land Expenditure |
+| $R$ | mittlere urbane Rente | Mean Urban Rent |
+
+### C1 Budget Share Translation
+
+**Status:** direkt umgesetzt
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | $M$, $\alpha$ | Cobb-Douglas-Budgetanteile | $z$ und Wohnlandbudget |
+| Vensim-Rekonstruktion | Disposable Income after Transport, Housing Preference Share Alpha | Housing Land Expenditure und Other Consumption Per Household z | Housing Land Expenditure, Other Consumption Per Household z |
+
+In Vensim stammt $M$ aus dem Einkommen nach Transportkosten:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+M=MAX(0,\ Y-TC)
+$$
+:::
+
+Danach werden die Budgetanteile berechnet:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+Housing\ Land\ Expenditure
+=
+Housing\ Preference\ Share\ Alpha
+\cdot
+Disposable\ Income\ after\ Transport
+$$
+:::
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+Other\ Consumption\ Per\ Household\ z
+=
+(1-Housing\ Preference\ Share\ Alpha)
+\cdot
+Disposable\ Income\ after\ Transport
+$$
+:::
+
+Diese Gleichungen setzen die Cobb-Douglas-Budgetanteile in Vensim-Variablen um.
+
+### C2 Housing Budget-to-q Translation
+
+**Status:** direkt umgesetzt
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | $E_H$, $R$ | Wohnlandbudget wird durch Landpreis geteilt | $q$ |
+| Vensim-Rekonstruktion | Housing Land Expenditure, Mean Urban Rent | ZIDZ schützt Division durch Null | Land Demand per Household q |
+
+Die Landnachfrage entsteht mathematisch aus Wohnlandbudget geteilt durch urbane Rente:
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+q=\frac{E_H}{R}
+$$
+:::
+
+Diese Gleichung transformiert Geldbudget in Fläche pro Haushalt.
+
+In Vensim wird die gleiche Division mit `ZIDZ` geschützt:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+q=ZIDZ(E_H,\ R)
+$$
+:::
+
+Diese Gleichung verhindert undefinierte Werte bei einer Mean Urban Rent von 0.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $q$ | Landnachfrage pro Haushalt | Land Demand per Household q |
+| $E_H$ | Wohnlandbudget | Housing Land Expenditure |
+| $R$ | mittlere urbane Rente | Mean Urban Rent |
+| $ZIDZ(E_H,R)$ | Vensim-Schutzfunktion für Division durch null | gibt 0 zurück, falls $R=0$, sonst $E_H/R$ |
+
+Damit endet der aktive Cobb-Douglas-Mechanismus bei $q$ und $z$.
+
+### C3 Utility Index Translation
+
+**Status:** diagnostisch umgesetzt
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | $rel_z$, $rel_q$, $\alpha$ | relative Cobb-Douglas-Nutzenfunktion | Nutzenindex |
+| Vensim-Rekonstruktion | Relative Other Consumption per Household, Relative Land Demand per Household, Housing Preference Share Alpha | Cobb Douglas Utility Index | Diagnosevariable |
+
+Mathematisch entspricht der Index einer relativen Cobb-Douglas-Funktion:
+
+::: {.formula-box .theory-formula}
+**Theoretische Form**
+
+$$
+\small
+U_{CD}=rel_z^{1-\alpha}\cdot rel_q^\alpha
+$$
+:::
+
+Diese Gleichung transformiert relative Änderungen von $q$ und $z$ in einen relativen Nutzenindex.
+
+In Vensim wird diese Formel als diagnostischer `Cobb Douglas Utility Index` berechnet:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+Cobb\ Douglas\ Utility\ Index
+=
+Relative\ Other\ Consumption^{1-\alpha}
+\cdot
+Relative\ Land\ Demand^\alpha
+$$
+:::
+
+Diese Gleichung erzeugt eine Interpretationsgrösse. Sie wirkt nicht aktiv zurück.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $U_{CD}$ | Cobb-Douglas-Index | Cobb Douglas Utility Index |
+| $rel_z$ | relativer übriger Konsum | Relative Other Consumption per Household |
+| $rel_q$ | relative Landnachfrage | Relative Land Demand per Household |
+| $\alpha$ | Wohnlandanteil | Housing Preference Share Alpha |
+
+### Variablenübersetzung
+
+| Modellterm | Vensim-Variable | Funktion | Vensim-Modell-Layer |
+|---|---|---|---|
+| verfügbares Budget $M$ | Disposable Income after Transport | Einkommen nach Transportkosten | 03_Income_and_Productivity, 05_AMM_Budget_and_Housing_Demand |
+| Präferenzanteil $\alpha$ | Housing Preference Share Alpha | Anteil des Budgets für Wohnland | 05_AMM_Budget_and_Housing_Demand, 07_Cobb_Douglas_Utility |
+| Wohnlandbudget $E_H=\alpha M$ | Housing Land Expenditure | Budget für Land oder Wohnen | 05_AMM_Budget_and_Housing_Demand |
+| übriger Konsum $z$ | Other Consumption Per Household z | restlicher Budgetanteil | 05_AMM_Budget_and_Housing_Demand, 07_Cobb_Douglas_Utility |
+| Landnachfrage $q$ | Land Demand per Household q | Wohnlandbudget geteilt durch Mean Urban Rent | 05_AMM_Budget_and_Housing_Demand, 09_Urban_Land_Conversion_Logic |
+| Nutzenindex $U_{CD}$ | Cobb Douglas Utility Index | Diagnose und Interpretation | 07_Cobb_Douglas_Utility |
+
+### Weglassungen und Diagnose
+
+Der `Cobb Douglas Utility Index` ist kein aktiver Treiber im Modell. Die relativen $q$- und $z$-Variablen dienen nur seiner Berechnung.
+
+## Submodell D: Bettencourt/West Urban Scaling
+
+Submodell D übersetzt Urban Scaling in einen relativen `Innovation Index`. Wegen der aggregierten EU-Ebene wird die Theorie nicht auf eine einzige Stadt angewendet, sondern über vereinfachte Stadtklassen umgesetzt.
+
+Relevante Vensim-Modell-Layer:
+
+- **11_Innovation_and_City_Size**
+- **03_Income_and_Productivity**
+- **08_Agriculture_and_Scarcity**
+
+### Zentrale Terme des Submodells
+
+::: {.formula-box .theory-formula}
+**Theoretische Form**
+
+$$
+\small
+Y=Y_0N^\beta
+$$
+:::
+
+Diese Gleichung beschreibt Urban Scaling: ein städtischer Output wächst als Potenz der Stadtbevölkerung.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+n_i=N_U\cdot\frac{s_i}{N_i}
+$$
+:::
+
+Diese Gleichung übersetzt aggregierte urbane Bevölkerung in äquivalente Stadtklassen.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+I_i=n_i\cdot N_i^{\beta_i}
+$$
+:::
+
+Diese Gleichung transformiert jede Stadtklasse in einen Innovationsbeitrag.
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+Index_I=\frac{I_{total}}{I_{ref}}
+$$
+:::
+
+Diese Gleichung normiert das gesamte Innovationspotenzial auf den Startwert.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $Y$ | urbaner Output in der Theorie | hier als Innovationspotenzial interpretiert |
+| $Y_0$ | Skalierungskonstante | nicht als eigener aktiver Node geführt |
+| $N$ | Bevölkerung einer Stadt | über Stadtklassen angenähert |
+| $\beta$ | Skalierungsexponent | Urban Scaling Exponent |
+| $N_U$ | urbane Bevölkerung | Urban Population Total |
+| $n_i$ | äquivalente Städte je Klasse | Equivalent Number of Cities |
+| $s_i$ | Anteil der Stadtklasse | Share City Class |
+| $N_i$ | typische Stadtgrösse | Representative City Size |
+| $I_i$ | Innovationsbeitrag je Klasse | Innovation Small, Medium, Large or Very Large |
+| $I_{total}$ | gesamtes Innovationspotenzial | Total Urban Innovation Potential |
+| $I_{ref}$ | Referenzpotenzial | Reference Total Innovation Potential |
+| $Index_I$ | relativer Innovationsindex | Innovation Index |
+
+### D1 Urban Population-to-City-Class Translation
+
+**Status:** Proxy-Umsetzung
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | $N$, Stadtgrössenstruktur | Bevölkerung wird in Stadtklassen zerlegt | Anzahl Städte je Klasse |
+| Vensim-Rekonstruktion | Urban Land, Urban Population Density, Share City Class, Representative City Size | Urban Population Total und Equivalent Number of Cities | Equivalent Number of Small, Medium, Large and Very Large Cities |
+
+Mathematisch wird zuerst eine urbane Bevölkerung als Proxy bestimmt:
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+N_U=\frac{L_U}{d_U}
+$$
+:::
+
+Diese Gleichung transformiert urbane Fläche und Dichte in eine approximierte urbane Bevölkerung.
+
+Danach wird diese Bevölkerung auf Stadtklassen verteilt:
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+n_i=N_U\cdot\frac{s_i}{N_i}
+$$
+:::
+
+Diese Gleichung transformiert aggregierte Bevölkerung in eine äquivalente Anzahl Städte je Klasse.
+
+In Vensim werden diese Terme als `Urban Population Total` und `Equivalent Number of ... Cities` umgesetzt.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $N_U$ | urbane Bevölkerung | Urban Population Total |
+| $L_U$ | urbane Fläche | Urban Land |
+| $d_U$ | urbane Bevölkerungsdichte | Urban Population Density |
+| $n_i$ | äquivalente Städte je Klasse | Equivalent Number of Small, Medium, Large or Very Large Cities |
+| $s_i$ | Anteil der Stadtklasse | Share Small, Medium, Large or Very Large City |
+| $N_i$ | typische Stadtgrösse | Representative City Size |
+
+### D2 City-Class-to-Innovation Translation
+
+**Status:** direkt umgesetzt als vereinfachte Power-Law-Logik
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | $n_i$, $N_i$, $\beta_i$ | stadtklassenspezifische Potenzfunktion | $I_i$ |
+| Vensim-Rekonstruktion | Equivalent Number of Cities, Representative City Size, Urban Scaling Exponent | Innovation Small, Medium, Large, very Large | Innovationsbeiträge je Stadtklasse |
+
+Mathematisch wird für jede Stadtklasse ein Innovationsbeitrag berechnet:
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+I_i=n_i\cdot N_i^{\beta_i}
+$$
+:::
+
+Diese Gleichung transformiert eine Stadtklasse in einen Innovationsbeitrag.
+
+Die Beiträge werden addiert:
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+I_{total}=I_S+I_M+I_L+I_{VL}
+$$
+:::
+
+Diese Gleichung transformiert alle Stadtklassenbeiträge in ein gesamtes Innovationspotenzial.
+
+In Vensim entsprechen diese Beiträge den Innovationsvariablen pro Stadtklasse und der Summe `Total Urban Innovation Potential`.
+
+### D3 Innovation Index-to-Model Feedback Translation
+
+**Status:** direkt umgesetzt
+
+| Ebene | Input | Transformation | Output |
+|---|---|---|---|
+| Mathematischer Schritt | $I_{total}$, $I_{ref}$ | Normierung auf Startwert | relativer Innovationsindex |
+| Vensim-Rekonstruktion | Total Urban Innovation Potential, Reference Total Innovation Potential | Innovation Index wirkt auf Urban Productivity Effect und Yield | Urban Productivity Effect, Yield |
+
+Mathematisch wird das Innovationspotenzial auf den Startwert normiert:
+
+::: {.formula-box .model-formula}
+**Modellinterne Transformation**
+
+$$
+\small
+Index_I=\frac{I_{total}}{I_{ref}}
+$$
+:::
+
+Diese Gleichung transformiert absolutes Innovationspotenzial in einen dimensionslosen relativen Index.
+
+In Vensim wird dieser Index an zwei Stellen weiterverwendet.
+
+Produktivitätseffekt:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+P_U=e_U(Index_I-1)
+$$
+:::
+
+Diese Gleichung transformiert den Innovationsindex in einen Produktivitätseffekt.
+
+Yield-Effekt:
+
+::: {.formula-box .vensim-formula}
+**Vensim-Umsetzung**
+
+$$
+\small
+Yield=K\cdot Index_I
+$$
+:::
+
+Diese Gleichung transformiert den Innovationsindex in einen landwirtschaftlichen Ertragseffekt.
+
+| Symbol | Bedeutung | Vensim-Variable |
+|---|---|---|
+| $Index_I$ | relativer Innovationsindex | Innovation Index |
+| $I_{total}$ | gesamtes Innovationspotenzial | Total Urban Innovation Potential |
+| $I_{ref}$ | Referenzpotenzial | Reference Total Innovation Potential |
+| $P_U$ | Produktivitätseffekt | Urban Productivity Effect |
+| $e_U$ | Produktivitätselastizität | Urban Productivity Elasticity |
+| $Yield$ | landwirtschaftlicher Ertrag | Yield |
+| $K$ | Basisertrag | Kcal per km² avg per t |
+
+Das Submodell verändert Urban Land nicht direkt. Es beeinflusst Einkommenswachstum und landwirtschaftliche Produktivität über den Innovation Index.
+
+### Variablenübersetzung
+
+| Modellterm | Vensim-Variable | Funktion | Vensim-Modell-Layer |
+|---|---|---|---|
+| urbane Bevölkerung $N_U$ | Urban Population Total | aggregierter Bevölkerungsproxy | 11_Innovation_and_City_Size |
+| Anteil Stadtklasse $s_i$ | Share Small City, Share Medium City, Share Large City, Share very Large City | Aufteilung der urbanen Bevölkerung | 11_Innovation_and_City_Size |
+| typische Stadtgrösse $N_i$ | Representative Small City Size, Representative Medium City Size, Representative Large City Size, Representative Very Large City Size | typische Grösse je Klasse | 11_Innovation_and_City_Size |
+| äquivalente Stadtzahl $n_i$ | Equivalent Number of Small/Medium/Large/Very Large Cities | angenäherte Stadtzahl je Klasse | 11_Innovation_and_City_Size |
+| Exponent $\beta_i$ | Urban Scaling Exponent Small/Medium/Large/very Large | klassenspezifischer Skalierungsexponent | 11_Innovation_and_City_Size |
+| Innovationsbeitrag $I_i$ | Innovation Small, Innovation Medium, Innovation Large, Innovation very Large | Potenzfunktion je Klasse | 11_Innovation_and_City_Size |
+| Gesamtpotenzial $I_{total}$ | Total Urban Innovation Potential | Summe der Klassen | 11_Innovation_and_City_Size |
+| Referenzpotenzial $I_{ref}$ | Reference Total Innovation Potential | Startwert für Normierung | 11_Innovation_and_City_Size |
+| Innovationsindex $Index_I$ | Innovation Index | wirkt auf Produktivität und Yield | 03_Income_and_Productivity, 08_Agriculture_and_Scarcity, 11_Innovation_and_City_Size |
+| Produktivitätseffekt $P_U$ | Urban Productivity Effect | beeinflusst Net Income Growth Rate | 03_Income_and_Productivity |
+| Ertrag $Yield$ | Yield | beeinflusst Food Production und Agricultural Scarcity | 08_Agriculture_and_Scarcity |
+
+### Weglassungen und Vereinfachungen
+
+Es werden keine einzelnen Städte modelliert. Die Stadtklassen sind eine vereinfachte Übersetzung der Theorie in ein aggregiertes EU-Modell. Es werden keine realen Patent- oder F&E-Daten simuliert. Der `Innovation Index` ist ein relativer Modellindex und keine direkte Messgrösse.
+
+## Zusammenfassung der aktiven Schnittstellen
+
+| Von | Nach | Übergabevariable | Funktion |
+|---|---|---|---|
+| Submodell C: Cobb-Douglas | Submodell B: AMM | Other Consumption Per Household z | Budgetterm im AMM |
+| Submodell C: Cobb-Douglas | Submodell B: AMM | Land Demand per Household q | Landbedarf im AMM |
+| Submodell B: AMM | Submodell A: Land Stocks and Conversion | AMM Consistent Economic Land Conversion Demand | erzeugt Umwandlungsdruck |
+| Submodell A: Land Stocks and Conversion | Submodell B: AMM | Urban Land | bestimmt Landknappheit |
+| Submodell A: Land Stocks and Conversion | Submodell D: Bettencourt/West | Urban Land | Grundlage für Urban Population Total |
+| Submodell D: Bettencourt/West | Income and Productivity | Innovation Index | Produktivitätseffekt |
+| Submodell D: Bettencourt/West | Agriculture and Scarcity | Innovation Index | Yield-Effekt |
+| Agriculture and Scarcity | Submodell B: AMM | Agricultural Rent | Randwert der landwirtschaftlichen Nutzung |
+
+Die zentrale Hauptkette lautet:
+
+1. Submodell C: Cobb-Douglas liefert $q$ und $z$.
+2. Submodell B: AMM nutzt $q$ und $z$ für Fringe Radius und Desired Urban Land.
+3. Daraus entsteht Urban Land Gap.
+4. Daraus entsteht eine Umwandlungsnachfrage.
+5. Submodell A: Land Stocks and Conversion speichert die Änderung von Urban Land und Agricultural Land.
+6. Urban Land wirkt wieder auf AMM und Bettencourt/West zurück.
+7. Submodell D: Bettencourt/West liefert den Innovation Index für Produktivität und Yield.
+
+## Gesamtübersicht: Modellterme und Vensim-Variablen
+
+| Submodell | Modellterm | Vensim-Variable | Funktion | Aktiv |
+|---|---|---|---|---|
+| A | landwirtschaftlicher Landbestand $L_A$ | Agricultural Land | Stock, nimmt durch Umwandlung ab | ja |
+| A | urbaner Landbestand $L_U$ | Urban Land | Stock, nimmt durch Umwandlung zu | ja |
+| A | Landumwandlung $C$ | Land Conversion Rate | Flow zwischen beiden Stocks | ja |
+| B | Budgetrestriktion $Y=z+Rq+tx$ | verteilt auf mehrere Nodes | theoretischer Schritt wird zusammengelegt | ja |
+| B | mittlere urbane Rente $R$ | Mean Urban Rent | Preisinput für q und AMM | ja |
+| B | landwirtschaftliche Rente $R_A$ | Agricultural Rent | Randwert der landwirtschaftlichen Alternative | ja |
+| B | Transportkosten $t$ | Transport Cost per km per Household | bestimmt Fringe Radius mit | ja |
+| B | Stadtrand $x^*$ | Urban Fringe Radius | theoretische Randdistanz | ja |
+| B | Zielstadtfläche $A^*_{total}$ | Desired Urban Land Total | skalierte Zielgrösse | ja |
+| B | Landlücke $G$ | Urban Land Gap | Differenz zwischen Ziel- und Istfläche | ja |
+| C | verfügbares Budget $M$ | Disposable Income after Transport | Budget nach Transportkosten | ja |
+| C | übriger Konsum $z$ | Other Consumption Per Household z | CD-Ergebnis, geht in AMM | ja |
+| C | Landnachfrage $q$ | Land Demand per Household q | CD-Ergebnis, geht in AMM | ja |
+| C | Nutzenindex $U_{CD}$ | Cobb Douglas Utility Index | Diagnose | nein |
+| D | urbane Bevölkerung $N_U$ | Urban Population Total | Bevölkerungsproxy für Scaling | ja |
+| D | Innovationspotenzial $I_{total}$ | Total Urban Innovation Potential | Summe der Stadtklassen | ja |
+| D | Innovationsindex $Index_I$ | Innovation Index | relativer Innovationsfaktor | ja |
+| D | Produktivitätseffekt $P_U$ | Urban Productivity Effect | Wirkung auf Einkommen | ja |
+| D | Ertrag $Yield$ | Yield | Wirkung auf Agrarproduktion | ja |

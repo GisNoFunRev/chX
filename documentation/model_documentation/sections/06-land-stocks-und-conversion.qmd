@@ -1,0 +1,28 @@
+## Submodell A: Stadt und  Landbestände und Landumwandlung
+
+Dieses Submodell bildet die physische Landbilanz des Modells. Es enthält keine eigene mathematische oder ökonomische Theorie. Es speichert nur, wie Land zwischen zwei Beständen verschoben wird.
+
+
+Die Struktur besteht aus zwei Stocks und einem Flow:
+
+$$
+\text{Agricultural Land}
+\rightarrow
+\text{Land Conversion Rate}
+\rightarrow
+\text{Urban Land}
+$$
+
+Die Land Conversion Rate kommt aus anderen Modellteilen. Sie beschreibt, wie viel landwirtschaftliche Fläche pro Jahr in urbane Fläche umgewandelt wird.
+
+
+- Urban Land nimmt durch die Land Conversion Rate zu.
+- Agricultural Land nimmt durch dieselbe Land Conversion Rate ab.
+- Die gesamte betrachtete Landfläche bleibt dadurch konstant.
+
+Das Submodell selbst entscheidet nicht, wie stark Land umgewandelt wird. Es nimmt den Umwandlungsdruck aus anderen Modellteilen auf und speichert die daraus folgende physische Veränderung.
+
+
+
+Eine Rückumwandlung von Urban Land zu Agricultural Land ist in diesem Submodell nicht enthalten.
+

@@ -1,0 +1,52 @@
+# Verwendung von KI
+
+Bei der Erstellung dieser Dokumentation wurde ChatGPT punktuell als unterstützendes Werkzeug eingesetzt. Die Nutzung der KI erfolgte dabei nicht als Ersatz für die eigene fachliche Arbeit, sondern als technische und sprachliche Unterstützung im Arbeitsprozess.
+
+Die inhaltliche Verantwortung für die Modellierung, die Auswahl der Systemgrenzen, die Interpretation der Ergebnisse, die Prüfung der Quellen sowie die finale Ausarbeitung liegt vollständig bei den Verfassenden dieser Arbeit. Die KI wurde nicht verwendet, um zentrale fachliche Entscheidungen zu treffen oder die Argumentation des Berichts eigenständig zu entwickeln.
+
+## Zweck der KI-Nutzung
+
+Die KI wurde insbesondere für unterstützende Tätigkeiten verwendet, welche den Schreib- und Dokumentationsprozess erleichtert haben. Dazu gehörten:
+
+* sprachliche Überarbeitung einzelner Textabschnitte,
+* Formulierungsvorschläge für verständlichere und präzisere Beschreibungen,
+* Unterstützung bei der Strukturierung einzelner Kapitel,
+* Hilfe bei der Erstellung von Quarto- und Markdown-Texten,
+* LaTeX-Unterstützung bei mathematischen Formulierungen,
+* technische Unterstützung bei Code- und Skriptproblemen,
+* Hinweise auf mögliche Quellen und Datenpunkte,
+* Unterstützung bei der Formulierung von Dokumentationsbausteinen,
+* Hilfe bei der Erklärung einzelner Vensim- oder Systemdynamik-Konzepte,
+* Unterstützung beim Debugging und bei der Interpretation technischer Fehlermeldungen.
+
+Die KI wurde damit vor allem als Werkzeug zur Effizienzsteigerung eingesetzt. Sie half dabei, bestehende Gedanken klarer zu formulieren, technische Probleme schneller einzuordnen und die Dokumentation konsistenter aufzubauen.
+
+## Abgrenzung der KI-Nutzung
+
+Wichtig ist, dass die KI nicht als inhaltliche Denkhilfe im Sinne einer eigenständigen fachlichen Bewertung verwendet wurde. Die zentralen Entscheidungen der Arbeit wurden durch die Verfassenden getroffen.
+
+Nicht durch KI übernommen wurden insbesondere:
+
+* die Festlegung der Forschungs- und Modellierungsziele,
+* die Auswahl der relevanten Modellvariablen,
+* die Entscheidung über die Systemgrenzen,
+* die Bewertung der Modellstruktur,
+* die Interpretation der Simulationsergebnisse,
+* die fachliche Prüfung der Modellannahmen,
+* die finale Auswahl und Bewertung der Quellen,
+* die Entscheidung, welche Inhalte in die Dokumentation aufgenommen werden,
+* die Verantwortung für Korrektheit, Nachvollziehbarkeit und Vollständigkeit des Berichts.
+
+Die von der KI vorgeschlagenen Inhalte wurden jeweils geprüft, angepasst und nur dann übernommen, wenn sie zur eigenen Argumentation und zum tatsächlichen Stand des Projekts passten.
+
+## Rolle der Verfassenden
+
+Die Verfassenden haben die fachliche Arbeit eigenständig durchgeführt. Dazu gehören insbesondere die Arbeit am Vensim-Modell, die Strukturierung der Dokumentation, die Auswahl der relevanten Kapitel, die Bewertung der Modelllogik sowie die Interpretation der Resultate.
+
+KI-generierte Vorschläge wurden nicht ungeprüft übernommen. Sie dienten als Ausgangspunkt für sprachliche Verbesserungen, technische Korrekturen oder alternative Formulierungen. Die finale Fassung wurde durch die Verfassenden kontrolliert und verantwortet.
+
+## Transparenzhinweis
+
+Zusammenfassend wurde KI in dieser Arbeit als unterstützendes Werkzeug für Sprache, Technik und Dokumentation verwendet. Die inhaltliche Konzeption, die fachliche Bewertung und die finale Verantwortung liegen vollständig bei den Verfassenden.
+
+Die Verwendung von KI entspricht damit einer technischen Unterstützung im Arbeitsprozess und nicht einer Auslagerung der eigentlichen wissenschaftlichen oder modellbezogenen Denkleistung.

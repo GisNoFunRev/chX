@@ -1,0 +1,39 @@
+# Submodell B: Alonso-Muth-Mills  – urbane Flächenberechnung {#sec-amm}
+
+Dieses Kapitel dokumentiert den Alonso-Muth-Mills-Kern des Modells. Diese beschreibt die **mathematische Grundlogik in sieben Schritten** und bildet die ökonomische Logik ab, aus der im Modell eine gewünschte urbane Fläche entsteht. Er verbindet Haushaltsbudget, Bodenrente, Transportkosten, Landnachfrage und Stadtgrenze.
+
+
+Jedes Unterkapitel ist gleich aufgebaut:
+
+1. Ein kurzer Einstieg erklärt, was der mathematische Schritt aussagt.
+2. Die zentrale Gleichung steht in einem hervorgehobenen Formelblock.
+3. Eine Symboltabelle erklärt die verwendeten Grössen und ihre Dimension.
+4. Die anschliessende Herleitung zeigt, warum die Gleichung gilt und wie sie ökonomisch gelesen wird.
+5. Am Ende steht eine kurze Quellen-Notation: Sie nennt nur dann analoge Begriffe, wenn wichtige Quellen andere Symbole oder Begriffe für denselben mathematischen Schritt verwenden.
+
+Die sieben Schritte bilden eine Kette:
+
+- Das Haushaltsbudget setzt den mikroökonomischen Rahmen. →
+- Daraus folgt die Bodenrentenfunktion. →
+- Die Pendelkosten erzeugen einen räumlichen Rentengradienten. →
+- Die Stadt endet dort, wo urbane und landwirtschaftliche Bodenrente gleich sind. →
+- Aus dieser Randbedingung entsteht die räumliche Stadtgrösse. →
+- Die Ringgeometrie übersetzt den Radius in Fläche. →
+- Die Gleichgewichtsbedingungen verbinden Bevölkerung, Dichte, Bodenrente und Stadtrand.
+
+---
+
+{{< include 07-amm-mathematik/01-household-budget.qmd >}}
+
+{{< include 07-amm-mathematik/02-bid-rent-function.qmd >}}
+
+{{< include 07-amm-mathematik/03-distance-effect.qmd >}}
+
+{{< include 07-amm-mathematik/04-fringe-condition.qmd >}}
+
+{{< include 07-amm-mathematik/05-fringe-radius.qmd >}}
+
+{{< include 07-amm-mathematik/06-urban-area.qmd >}}
+
+{{< include 07-amm-mathematik/07-land-demand-equilibrium-idea.qmd >}}
+

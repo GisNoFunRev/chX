@@ -1,0 +1,24 @@
+# Kalibrierung und Plausibilitätsprüfung {#sec-kalibrierung-plausibilitaet}
+
+Dieses Kapitel beschreibt die Kalibrierung und Plausibilitätsprüfung des Modells.
+
+## Ziel der Kalibrierung
+
+Die Kalibrierung soll sicherstellen, dass das Modell im Basislauf plausible Werte erzeugt.
+
+Das Ziel ist keine perfekte historische Reproduktion, sondern eine glaubwürdige Ausgangsdynamik.
+
+## Plausibilitätsprüfungen
+
+Geprüft werden später insbesondere:
+
+- Startwerte
+- Einheitenkonsistenz
+- Grössenordnungen
+- Verhalten im Basislauf
+- Verhalten bei Extremwerten
+- Verhalten bei Parameteränderungen
+
+## Dokumentationsstand
+
+Die Kalibrierung wird nach Abschluss des finalen Modells ergänzt.

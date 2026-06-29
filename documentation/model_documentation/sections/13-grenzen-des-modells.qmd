@@ -1,0 +1,23 @@
+# Grenzen des Modells {#sec-grenzen-des-modells}
+
+Dieses Kapitel beschreibt die Grenzen des Modells.
+
+## Räumliche Vereinfachung
+
+Das Modell bildet keine echte räumliche Struktur ab.
+
+Die Stadt wird über aggregierte Grössen beschrieben, nicht über einzelne Standorte oder Parzellen.
+
+## Ökonomische Vereinfachung
+
+Der AMM-Kern wird stark vereinfacht.
+
+Das Modell nutzt zentrale Beziehungen zwischen Einkommen, Transportkosten, Bodenrente und Landnachfrage, aber es bildet keinen vollständigen Wohnungsmarkt ab.
+
+## Politische und institutionelle Vereinfachung
+
+Planungsrecht, Zonierung, Steuern, Eigentum und politische Konflikte werden nicht explizit modelliert.
+
+## Datenbezogene Grenzen
+
+Einige Parameter müssen aus Literaturwerten, Näherungen oder plausibilisierten Annahmen abgeleitet werden.

@@ -1,0 +1,23 @@
+# Sensitivitätsanalyse {#sec-sensitivitaetsanalyse}
+
+Dieses Kapitel beschreibt die Sensitivitätsanalyse.
+
+## Ziel
+
+Die Sensitivitätsanalyse zeigt, welche Parameter das Modellverhalten besonders stark beeinflussen.
+
+## Mögliche Sensitivitätsparameter
+
+Besonders relevante Parameter sind:
+
+- Urban Rent Adjustment Time
+- Urban Rent Sensitivity to Land Tightness
+- Minimum Land Demand per Household
+- Maximum Land Demand per Household
+- Urban Expansion Adjustment Time
+- Transport Cost per km
+- Agricultural Rent
+
+## Ergebnisdarstellung
+
+Die Ergebnisse werden später als Bandbreiten, Szenariovergleiche oder Vensim-Sensitivitätsgrafiken dokumentiert.

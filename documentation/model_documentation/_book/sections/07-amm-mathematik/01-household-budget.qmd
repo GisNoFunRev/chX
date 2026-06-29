@@ -1,0 +1,37 @@
+### 1. Household Budget Constraint – Haushaltsbudget des Haushalts
+
+Dieser Schritt beschreibt die Budgetrestriktion eines Haushalts im monozentrischen Stadtmodell. Ein Haushalt erzielt Einkommen im Zentrum und verwendet dieses Einkommen für übrigen Konsum, Land beziehungsweise Wohnfläche und Transportkosten. Die Gleichung bildet den mikroökonomischen Ausgangspunkt, aus dem die räumliche Bodenrentenlogik abgeleitet wird.
+
+::: {.key-equation}
+$$
+\Large
+Y = z + R(x) \cdot q + t \cdot x
+$$
+:::
+
+| Symbol | Bedeutung | Einheit / Dimension |
+|---|---|---|
+| $Y$ | Haushaltseinkommen | Geld pro Haushalt |
+| $z$ | übriger Konsum des Haushalts | Geld pro Haushalt |
+| $R(x)$ | Bodenrente am Standort $x$ | Geld pro Fläche |
+| $q$ | konsumierte Landmenge pro Haushalt | Fläche pro Haushalt |
+| $x$ | Distanz zum Stadtzentrum | Distanz |
+| $t$ | Transportkosten pro Distanzeinheit | Geld pro Distanz und Haushalt |
+| $R(x) \cdot q$ | Ausgaben für Land oder Wohnfläche am Standort $x$ | Geld pro Haushalt |
+| $t \cdot x$ | Transportkosten bei Distanz $x$ | Geld pro Haushalt |
+
+Die Gleichung ist eine Budgetrestriktion. Alle Terme müssen in derselben monetären Einheit gemessen werden. Das Einkommen $Y$ wird auf übrigen Konsum $z$, Land- oder Wohnflächenausgaben $R(x) \cdot q$ und Transportkosten $t \cdot x$ verteilt.
+
+Brueckner formuliert die gleiche Logik in einer leicht anderen Notation. Haushalte verdienen im CBD ein Einkommen $y$, zahlen bei Distanz $x$ Pendelkosten $tx$, und verwenden das verbleibende Einkommen für Land $q$ und ein nicht-wohnbezogenes Konsumgut $c$ [@brueckner2001sprawl, pp. 67-68]. In der hier verwendeten Notation entspricht $z$ diesem übrigen Konsum.
+
+Mathematisch ist $R(x) \cdot q$ ein Geldbetrag pro Haushalt, weil eine Bodenrente pro Fläche mit einer Fläche pro Haushalt multipliziert wird. Ebenso ist $t \cdot x$ ein Geldbetrag pro Haushalt, weil Transportkosten pro Distanzeinheit mit einer Distanz multipliziert werden. Damit ist die Gleichung dimensionskonsistent.
+
+Ökonomisch beschreibt die Gleichung den grundlegenden Trade-off des monozentrischen Modells. Bei gegebenem Einkommen kann ein Haushalt nicht gleichzeitig beliebig viel übrigen Konsum, viel Land, hohe Bodenrente und hohe Transportkosten tragen. Diese Budgetlogik ist die Grundlage für die anschliessende Umstellung nach $R(x)$.
+
+**Hinweis zur Rolle des Cobb-Douglas-Untermodells.**
+Die Grössen $z$ und $q$ werden in diesem AMM-Schritt als Bestandteile der Haushaltsentscheidung verwendet. Die AMM-Budgetgleichung zeigt zunächst nur, dass übriger Konsum, Landkonsum, Bodenrente und Transportkosten gemeinsam im Haushaltsbudget stehen. Wie der Haushalt die Aufteilung zwischen übrigem Konsum $z$ und Landkonsum $q$ wählt, wird im anschliessenden Cobb-Douglas-Untermodell separat hergeleitet. Dort wird die Präferenzstruktur des Haushalts beschrieben, zum Beispiel über eine Nutzenfunktion der Form $U = q^\alpha z^{1-\alpha}$.
+
+Quellen-Notation:
+
+- **Brueckner:** $y$ für Einkommen, $c$ für übrigen Konsum, $q$ für Landkonsum.
+
