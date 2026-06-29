@@ -68,9 +68,12 @@ Urban Fringe Radius=MAX(
 		Rente entspricht.
 	|
 
-Share Large City=0.04
+Share Large City=0.26
 	~	Dmnl
-	~		|
+	~	Anteil der urbanen Bevölkerung in grossen Städten. Der Wert beschreibt \
+		eine vereinfachte Stadtgrössenverteilung und beeinflusst das modellierte \
+		Innovationspotenzial.
+	|
 
 AMM Fringe Condition Gap=    Urban Rent at Fringe - Agricultural Rent
 	~	EUR/km2
@@ -78,23 +81,41 @@ AMM Fringe Condition Gap=    Urban Rent at Fringe - Agricultural Rent
 		Wert nahe null zeigt, dass die Fringe-Bedingung erfüllt ist.
 	|
 
-Ammount Large City=Urban Population Total * (Share Large City / Treshold Large City)
-	~	Dmnl
-	~		|
-
-Ammount Medium City=Urban Population Total * (Share Medium City / Treshold Medium City\
+Equivalent Number of Large Cities=Urban Population Total * (Share Large City / Representative Large City Size\
 		)
 	~	Dmnl
-	~		|
+	~	Modellierte äquivalente Anzahl kleiner Städte. Die urbane Bevölkerung \
+		dieser Grössenklasse wird durch eine repräsentative Stadtgrösse \
+		geteilt. Es handelt sich nicht um eine echte gezählte Anzahl Städte, \
+		sondern um eine vereinfachte Modellgrösse.
+	|
 
-Ammount Small City=Urban Population Total * (Share Small City / Treshold Small City)
-	~	Dmnl
-	~		|
-
-Ammount Very Large City=Urban Population Total * (Share very Large City / Treshold Very Large City\
+Equivalent Number of Medium Cities=Urban Population Total * (Share Medium City / Representative Medium City Size\
 		)
 	~	Dmnl
-	~		|
+	~	Modellierte äquivalente Anzahl kleiner Städte. Die urbane Bevölkerung \
+		dieser Grössenklasse wird durch eine repräsentative Stadtgrösse \
+		geteilt. Es handelt sich nicht um eine echte gezählte Anzahl Städte, \
+		sondern um eine vereinfachte Modellgrösse.
+	|
+
+Equivalent Number of Small Cities=Urban Population Total * (Share Small City / Representative Small City Size\
+		)
+	~	Dmnl
+	~	Modellierte äquivalente Anzahl kleiner Städte. Die urbane Bevölkerung \
+		dieser Grössenklasse wird durch eine repräsentative Stadtgrösse \
+		geteilt. Es handelt sich nicht um eine echte gezählte Anzahl Städte, \
+		sondern um eine vereinfachte Modellgrösse.
+	|
+
+Equivalent Number of Very Large Cities=Urban Population Total * (Share very Large City\
+		 / Representative Very Large City Size)
+	~	Dmnl
+	~	Modellierte äquivalente Anzahl kleiner Städte. Die urbane Bevölkerung \
+		dieser Grössenklasse wird durch eine repräsentative Stadtgrösse \
+		geteilt. Es handelt sich nicht um eine echte gezählte Anzahl Städte, \
+		sondern um eine vereinfachte Modellgrösse.
+	|
 
 Reference Initial Desired Urban Land= INITIAL(Desired Urban Land)
 	~	km2
@@ -112,7 +133,7 @@ Land Conversion Pressure Factors=AMM Consistent Economic Land Conversion Demand
 		Rent Gap Pressure Factor verstärkt.
 	|
 
-Spatial Planning=Urban Land Index * Spacial Planing Factor
+Spatial Planning=Urban Land Index * Spatial Planing Factor
 	~	Dmnl
 	~	Planungsindex aus Urban Land Index und Spacial Planing Factor.
 	|
@@ -123,21 +144,35 @@ Reference Initial Number of Households= INITIAL(Number of Households)
 		Entwicklung der Haushaltszahl relativ zum Startjahr abzubilden.
 	|
 
-Innovation Large=Ammount Large City * Treshold Large City ^ Urban Scaling Exponent Large
+Innovation Large=Equivalent Number of Large Cities * Representative Large City Size ^\
+		 Urban Scaling Exponent Large
 	~	Dmnl
-	~		|
+	~	Innovationsbeitrag der grossen Stadtklasse. Der Wert folgt der \
+		Urban-Scaling-Logik, bei der Innovation überproportional mit der \
+		Stadtgrösse skaliert.
+	|
 
-Innovation Medium=Ammount Medium City * Treshold Medium City ^ Urban Scaling Exponent Medium
+Innovation Medium=Equivalent Number of Medium Cities * Representative Medium City Size\
+		 ^ Urban Scaling Exponent Medium
 	~	Dmnl
-	~		|
+	~	Innovationsbeitrag der mittleren Stadtklasse. Der Wert folgt der \
+		Urban-Scaling-Logik, bei der Innovation überproportional mit der \
+		Stadtgrösse skaliert.
+	|
 
 Reference Total Innovation Potential= INITIAL(Total Urban Innovation Potential)
 	~	Dmnl
-	~		|
+	~	Referenzwert des gesamten Innovationspotenzials zu Beginn der Simulation. \
+		Dieser Wert dient zur Normalisierung des späteren Innovationsindex.
+	|
 
-Innovation very Large=Ammount Very Large City * Treshold Very Large City ^ Urban Scaling Exponent very Large
+Innovation very Large=Equivalent Number of Very Large Cities * Representative Very Large City Size\
+		 ^ Urban Scaling Exponent very Large
 	~	Dmnl
-	~		|
+	~	Innovationsbeitrag der sehr grossen Stadtklasse. Der Wert folgt der \
+		Urban-Scaling-Logik, bei der Innovation überproportional mit der \
+		Stadtgrösse skaliert.
+	|
 
 Urban Productivity Effect=Urban Productivity Elasticity
 	    * (Innovation Index - 1)
@@ -160,9 +195,11 @@ Soil Protection Factor=0.3
 		landwirtschaftliche Knappheit die spätere Land Conversion Rate.
 	|
 
-Spacial Planing Factor=1.0001
+Spatial Planing Factor=1.0001
 	~	Dmnl
-	~		|
+	~	Szenarioparameter für räumliche Planung. Ein Wert von 1 bedeutet eine \
+		neutrale Planungsannahme ohne zusätzliche Verstärkung oder Dämpfung.
+	|
 
 Urban Rent at Current Fringe=(
 	        Mean Household Income
@@ -176,13 +213,19 @@ Urban Rent at Current Fringe=(
 		Transportkosten.
 	|
 
-Share Medium City=0.07
+Share Medium City=0.2
 	~	Dmnl
-	~		|
+	~	Anteil der urbanen Bevölkerung in mittleren Städten. Der Wert beschreibt \
+		eine vereinfachte Stadtgrössenverteilung und beeinflusst das modellierte \
+		Innovationspotenzial.
+	|
 
-Share Small City=0.85
+Share Small City=0.28
 	~	Dmnl
-	~		|
+	~	Anteil der urbanen Bevölkerung in kleinen Städten. Der Wert beschreibt \
+		eine vereinfachte Stadtgrössenverteilung und beeinflusst das modellierte \
+		Innovationspotenzial.
+	|
 
 Desired Urban Land=3.141 * (Urban Fringe Radius ^ 2)
 	~	km2
@@ -218,9 +261,11 @@ Urban Aggregate Scale Factor=Reference Initial Urban Land / Reference Initial De
 		urbane Fläche des Gesamtmodells skaliert.
 	|
 
-Urban Scaling Exponent very Large=1.6
+Urban Scaling Exponent very Large=1.15
 	~	Dmnl
-	~		|
+	~	Urban-Scaling-Exponent der sehr grossen Stadtklasse. Werte über 1 \
+		bedeuten, dass Innovation überproportional mit der Stadtgrösse steigt.
+	|
 
 Yield="Kcal per km^2 avg per t"
 	    * Innovation Index
@@ -256,9 +301,13 @@ Household Clearing Gap=MAX(
 		der aktuellen urbanen Fläche. Negative Werte werden auf null gesetzt.
 	|
 
-Innovation Small=Ammount Small City * Treshold Small City ^ Urban Scaling Exponent Small
+Innovation Small=Equivalent Number of Small Cities * Representative Small City Size ^\
+		 Urban Scaling Exponent Small
 	~	Dmnl
-	~		|
+	~	Innovationsbeitrag der kleinen Stadtklasse. Der Wert folgt der \
+		Urban-Scaling-Logik, bei der Innovation überproportional mit der \
+		Stadtgrösse skaliert.
+	|
 
 Urban Population Total=Urban Land / Urban Population Density
 	~	Dmnl
@@ -266,29 +315,45 @@ Urban Population Total=Urban Land / Urban Population Density
 		aus Urban Land und Urban Population Density berechnet.
 	|
 
-Urban Scaling Exponent Medium=1.1
+Urban Scaling Exponent Medium=1.15
 	~	Dmnl
-	~		|
+	~	Urban-Scaling-Exponent der mittleren Stadtklasse. Werte über 1 bedeuten, \
+		dass Innovation überproportional mit der Stadtgrösse steigt.
+	|
 
-Urban Scaling Exponent Small=0.8
+Urban Scaling Exponent Small=1.15
 	~	Dmnl
-	~		|
+	~	Urban-Scaling-Exponent der kleinen Stadtklasse. Werte über 1 bedeuten, \
+		dass Innovation überproportional mit der Stadtgrösse steigt.
+	|
 
-Treshold Small City=50000
+Representative Small City Size=100000
 	~	Dmnl
-	~		|
+	~	Repräsentative Stadtgrösse der kleinen Stadtklasse. Der Wert wird zur \
+		Approximation der Anzahl kleiner Städte und ihres Innovationsbeitrags \
+		verwendet.
+	|
 
-Treshold Very Large City=1e+06
+Representative Very Large City Size=2.5e+06
 	~	Dmnl
-	~		|
+	~	Repräsentative Stadtgrösse der sehr grossen Stadtklasse. Der Wert wird \
+		zur Approximation der Anzahl sehr grosser Städte und ihres \
+		Innovationsbeitrags verwendet.
+	|
 
-Treshold Large City=500000
+Representative Large City Size=866000
 	~	Dmnl
-	~		|
+	~	Repräsentative Stadtgrösse der grossen Stadtklasse. Der Wert wird zur \
+		Approximation der Anzahl grosser Städte und ihres Innovationsbeitrags \
+		verwendet.
+	|
 
-Treshold Medium City=250000
+Representative Medium City Size=316000
 	~	Dmnl
-	~		|
+	~	Repräsentative Stadtgrösse der mittleren Stadtklasse. Der Wert wird zur \
+		Approximation der Anzahl mittlerer Städte und ihres Innovationsbeitrags \
+		verwendet.
+	|
 
 Urban Land Required for Households=    Land Demand per Household q * Number of Households
 	~	km2
@@ -297,11 +362,17 @@ Urban Land Required for Households=    Land Demand per Household q * Number of H
 
 Urban Population Density=1500
 	~	Dmnl
-	~		|
+	~	Angenommene urbane Bevölkerungsdichte. Der Wert kann an der \
+		EU-OECD-Definition eines Urban Centre mit 1'500 Personen pro km2 \
+		orientiert werden.
+	|
 
-Share very Large City=0.04
+Share very Large City=0.26
 	~	Dmnl
-	~		|
+	~	Anteil der urbanen Bevölkerung in sehr grossen Städten. Der Wert \
+		beschreibt eine vereinfachte Stadtgrössenverteilung und beeinflusst das \
+		modellierte Innovationspotenzial.
+	|
 
 Soil Protection=Spatial Planning * Soil Protection Factor
 	~	Dmnl
@@ -311,7 +382,9 @@ Soil Protection=Spatial Planning * Soil Protection Factor
 
 Land per Capita=0.0003
 	~	km2/Person
-	~		|
+	~	Angenommener urbaner Flächenbedarf pro Person. Der Wert sollte konsistent \
+		mit der angenommenen Urban Population Density gewählt werden.
+	|
 
 Land per Household=Land per Capita * Mean Household Size
 	~	km2/Household
@@ -324,7 +397,9 @@ Total Urban Innovation Potential=Innovation Large
 	    + Innovation Small
 	    + Innovation very Large
 	~	Dmnl
-	~		|
+	~	Aggregiertes Innovationspotenzial aller Stadtgrössenklassen. Der Wert \
+		ergibt sich aus der Summe der klassenspezifischen Innovationsbeiträge.
+	|
 
 Urban Rent at Fringe=(
 	        Mean Household Income
@@ -345,9 +420,11 @@ Mean Annual Housing Cost per Household=Mean Annual Housing Cost per Capita * Mea
 		Haushaltsgrösse.
 	|
 
-Urban Scaling Exponent Large=1.2
+Urban Scaling Exponent Large=1.15
 	~	Dmnl
-	~		|
+	~	Urban-Scaling-Exponent der grossen Stadtklasse. Werte über 1 bedeuten, \
+		dass Innovation überproportional mit der Stadtgrösse steigt.
+	|
 
 Number of Households=Expected Population / Mean Household Size
 	~	Household
@@ -777,7 +854,9 @@ Land Conversion Rate= MIN(
 
 Land Conversion Time Minimum=1
 	~	Year
-	~		|
+	~	Minimal zulässige Anpassungszeit der Landumwandlung. Der Parameter \
+		verhindert unrealistisch schnelle oder numerisch instabile Landkonversion.
+	|
 
 Land Tightness Index= ZIDZ(
 	        Reference Initial Land Demand per Household,
@@ -1290,110 +1369,110 @@ TIME STEP  = 1
 V300  Do not put anything below this section - it will be ignored
 *00_Legend
 $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,68,2
-12,1,0,929,-10,264,105,8,7,0,42,-1,5,0,0,0-0-0,0-0-0,Helvetica|24||0-0-0,0,0,0,0,0,0
+12,1,0,1045,179,264,105,8,7,0,42,-1,5,0,0,0-0-0,0-0-0,Helvetica|24||0-0-0,0,0,0,0,0,0
 Visuelle Legende |<<NnN>>||<<NnN>>||<<NnN>>|Diese View definiert die visuelle Sprache des Modells. Sie enthält keine aktive Modelllogik, sondern dient nur zur Orientierung.|<<NnN>>|
-12,2,0,1185,293,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+12,2,0,1301,482,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
 |<<NnN>>||<<NnN>>|Speichert einen Wert über die Zeit.|<<NnN>>|Wird normalerweise mit INTEG(…) definiert.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Population|<<NnN>>|Urban Land|<<NnN>>|Aggricultural Land|<<NnN>>|Mean Urban Rent|<<NnN>>|Income per Capita
-12,3,122,691,333,94,52,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-12,4,0,931,293,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+12,3,122,807,522,94,52,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,4,0,1047,482,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
 Stock / Zustandsvariable
-12,5,0,691,196,80,40,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+12,5,0,807,385,80,40,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
 Symbol
-12,6,0,931,196,80,40,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+12,6,0,1047,385,80,40,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
 Zweck
-12,7,0,1185,196,80,40,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+12,7,0,1301,385,80,40,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
 Beschreibung / Beispiel
-12,8,137,691,482,94,52,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
-12,9,0,931,476,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+12,8,137,807,671,94,52,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,9,0,1047,665,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
 Flow / Veränderungsrate
-12,10,0,1185,476,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+12,10,0,1301,665,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
 Verändert eine Zustandsvariable pro Zeiteinheit.|<<NnN>>|Flows erhöhen oder reduzieren einen Stock.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Births|<<NnN>>|Deaths|<<NnN>>|Land Conversion Rate|<<NnN>>|Income per Capita Growth|<<NnN>>|Transport Cost per km Change
-12,11,0,691,674,95,95,6,3,0,4,-1,0,0,0,0-0-0,144-179-255,|||0-0-0,0,0,0,0,0,0
-12,12,0,931,670,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+12,11,0,807,863,95,95,6,3,0,4,-1,0,0,0,0-0-0,144-179-255,|||0-0-0,0,0,0,0,0,0
+12,12,0,1047,859,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
 Parameter / Annahme
-12,13,0,1185,670,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+12,13,0,1301,859,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
 Fester Wert oder Kalibrierparameter.|<<NnN>>|Diese Werte steuern das Verhalten des Modells,|<<NnN>>|verändern sich aber nicht automatisch über die Zeit.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Housing Preference Share Alpha|<<NnN>>|Urban Expansion Adjustment Time|<<NnN>>|Initial Income per Capita|<<NnN>>|Average Commuting Distance
-12,14,0,691,909,95,95,6,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-12,15,0,935,904,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+12,14,0,807,1098,95,95,6,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+12,15,0,1051,1093,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
 Lookup / Exogener Input
-12,16,0,1189,904,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+12,16,0,1305,1093,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
 Zeitabhängiger Input oder Szenarioannahme.|<<NnN>>|Wird meist mit WITH LOOKUP(...) definiert.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Expected Population|<<NnN>>|Crude Birth Rate Lookup|<<NnN>>|Crude Death Rate Lookup|<<NnN>>|historische Zielwerte für Population oder Urban Land
-12,17,0,691,1144,95,95,2,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-12,18,0,933,1130,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+12,17,0,807,1333,95,95,2,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+12,18,0,1049,1319,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
 Auxiliary / Hilfsvariable
-12,19,0,1187,1130,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+12,19,0,1303,1319,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
 Erechnete Zwischenvariable.|<<NnN>>|Speichert keinen Wert über die Zeit,|<<NnN>>|sondern wird direkt aus anderen Variablen berechnet.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Number of Households|<<NnN>>|Urban Fringe Radius|<<NnN>>|Land Demand per Household q|<<NnN>>|Transport Cost per Household|<<NnN>>|Food Production
-12,20,0,691,1379,95,95,11,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-12,21,0,934,1355,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+12,20,0,807,1568,95,95,11,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+12,21,0,1050,1544,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
 Begrenzung / Entscheidungslogik
-12,22,0,1188,1355,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+12,22,0,1304,1544,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
 Variable mit Begrenzung, Schwellenwert oder Schutzlogik.|<<NnN>>|Wird oft mit MIN(...), MAX(...), ZIDZ(...) oder IF THEN ELSE(...) berechnet.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Max Feasible Conversion|<<NnN>>|Soil Protection Effect|<<NnN>>|Land Conversion Rate|<<NnN>>|Current Fringe Rent Gap
-12,23,125,691,1614,95,95,3,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-12,24,0,931,1588,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+12,23,125,807,1803,95,95,3,3,0,1,-1,4,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+12,24,0,1047,1777,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
 Output / KPI / Validierung
-12,25,0,1185,1588,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+12,25,0,1301,1777,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
 Wichtige Zielgrösse oder Auswertungsvariable.|<<NnN>>|Diese Werte werden für Interpretation, Backtesting|<<NnN>>|oder Modellvergleich verwendet.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Population|<<NnN>>|Urban Land|<<NnN>>|Mean Urban Rent|<<NnN>>|Population Error|<<NnN>>|Urban Land Error
-12,26,0,691,1850,95,95,3,3,0,5,-1,2,0,0,0-0-0,0-112-112,|||0-0-0,0,0,0,0,0,0
-12,27,0,935,1850,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
+12,26,0,807,2039,95,95,3,3,0,5,-1,2,0,0,0-0-0,0-112-112,|||0-0-0,0,0,0,0,0,0
+12,27,0,1051,2039,105,66,8,7,0,0,-1,0,0,0,0,0,0,0,0,0
 Grau / Shadow Variable
-12,28,0,1189,1850,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
+12,28,0,1305,2039,105,66,8,7,0,0,-1,0,0,0,0,0,1,0,0,0
 Eine bereits existierende Variable wird in dieser View erneut angezeigt.|<<NnN>>|Sie wird nicht neu berechnet, sondern nur zur Übersicht wiederverwendet.|<<NnN>>||<<NnN>>|Beispiele:|<<NnN>>|Population in der Agriculture-View|<<NnN>>|Urban Land in der Backtesting-View|<<NnN>>|Innovation Index in der AMM-View
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *01_Population_Household
 $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,60,2
-12,1,0,1330,381,358,90,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
+12,1,0,1333,55,358,90,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
 01 Population & Households|<<NnN>>||<<NnN>>|Diese View zeigt die Bevölkerungs- und Haushaltslogik.|<<NnN>>||<<NnN>>|Die Bevölkerung wird nicht mehr über Geburten, Todesfälle|<<NnN>>|und Migration modelliert, sondern als exogener Lookup-Input|<<NnN>>|vorgegeben.|<<NnN>>||<<NnN>>|Aus Expected Population und Mean Household Size wird|<<NnN>>|Number of Households berechnet. Diese Variable treibt später|<<NnN>>|die Nachfrage nach urbaner Fläche.
-10,2,Time,783,609,35,26,3,2,0,6,-1,1,0,0,-1--1--1,0-138-137,|||255-255-255,0,0,0,0,0,0
-10,3,Expected Population,1091,769,65,65,6,3,0,0,-1,1,0,0,0,0,0,0,0,0
-10,4,Mean Household Size,1289,1089,57,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,5,Desired Mean Household Size,1216,1246,66,66,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,6,Long Run Mean Household Size,1023,1246,65,65,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,7,Household Size Adjustment Time,1811,1014,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,8,Initial Mean Household Size,1139,991,60,60,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,9,11,4,100,0,0,22,0,192,0,-1--1--1,,1|(1459,1089)|
-1,10,11,4,4,0,0,22,0,192,0,-1--1--1,,1|(1459,1089)|
-11,11,0,1459,1021,20,15,34,3,0,0,4,0,0,0,0,0,0,0,0,0
-10,12,Mean Household Size Change,1536,1021,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Time,786,283,35,26,3,2,0,6,-1,1,0,0,-1--1--1,0-138-137,|||255-255-255,0,0,0,0,0,0
+10,3,Expected Population,1094,443,65,65,6,3,0,0,-1,1,0,0,0,0,0,0,0,0
+10,4,Mean Household Size,1292,763,57,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,Desired Mean Household Size,1219,920,66,66,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,Long Run Mean Household Size,1026,920,65,65,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Household Size Adjustment Time,1814,688,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Initial Mean Household Size,1142,665,60,60,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,9,11,4,100,0,0,22,0,192,0,-1--1--1,,1|(1462,763)|
+1,10,11,4,4,0,0,22,0,192,0,-1--1--1,,1|(1462,763)|
+11,11,0,1462,695,20,15,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,12,Mean Household Size Change,1539,695,57,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,13,8,4,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
-1,14,5,12,1,0,0,0,0,192,0,-1--1--1,,1|(1457,1248)|
+1,14,5,12,1,0,0,0,0,192,0,-1--1--1,,1|(1460,922)|
 1,15,7,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,16,6,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-1,17,4,12,1,0,0,0,0,192,0,-1--1--1,,1|(1336,977)|
-10,18,Year Unit,773,741,55,55,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,19,Time for Lookup,1091,607,55,55,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,17,4,12,1,0,0,0,0,192,0,-1--1--1,,1|(1339,651)|
+10,18,Year Unit,776,415,55,55,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,19,Time for Lookup,1094,281,55,55,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,20,18,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,21,2,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,22,19,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,23,Number of Households,1291,773,61,61,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,23,Number of Households,1294,447,61,61,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,24,3,23,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,25,4,23,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *02_Transport_and_Commuting
-$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,61,2
-12,1,0,1057,281,299,79,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|109-109-109,0,0,256,0,0,0
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,95,2
+12,1,0,623,-393,299,79,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|109-109-109,0,0,256,0,0,0
 02 Transport & Commuting|<<NnN>>||<<NnN>>|Diese View beschreibt die jährlichen Transportkosten eines Haushalts.|<<NnN>>||<<NnN>>|Die Transportkosten pro Kilometer werden als Stock modelliert und|<<NnN>>|passen sich über die Zeit an einen langfristigen Zielwert an.|<<NnN>>||<<NnN>>|Zusätzlich wird berechnet, wie viele Pendler pro Haushalt existieren.|<<NnN>>|Daraus entstehen die Transportkosten pro Haushalt, welche später in|<<NnN>>|der AMM-Budgetlogik vom Haushaltseinkommen abgezogen werden.|<<NnN>>||<<NnN>>||<<NnN>>|
-10,2,Transport Cost per km,1234,1041,59,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(1434,1041)|
-1,4,5,2,4,0,0,22,0,192,0,-1--1--1,,1|(1434,1041)|
-11,5,0,1434,1176,32,22,34,3,0,0,4,0,0,0,0,0,0,0,0,0
-10,6,Transport Cost per km Change,1525,1176,59,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,7,Initial Transport Cost per km,1234,893,64,64,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-10,8,Long Run Transport Cost per km,1143,1337,64,64,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-10,9,Desired Transport Cost per km,1396,1336,60,60,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-10,10,Transport Cost Adjustment Time,1566,1338,57,57,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-10,11,Mean Household Size,517,1091,62,20,3,2,0,6,-1,1,0,0,-1--1--1,111-111-111,|||255-255-255,0,0,0,0,0,0
-10,12,Employment Share of Total Population,799,1186,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,13,Commuting Share of Employed Persons,629,1185,60,60,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,14,Commuters per Household,727,977,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,15,Average Workdays per Capita,1012,1187,59,59,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,16,Transport Cost per km per Capita,1018,952,59,59,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-10,17,Average Commuting Distance,1130,646,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,18,Transport Cost per Household,1270,762,59,26,3,3,0,4,-1,1,0,0,0-0-0,0-255-122,|||0-0-0,0,0,0,0,0,0
+10,2,Transport Cost per km,800,367,59,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(1000,367)|
+1,4,5,2,4,0,0,22,0,192,0,-1--1--1,,1|(1000,367)|
+11,5,0,1000,502,32,22,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,6,Transport Cost per km Change,1091,502,59,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Initial Transport Cost per km,800,219,64,64,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,8,Long Run Transport Cost per km,709,663,64,64,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,9,Desired Transport Cost per km,962,662,60,60,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,10,Transport Cost Adjustment Time,1132,664,57,57,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,11,Mean Household Size,83,417,62,20,3,2,0,6,-1,1,0,0,-1--1--1,111-111-111,|||255-255-255,0,0,0,0,0,0
+10,12,Employment Share of Total Population,365,512,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Commuting Share of Employed Persons,195,511,60,60,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Commuters per Household,293,303,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,Average Workdays per Capita,578,513,59,59,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,Transport Cost per km per Capita,584,278,59,59,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,17,Average Commuting Distance,696,-28,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,Transport Cost per Household,836,88,59,26,3,3,0,4,-1,1,0,0,0-0-0,0-255-122,|||0-0-0,0,0,0,0,0,0
 1,19,8,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,20,9,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-1,21,2,6,1,0,0,0,0,192,0,-1--1--1,,1|(1518,1030)|
+1,21,2,6,1,0,0,0,0,192,0,-1--1--1,,1|(1084,356)|
 1,22,10,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,23,7,2,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
 1,24,11,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
@@ -1401,7 +1480,7 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,61,2
 1,26,13,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,27,2,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,28,15,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,29,Transport Cost per km per Household,1020,781,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,Transport Cost per km per Household,586,107,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,30,16,29,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,31,14,29,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,32,17,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
@@ -1409,28 +1488,28 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,61,2
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *03_Income_and_Productivity
-$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,67,2
-12,1,0,1188,336,327,145,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,55,2
+12,1,0,1161,111,327,145,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
 03 Income & Productivity|<<NnN>>||<<NnN>>|Diese View beschreibt die Entwicklung des Einkommens.|<<NnN>>||<<NnN>>|Income per Capita wird als Stock modelliert und wächst über|<<NnN>>|Income per Capita Growth. Die Wachstumsrate wird durch eine|<<NnN>>|Basiswachstumsrate und einen Produktivitätseffekt beeinflusst.|<<NnN>>||<<NnN>>|Der Produktivitätseffekt hängt vom Innovation Index ab.|<<NnN>>|Aus Income per Capita und Mean Household Size entsteht|<<NnN>>|Mean Household Income.|<<NnN>>||<<NnN>>|Nach Abzug der Transportkosten ergibt sich|<<NnN>>|Disposable Income after Transport, welches später in der|<<NnN>>|AMM-Budgetlogik verwendet wird.
-10,2,Income per Capita,1105,807,60,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(1314,807)|
-1,4,5,2,4,0,0,22,0,192,0,-1--1--1,,1|(1314,807)|
-11,5,0,1314,897,28,22,34,3,0,0,4,0,0,0,0,0,0,0,0,0
-10,6,Income per Capita Growth,1393,897,51,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,7,Initial Income per Capita,759,807,63,63,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-10,8,Net Income Growth Rate,1211,1080,85,85,11,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,9,Base Income Growth Rate,1560,1080,55,55,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,10,Maximum Income Growth Rate,1229,1262,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,11,Minimum Income Growth Rate,1409,1262,78,78,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,12,Urban Productivity Effect,853,1080,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,13,Urban Productivity Elasticity,1074,1262,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,14,Mean Household Size,1196,711,62,20,3,2,0,7,-1,1,0,0,128-128-128,128-128-128,|||255-255-255,0,0,0,0,0,0
-10,15,Mean Household Income,1523,711,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,16,Transport Cost per Household,1736,903,64,21,3,2,0,7,-1,1,0,0,128-128-128,113-113-113,|||255-255-255,0,0,0,0,0,0
-10,17,Disposable Income after Transport,1736,752,63,26,3,3,0,4,-1,1,0,0,0-0-0,0-255-104,|||0-0-0,0,0,0,0,0,0
+10,2,Income per Capita,1078,582,60,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(1287,582)|
+1,4,5,2,4,0,0,22,0,192,0,-1--1--1,,1|(1287,582)|
+11,5,0,1287,672,28,22,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,6,Income per Capita Growth,1366,672,51,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Initial Income per Capita,732,582,63,63,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,8,Net Income Growth Rate,1184,855,85,85,11,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,Base Income Growth Rate,1533,855,55,55,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Maximum Income Growth Rate,1202,1037,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Minimum Income Growth Rate,1382,1037,78,78,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Urban Productivity Effect,826,855,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Urban Productivity Elasticity,1047,1037,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Mean Household Size,1169,486,62,20,3,2,0,7,-1,1,0,0,128-128-128,128-128-128,|||255-255-255,0,0,0,0,0,0
+10,15,Mean Household Income,1496,486,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,Transport Cost per Household,1709,678,64,21,3,2,0,7,-1,1,0,0,128-128-128,113-113-113,|||255-255-255,0,0,0,0,0,0
+10,17,Disposable Income after Transport,1709,527,63,26,3,3,0,4,-1,1,0,0,0-0-0,0-255-104,|||0-0-0,0,0,0,0,0,0
 1,18,7,2,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
-1,19,2,6,1,0,0,0,0,192,0,-1--1--1,,1|(1202,936)|
-1,20,8,6,1,0,0,0,0,192,0,-1--1--1,,1|(1353,992)|
+1,19,2,6,1,0,0,0,0,192,0,-1--1--1,,1|(1175,711)|
+1,20,8,6,1,0,0,0,0,192,0,-1--1--1,,1|(1326,767)|
 1,21,9,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,22,11,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,23,10,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
@@ -1440,128 +1519,128 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,67,2
 1,27,15,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,28,16,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,29,12,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,30,Innovation Index,611,1141,62,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,30,Innovation Index,584,916,62,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,31,30,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *04_Urban_Rent_and_Land_Tightness
-$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,32,2
-12,1,0,2388,468,312,181,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,68,2
+12,1,0,1197,466,312,181,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
 04 Urban Rent & Land Tightness|<<NnN>>||<<NnN>>|Diese View beschreibt die Dynamik der mittleren urbanen Miete.|<<NnN>>||<<NnN>>|Die Miete reagiert auf die Knappheit urbaner Fläche pro Haushalt.|<<NnN>>|Wenn die verfügbare urbane Fläche pro Haushalt sinkt, steigt der|<<NnN>>|Land Tightness Index. Dadurch erhöht sich Desired Mean Urban Rent.|<<NnN>>||<<NnN>>|Mean Urban Rent passt sich über eine Anpassungszeit schrittweise|<<NnN>>|an den gewünschten Mietwert an.
-10,2,Current Urban Land per Household,2379,1611,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,3,Reference Initial Land Demand per Capita,2954,1173,62,62,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-10,4,Initial Mean Household Size,2672,1380,77,20,3,2,0,7,-1,1,0,0,128-128-128,118-118-118,|||255-255-255,0,0,0,0,0,0
-10,5,Reference Initial Land Demand per Household,2672,1173,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,6,Land Tightness Index,2379,1173,66,66,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-10,7,Urban Rent Sensitivity to Land Tightness,2130,1391,64,64,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,8,Initial Mean Urban Rent,2625,1000,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,9,Housing Land Expenditure,2883,1000,65,20,3,2,0,7,-1,1,0,0,128-128-128,123-123-123,|||255-255-255,0,0,0,0,0,0
-10,10,Urban Land,2089,1611,50,20,3,2,0,7,-1,1,0,0,128-128-128,125-125-125,|||255-255-255,0,0,0,0,0,0
-10,11,Desired Mean Urban Rent,2130,1173,55,55,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,12,Urban Rent Adjustment Time,1819,1064,61,61,6,3,0,0,-1,1,0,0,0,0,0,0,0,0
-10,13,Mean Urban Rent,2171,826,58,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,14,16,13,100,0,0,22,0,192,0,-1--1--1,,1|(1866,826)|
-1,15,16,13,4,0,0,22,0,192,0,-1--1--1,,1|(1866,826)|
-11,16,0,1866,875,21,25,34,3,0,0,4,0,0,0,0,0,0,0,0,0
-10,17,Mean Urban Rent Change,1964,875,77,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Current Urban Land per Household,1188,1609,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Reference Initial Land Demand per Capita,1763,1171,62,62,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,4,Initial Mean Household Size,1481,1378,77,20,3,2,0,7,-1,1,0,0,128-128-128,118-118-118,|||255-255-255,0,0,0,0,0,0
+10,5,Reference Initial Land Demand per Household,1481,1171,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,Land Tightness Index,1188,1171,66,66,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,7,Urban Rent Sensitivity to Land Tightness,939,1389,64,64,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Initial Mean Urban Rent,1434,998,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,Housing Land Expenditure,1692,998,65,20,3,2,0,7,-1,1,0,0,128-128-128,123-123-123,|||255-255-255,0,0,0,0,0,0
+10,10,Urban Land,898,1609,50,20,3,2,0,7,-1,1,0,0,128-128-128,125-125-125,|||255-255-255,0,0,0,0,0,0
+10,11,Desired Mean Urban Rent,939,1171,55,55,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Urban Rent Adjustment Time,628,1062,61,61,6,3,0,0,-1,1,0,0,0,0,0,0,0,0
+10,13,Mean Urban Rent,980,824,58,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,14,16,13,100,0,0,22,0,192,0,-1--1--1,,1|(675,824)|
+1,15,16,13,4,0,0,22,0,192,0,-1--1--1,,1|(675,824)|
+11,16,0,675,873,21,25,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,17,Mean Urban Rent Change,773,873,77,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,18,4,5,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
 1,19,3,5,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
 1,20,2,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,21,5,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,22,9,8,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
-1,23,5,8,1,0,0,0,0,192,1,-1--1--1,,1|(2705,1094)|
+1,23,5,8,1,0,0,0,0,192,1,-1--1--1,,1|(1514,1092)|
 1,24,8,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,25,6,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,26,7,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-1,27,11,17,1,0,0,0,0,192,0,-1--1--1,,1|(1986,1093)|
+1,27,11,17,1,0,0,0,0,192,0,-1--1--1,,1|(795,1091)|
 1,28,12,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,29,8,13,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
 1,30,10,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-1,31,13,17,1,0,0,0,0,192,0,-1--1--1,,1|(2095,954)|
-10,32,Current Urban Radius,1907,1611,57,57,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,31,13,17,1,0,0,0,0,192,0,-1--1--1,,1|(904,952)|
+10,32,Current Urban Radius,716,1609,57,57,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,33,10,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,34,Urban Rent at Current Fringe,1898,1432,58,58,2,3,0,16,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,34,Urban Rent at Current Fringe,707,1430,58,58,2,3,0,16,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
 1,35,32,34,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,36,Mean Household Income,1645,1312,49,27,3,2,0,7,-1,0,0,0,110-110-110,110-110-110,|||255-255-255,0,0,0,0,0,0
+10,36,Mean Household Income,454,1310,49,27,3,2,0,7,-1,0,0,0,110-110-110,110-110-110,|||255-255-255,0,0,0,0,0,0
 1,37,36,34,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,38,Other Consumption Per Household z,1633,1430,65,27,3,2,0,7,-1,0,0,0,110-110-110,110-110-110,|||255-255-255,0,0,0,0,0,0
+10,38,Other Consumption Per Household z,442,1428,65,27,3,2,0,7,-1,0,0,0,110-110-110,110-110-110,|||255-255-255,0,0,0,0,0,0
 1,39,38,34,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,40,Transport Cost per km per Household,1617,1526,62,27,3,2,0,7,-1,0,0,0,110-110-110,110-110-110,|||255-255-255,0,0,0,0,0,0
-10,41,Land Demand per Household q,1879,1314,51,27,3,2,0,7,-1,0,0,0,110-110-110,110-110-110,|||255-255-255,0,0,0,0,0,0
+10,40,Transport Cost per km per Household,426,1524,62,27,3,2,0,7,-1,0,0,0,110-110-110,110-110-110,|||255-255-255,0,0,0,0,0,0
+10,41,Land Demand per Household q,688,1312,51,27,3,2,0,7,-1,0,0,0,110-110-110,110-110-110,|||255-255-255,0,0,0,0,0,0
 1,42,41,34,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,43,40,34,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,44,Number of Households,2577,1570,37,27,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,44,Number of Households,1386,1568,37,27,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,45,44,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *05_AMM_Budget_and_Housing_Demand
 $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,65,2
-12,1,0,1365,367,405,106,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
+12,1,0,4,-43,405,106,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
 05 AMM Budget & Housing Demand|<<NnN>>||<<NnN>>|Diese View beschreibt die Nachfrageseite des AMM-Modells.|<<NnN>>||<<NnN>>|Aus dem verfügbaren Haushaltseinkommen nach Transportkosten|<<NnN>>|wird ein Wohnbudget berechnet. Dieses Wohnbudget wird durch|<<NnN>>|die mittlere urbane Miete geteilt, um die Landnachfrage pro|<<NnN>>|Haushalt zu bestimmen.|<<NnN>>||<<NnN>>|Zusammen mit der Haushaltszahl ergibt sich daraus die gewünschte|<<NnN>>|urbane Fläche auf aggregierter Ebene.
-10,2,Disposable Income after Transport,428,1186,66,27,3,2,0,7,-1,1,0,0,128-128-128,140-140-140,|||255-255-255,0,0,0,0,0,0
-10,3,Housing Land Expenditure,590,1098,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,4,Other Consumption Per Household z,527,1362,63,63,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,5,Housing Preference Share Alpha,812,1181,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Disposable Income after Transport,-933,776,66,27,3,2,0,7,-1,1,0,0,128-128-128,140-140-140,|||255-255-255,0,0,0,0,0,0
+10,3,Housing Land Expenditure,-771,688,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Other Consumption Per Household z,-834,952,63,63,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,Housing Preference Share Alpha,-549,771,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,6,5,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,7,2,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,8,Mean Urban Rent,1141,784,53,20,3,2,0,7,-1,1,0,0,128-128-128,126-126-126,|||255-255-255,0,0,0,0,0,0
-10,9,Land Demand per Household q,1475,784,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Mean Urban Rent,-220,374,53,20,3,2,0,7,-1,1,0,0,128-128-128,126-126-126,|||255-255-255,0,0,0,0,0,0
+10,9,Land Demand per Household q,114,374,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,10,3,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,11,8,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,12,Desired Urban Land Total,1136,1484,77,26,3,3,0,4,-1,1,0,0,0-0-0,0-255-0,|||0-0-0,0,0,0,0,0,0
+10,12,Desired Urban Land Total,-225,1074,77,26,3,3,0,4,-1,1,0,0,0-0-0,0-255-0,|||0-0-0,0,0,0,0,0,0
 1,13,5,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,14,Reference Initial Land Demand per Household,1236,592,65,27,3,2,0,7,-1,1,0,0,128-128-128,125-125-125,|||255-255-255,0,0,0,0,0,0
-10,15,Relative Land Demand per Household,1475,592,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Reference Initial Land Demand per Household,-125,182,65,27,3,2,0,7,-1,1,0,0,128-128-128,125-125-125,|||255-255-255,0,0,0,0,0,0
+10,15,Relative Land Demand per Household,114,182,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,16,9,15,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,17,14,15,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,18,2,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,19,Urban Rent at Fringe,2034,1112,65,65,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-10,20,Mean Household Income,1568,1210,49,27,3,2,0,7,-1,0,0,0,100-100-100,100-100-100,|||255-255-255,0,0,0,0,0,0
-1,21,4,19,1,0,0,0,0,192,0,-1--1--1,,1|(1377,1627)|
+10,19,Urban Rent at Fringe,673,702,65,65,2,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,20,Mean Household Income,207,800,49,27,3,2,0,7,-1,0,0,0,100-100-100,100-100-100,|||255-255-255,0,0,0,0,0,0
+1,21,4,19,1,0,0,0,0,192,0,-1--1--1,,1|(16,1217)|
 1,22,20,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,23,Transport Cost per km per Household,1612,1047,62,27,3,2,0,7,-1,0,0,0,100-100-100,100-100-100,|||255-255-255,0,0,0,0,0,0
+10,23,Transport Cost per km per Household,251,637,62,27,3,2,0,7,-1,0,0,0,100-100-100,100-100-100,|||255-255-255,0,0,0,0,0,0
 1,24,23,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,25,AMM Fringe Condition Gap,1604,950,58,58,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,25,AMM Fringe Condition Gap,243,540,58,58,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,26,19,25,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,27,Agricultural Rent,1472,1004,51,20,3,2,0,7,-1,1,0,0,128-128-128,113-113-113,|||255-255-255,0,0,0,0,0,0
+10,27,Agricultural Rent,111,594,51,20,3,2,0,7,-1,1,0,0,128-128-128,113-113-113,|||255-255-255,0,0,0,0,0,0
 1,28,27,25,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,29,Desired Urban Land,1132,1284,64,26,3,3,0,5,-1,0,0,0,0-0-0,0-255-0,|||0-0-0,0,0,0,0,0,0
-10,30,Urban Fringe Radius,1372,1116,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,Desired Urban Land,-229,874,64,26,3,3,0,5,-1,0,0,0,0-0-0,0-255-0,|||0-0-0,0,0,0,0,0,0
+10,30,Urban Fringe Radius,11,706,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,31,20,30,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,32,4,30,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,33,9,30,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,34,27,30,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,35,23,30,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-1,36,9,19,1,0,0,0,0,192,0,-1--1--1,,1|(1799,906)|
+1,36,9,19,1,0,0,0,0,192,0,-1--1--1,,1|(438,496)|
 1,37,30,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,38,30,29,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,39,Reference Initial Desired Urban Land,1273,1341,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,39,Reference Initial Desired Urban Land,-88,931,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,40,29,39,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
-10,41,Urban Aggregate Scale Factor,1548,1395,59,59,2,3,0,7,-1,0,0,0,100-100-100,255-255-255,|||0-0-0,0,0,0,0,0,0
-10,42,Reference Initial Urban Land,1547,1286,63,20,3,2,0,7,-1,0,0,0,100-100-100,100-100-100,|||255-255-255,0,0,0,0,0,0
+10,41,Urban Aggregate Scale Factor,187,985,59,59,2,3,0,7,-1,0,0,0,100-100-100,255-255-255,|||0-0-0,0,0,0,0,0,0
+10,42,Reference Initial Urban Land,186,876,63,20,3,2,0,7,-1,0,0,0,100-100-100,100-100-100,|||255-255-255,0,0,0,0,0,0
 1,43,42,41,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,44,39,41,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,45,Reference Initial Number of Households,2231,787,65,65,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,46,Number of Households,2100,707,37,27,3,2,0,7,-1,0,0,0,116-116-116,116-116-116,|||255-255-255,0,0,0,0,0,0
+10,45,Reference Initial Number of Households,870,377,65,65,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,46,Number of Households,739,297,37,27,3,2,0,7,-1,0,0,0,116-116-116,116-116-116,|||255-255-255,0,0,0,0,0,0
 1,47,46,45,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
-10,48,Household Scaling Factor,2155,1218,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,48,Household Scaling Factor,794,808,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,49,45,48,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,50,46,48,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,51,Urban Land Required for Households,1988,808,64,26,3,3,0,5,-1,0,0,0,0-0-0,0-255-0,|||0-0-0,0,0,0,0,0,0
+10,51,Urban Land Required for Households,627,398,64,26,3,3,0,5,-1,0,0,0,0-0-0,0-255-0,|||0-0-0,0,0,0,0,0,0
 1,52,9,51,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,53,46,51,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,54,Land per Capita,2668,1104,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,55,Land per Household,2499,1080,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,54,Land per Capita,1307,694,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,55,Land per Household,1138,670,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,56,54,55,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,57,Mean Household Size,2287,1016,62,20,3,2,0,7,-1,0,0,0,116-116-116,116-116-116,|||255-255-255,0,0,0,0,0,0
+10,57,Mean Household Size,926,606,62,20,3,2,0,7,-1,0,0,0,116-116-116,116-116-116,|||255-255-255,0,0,0,0,0,0
 1,58,57,55,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,59,Mean Annual Housing Cost per Capita,2505,853,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,60,Mean Annual Housing Cost per Household,2305,916,63,63,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,59,Mean Annual Housing Cost per Capita,1144,443,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,60,Mean Annual Housing Cost per Household,944,506,63,63,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,61,59,60,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,62,57,60,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,63,29,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,64,41,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-1,65,48,12,1,0,0,0,0,192,0,-1--1--1,,1|(1757,1601)|
+1,65,48,12,1,0,0,0,0,192,0,-1--1--1,,1|(396,1191)|
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *07_Cobb_Douglas_Utility
@@ -1638,37 +1717,37 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,96,2
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *09_Urban_Land_Conversion_Logic
-$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,81,2
-12,1,0,906,140,380,132,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,37,2
+12,1,0,1508,521,380,132,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
 09 Urban Land Conversion Logic|<<NnN>>||<<NnN>>|Diese View berechnet die tatsächliche Land Conversion Rate.|<<NnN>>||<<NnN>>|Die gewünschte urbane Fläche wird mit der aktuell vorhandenen|<<NnN>>|urbanen Fläche verglichen. Daraus entsteht der Urban Land Gap.|<<NnN>>||<<NnN>>|Dieser Gap erzeugt eine AMM-basierte Umwandlungsnachfrage.|<<NnN>>|Die tatsächliche Landumwandlung wird jedoch durch verfügbare|<<NnN>>|landwirtschaftliche Fläche, Bodenrenten und Schutz-/Knappheitslogik|<<NnN>>|begrenzt.|<<NnN>>||<<NnN>>|Die resultierende Land Conversion Rate fliesst zurück in die|<<NnN>>|Macro-Land-Stocks-View und verändert Urban Land und Aggricultural Land.
-10,2,Desired Urban Land Total,565,480,56,20,3,2,0,7,-1,1,0,0,128-128-128,121-121-121,|||255-255-255,0,0,0,0,0,0
-10,3,Urban Land,565,558,54,13,3,2,0,7,-1,1,0,0,128-128-128,108-108-108,|||255-255-255,0,0,0,0,0,0
-10,4,Urban Land Gap,968,535,55,55,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Desired Urban Land Total,1167,861,56,20,3,2,0,7,-1,1,0,0,128-128-128,121-121-121,|||255-255-255,0,0,0,0,0,0
+10,3,Urban Land,1167,939,54,13,3,2,0,7,-1,1,0,0,128-128-128,108-108-108,|||255-255-255,0,0,0,0,0,0
+10,4,Urban Land Gap,1570,916,55,55,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,5,2,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,6,3,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,7,Urban Expansion Adjustment Time,968,411,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,8,AMM Consistent Economic Land Conversion Demand,1191,535,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Urban Expansion Adjustment Time,1570,792,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,AMM Consistent Economic Land Conversion Demand,1793,916,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,9,4,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,10,7,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,11,Mean Urban Rent,756,604,53,20,3,2,0,7,-1,1,0,0,128-128-128,130-130-130,|||255-255-255,0,0,0,0,0,0
-10,12,Agricultural Rent,578,712,51,20,3,2,0,7,-1,1,0,0,128-128-128,119-119-119,|||255-255-255,0,0,0,0,0,0
-10,13,Rent Gap Pressure Factor,980,714,66,66,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,14,Current Fringe Rent Gap,757,714,63,63,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Mean Urban Rent,1358,985,53,20,3,2,0,7,-1,1,0,0,128-128-128,130-130-130,|||255-255-255,0,0,0,0,0,0
+10,12,Agricultural Rent,1180,1093,51,20,3,2,0,7,-1,1,0,0,128-128-128,119-119-119,|||255-255-255,0,0,0,0,0,0
+10,13,Rent Gap Pressure Factor,1582,1095,66,66,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Current Fringe Rent Gap,1359,1095,63,63,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,15,11,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,16,12,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,17,14,13,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-1,18,12,13,1,0,0,0,0,192,0,-1--1--1,,1|(781,848)|
-10,19,Land Conversion Pressure Factors,1191,714,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,12,13,1,0,0,0,0,192,0,-1--1--1,,1|(1383,1229)|
+10,19,Land Conversion Pressure Factors,1793,1095,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,20,8,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,21,Household Capacity of Current Urban Land,395,629,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,22,Land Demand per Household q,171,632,51,27,3,2,0,7,-1,0,0,0,108-103-109,108-103-109,|||255-255-255,0,0,0,0,0,0
+10,21,Household Capacity of Current Urban Land,997,1010,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,22,Land Demand per Household q,773,1013,51,27,3,2,0,7,-1,0,0,0,108-103-109,108-103-109,|||255-255-255,0,0,0,0,0,0
 1,23,22,21,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,24,3,21,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,25,Household Clearing Gap,396,769,63,63,11,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,26,Number of Households,398,916,37,27,3,2,0,7,-1,0,0,0,108-103-109,108-103-109,|||255-255-255,0,0,0,0,0,0
+10,25,Household Clearing Gap,998,1150,63,63,11,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,26,Number of Households,1000,1297,37,27,3,2,0,7,-1,0,0,0,108-103-109,108-103-109,|||255-255-255,0,0,0,0,0,0
 1,27,26,25,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,28,21,25,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,29,Additional Urban Land Needed for Clearing,173,764,64,27,3,3,0,5,-1,0,0,0,0-0-0,0-255-0,|||0-0-0,0,0,0,0,0,0
+10,29,Additional Urban Land Needed for Clearing,775,1145,64,27,3,3,0,5,-1,0,0,0,0-0-0,0-255-0,|||0-0-0,0,0,0,0,0,0
 1,30,25,29,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,31,22,29,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 \\\---/// Sketch information - do not modify anything except names
@@ -1679,7 +1758,7 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,82,2
 10 Soil Protection & Agricultural Pressure|<<NnN>>||<<NnN>>|Diese View beschreibt die Schutzlogik für landwirtschaftliche Fläche.|<<NnN>>||<<NnN>>|Wenn landwirtschaftliche Fläche knapper wird, soll die Umwandlung|<<NnN>>|von landwirtschaftlicher Fläche in urbane Fläche gebremst werden.|<<NnN>>||<<NnN>>|Der Soil Protection Effect wirkt später als Reduktionsfaktor auf|<<NnN>>|die Land Conversion Pressure Factors in der Urban-Land-Conversion-View.
 10,2,Soil Protection Factor,480,340,56,56,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
 10,3,Max Ceiling Soil Protection,458,717,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,4,Spacial Planing Factor,678,658,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Spatial Planing Factor,678,658,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
 10,5,Spatial Planning,1034,535,54,54,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 10,6,Urban Land Index,1138,438,54,20,3,2,0,7,-1,0,0,0,117-117-117,117-117-117,|||255-255-255,0,0,0,0,0,0
 1,7,6,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
@@ -1693,26 +1772,26 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,82,2
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *11_Innovation_and_City_Size
-$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,49,2
-12,1,0,1376,256,356,172,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,77,2
+12,1,0,1222,-1204,356,172,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
 11 Innovation & City Size|<<NnN>>||<<NnN>>|Diese View beschreibt den Zusammenhang zwischen Stadtgrösse|<<NnN>>|und Innovation.|<<NnN>>||<<NnN>>|Mit wachsender Bevölkerung steigt der Population Scale Index.|<<NnN>>|Dieser beeinflusst den Desired Innovation Index.|<<NnN>>||<<NnN>>|Der Innovation Index passt sich verzögert an diesen Zielwert an|<<NnN>>|und kann später Produktivität und landwirtschaftlichen Ertrag|<<NnN>>|beeinflussen.
-10,2,Urban Population Density,1096,746,77,77,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,3,Urban Population Total,1216,1045,61,61,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,4,Urban Land,1301,747,54,13,3,2,0,7,-1,0,0,0,116-116-116,116-116-116,|||255-255-255,0,0,0,0,0,0
+10,2,Urban Population Density,942,-714,77,77,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Urban Population Total,1062,-415,61,61,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Urban Land,1147,-713,54,13,3,2,0,7,-1,0,0,0,116-116-116,116-116-116,|||255-255-255,0,0,0,0,0,0
 1,5,4,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,6,2,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,7,Share Small City,467,1164,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,8,Share Medium City,884,1300,61,61,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,9,Share Large City,1297,1284,55,55,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,10,Share very Large City,2220,1177,66,66,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,11,Treshold Small City,467,1381,61,61,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,12,Treshold Medium City,884,1473,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,13,Treshold Large City,1297,1480,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,14,Treshold Very Large City,2226,1415,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,15,Ammount Small City,643,1284,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,16,Ammount Medium City,1096,1300,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,17,Ammount Large City,1551,1284,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,18,Ammount Very Large City,2012,1284,66,66,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Share Small City,313,-296,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Share Medium City,730,-160,61,61,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,Share Large City,1143,-176,55,55,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Share very Large City,2066,-283,66,66,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Representative Small City Size,313,-79,61,61,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Representative Medium City Size,730,13,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Representative Large City Size,1143,20,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Representative Very Large City Size,2072,-45,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,Equivalent Number of Small Cities,489,-176,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,Equivalent Number of Medium Cities,942,-160,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,Equivalent Number of Large Cities,1397,-176,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,Equivalent Number of Very Large Cities,1858,-176,66,66,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,19,3,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,20,3,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,21,3,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
@@ -1725,14 +1804,14 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,49,2
 1,28,9,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,29,14,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,30,10,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,31,Urban Scaling Exponent Small,576,1879,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,32,Urban Scaling Exponent Medium,860,1874,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,33,Urban Scaling Exponent Large,1150,1894,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,34,Urban Scaling Exponent very Large,1470,1876,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,35,Innovation Small,718,2027,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,36,Innovation Medium,1009,2050,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,37,Innovation Large,1252,2053,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,38,Innovation very Large,1527,2014,57,57,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,Urban Scaling Exponent Small,422,419,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,32,Urban Scaling Exponent Medium,706,414,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,33,Urban Scaling Exponent Large,996,434,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,Urban Scaling Exponent very Large,1316,416,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,35,Innovation Small,564,567,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,36,Innovation Medium,855,590,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,37,Innovation Large,1098,593,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,38,Innovation very Large,1373,554,57,57,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,39,15,35,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,40,31,35,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,41,16,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
@@ -1741,14 +1820,14 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,49,2
 1,44,18,38,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,45,34,38,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,46,33,37,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,47,Total Urban Innovation Potential,1141,2242,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,47,Total Urban Innovation Potential,987,782,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,48,35,47,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,49,36,47,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,50,37,47,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,51,38,47,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,52,Reference Total Innovation Potential,1506,2236,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,52,Reference Total Innovation Potential,1352,776,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,53,47,52,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
-10,54,Innovation Index,1115,2410,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,54,Innovation Index,961,950,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,55,47,54,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,56,52,54,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,57,11,35,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
@@ -1758,38 +1837,38 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,49,2
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *Macro_Ebene
-$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,103,2
-12,1,0,594,-155,328,144,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,47,2
+12,1,0,1864,362,328,144,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
 Macro Ebene|<<NnN>>||<<NnN>>|Diese View zeigt die Makro-Ebene der Landflächen.|<<NnN>>||<<NnN>>|Urban Land und Aggricultural Land sind zentrale Bestandsgrössen|<<NnN>>|des Modells. Urban Land steigt durch Land Conversion Rate,|<<NnN>>|während Aggricultural Land durch dieselbe Umwandlungsrate sinkt.|<<NnN>>||<<NnN>>|Die detaillierte Berechnung von Land Conversion Rate wird später|<<NnN>>|in der Urban-Land-Conversion-View modelliert. Diese View zeigt|<<NnN>>|zuerst nur die Veränderung der zentralen Landbestände.
-10,2,Initial Urban Land,315,135,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,3,Urban Land,315,296,61,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,4,Initial Aggricultural Land,843,132,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,5,Aggricultural Land,843,296,59,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,6,8,5,100,0,0,22,0,192,0,-1--1--1,,1|(695,313)|
-1,7,8,3,4,0,0,22,0,192,0,-1--1--1,,1|(478,313)|
-11,8,0,594,313,13,25,34,3,0,0,1,0,0,0,0,0,0,0,0,0
-10,9,Land Conversion Rate,594,374,64,36,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,10,Reference Initial Urban Land,315,472,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,11,Urban Land Index,124,296,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Initial Urban Land,1585,652,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Urban Land,1585,813,61,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Initial Aggricultural Land,2113,649,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,Aggricultural Land,2113,813,59,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,8,5,100,0,0,22,0,192,0,-1--1--1,,1|(1965,830)|
+1,7,8,3,4,0,0,22,0,192,0,-1--1--1,,1|(1748,830)|
+11,8,0,1864,830,13,25,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,9,Land Conversion Rate,1864,891,64,36,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Reference Initial Urban Land,1585,989,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Urban Land Index,1394,813,59,59,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,12,2,3,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
 1,13,4,5,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
 1,14,3,10,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
 1,15,3,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,16,10,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,17,Land Conversion Pressure Factors,594,468,48,27,3,2,0,7,-1,1,0,0,128-128-128,121-121-121,|||255-255-255,0,0,0,0,0,0
+10,17,Land Conversion Pressure Factors,1864,985,48,27,3,2,0,7,-1,1,0,0,128-128-128,121-121-121,|||255-255-255,0,0,0,0,0,0
 1,18,17,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,19,Max Feasible Conversion,845,496,64,64,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,19,Max Feasible Conversion,2115,1013,64,64,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,20,5,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,21,19,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,22,Land Conversion Time Minimum,1054,494,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,22,Land Conversion Time Minimum,2324,1011,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,23,22,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 ///---\\\
 :L<%^E!@
 1:current.vdfx
 4:Time
-5:Urban Land Index
+5:Urban Scaling Exponent very Large
 9:current
-19:81,8
+19:77,10
 24:2025
 25:2050
 26:2050
