@@ -152,24 +152,59 @@ def resolve_project_path(path: Path) -> Path:
     return PROJECT_ROOT / path
 
 
-def load_existing_documentation(path: Path) -> dict[str, dict[str, Any]]:
-    """Liest bestehende CSV und indexiert sie nach Variablenname.
+def load_existing_documentation(path: Path) -> dict[str, dict[str, str]]:
+    """
+    Lädt bestehende Dokumentationsdaten aus CSV/TSV/Semikolon-CSV.
 
-    Dadurch gehen manuell ausgefuellte Felder nicht verloren, wenn das Script erneut
-    ausgefuehrt wird.
+    Die Funktion ist absichtlich tolerant, weil Excel CSV-Dateien je nach
+    Spracheinstellung mit Komma, Semikolon oder Tab speichern kann.
     """
     if not path.exists():
         return {}
 
-    existing_df = pd.read_csv(path).fillna("")
-    if "name" not in existing_df.columns:
-        return {}
+    read_attempts = [
+        {"sep": ",", "engine": "python"},
+        {"sep": ";", "engine": "python"},
+        {"sep": "\t", "engine": "python"},
+        {"sep": None, "engine": "python"},
+    ]
 
-    return {
-        str(row["name"]): row.to_dict()
-        for _, row in existing_df.iterrows()
-        if str(row.get("name", "")).strip()
-    }
+    last_error = None
+
+    for kwargs in read_attempts:
+        try:
+            existing_df = pd.read_csv(
+                path,
+                dtype=str,
+                encoding="utf-8-sig",
+                on_bad_lines="warn",
+                **kwargs,
+            ).fillna("")
+
+            if "name" in existing_df.columns:
+                existing = {}
+
+                for _, row in existing_df.iterrows():
+                    variable_name = str(row.get("name", "")).strip()
+
+                    if not variable_name:
+                        continue
+
+                    existing[variable_name] = {
+                        column: str(row.get(column, "")).strip()
+                        for column in existing_df.columns
+                    }
+
+                print(f"Bestehende Dokumentation geladen: {len(existing)} Variablen")
+                return existing
+
+        except Exception as error:
+            last_error = error
+
+    raise ValueError(
+        f"Die Datei {path} konnte nicht als CSV/TSV gelesen werden. "
+        f"Letzter Fehler: {last_error}"
+    )
 
 
 def needs_source(variable_name: str, kind: str) -> bool:

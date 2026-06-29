@@ -1,0 +1,9 @@
+Parameter,Best Value,Lower Bound,Upper Bound
+Initial Urban Land,154611.4083296881,145000.0,155000.0
+Urban Expansion Adjustment Time,19.760072715727105,3.0,20.0
+Soil Protection Factor,0.7534696659166892,0.1,0.8
+Spatial Planing Factor,1.1972967393113556,0.8,1.3
+Urban Population Density,2007.507540644774,1200.0,2500.0
+Reference Initial Land Demand per Capita,0.0008,0.0003,0.0008
+Housing Preference Share Alpha,0.1,0.1,0.25
+Long Run Transport Cost per km,0.3576315785110428,0.3,0.8

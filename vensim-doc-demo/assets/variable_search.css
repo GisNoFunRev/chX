@@ -227,3 +227,58 @@
     grid-template-columns: 1fr;
   }
 }
+
+.vensim-doc-subblock {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.85rem;
+  margin-bottom: 0.75rem;
+  background: #f9fafb;
+}
+
+.vensim-doc-subblock:last-child {
+  margin-bottom: 0;
+}
+
+.vensim-doc-subblock h5 {
+  margin: 0 0 0.35rem 0;
+  font-size: 0.98rem;
+  color: #111827;
+}
+
+.vensim-doc-subblock a {
+  overflow-wrap: anywhere;
+}
+
+.vensim-doc-status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.vensim-doc-status-label {
+  color: #4b5563;
+  font-weight: 650;
+}
+
+.vensim-doc-status {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  background: #ecfdf5;
+  color: #047857;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.vensim-pill-muted {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.vensim-pill-warning {
+  background: #fef3c7;
+  color: #92400e;
+}

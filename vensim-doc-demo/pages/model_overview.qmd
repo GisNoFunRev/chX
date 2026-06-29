@@ -1,0 +1,210 @@
+---
+title: "Modellübersicht"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+execute:
+  echo: false
+  warning: false
+  message: false
+jupyter: python3
+---
+
+```{python}
+from pathlib import Path
+import subprocess
+import sys
+
+# Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot
+# oder aus dem Ordner pages/ rendert.
+def find_project_root(start: Path) -> Path:
+    start = start.resolve()
+    for candidate in [start, *start.parents]:
+        if (candidate / "scripts" / "generate_model_overview_assets.py").exists():
+            return candidate
+    raise FileNotFoundError(
+        "scripts/generate_model_overview_assets.py wurde nicht gefunden. "
+        f"Aktueller Arbeitsordner: {Path.cwd()}"
+    )
+
+PROJECT_ROOT = find_project_root(Path.cwd())
+
+# Nur diesen Pfad anpassen, falls dein Modell woanders liegt.
+MODEL_PATH = PROJECT_ROOT / "data" / "DiamondDuckTheClean.mdl"
+OUT_DIR = PROJECT_ROOT / "assets" / "model_overview"
+SCRIPT_PATH = PROJECT_ROOT / "scripts" / "generate_model_overview_assets.py"
+
+if not MODEL_PATH.exists():
+    raise FileNotFoundError(
+        f"Modell nicht gefunden: {MODEL_PATH}\n"
+        "Passe MODEL_PATH in pages/model_overview.qmd an oder lege die .mdl-Datei in data/ ab."
+    )
+
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+result = subprocess.run(
+    [sys.executable, str(SCRIPT_PATH), str(MODEL_PATH), "--out-dir", str(OUT_DIR)],
+    text=True,
+    capture_output=True,
+)
+
+if result.returncode != 0:
+    raise RuntimeError(
+        "Die Modellübersicht konnte nicht erzeugt werden.\n\n"
+        f"Befehl: {' '.join(result.args)}\n\n"
+        f"STDOUT:\n{result.stdout}\n\n"
+        f"STDERR:\n{result.stderr}"
+    )
+
+print(result.stdout)
+```
+
+Diese Seite erzeugt eine grafische Gesamtübersicht des Vensim-Modells direkt aus der `.mdl`-Datei. Dadurch wird die Übersicht bei jedem Rendern automatisch aktualisiert, sobald sich das Modell verändert.
+
+Die Darstellung besteht aus zwei Ebenen:
+
+1. einer gerichteten Abhängigkeitskarte zwischen den Vensim-Views, und  
+2. einer detaillierten Gesamtübersicht aller Variablen, gruppiert nach ihrer primären Modell-View.
+
+Die **Macro_Ebene** wird bewusst hervorgehoben, weil sie die wichtigste Orientierungsebene des Modells darstellt. Die Views `01` bis `04` sind als dynamisierende Komponenten des AMM-Modells markiert. Die AMM-relevante Kernlogik ist separat eingefärbt und verwendet eine eigene Knotenform.
+
+## Modellzusammenfassung
+
+```{python}
+import pandas as pd
+from IPython.display import Markdown, SVG, display
+
+summary = pd.read_csv(OUT_DIR / "model_summary.csv")
+summary_t = summary.drop(columns=["model_file"], errors="ignore").T.reset_index()
+summary_t.columns = ["Kennzahl", "Wert"]
+
+metric_names = {
+    "variables": "Variablen",
+    "edges": "Abhängigkeiten",
+    "views": "Views",
+    "stocks": "Stocks",
+    "flows": "Flows",
+    "lookups": "Lookups",
+    "parameters": "Parameter",
+}
+summary_t["Kennzahl"] = summary_t["Kennzahl"].replace(metric_names)
+display(Markdown(summary_t.to_markdown(index=False)))
+```
+
+## Gerichtete View-Abhängigkeiten
+
+Diese Grafik zeigt, wie die einzelnen Vensim-Views voneinander abhängen. Ein Pfeil bedeutet: Mindestens eine Variable aus der Quell-View wird in einer Gleichung der Ziel-View verwendet. Die Zahl an einer Kante zeigt die Anzahl solcher view-übergreifenden Abhängigkeiten, sofern sie hoch genug ist.
+
+Die Farb- und Formlogik ist in der Legende der Grafik enthalten:
+
+- **Macro_Ebene**: zentrale Modellübersicht, bewusst grösser dargestellt.
+- **AMM-Dynamisierung**: Views `01` bis `04`, also Population, Transport, Einkommen und urbane Miete/Landknappheit.
+- **AMM-Kernlogik**: Budget-, Nutzen-, Agrar-/Knappheits- und Landkonversionslogik.
+
+```{python}
+display(SVG(filename=str(OUT_DIR / "model_view_dependency_map.svg")))
+```
+
+## Gesamtübersicht nach Modell-Views
+
+Diese Grafik zeigt die Variablen des gesamten Modells gruppiert nach ihrer primären Vensim-View. Die Pfeile sind gerichtet und zeigen von der Input-Variable zur berechneten Zielvariable.
+
+Die Macro-Ebene wird als grosser oberer Bereich angezeigt. Dadurch ist sofort sichtbar, welche aggregierten Variablen auf der obersten Ebene des Modells liegen. Die Views `01` bis `04` sind als AMM-Dynamisierung markiert, während die AMM-relevante Kernlogik farblich und über eine eigene Knotenform hervorgehoben wird.
+
+```{python}
+display(SVG(filename=str(OUT_DIR / "model_overview_by_view.svg")))
+```
+
+## Übersicht pro View
+
+Die folgende Tabelle fasst zusammen, wie viele Variablen, Stocks, Flows, Parameter und weitere Elemente pro View enthalten sind. Zusätzlich werden eingehende und ausgehende Abhängigkeiten zwischen Views gezählt.
+
+```{python}
+views = pd.read_csv(OUT_DIR / "model_views.csv")
+cols = [
+    "view", "variables", "stocks", "flows", "parameters", "lookups",
+    "auxiliaries", "guards", "kpis",
+    "incoming_cross_view_edges", "outgoing_cross_view_edges",
+]
+views = views[cols]
+views = views.rename(columns={
+    "view": "View",
+    "variables": "Variablen",
+    "stocks": "Stocks",
+    "flows": "Flows",
+    "parameters": "Parameter",
+    "lookups": "Lookups",
+    "auxiliaries": "Auxiliaries",
+    "guards": "Guards",
+    "kpis": "KPIs",
+    "incoming_cross_view_edges": "Eingehende View-Kanten",
+    "outgoing_cross_view_edges": "Ausgehende View-Kanten",
+})
+display(Markdown(views.to_markdown(index=False)))
+```
+
+## Strukturell wichtige Variablen
+
+Die folgende Tabelle zeigt Variablen mit dem höchsten gesamten Abhängigkeitsgrad. Ein hoher Wert bedeutet, dass eine Variable entweder von vielen anderen Variablen abhängt oder selbst in vielen Gleichungen verwendet wird. Solche Variablen sind oft strukturell wichtig für das Modellverhalten.
+
+```{python}
+variables = pd.read_csv(OUT_DIR / "model_variables.csv")
+hubs = (
+    variables
+    .sort_values("degree", ascending=False)
+    .loc[:, ["name", "type", "units", "primary_view", "inputs", "outputs", "degree"]]
+    .head(25)
+    .rename(columns={
+        "name": "Variable",
+        "type": "Typ",
+        "units": "Einheit",
+        "primary_view": "Primäre View",
+        "inputs": "Inputs",
+        "outputs": "Outputs",
+        "degree": "Grad",
+    })
+)
+display(Markdown(hubs.to_markdown(index=False)))
+```
+
+## Stocks und Flows
+
+Stocks und Flows sind für die Dynamik des Modells besonders wichtig. Diese Tabelle zeigt sie mit Einheit, primärer View und Gleichung.
+
+```{python}
+stocks_flows = (
+    variables[variables["type"].isin(["Stock", "Flow"])]
+    .sort_values(["type", "primary_view", "name"])
+    .loc[:, ["name", "type", "units", "primary_view", "equation"]]
+    .rename(columns={
+        "name": "Variable",
+        "type": "Typ",
+        "units": "Einheit",
+        "primary_view": "Primäre View",
+        "equation": "Gleichung",
+    })
+)
+display(Markdown(stocks_flows.to_markdown(index=False)))
+```
+
+## Nicht zugewiesene Variablen
+
+Diese Variablen sind in den Gleichungen der `.mdl`-Datei vorhanden, konnten aber keiner sichtbaren Vensim-Sketch-View zugeordnet werden. Das ist hilfreich, um aufzuräumen oder fehlende View-Zuordnungen zu finden.
+
+```{python}
+unassigned = (
+    variables[variables["primary_view"] == "Unassigned"]
+    .sort_values("name")
+    .loc[:, ["name", "type", "units", "equation"]]
+    .rename(columns={
+        "name": "Variable",
+        "type": "Typ",
+        "units": "Einheit",
+        "equation": "Gleichung",
+    })
+)
+if len(unassigned) == 0:
+    display(Markdown("Keine nicht zugewiesenen Variablen gefunden."))
+else:
+    display(Markdown(unassigned.to_markdown(index=False)))
+```

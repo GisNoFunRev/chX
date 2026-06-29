@@ -25,12 +25,26 @@ Die Anzeige besteht aus mehreren Blöcken:
 
 - **Grafik:** Dependency-Umfeld der Fokusvariable. Inputs zeigen auf die Fokusvariable, Outputs gehen von ihr weg.
 - **Einheiten:** Typ und Einheit der Fokusvariable.
-- **Dokumentation:** Kommentar aus dem Vensim-Modell, falls vorhanden.
+- **Dokumentation:** Kommentar aus dem Vensim-Modell plus ergänzte CSV-Felder wie Zweck, Modelllogik, Annahme, Quelle, Kalibrierung und Interpretation.
 - **Gleichung:** Originale Gleichung aus der `.mdl`-Datei.
 - **Verbundene Variablen:** Aufgeteilt in Variablen, welche die Fokusvariable beeinflussen, und Variablen, die von der Fokusvariable beeinflusst werden.
 - **Views:** Vensim-Views, in denen die Fokusvariable vorkommt.
 
 Technische Steuergrössen wie `INITIAL TIME`, `FINAL TIME`, `TIME STEP` und `SAVEPER` werden in der Suche standardmässig ausgeblendet, damit die Ergebnisliste übersichtlich bleibt.
+
+Die fachlichen Zusatzinformationen stammen aus:
+
+```text
+docs/variable_documentation.csv
+```
+
+Wenn du diese CSV bearbeitest, musst du danach die Suchdaten neu erzeugen:
+
+```bash
+python scripts/build_search_assets.py
+quarto render
+```
+
 
 ## Variablensuche
 

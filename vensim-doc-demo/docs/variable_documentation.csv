@@ -1,404 +1,404 @@
-name;kind;units;equation;vensim_comment;views;inputs;outputs;n_inputs;n_outputs;priority;purpose;logic;assumption;source;calibration;interpretation;status;suggested_priority;suggested_reason;needs_source;needs_assumption
-Aggricultural Land;stock;km2;INTEG (-Land Conversion Rate, Initial Aggricultural Land);"Aggricultural Land
+name,kind,units,equation,vensim_comment,views,inputs,outputs,n_inputs,n_outputs,priority,purpose,logic,assumption,source,calibration,interpretation,status,suggested_priority,suggested_reason,needs_source,needs_assumption
+Desired Agricultural Rent,auxiliary,EUR/km2,Initial Agricultural Rent * ( Relative Agricultural Scarcity ^ Agricultural Rent Sensitivity to Scarcity ),"Desired Agricultural Rent
  
- Stock f�r die landwirtschaftliche Fl�che.
+ Gewünschte landwirtschaftliche Bodenrente.
  
- Aggricultural Land sinkt, wenn Fl�che in urbane Nutzung
- umgewandelt wird. Deshalb geht Land Conversion Rate mit
- negativem Vorzeichen in diesen Stock ein.";"08_Agriculture_and_Scarcity; Macro_Ebene";"Initial Aggricultural Land; Land Conversion Rate";"Aggricultural Land Requirement; Agricultural Scarcity Index; Food Production; Max Feasible Conversion";2;4;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt";WAHR;WAHR
-Agricultural Rent;stock;EUR/km2;INTEG (Agricultural Rent Change, Initial Agricultural Rent);"Agricultural Rent
+ Sie steigt, wenn Relative Agricultural Scarcity über 1 liegt.
+ Die Sensitivität bestimmt, wie stark die Rente auf Knappheit
+ reagiert.",08_Agriculture_and_Scarcity,Agricultural Rent; Agricultural Rent Sensitivity to Scarcity; Initial Agricultural Rent; Relative Agricultural Scarcity,Agricultural Rent Change,4,1,high,Beschreibt die gewünschte landwirtschaftliche Bodenrente aufgrund relativer Knappheit.,Initial Agricultural Rent wird mit Relative Agricultural Scarcity hoch Sensitivity skaliert.,Knappere landwirtschaftliche Fläche erhöht Bodenrente über eine Elastizitätsannahme.,"Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327; agricultural scarcity context: FAO Food Balance Sheets / dietary energy supply: https://www.fao.org/statistics/highlights-archive/highlights-detail/food-balance-sheets-2010-2023/en; Eurostat agricultural production crops: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Agricultural_production_-_crops",Sensitivity to Scarcity als Szenario-/Kalibrierparameter dokumentieren; empirische Ableitung aus Bodenpreis-/Pachtdaten wäre besser.,Höhere relative Knappheit führt zu höherer gewünschter landwirtschaftlicher Rente.,draft,high,zentrale Variable aus empfohlener Startliste,False,False
+Desired Mean Urban Rent,auxiliary,EUR/km2,Initial Mean Urban Rent * (Land Tightness Index ^ Urban Rent Sensitivity to Land Tightness),"Desired Mean Urban Rent
  
- Stock f�r die landwirtschaftliche Bodenrente.
+ Gewünschte mittlere urbane Miete.
  
- Die Variable passt sich �ber Agricultural Rent Change
- schrittweise an Desired Agricultural Rent an.
- 
- Agricultural Rent wird sp�ter in der AMM- und
- Urban-Land-Conversion-Logik verwendet.";"05_AMM_Budget_and_Housing_Demand; 08_Agriculture_and_Scarcity; 09_Urban_Land_Conversion_Logic";"Agricultural Rent Change; Initial Agricultural Rent";"AMM Fringe Condition Gap; Agricultural Rent Change; Current Fringe Rent Gap; Desired Agricultural Rent; Rent Gap Pressure Factor; Urban Fringe Radius";2;6;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt";WAHR;WAHR
-Agricultural Rent Change;flow;(EUR/km2)/Year;(Desired Agricultural Rent - Agricultural Rent) / Agricultural Rent Adjustment Time;"Agricultural Rent Change
- 
- Anpassungsrate der landwirtschaftlichen Bodenrente.
- 
- Sie beschreibt, wie schnell Agricultural Rent auf den
- gew�nschten Rentenwert reagiert.";08_Agriculture_and_Scarcity;"Agricultural Rent; Agricultural Rent Adjustment Time; Desired Agricultural Rent";Agricultural Rent;3;1;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-AMM Consistent Economic Land Conversion Demand;flow;km2/Year;Urban Land Gap / Urban Expansion Adjustment Time;"AMM Consistent Economic Land Conversion Demand
- 
- AMM-basierte j�hrliche Nachfrage nach zus�tzlicher urbaner Fl�che.
- 
- Sie ergibt sich aus dem Urban Land Gap geteilt durch die
- Anpassungszeit der urbanen Expansion.";09_Urban_Land_Conversion_Logic;"Urban Expansion Adjustment Time; Urban Land; Urban Land Gap";Land Conversion Pressure Factors;3;1;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; flow sollte fachlich erklaert werden";WAHR;WAHR
-Desired Agricultural Rent;auxiliary;EUR/km2;Initial Agricultural Rent * ( Relative Agricultural Scarcity ^ Agricultural Rent Sensitivity to Scarcity );"Desired Agricultural Rent
- 
- Gew�nschte landwirtschaftliche Bodenrente.
- 
- Sie steigt, wenn Relative Agricultural Scarcity �ber 1 liegt.
- Die Sensitivit�t bestimmt, wie stark die Rente auf Knappheit
- reagiert.";08_Agriculture_and_Scarcity;"Agricultural Rent; Agricultural Rent Sensitivity to Scarcity; Initial Agricultural Rent; Relative Agricultural Scarcity";Agricultural Rent Change;4;1;high;;;;;;;todo;high;zentrale Variable aus empfohlener Startliste;FALSCH;FALSCH
-Desired Mean Urban Rent;auxiliary;EUR/km2;Initial Mean Urban Rent * (Land Tightness Index ^ Urban Rent Sensitivity to Land Tightness);"Desired Mean Urban Rent
- 
- Gew�nschte mittlere urbane Miete.
- 
- Wenn Land Tightness Index �ber 1 liegt, steigt der gew�nschte
- Mietwert. Wenn der Index unter 1 liegt, sinkt der gew�nschte
+ Wenn Land Tightness Index über 1 liegt, steigt der gewünschte
+ Mietwert. Wenn der Index unter 1 liegt, sinkt der gewünschte
  Mietwert.
  
- Die Sensitivit�t bestimmt, wie stark die Miete auf Knappheit
- reagiert.";04_Urban_Rent_and_Land_Tightness;"Initial Mean Urban Rent; Land Tightness Index; Mean Urban Rent; Urban Rent Sensitivity to Land Tightness";Mean Urban Rent Change;4;1;high;;;;;;;todo;high;zentrale Variable aus empfohlener Startliste;FALSCH;FALSCH
-Desired Urban Land Total;auxiliary;km2;Desired Urban Land * Urban Aggregate Scale Factor * Household Scaling Factor;"Desired Urban Land Total
+ Die Sensitivität bestimmt, wie stark die Miete auf Knappheit
+ reagiert.",04_Urban_Rent_and_Land_Tightness,Initial Mean Urban Rent; Land Tightness Index; Mean Urban Rent; Urban Rent Sensitivity to Land Tightness,Mean Urban Rent Change,4,1,high,Beschreibt den gewünschten Mietwert aufgrund urbaner Landknappheit.,Initial Mean Urban Rent wird mit Land Tightness Index hoch Urban Rent Sensitivity skaliert.,"Knappheit erhöht Mieten nicht linear zwingend, sondern über eine Elastizitätsannahme.","Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327; Housing affordability context: Eurostat housing-cost overburden / housing affordability: https://ec.europa.eu/eurostat/databrowser/view/tespm140/default/table?lang=en; Eurostat Housing in Europe 2024: https://ec.europa.eu/eurostat/web/interactive-publications/housing-2024",Urban Rent Sensitivity sollte als Szenario-/Kalibrierparameter dokumentiert und mit Sensitivität getestet werden.,"Wenn Land Tightness Index über 1 liegt, steigt gewünschte Miete; unter 1 sinkt sie.",draft,high,zentrale Variable aus empfohlener Startliste,False,False
+Desired Urban Land Total,auxiliary,km2,Desired Urban Land * Urban Aggregate Scale Factor * Household Scaling Factor,"Desired Urban Land Total
  
- Gesamte gew�nschte urbane Fl�che.
+ Gesamte gewünschte urbane Fläche.
  
- Die Variable ergibt sich aus der gew�nschten Landfl�che pro Haushalt
+ Die Variable ergibt sich aus der gewünschten Landfläche pro Haushalt
  multipliziert mit der Anzahl Haushalte.
  
- Sie ist der zentrale Nachfrageinput f�r die sp�tere
- Urban-Land-Conversion-View.";"05_AMM_Budget_and_Housing_Demand; 09_Urban_Land_Conversion_Logic";"Desired Urban Land; Household Scaling Factor; Urban Aggregate Scale Factor; Urban Land";Urban Land Gap;4;1;high;;;;;;;todo;high;zentrale Variable aus empfohlener Startliste;FALSCH;FALSCH
-Expected Population;lookup;Person;WITH LOOKUP ( Time for Lookup, ([(2025,4.4e+08)-(2050,4.6e+08)], (2025,4.518e+08), (2029,4.533e+08), (2030,4.529e+08), (2035,4.509e+08), (2040,4.49e+08), (2045,4.47e+08), (2050,4.45e+08)));"Expected Population
+ Sie ist der zentrale Nachfrageinput für die spätere
+ Urban-Land-Conversion-View.",05_AMM_Budget_and_Housing_Demand; 09_Urban_Land_Conversion_Logic,Desired Urban Land; Household Scaling Factor; Urban Aggregate Scale Factor; Urban Land,Urban Land Gap,4,1,high,Beschreibt die gesamte gewünschte urbane Fläche im Modell.,Gewünschte Landfläche pro Haushalt wird mit Skalierungsfaktoren und Haushaltszahl verknüpft.,Die aggregierte urbane Flächennachfrage kann aus Haushaltsnachfrage und Skalierungsfaktoren approximiert werden.,"Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327","Muss über Land Demand per Household, Household Scaling Factor und beobachtete Urban Land plausibilisiert werden.","Je höher dieser Wert über Urban Land liegt, desto stärker wird der Urban Land Gap.",draft,high,zentrale Variable aus empfohlener Startliste,False,False
+Innovation Index,auxiliary,Dmnl,Total Urban Innovation Potential / Reference Total Innovation Potential,Relativer Innovationsindex. Er vergleicht das aktuelle Total Urban Innovation Potential mit dem initialen Referenzwert.,03_Income_and_Productivity; 08_Agriculture_and_Scarcity; 11_Innovation_and_City_Size,Reference Total Innovation Potential; Total Urban Innovation Potential,Urban Productivity Effect; Yield,2,2,high,Normalisiert das gesamte modellierte Innovationspotenzial relativ zum Startwert.,Total Urban Innovation Potential wird durch Reference Total Innovation Potential geteilt.,"Das Startjahr wird als Referenzniveau gesetzt. Der Index misst relative Veränderung, nicht absolute Innovationsleistung.",Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,Keine externe Zahl nötig; der Index wird endogen aus dem initialen Referenzwert normalisiert.,Ein Wert über 1 bedeutet höheres Innovationspotenzial als im Startjahr; ein Wert unter 1 ein tieferes relatives Innovationspotenzial.,draft,high,zentrale Variable aus empfohlener Startliste,False,False
+Innovation Large,auxiliary,Dmnl,Equivalent Number of Large Cities * Representative Large City Size ^ Urban Scaling Exponent Large,"Innovationsbeitrag der grossen Stadtklasse. Der Wert folgt der Urban-Scaling-Logik, bei der Innovation überproportional mit der Stadtgrösse skaliert.",11_Innovation_and_City_Size,Equivalent Number of Large Cities; Representative Large City Size; Urban Scaling Exponent Large,Total Urban Innovation Potential,3,1,high,Beschreibt den modellierten Innovationsbeitrag der grossen Stadtklasse.,Die äquivalente Anzahl grossen Städte wird mit der repräsentativen Stadtgrösse hoch dem Urban-Scaling-Exponent kombiniert.,Innovation wird als superlinear skalierende sozioökonomische Grösse modelliert. Ein einheitlicher Exponent von 1.15 ist als Basisannahme besser belegbar als stark unterschiedliche Exponenten je Stadtklasse.,Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,Empfohlener Basiswert für die Exponenten: 1.15; sinnvoller Sensitivitätsbereich: 1.10 bis 1.20. Für patentnahe Innovationsgrössen kann 1.20 bis 1.25 getestet werden.,Höhere Werte erhöhen das Total Urban Innovation Potential; sehr grosse Städte wirken wegen der Potenzfunktion überproportional.,draft,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Innovation Medium,auxiliary,Dmnl,Equivalent Number of Medium Cities * Representative Medium City Size ^ Urban Scaling Exponent Medium,"Innovationsbeitrag der mittleren Stadtklasse. Der Wert folgt der Urban-Scaling-Logik, bei der Innovation überproportional mit der Stadtgrösse skaliert.",11_Innovation_and_City_Size,Equivalent Number of Medium Cities; Representative Medium City Size; Urban Scaling Exponent Medium,Total Urban Innovation Potential,3,1,high,Beschreibt den modellierten Innovationsbeitrag der mittleren Stadtklasse.,Die äquivalente Anzahl mittleren Städte wird mit der repräsentativen Stadtgrösse hoch dem Urban-Scaling-Exponent kombiniert.,Innovation wird als superlinear skalierende sozioökonomische Grösse modelliert. Ein einheitlicher Exponent von 1.15 ist als Basisannahme besser belegbar als stark unterschiedliche Exponenten je Stadtklasse.,Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,Empfohlener Basiswert für die Exponenten: 1.15; sinnvoller Sensitivitätsbereich: 1.10 bis 1.20. Für patentnahe Innovationsgrössen kann 1.20 bis 1.25 getestet werden.,Höhere Werte erhöhen das Total Urban Innovation Potential; sehr grosse Städte wirken wegen der Potenzfunktion überproportional.,draft,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Innovation Small,auxiliary,Dmnl,Equivalent Number of Small Cities * Representative Small City Size ^ Urban Scaling Exponent Small,"Innovationsbeitrag der kleinen Stadtklasse. Der Wert folgt der Urban-Scaling-Logik, bei der Innovation überproportional mit der Stadtgrösse skaliert.",11_Innovation_and_City_Size,Equivalent Number of Small Cities; Representative Small City Size; Urban Scaling Exponent Small,Total Urban Innovation Potential,3,1,high,Beschreibt den modellierten Innovationsbeitrag der kleinen Stadtklasse.,Die äquivalente Anzahl kleinen Städte wird mit der repräsentativen Stadtgrösse hoch dem Urban-Scaling-Exponent kombiniert.,Innovation wird als superlinear skalierende sozioökonomische Grösse modelliert. Ein einheitlicher Exponent von 1.15 ist als Basisannahme besser belegbar als stark unterschiedliche Exponenten je Stadtklasse.,Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,Empfohlener Basiswert für die Exponenten: 1.15; sinnvoller Sensitivitätsbereich: 1.10 bis 1.20. Für patentnahe Innovationsgrössen kann 1.20 bis 1.25 getestet werden.,Höhere Werte erhöhen das Total Urban Innovation Potential; sehr grosse Städte wirken wegen der Potenzfunktion überproportional.,draft,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Innovation very Large,auxiliary,Dmnl,Equivalent Number of Very Large Cities * Representative Very Large City Size ^ Urban Scaling Exponent very Large,"Innovationsbeitrag der sehr grossen Stadtklasse. Der Wert folgt der Urban-Scaling-Logik, bei der Innovation überproportional mit der Stadtgrösse skaliert.",11_Innovation_and_City_Size,Equivalent Number of Very Large Cities; Representative Very Large City Size; Urban Scaling Exponent very Large,Total Urban Innovation Potential,3,1,high,Beschreibt den modellierten Innovationsbeitrag der sehr grossen Stadtklasse.,Die äquivalente Anzahl sehr grossen Städte wird mit der repräsentativen Stadtgrösse hoch dem Urban-Scaling-Exponent kombiniert.,Innovation wird als superlinear skalierende sozioökonomische Grösse modelliert. Ein einheitlicher Exponent von 1.15 ist als Basisannahme besser belegbar als stark unterschiedliche Exponenten je Stadtklasse.,Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,Empfohlener Basiswert für die Exponenten: 1.15; sinnvoller Sensitivitätsbereich: 1.10 bis 1.20. Für patentnahe Innovationsgrössen kann 1.20 bis 1.25 getestet werden.,Höhere Werte erhöhen das Total Urban Innovation Potential; sehr grosse Städte wirken wegen der Potenzfunktion überproportional.,draft,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Land Demand per Household q,auxiliary,km2/Household,"ZIDZ(Housing Land Expenditure, Mean Urban Rent)","Land Demand per Household q
  
- Exogener Bev�lkerungspfad des Modells.
- Die Bev�lkerung wird nicht mehr endogen durch Geburten,
- Todesf�lle und Migration berechnet.
- 
- Diese Lookup-Tabelle gibt die erwartete Bev�lkerung
- f�r den Simulationszeitraum vor.";"01_Population_Household; 08_Agriculture_and_Scarcity";Time for Lookup;"Number of Households; Population kcal demand";1;2;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; lookup sollte fachlich erklaert werden";WAHR;WAHR
-Food Production;flow;kcal/Year;Yield * Aggricultural Land;"Food Production
- 
- J�hrliche Nahrungsmittelproduktion.
- 
- Die Variable ergibt sich aus dem landwirtschaftlichen Ertrag
- pro km2 multipliziert mit der verf�gbaren Aggricultural Land.";08_Agriculture_and_Scarcity;"Aggricultural Land; Yield";Import Dependence;2;1;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-Income per Capita;stock;EUR/Person;INTEG (Income per Capita Growth, Initial Income per Capita);"Income per Capita
- 
- Stock f�r das durchschnittliche Einkommen pro Person.
- Die Variable w�chst �ber Income per Capita Growth und wird
- durch Initial Income per Capita initialisiert.
- 
- Sie bildet die Grundlage f�r das Haushaltseinkommen.";03_Income_and_Productivity;"Income per Capita Growth; Initial Income per Capita";"Income per Capita Growth; Mean Household Income";2;2;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden";WAHR;WAHR
-Income per Capita Growth;flow;(EUR/Person)/Year;Income per Capita * Net Income Growth Rate;"Income per Capita Growth
- 
- Wachstumsrate des Einkommens pro Person.
- Sie ergibt sich aus dem aktuellen Einkommen pro Person
- multipliziert mit der effektiven j�hrlichen Einkommenswachstumsrate.";03_Income_and_Productivity;"Income per Capita; Net Income Growth Rate";Income per Capita;2;1;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-Innovation Index;auxiliary;Dmnl;Total Urban Innovation Potential / Reference Total Innovation Potential;Relativer Innovationsindex. Er vergleicht das aktuelle Total Urban Innovation Potential mit dem initialen Referenzwert.;"03_Income_and_Productivity; 08_Agriculture_and_Scarcity; 11_Innovation_and_City_Size";"Reference Total Innovation Potential; Total Urban Innovation Potential";"Urban Productivity Effect; Yield";2;2;high;;;;;;;todo;high;zentrale Variable aus empfohlener Startliste;FALSCH;FALSCH
-Innovation Large;auxiliary;Dmnl;Equivalent Number of Large Cities * Representative Large City Size ^ Urban Scaling Exponent Large;Innovationsbeitrag der grossen Stadtklasse. Der Wert folgt der Urban-Scaling-Logik, bei der Innovation �berproportional mit der Stadtgr�sse skaliert.;11_Innovation_and_City_Size;"Equivalent Number of Large Cities; Representative Large City Size; Urban Scaling Exponent Large";Total Urban Innovation Potential;3;1;high;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Innovation Medium;auxiliary;Dmnl;Equivalent Number of Medium Cities * Representative Medium City Size ^ Urban Scaling Exponent Medium;Innovationsbeitrag der mittleren Stadtklasse. Der Wert folgt der Urban-Scaling-Logik, bei der Innovation �berproportional mit der Stadtgr�sse skaliert.;11_Innovation_and_City_Size;"Equivalent Number of Medium Cities; Representative Medium City Size; Urban Scaling Exponent Medium";Total Urban Innovation Potential;3;1;high;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Innovation Small;auxiliary;Dmnl;Equivalent Number of Small Cities * Representative Small City Size ^ Urban Scaling Exponent Small;Innovationsbeitrag der kleinen Stadtklasse. Der Wert folgt der Urban-Scaling-Logik, bei der Innovation �berproportional mit der Stadtgr�sse skaliert.;11_Innovation_and_City_Size;"Equivalent Number of Small Cities; Representative Small City Size; Urban Scaling Exponent Small";Total Urban Innovation Potential;3;1;high;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Innovation very Large;auxiliary;Dmnl;Equivalent Number of Very Large Cities * Representative Very Large City Size ^ Urban Scaling Exponent very Large;Innovationsbeitrag der sehr grossen Stadtklasse. Der Wert folgt der Urban-Scaling-Logik, bei der Innovation �berproportional mit der Stadtgr�sse skaliert.;11_Innovation_and_City_Size;"Equivalent Number of Very Large Cities; Representative Very Large City Size; Urban Scaling Exponent very Large";Total Urban Innovation Potential;3;1;high;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Land Conversion Pressure Factors;flow;km2/Year;AMM Consistent Economic Land Conversion Demand;"Land Conversion Pressure Factors
- 
- Gesamter modellierter Umwandlungsdruck ohne Soil Protection.
- 
- Die AMM-basierte Umwandlungsnachfrage wird durch den
- Rent Gap Pressure Factor verst�rkt.";"09_Urban_Land_Conversion_Logic; Macro_Ebene";AMM Consistent Economic Land Conversion Demand;Land Conversion Rate;1;1;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; flow sollte fachlich erklaert werden";WAHR;WAHR
-Land Conversion Rate;flow;km2/Year;MIN( Land Conversion Pressure Factors, Max Feasible Conversion );"Land Conversion Rate
- 
- Tempor�rer Platzhalter f�r die Landumwandlungsrate.
- 
- In dieser View wird nur gezeigt, wie die Rate Urban Land erh�ht
- und Aggricultural Land reduziert.
- 
- Die detaillierte Berechnung von Land Conversion Rate wird sp�ter
- in der Urban-Land-Conversion-View modelliert.";Macro_Ebene;"Land Conversion Pressure Factors; Max Feasible Conversion";"Aggricultural Land; Urban Land";2;2;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; flow sollte fachlich erklaert werden";WAHR;WAHR
-Land Conversion Time Minimum;constant;Year;1;Minimal zul�ssige Anpassungszeit der Landumwandlung. Der Parameter verhindert unrealistisch schnelle oder numerisch instabile Landkonversion.;Macro_Ebene;;Max Feasible Conversion;0;1;high;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Land Demand per Household q;auxiliary;km2/Household;ZIDZ(Housing Land Expenditure, Mean Urban Rent);"Land Demand per Household q
- 
- Gew�nschte urbane Landfl�che pro Haushalt.
+ Gewünschte urbane Landfläche pro Haushalt.
  
  Die Variable ergibt sich aus dem Wohnbudget pro Haushalt
  geteilt durch die mittlere urbane Miete pro km2.
  
- Je h�her das Wohnbudget oder je tiefer die Miete,
- desto h�her ist die Landnachfrage pro Haushalt.";"04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand; 09_Urban_Land_Conversion_Logic";"Housing Land Expenditure; Mean Urban Rent";"Additional Urban Land Needed for Clearing; Household Capacity of Current Urban Land; Relative Land Demand per Household; Urban Fringe Radius; Urban Land Required for Households; Urban Rent at Current Fringe; Urban Rent at Fringe";2;7;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; stark vernetzt";FALSCH;FALSCH
-Land per Capita;constant;km2/Person;0.0003;Angenommener urbaner Fl�chenbedarf pro Person. Der Wert sollte konsistent mit der angenommenen Urban Population Density gew�hlt werden.;05_AMM_Budget_and_Housing_Demand;;Land per Household;0;1;high;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Max Feasible Conversion;flow;km2/Year;Aggricultural Land / Land Conversion Time Minimum;"Max Feasible Conversion
+ Je höher das Wohnbudget oder je tiefer die Miete,
+ desto höher ist die Landnachfrage pro Haushalt.",04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand; 09_Urban_Land_Conversion_Logic,Housing Land Expenditure; Mean Urban Rent,Additional Urban Land Needed for Clearing; Household Capacity of Current Urban Land; Relative Land Demand per Household; Urban Fringe Radius; Urban Land Required for Households; Urban Rent at Current Fringe; Urban Rent at Fringe,2,7,high,Beschreibt die gewünschte urbane Landfläche pro Haushalt.,Wohnbudget für Land wird durch Mean Urban Rent geteilt; ZIDZ schützt vor Division durch Null.,"Haushalte fragen mehr Land nach, wenn Wohnbudget höher oder Renten tiefer sind; das ist AMM-/Budgetlogik.","Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327; Housing affordability context: Eurostat housing-cost overburden / housing affordability: https://ec.europa.eu/eurostat/databrowser/view/tespm140/default/table?lang=en; Eurostat Housing in Europe 2024: https://ec.europa.eu/eurostat/web/interactive-publications/housing-2024",Direkte Werte sollten gegen beobachtete Wohnfläche/Grundstücksfläche je Haushalt plausibilisiert werden.,Zentrale Nachfragevariable: höhere Land Demand pro Haushalt erhöht gewünschte urbane Fläche.,draft,high,zentrale Variable aus empfohlener Startliste; stark vernetzt,False,False
+Number of Households,auxiliary,Household,Expected Population / Mean Household Size,"Die Variable verbindet den exogenen Bevölkerungspfad mit der Nachfrage nach Wohnfläche und urbanem Land. Je höher die Bevölkerung oder je kleiner die Haushaltsgrösse, desto mehr Haushalte entstehen.",01_Population_Household; 04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand; 09_Urban_Land_Conversion_Logic,Expected Population; Mean Household Size,Current Urban Land per Household; Household Clearing Gap; Household Scaling Factor; Reference Initial Number of Households; Urban Land Required for Households,2,5,high,Berechnet die Anzahl Haushalte aus Bevölkerung und Haushaltsgrösse.,Expected Population wird durch Mean Household Size geteilt.,Durchschnittliche Haushaltsgrösse repräsentiert die gesamte Bevölkerung; Unterschiede nach Ländern/Urbanität werden abstrahiert.,"Eurostat Housing in Europe 2024, average household size: https://ec.europa.eu/eurostat/web/interactive-publications/housing-2024; Eurostat household composition: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Household_composition_statistics",EU-Durchschnitt ca. 2.3 Personen pro Haushalt als plausibler Startwert; Trend kann über Desired Mean Household Size abgebildet werden.,Mehr Haushalte erhöhen Wohnflächen- und Landnachfrage.,draft,high,zentrale Variable aus empfohlener Startliste; stark vernetzt,False,False
+Reference Total Innovation Potential,auxiliary,Dmnl,INITIAL(Total Urban Innovation Potential),Referenzwert des gesamten Innovationspotenzials zu Beginn der Simulation. Dieser Wert dient zur Normalisierung des späteren Innovationsindex.,11_Innovation_and_City_Size,Total Urban Innovation Potential,Innovation Index,1,1,high,Speichert das anfängliche gesamte Innovationspotenzial als Referenzwert.,Der Initialwert von Total Urban Innovation Potential wird fixiert und dient als Nenner für den Innovation Index.,Das Startjahr ist ein sinnvoller Normalisierungspunkt; absolute Einheiten des Innovationspotenzials werden dadurch nicht benötigt.,Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,"Keine direkte externe Kalibrierung nötig; ergibt sich aus Initialwerten, Stadtgrössenanteilen und Scaling-Exponenten.",Ein stabiler Referenzwert macht die Innovationswirkung in anderen Modellteilen als dimensionslosen Index nutzbar.,draft,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Total Urban Innovation Potential,auxiliary,Dmnl,Innovation Large + Innovation Medium + Innovation Small + Innovation very Large,Aggregiertes Innovationspotenzial aller Stadtgrössenklassen. Der Wert ergibt sich aus der Summe der klassenspezifischen Innovationsbeiträge.,11_Innovation_and_City_Size,Innovation Large; Innovation Medium; Innovation Small; Innovation very Large,Innovation Index; Reference Total Innovation Potential,4,2,high,Aggregiert das modellierte Innovationspotenzial aller Stadtgrössenklassen.,"Summe aus Innovation Small, Innovation Medium, Innovation Large und Innovation very Large.",Das urbane Innovationspotenzial kann als Summe klassenspezifischer Urban-Scaling-Beiträge approximiert werden.,Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,"Wird durch Stadtgrössenanteile, repräsentative Stadtgrössen und Exponenten bestimmt. Keine einzelne beobachtete Zahl, sondern modellierter Indexbaustein.",Höhere Werte deuten auf ein höheres theoretisches Innovationspotenzial des gesamten urbanen Systems hin.,draft,high,zentrale Variable aus empfohlener Startliste; stark vernetzt,False,False
+Urban Land Gap,auxiliary,km2,"MAX(0, Desired Urban Land Total - Urban Land)","Urban Land Gap
  
- Maximal m�gliche Landumwandlung pro Zeiteinheit.
+ Differenz zwischen gewünschter und aktuell vorhandener urbaner Fläche.
  
- Diese Variable verhindert, dass mehr landwirtschaftliche Fl�che
- umgewandelt wird, als im Modell verf�gbar ist.";Macro_Ebene;"Aggricultural Land; Land Conversion Time Minimum";Land Conversion Rate;2;1;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; flow sollte fachlich erklaert werden";WAHR;WAHR
-Mean Annual Housing Cost per Household;flow;EUR/Household/Year;Mean Annual Housing Cost per Capita * Mean Household Size;Durchschnittliche j�hrliche Wohnkosten pro Haushalt. Sie ergeben sich aus den j�hrlichen Wohnkosten pro Person multipliziert mit der Haushaltsgr�sse.;05_AMM_Budget_and_Housing_Demand;"Mean Annual Housing Cost per Capita; Mean Household Size";;2;0;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-Mean Household Size;stock;Person/Household;INTEG (Mean Household Size Change, Initial Mean Household Size);"Mean Household Size
+ Die MAX-Funktion verhindert negative Werte. Wenn die aktuelle
+ urbane Fläche bereits grösser ist als die gewünschte Fläche,
+ entsteht kein zusätzlicher Umwandlungsdruck.",09_Urban_Land_Conversion_Logic,Desired Urban Land; Desired Urban Land Total; Urban Land,AMM Consistent Economic Land Conversion Demand,3,1,high,Misst die Lücke zwischen gewünschter und aktuell vorhandener urbaner Fläche.,"MAX(0, Desired Urban Land Total - Urban Land) verhindert negative Umwandlungsnachfrage.",Nur zusätzlicher Flächenbedarf erzeugt Umwandlungsdruck; Überschussfläche führt nicht zu aktiver Schrumpfung.,"Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327",Keine externe Zahl; ergibt sich endogen aus gewünschter und aktueller Fläche.,Zentrale Brückenvariable zwischen Wohnflächennachfrage und Land Conversion Rate.,draft,high,zentrale Variable aus empfohlener Startliste,False,False
+Land Conversion Time Minimum,constant,Year,1,Minimal zulässige Anpassungszeit der Landumwandlung. Der Parameter verhindert unrealistisch schnelle oder numerisch instabile Landkonversion.,Macro_Ebene,,Max Feasible Conversion,0,1,high,Setzt eine minimale Anpassungszeit für Landumwandlung.,Der Parameter begrenzt die maximale jährliche Umwandlung als Aggricultural Land / Minimum Time.,Ein Mindestwert verhindert unrealistisch schnelle oder numerisch instabile Konversion.,Eigene numerische Modellannahme.,"Aktueller Wert 1 Year ist eine technische Mindestannahme, nicht empirisch belegt. Als Sensitivität 1–5 Jahre testen.",Kleiner Wert erlaubt schnelle Umwandlung; grosser Wert begrenzt Land Conversion stärker.,draft,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Land per Capita,constant,km2/Person,0.0003,Angenommener urbaner Flächenbedarf pro Person. Der Wert sollte konsistent mit der angenommenen Urban Population Density gewählt werden.,05_AMM_Budget_and_Housing_Demand,,Land per Household,0,1,high,Beschreibt den angenommenen urbanen Flächenbedarf pro Person.,Kann als Kehrwert einer angenommenen Urban Population Density interpretiert werden.,Die Flächenannahme muss konsistent mit der Dichteannahme sein.,EU-OECD FUA/urban-centre definition: https://www.oecd.org/content/dam/oecd/en/publications/reports/2019/12/the-eu-oecd-definition-of-a-functional-urban-area_cef4a128/d58cb34d-en.pdf,"Aktuell 0.0003 km2/Person entspricht ca. 3333 Person/km2. Wenn Urban Population Density = 1500 Person/km2 genutzt wird, sollte Land per Capita auf 0.000667 km2/Person korrigiert werden.",Höherer Wert bedeutet mehr Flächenbedarf pro Person und erhöht Urbanisierungsdruck.,draft,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Share Large City,constant,Dmnl,0.26,Anteil der urbanen Bevölkerung in grossen Städten. Der Wert beschreibt eine vereinfachte Stadtgrössenverteilung und beeinflusst das modellierte Innovationspotenzial.,11_Innovation_and_City_Size,,Equivalent Number of Large Cities,0,1,high,Verteilt einen Anteil der urbanen Gesamtbevölkerung auf grosse Städte.,Der Anteil fliesst in die Berechnung der äquivalenten Anzahl Städte dieser Klasse ein.,Die Stadtgrössenverteilung wird stark vereinfacht in vier Klassen abgebildet; die Summe der Anteile sollte 1 ergeben.,OECD city-size classes: https://www.oecd.org/en/data/indicators/urban-population-by-city-size.html,Aktueller/empfohlener POC-Wert: 0.26. Die 0.26 ist eine POC-Näherung. Final besser aus OECD/FUA-Bevölkerungsdaten berechnen.,Höhere Anteile grosser und sehr grosser Städte erhöhen wegen superlinearer Skalierung das gesamte Innovationspotenzial.,draft,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Share Medium City,constant,Dmnl,0.2,Anteil der urbanen Bevölkerung in mittleren Städten. Der Wert beschreibt eine vereinfachte Stadtgrössenverteilung und beeinflusst das modellierte Innovationspotenzial.,11_Innovation_and_City_Size,,Equivalent Number of Medium Cities,0,1,high,Verteilt einen Anteil der urbanen Gesamtbevölkerung auf mittlere Städte.,Der Anteil fliesst in die Berechnung der äquivalenten Anzahl Städte dieser Klasse ein.,Die Stadtgrössenverteilung wird stark vereinfacht in vier Klassen abgebildet; die Summe der Anteile sollte 1 ergeben.,OECD city-size classes: https://www.oecd.org/en/data/indicators/urban-population-by-city-size.html,Aktueller/empfohlener POC-Wert: 0.20. Die 0.20 ist eine POC-Näherung zwischen OECD-Klassen. Final besser aus OECD/FUA-Bevölkerungsdaten berechnen.,Höhere Anteile grosser und sehr grosser Städte erhöhen wegen superlinearer Skalierung das gesamte Innovationspotenzial.,draft,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Share Small City,constant,Dmnl,0.28,Anteil der urbanen Bevölkerung in kleinen Städten. Der Wert beschreibt eine vereinfachte Stadtgrössenverteilung und beeinflusst das modellierte Innovationspotenzial.,11_Innovation_and_City_Size,,Equivalent Number of Small Cities,0,1,high,Verteilt einen Anteil der urbanen Gesamtbevölkerung auf kleine Städte.,Der Anteil fliesst in die Berechnung der äquivalenten Anzahl Städte dieser Klasse ein.,Die Stadtgrössenverteilung wird stark vereinfacht in vier Klassen abgebildet; die Summe der Anteile sollte 1 ergeben.,OECD city-size classes: https://www.oecd.org/en/data/indicators/urban-population-by-city-size.html,Aktueller/empfohlener POC-Wert: 0.28. Die 0.28 ist eine POC-Näherung. Sie ist nicht exakt direkt belegt; final sollte der Anteil aus OECD/FUA-Daten nach eurer Klassendefinition berechnet werden.,Höhere Anteile grosser und sehr grosser Städte erhöhen wegen superlinearer Skalierung das gesamte Innovationspotenzial.,draft,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Share very Large City,constant,Dmnl,0.26,Anteil der urbanen Bevölkerung in sehr grossen Städten. Der Wert beschreibt eine vereinfachte Stadtgrössenverteilung und beeinflusst das modellierte Innovationspotenzial.,11_Innovation_and_City_Size,,Equivalent Number of Very Large Cities,0,1,high,Verteilt einen Anteil der urbanen Gesamtbevölkerung auf sehr grosse Städte.,Der Anteil fliesst in die Berechnung der äquivalenten Anzahl Städte dieser Klasse ein.,Die Stadtgrössenverteilung wird stark vereinfacht in vier Klassen abgebildet; die Summe der Anteile sollte 1 ergeben.,OECD city-size classes: https://www.oecd.org/en/data/indicators/urban-population-by-city-size.html,Aktueller/empfohlener POC-Wert: 0.26. Die 0.26 ist eine POC-Näherung. Die offene grosse Stadtklasse sollte später mit echten FUA-Daten kalibriert werden.,Höhere Anteile grosser und sehr grosser Städte erhöhen wegen superlinearer Skalierung das gesamte Innovationspotenzial.,draft,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Urban Population Density,constant,Dmnl,1500,Angenommene urbane Bevölkerungsdichte. Der Wert kann an der EU-OECD-Definition eines Urban Centre mit 1'500 Personen pro km2 orientiert werden.,11_Innovation_and_City_Size,,Urban Population Total,0,1,high,Beschreibt die angenommene urbane Bevölkerungsdichte.,Dient als Dichteannahme zur Verbindung von Bevölkerung und urbaner Fläche.,"1500 Person/km2 kann als EU-OECD-Urban-Centre-Schwelle interpretiert werden, ist aber eher Mindestkriterium als durchschnittliche Stadtverdichtung.",EU-OECD FUA/urban-centre definition: https://www.oecd.org/content/dam/oecd/en/publications/reports/2019/12/the-eu-oecd-definition-of-a-functional-urban-area_cef4a128/d58cb34d-en.pdf,"Wert 1500 ist belegbar als Urban-Centre-Schwelle; Einheit sollte Person/km2 statt Dmnl sein. Wenn Land per Capita 0.0003 bleibt, müsste Dichte konsistent 3333 Person/km2 sein.",Höhere Dichte senkt rechnerischen Flächenbedarf pro Person.,draft,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Urban Scaling Exponent Large,constant,Dmnl,1.15,"Urban-Scaling-Exponent der grossen Stadtklasse. Werte über 1 bedeuten, dass Innovation überproportional mit der Stadtgrösse steigt.",11_Innovation_and_City_Size,,Innovation Large,0,1,high,"Steuert, wie stark Innovation mit Stadtgrösse skaliert.",Der Exponent wird in der Potenzfunktion der Urban-Scaling-Logik verwendet.,"Innovation, Patente und ähnliche sozioökonomische Grössen skalieren typischerweise superlinear mit Stadtgrösse. Ein einheitlicher Wert von 1.15 ist als Basisannahme plausibel.",Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,Empfohlen: 1.15; Sensitivität: 1.10 bis 1.20. Ein Wert von 1.6 wäre nicht durch die Standard-Urban-Scaling-Literatur gedeckt und sollte nur als extremes Szenario verwendet werden.,"Werte über 1 bedeuten zunehmende Skalenerträge durch Agglomeration; je höher der Exponent, desto stärker dominiert die grosse Stadtklasse.",draft,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Urban Scaling Exponent Medium,constant,Dmnl,1.15,"Urban-Scaling-Exponent der mittleren Stadtklasse. Werte über 1 bedeuten, dass Innovation überproportional mit der Stadtgrösse steigt.",11_Innovation_and_City_Size,,Innovation Medium,0,1,high,"Steuert, wie stark Innovation mit Stadtgrösse skaliert.",Der Exponent wird in der Potenzfunktion der Urban-Scaling-Logik verwendet.,"Innovation, Patente und ähnliche sozioökonomische Grössen skalieren typischerweise superlinear mit Stadtgrösse. Ein einheitlicher Wert von 1.15 ist als Basisannahme plausibel.",Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,Empfohlen: 1.15; Sensitivität: 1.10 bis 1.20. Ein Wert von 1.6 wäre nicht durch die Standard-Urban-Scaling-Literatur gedeckt und sollte nur als extremes Szenario verwendet werden.,"Werte über 1 bedeuten zunehmende Skalenerträge durch Agglomeration; je höher der Exponent, desto stärker dominiert die grosse Stadtklasse.",draft,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Urban Scaling Exponent Small,constant,Dmnl,1.15,"Urban-Scaling-Exponent der kleinen Stadtklasse. Werte über 1 bedeuten, dass Innovation überproportional mit der Stadtgrösse steigt.",11_Innovation_and_City_Size,,Innovation Small,0,1,high,"Steuert, wie stark Innovation mit Stadtgrösse skaliert.",Der Exponent wird in der Potenzfunktion der Urban-Scaling-Logik verwendet.,"Innovation, Patente und ähnliche sozioökonomische Grössen skalieren typischerweise superlinear mit Stadtgrösse. Ein einheitlicher Wert von 1.15 ist als Basisannahme plausibel.",Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,Empfohlen: 1.15; Sensitivität: 1.10 bis 1.20. Ein Wert von 1.6 wäre nicht durch die Standard-Urban-Scaling-Literatur gedeckt und sollte nur als extremes Szenario verwendet werden.,"Werte über 1 bedeuten zunehmende Skalenerträge durch Agglomeration; je höher der Exponent, desto stärker dominiert die grosse Stadtklasse.",draft,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Urban Scaling Exponent very Large,constant,Dmnl,1.15,"Urban-Scaling-Exponent der sehr grossen Stadtklasse. Werte über 1 bedeuten, dass Innovation überproportional mit der Stadtgrösse steigt.",11_Innovation_and_City_Size,,Innovation very Large,0,1,high,"Steuert, wie stark Innovation mit Stadtgrösse skaliert.",Der Exponent wird in der Potenzfunktion der Urban-Scaling-Logik verwendet.,"Innovation, Patente und ähnliche sozioökonomische Grössen skalieren typischerweise superlinear mit Stadtgrösse. Ein einheitlicher Wert von 1.15 ist als Basisannahme plausibel.",Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,Empfohlen: 1.15; Sensitivität: 1.10 bis 1.20. Ein Wert von 1.6 wäre nicht durch die Standard-Urban-Scaling-Literatur gedeckt und sollte nur als extremes Szenario verwendet werden.,"Werte über 1 bedeuten zunehmende Skalenerträge durch Agglomeration; je höher der Exponent, desto stärker dominiert die grosse Stadtklasse.",draft,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+AMM Consistent Economic Land Conversion Demand,flow,km2/Year,Urban Land Gap / Urban Expansion Adjustment Time,"AMM Consistent Economic Land Conversion Demand
  
- Shadow Variable aus View 01.
- Sie wird hier verwendet, um die Anzahl Pendler pro Haushalt
- zu berechnen.";"01_Population_Household; 02_Transport_and_Commuting; 03_Income_and_Productivity; 05_AMM_Budget_and_Housing_Demand";"Initial Mean Household Size; Mean Household Size Change";"Commuters per Household; Desired Mean Household Size; Land per Household; Mean Annual Housing Cost per Household; Mean Household Income; Mean Household Size Change; Number of Households; Reference Initial Land Demand per Household";2;8;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt";WAHR;WAHR
-Mean Household Size Change;flow;Person/Household/Year;(Desired Mean Household Size - Mean Household Size) / Household Size Adjustment Time;"Mean Household Size Change
+ AMM-basierte jährliche Nachfrage nach zusätzlicher urbaner Fläche.
  
- Anpassungsrate der mittleren Haushaltsgr�sse.
+ Sie ergibt sich aus dem Urban Land Gap geteilt durch die
+ Anpassungszeit der urbanen Expansion.",09_Urban_Land_Conversion_Logic,Urban Expansion Adjustment Time; Urban Land; Urban Land Gap,Land Conversion Pressure Factors,3,1,high,Beschreibt die AMM-basierte Nachfrage nach zusätzlicher urbaner Fläche pro Jahr.,Urban Land Gap wird über Urban Expansion Adjustment Time in eine jährliche Flächennachfrage übersetzt.,Der Anpassungsprozess ist verzögert; Nachfrage nach Fläche wird nicht sofort vollständig umgesetzt.,"Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327",Urban Expansion Adjustment Time ist ein Szenario-/Kalibrierparameter; gegen historische Urban-Land-Änderungen prüfen.,Hohe Werte zeigen starken ökonomischen Druck zur Stadtflächenerweiterung.,draft,high,zentrale Variable aus empfohlener Startliste; flow sollte fachlich erklaert werden,True,True
+Agricultural Rent Change,flow,(EUR/km2)/Year,(Desired Agricultural Rent - Agricultural Rent) / Agricultural Rent Adjustment Time,"Agricultural Rent Change
+ 
+ Anpassungsrate der landwirtschaftlichen Bodenrente.
+ 
+ Sie beschreibt, wie schnell Agricultural Rent auf den
+ gewünschten Rentenwert reagiert.",08_Agriculture_and_Scarcity,Agricultural Rent; Agricultural Rent Adjustment Time; Desired Agricultural Rent,Agricultural Rent,3,1,high,Beschreibt die Anpassungsrate der landwirtschaftlichen Bodenrente.,Differenz zwischen Desired Agricultural Rent und Agricultural Rent wird über Adjustment Time abgebaut.,Bodenrenten passen sich nicht sofort an Knappheit an.,"Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327",Agricultural Rent Adjustment Time ist ein Modellparameter; keine direkte externe Zahl.,Positive Werte erhöhen Agricultural Rent; negative Werte senken sie.,draft,high,flow sollte fachlich erklaert werden,True,True
+Food Production,flow,kcal/Year,Yield * Aggricultural Land,"Food Production
+ 
+ Jährliche Nahrungsmittelproduktion.
+ 
+ Die Variable ergibt sich aus dem landwirtschaftlichen Ertrag
+ pro km2 multipliziert mit der verfügbaren Aggricultural Land.",08_Agriculture_and_Scarcity,Aggricultural Land; Yield,Import Dependence,2,1,high,Beschreibt die jährliche Nahrungsmittelproduktion auf landwirtschaftlicher Fläche.,Yield wird mit Aggricultural Land multipliziert.,"Alle landwirtschaftliche Fläche wird mit einem durchschnittlichen kcal-Ertrag modelliert; Nutzpflanzenmix, Futter-/Food-Anteil und Verluste werden stark vereinfacht.",FAO Food Balance Sheets / dietary energy supply: https://www.fao.org/statistics/highlights-archive/highlights-detail/food-balance-sheets-2010-2023/en; Eurostat agricultural production crops: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Agricultural_production_-_crops,"Yield sollte aus EU-Ertragsdaten und Kalorienumrechnung plausibilisiert werden. Eurostat liefert Tonnen/ha, FAO Kalorien-/Food-Balance-Kontext.",Sinkende Aggricultural Land oder Yield reduziert Food Production und erhöht Import Dependence.,draft,high,flow sollte fachlich erklaert werden,True,True
+Income per Capita Growth,flow,(EUR/Person)/Year,Income per Capita * Net Income Growth Rate,"Income per Capita Growth
+ 
+ Wachstumsrate des Einkommens pro Person.
+ Sie ergibt sich aus dem aktuellen Einkommen pro Person
+ multipliziert mit der effektiven jährlichen Einkommenswachstumsrate.",03_Income_and_Productivity,Income per Capita; Net Income Growth Rate,Income per Capita,2,1,high,Beschreibt die jährliche Veränderung des Einkommens pro Kopf.,Income per Capita wird mit Net Income Growth Rate multipliziert.,Einkommen wächst proportional zum aktuellen Niveau; Produktivitätseffekte wirken auf die Wachstumsrate.,Eurostat GDP per capita (nama_10_pc): https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table?lang=en; World Bank EU GDP per-capita growth: https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=EU,Basiswachstumsrate mit realem EU-GDP-per-capita-Wachstum plausibilisieren; Szenarien für Minimum/Maximum dokumentieren.,Positive Werte erhöhen Einkommen und Wohn-/Landbudget.,draft,high,flow sollte fachlich erklaert werden,True,True
+Land Conversion Pressure Factors,flow,km2/Year,AMM Consistent Economic Land Conversion Demand,"Land Conversion Pressure Factors
+ 
+ Gesamter modellierter Umwandlungsdruck ohne Soil Protection.
+ 
+ Die AMM-basierte Umwandlungsnachfrage wird durch den
+ Rent Gap Pressure Factor verstärkt.",09_Urban_Land_Conversion_Logic; Macro_Ebene,AMM Consistent Economic Land Conversion Demand,Land Conversion Rate,1,1,high,Beschreibt den modellierten Umwandlungsdruck vor der physischen Flächenbegrenzung.,Im aktuellen Modell entspricht der Druck der AMM Consistent Economic Land Conversion Demand.,Ökonomischer Flächendruck wird über Nachfrage nach zusätzlicher urbaner Fläche approximiert.,"Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327",Keine direkte externe Zahl; sollte über Sensitivität und Vergleich mit beobachteter Urban-Land-Zunahme plausibilisiert werden.,Dient als Nachfragekomponente der Land Conversion Rate.,draft,high,zentrale Variable aus empfohlener Startliste; flow sollte fachlich erklaert werden,True,True
+Land Conversion Rate,flow,km2/Year,"MIN( Land Conversion Pressure Factors, Max Feasible Conversion )","Land Conversion Rate
+ 
+ Temporärer Platzhalter für die Landumwandlungsrate.
+ 
+ In dieser View wird nur gezeigt, wie die Rate Urban Land erhöht
+ und Aggricultural Land reduziert.
+ 
+ Die detaillierte Berechnung von Land Conversion Rate wird später
+ in der Urban-Land-Conversion-View modelliert.",Macro_Ebene,Land Conversion Pressure Factors; Max Feasible Conversion,Aggricultural Land; Urban Land,2,2,high,Beschreibt die tatsächliche jährliche Umwandlung landwirtschaftlicher in urbane Fläche.,Die Rate ist das Minimum aus Umwandlungsdruck und maximal möglicher Umwandlung.,"Landumwandlung wird durch Nachfrage getrieben, aber durch verfügbare Fläche begrenzt. Negative Rückumwandlung wird nicht berücksichtigt.","Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327","Direkt kalibrierbare Beobachtungsdaten schwer; als Modellrate über Urban Land Gap, Adjustment Time und verfügbare Landfläche plausibilisieren.",Hohe Werte bedeuten schnelle Urbanisierung; die Variable verändert Urban Land und Aggricultural Land direkt.,draft,high,zentrale Variable aus empfohlener Startliste; flow sollte fachlich erklaert werden,True,True
+Max Feasible Conversion,flow,km2/Year,Aggricultural Land / Land Conversion Time Minimum,"Max Feasible Conversion
+ 
+ Maximal mögliche Landumwandlung pro Zeiteinheit.
+ 
+ Diese Variable verhindert, dass mehr landwirtschaftliche Fläche
+ umgewandelt wird, als im Modell verfügbar ist.",Macro_Ebene,Aggricultural Land; Land Conversion Time Minimum,Land Conversion Rate,2,1,high,Begrenzt die maximal mögliche Landumwandlung pro Jahr.,Aggricultural Land wird durch Land Conversion Time Minimum geteilt.,"Es kann nicht mehr Land umgewandelt werden, als landwirtschaftlich verfügbar ist; die Mindestzeit verhindert numerische Sprünge.",Eigene numerische Modellannahme; Stock-Flow-Begrenzungslogik.,Land Conversion Time Minimum aktuell 1 Jahr: konservative harte Obergrenze; keine externe empirische Zahl.,Schützt das Modell vor unrealistischer vollständiger Umwandlung in einem Zeitschritt.,draft,high,zentrale Variable aus empfohlener Startliste; flow sollte fachlich erklaert werden,True,True
+Mean Annual Housing Cost per Household,flow,EUR/Household/Year,Mean Annual Housing Cost per Capita * Mean Household Size,Durchschnittliche jährliche Wohnkosten pro Haushalt. Sie ergeben sich aus den jährlichen Wohnkosten pro Person multipliziert mit der Haushaltsgrösse.,05_AMM_Budget_and_Housing_Demand,Mean Annual Housing Cost per Capita; Mean Household Size,,2,0,high,Beschreibt durchschnittliche jährliche Wohnkosten pro Haushalt.,Wohnkosten pro Kopf werden mit Mean Household Size multipliziert.,Pro-Kopf-Wohnkosten können auf Haushaltsebene linear mit Haushaltsgrösse approximiert werden; Skaleneffekte innerhalb von Haushalten werden vereinfacht.,Eurostat housing-cost overburden / housing affordability: https://ec.europa.eu/eurostat/databrowser/view/tespm140/default/table?lang=en; Eurostat Housing in Europe 2024: https://ec.europa.eu/eurostat/web/interactive-publications/housing-2024,Mean Annual Housing Cost per Capita sollte aus Eurostat/OECD-Housing-Cost-Daten oder als Anteil am Einkommen abgeleitet werden. Direkte EU-weite EUR/Household-Zahl ist schwer einheitlich belegbar.,Höhere Wohnkosten pro Haushalt beeinflussen Housing Land Expenditure und damit Land Demand.,draft,high,flow sollte fachlich erklaert werden,True,True
+Mean Household Size Change,flow,Person/Household/Year,(Desired Mean Household Size - Mean Household Size) / Household Size Adjustment Time,"Mean Household Size Change
+ 
+ Anpassungsrate der mittleren Haushaltsgrösse.
  Sie beschreibt, wie schnell sich Mean Household Size
- dem gew�nschten langfristigen Wert ann�hert.";01_Population_Household;"Desired Mean Household Size; Household Size Adjustment Time; Mean Household Size";Mean Household Size;3;1;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-Mean Urban Rent;stock;EUR/km2;INTEG (Mean Urban Rent Change, Initial Mean Urban Rent);"Mean Urban Rent
- 
- Stock f�r die mittlere urbane Miete.
- 
- Die Variable passt sich �ber Mean Urban Rent Change
- schrittweise an Desired Mean Urban Rent an.
- 
- Mean Urban Rent wird sp�ter in der AMM-Housing-Demand-View
- verwendet, um die Landnachfrage pro Haushalt zu berechnen.";"04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand; 09_Urban_Land_Conversion_Logic";"Initial Mean Urban Rent; Mean Urban Rent Change";"Current Fringe Rent Gap; Desired Mean Urban Rent; Land Demand per Household q; Mean Urban Rent Change";2;4;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt";WAHR;WAHR
-Mean Urban Rent Change;flow;(EUR/km2)/Year;(Desired Mean Urban Rent - Mean Urban Rent) / Urban Rent Adjustment Time;"Mean Urban Rent Change
+ dem gewünschten langfristigen Wert annähert.",01_Population_Household,Desired Mean Household Size; Household Size Adjustment Time; Mean Household Size,Mean Household Size,3,1,high,Beschreibt die jährliche Anpassung der Haushaltsgrösse.,Differenz zwischen Desired Mean Household Size und Mean Household Size wird über Household Size Adjustment Time abgebaut.,"Demografische und soziale Haushaltsstruktur ändert sich graduell, nicht sprunghaft.","Eurostat Housing in Europe 2024, average household size: https://ec.europa.eu/eurostat/web/interactive-publications/housing-2024; Eurostat household composition: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Household_composition_statistics",Adjustment Time ist ein Modellparameter; Trend und Zielwert mit Eurostat-Haushaltsdaten plausibilisieren.,Negative Werte bedeuten sinkende Haushaltsgrösse und erhöhen tendenziell Number of Households.,draft,high,flow sollte fachlich erklaert werden,True,True
+Mean Urban Rent Change,flow,(EUR/km2)/Year,(Desired Mean Urban Rent - Mean Urban Rent) / Urban Rent Adjustment Time,"Mean Urban Rent Change
  
  Anpassungsrate der mittleren urbanen Miete.
  
- Sie beschreibt, wie schnell Mean Urban Rent auf den gew�nschten
- Mietwert reagiert.";04_Urban_Rent_and_Land_Tightness;"Desired Mean Urban Rent; Mean Urban Rent; Urban Rent Adjustment Time";Mean Urban Rent;3;1;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-Net Income Growth Rate;flow;Dmnl/Year;MIN( Maximum Income Growth Rate, MAX( Minimum Income Growth Rate, Base Income Growth Rate + Urban Productivity Effect ) );"Net Income Growth Rate
+ Sie beschreibt, wie schnell Mean Urban Rent auf den gewünschten
+ Mietwert reagiert.",04_Urban_Rent_and_Land_Tightness,Desired Mean Urban Rent; Mean Urban Rent; Urban Rent Adjustment Time,Mean Urban Rent,3,1,high,Beschreibt die Anpassungsrate der mittleren urbanen Miete.,Differenz zwischen Desired Mean Urban Rent und Mean Urban Rent wird über Urban Rent Adjustment Time abgebaut.,Renten passen sich verzögert an Knappheit an.,"Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327",Urban Rent Adjustment Time ist ein Kalibrierparameter; keine direkte externe Zahl. Empfohlen: Sensitivität testen.,Positive Werte erhöhen Mean Urban Rent; negative Werte senken sie.,draft,high,flow sollte fachlich erklaert werden,True,True
+Net Income Growth Rate,flow,Dmnl/Year,"MIN( Maximum Income Growth Rate, MAX( Minimum Income Growth Rate, Base Income Growth Rate + Urban Productivity Effect ) )","Net Income Growth Rate
  
- Effektive j�hrliche Einkommenswachstumsrate.
+ Effektive jährliche Einkommenswachstumsrate.
  
  Die Variable kombiniert die Basiswachstumsrate mit dem
  Urban Productivity Effect. Durch MIN und MAX wird die
- Wachstumsrate nach oben und unten begrenzt.";03_Income_and_Productivity;"Base Income Growth Rate; Maximum Income Growth Rate; Minimum Income Growth Rate; Urban Productivity Effect";Income per Capita Growth;4;1;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-Number of Households;auxiliary;Household;Expected Population / Mean Household Size;Die Variable verbindet den exogenen Bev�lkerungspfad mit der Nachfrage nach Wohnfl�che und urbanem Land. Je h�her die Bev�lkerung oder je kleiner die Haushaltsgr�sse, desto mehr Haushalte entstehen.;"01_Population_Household; 04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand; 09_Urban_Land_Conversion_Logic";"Expected Population; Mean Household Size";"Current Urban Land per Household; Household Clearing Gap; Household Scaling Factor; Reference Initial Number of Households; Urban Land Required for Households";2;5;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; stark vernetzt";FALSCH;FALSCH
-Population kcal demand;flow;kcal/Year;Caloric Baseline Need pP * Expected Population;"Population kcal demand
+ Wachstumsrate nach oben und unten begrenzt.",03_Income_and_Productivity,Base Income Growth Rate; Maximum Income Growth Rate; Minimum Income Growth Rate; Urban Productivity Effect,Income per Capita Growth,4,1,high,Beschreibt die effektive jährliche Einkommenswachstumsrate.,Basiswachstum plus Urban Productivity Effect wird durch Minimum und Maximum begrenzt.,Langfristiges Wachstum bleibt innerhalb plausibler Grenzen; Innovationswirkung verändert Wachstum nur begrenzt.,Eurostat GDP per capita (nama_10_pc): https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table?lang=en; World Bank EU GDP per-capita growth: https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=EU; urban productivity scaling: Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,Base/Min/Max Growth Rate anhand historischer EU-GDP-per-capita-Wachstumsraten setzen; Grenzen als Szenarioannahmen testen.,Steuert direkt Income per Capita Growth und damit Nachfrage im Modell.,draft,high,flow sollte fachlich erklaert werden,True,True
+Population kcal demand,flow,kcal/Year,Caloric Baseline Need pP * Expected Population,"Population kcal demand
  
- Gesamter j�hrlicher Kalorienbedarf der Bev�lkerung.
+ Gesamter jährlicher Kalorienbedarf der Bevölkerung.
  
- Die Variable ergibt sich aus dem j�hrlichen Kalorienbedarf pro Person
- multipliziert mit Expected Population.";08_Agriculture_and_Scarcity;"Caloric Baseline Need pP; Expected Population";"Import Dependence; Target Value: Populational Need of Kcal in Km2";2;2;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-Reference Total Innovation Potential;auxiliary;Dmnl;INITIAL(Total Urban Innovation Potential);Referenzwert des gesamten Innovationspotenzials zu Beginn der Simulation. Dieser Wert dient zur Normalisierung des sp�teren Innovationsindex.;11_Innovation_and_City_Size;Total Urban Innovation Potential;Innovation Index;1;1;high;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Share Large City;constant;Dmnl;0.26;Anteil der urbanen Bev�lkerung in grossen St�dten. Der Wert beschreibt eine vereinfachte Stadtgr�ssenverteilung und beeinflusst das modellierte Innovationspotenzial.;11_Innovation_and_City_Size;;Equivalent Number of Large Cities;0;1;high;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Share Medium City;constant;Dmnl;0.2;Anteil der urbanen Bev�lkerung in mittleren St�dten. Der Wert beschreibt eine vereinfachte Stadtgr�ssenverteilung und beeinflusst das modellierte Innovationspotenzial.;11_Innovation_and_City_Size;;Equivalent Number of Medium Cities;0;1;high;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Share Small City;constant;Dmnl;0.28;Anteil der urbanen Bev�lkerung in kleinen St�dten. Der Wert beschreibt eine vereinfachte Stadtgr�ssenverteilung und beeinflusst das modellierte Innovationspotenzial.;11_Innovation_and_City_Size;;Equivalent Number of Small Cities;0;1;high;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Share very Large City;constant;Dmnl;0.26;Anteil der urbanen Bev�lkerung in sehr grossen St�dten. Der Wert beschreibt eine vereinfachte Stadtgr�ssenverteilung und beeinflusst das modellierte Innovationspotenzial.;11_Innovation_and_City_Size;;Equivalent Number of Very Large Cities;0;1;high;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Total Urban Innovation Potential;auxiliary;Dmnl;Innovation Large + Innovation Medium + Innovation Small + Innovation very Large;Aggregiertes Innovationspotenzial aller Stadtgr�ssenklassen. Der Wert ergibt sich aus der Summe der klassenspezifischen Innovationsbeitr�ge.;11_Innovation_and_City_Size;"Innovation Large; Innovation Medium; Innovation Small; Innovation very Large";"Innovation Index; Reference Total Innovation Potential";4;2;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; stark vernetzt";FALSCH;FALSCH
-Transport Cost per km;stock;EUR/km;INTEG (Transport Cost per km Change, Initial Transport Cost per km);"Transport Cost per km
- 
- Stock f�r die durchschnittlichen Transportkosten pro Kilometer.
- Die Variable ver�ndert sich �ber die Zeit in Richtung eines
- langfristigen Zielwertes.
- 
- Sie bildet die Grundlage f�r die sp�teren j�hrlichen
- Transportkosten eines Haushalts.";02_Transport_and_Commuting;"Initial Transport Cost per km; Transport Cost per km Change";"Desired Transport Cost per km; Transport Cost per Household; Transport Cost per km Change; Transport Cost per km per Capita; Transport Cost per km per Household; Urban Fringe Radius; Urban Rent at Current Fringe; Urban Rent at Fringe";2;8;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt";WAHR;WAHR
-Transport Cost per km Change;flow;(EUR/km)/Year;(Desired Transport Cost per km - Transport Cost per km) / Transport Cost Adjustment Time;"Transport Cost per km Change
+ Die Variable ergibt sich aus dem jährlichen Kalorienbedarf pro Person
+ multipliziert mit Expected Population.",08_Agriculture_and_Scarcity,Caloric Baseline Need pP; Expected Population,Import Dependence; Populational Need of Kcal in Km2,2,2,high,Beschreibt den jährlichen Kalorienbedarf der modellierten Bevölkerung.,Caloric Baseline Need pP wird mit Expected Population multipliziert.,Der Kalorienbedarf pro Person wird als konstanter Durchschnittswert angenommen; Altersstruktur und Ernährungswandel werden abstrahiert.,FAO Food Balance Sheets / dietary energy supply: https://www.fao.org/statistics/highlights-archive/highlights-detail/food-balance-sheets-2010-2023/en; Eurostat agricultural production crops: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Agricultural_production_-_crops,Caloric Baseline Need pP sollte als kcal/Person/Jahr aus FAO dietary energy requirement oder DES abgeleitet werden; Wert = kcal/Tag * 365.,Höhere Bevölkerung oder höherer kcal-Bedarf erhöht Import Dependence / Agricultural Pressure.,draft,high,flow sollte fachlich erklaert werden,True,True
+Transport Cost per km Change,flow,(EUR/km)/Year,(Desired Transport Cost per km - Transport Cost per km) / Transport Cost Adjustment Time,"Transport Cost per km Change
  
  Anpassungsrate der Transportkosten pro Kilometer.
  Sie beschreibt, wie schnell sich Transport Cost per km
- dem gew�nschten langfristigen Wert ann�hert.";02_Transport_and_Commuting;"Desired Transport Cost per km; Transport Cost Adjustment Time; Transport Cost per km";Transport Cost per km;3;1;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-Urban Land;stock;km2;INTEG (Land Conversion Rate, Initial Urban Land);"Urban Land
+ dem gewünschten langfristigen Wert annähert.",02_Transport_and_Commuting,Desired Transport Cost per km; Transport Cost Adjustment Time; Transport Cost per km,Transport Cost per km,3,1,high,Beschreibt die Anpassungsrate der Transportkosten pro km.,Differenz zwischen Desired und aktuellem Transport Cost per km wird über Adjustment Time abgebaut.,"Langfristige Transportkostenänderungen erfolgen verzögert, z. B. durch Energiepreise, Technologie und Modal Split.",European Commission Handbook on external costs of transport: https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1; Eurostat commuting time: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Main_place_of_work_and_commuting_time_-_statistics,Transport Cost Adjustment Time als Szenario-/Glättungsparameter dokumentieren; keine direkte externe Zahl.,Positive Werte erhöhen Transport Cost per km; negative Werte senken sie.,draft,high,flow sollte fachlich erklaert werden,True,True
+Urban Productivity Effect,flow,Dmnl/Year,Urban Productivity Elasticity * (Innovation Index - 1),"Urban Productivity Effect
  
- Stock f�r die gesamte urbane Fl�che.
+ Zusätzlicher Produktivitätseffekt auf das Einkommenswachstum.
  
- Urban Land steigt, wenn landwirtschaftliche Fl�che in urbane
- Nutzung umgewandelt wird. Die Ver�nderung erfolgt �ber
- Land Conversion Rate.";"04_Urban_Rent_and_Land_Tightness; 09_Urban_Land_Conversion_Logic; 11_Innovation_and_City_Size; Macro_Ebene";"Initial Urban Land; Land Conversion Rate";"AMM Consistent Economic Land Conversion Demand; Current Urban Land per Household; Current Urban Radius; Desired Urban Land Total; Household Capacity of Current Urban Land; Household Clearing Gap; Land Tightness Index; Reference Initial Desired Urban Land; Reference Initial Urban Land; Spatial Planning; Urban Aggregate Scale Factor; Urban Land Gap; Urban Land Index; Urban Population Total";2;14;high;;;;;;;todo;high;"zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt";WAHR;WAHR
-Urban Land Gap;auxiliary;km2;MAX(0, Desired Urban Land Total - Urban Land);"Urban Land Gap
- 
- Differenz zwischen gew�nschter und aktuell vorhandener urbaner Fl�che.
- 
- Die MAX-Funktion verhindert negative Werte. Wenn die aktuelle
- urbane Fl�che bereits gr�sser ist als die gew�nschte Fl�che,
- entsteht kein zus�tzlicher Umwandlungsdruck.";09_Urban_Land_Conversion_Logic;"Desired Urban Land; Desired Urban Land Total; Urban Land";AMM Consistent Economic Land Conversion Demand;3;1;high;;;;;;;todo;high;zentrale Variable aus empfohlener Startliste;FALSCH;FALSCH
-Urban Population Density;constant;Dmnl;1500;Angenommene urbane Bev�lkerungsdichte. Der Wert kann an der EU-OECD-Definition eines Urban Centre mit 1'500 Personen pro km2 orientiert werden.;11_Innovation_and_City_Size;;Urban Population Total;0;1;high;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Urban Productivity Effect;flow;Dmnl/Year;Urban Productivity Elasticity * (Innovation Index - 1);"Urban Productivity Effect
- 
- Zus�tzlicher Produktivit�tseffekt auf das Einkommenswachstum.
- 
- Wenn der Innovation Index �ber 1 liegt, erh�ht sich die
- Wachstumsrate. Wenn er unter 1 liegt, wird sie reduziert.";03_Income_and_Productivity;"Innovation Index; Urban Productivity Elasticity";Net Income Growth Rate;2;1;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-Urban Scaling Exponent Large;constant;Dmnl;1.15;Urban-Scaling-Exponent der grossen Stadtklasse. Werte �ber 1 bedeuten, dass Innovation �berproportional mit der Stadtgr�sse steigt.;11_Innovation_and_City_Size;;Innovation Large;0;1;high;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Urban Scaling Exponent Medium;constant;Dmnl;1.15;Urban-Scaling-Exponent der mittleren Stadtklasse. Werte �ber 1 bedeuten, dass Innovation �berproportional mit der Stadtgr�sse steigt.;11_Innovation_and_City_Size;;Innovation Medium;0;1;high;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Urban Scaling Exponent Small;constant;Dmnl;1.15;Urban-Scaling-Exponent der kleinen Stadtklasse. Werte �ber 1 bedeuten, dass Innovation �berproportional mit der Stadtgr�sse steigt.;11_Innovation_and_City_Size;;Innovation Small;0;1;high;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Urban Scaling Exponent very Large;constant;Dmnl;1.15;Urban-Scaling-Exponent der sehr grossen Stadtklasse. Werte �ber 1 bedeuten, dass Innovation �berproportional mit der Stadtgr�sse steigt.;11_Innovation_and_City_Size;;Innovation very Large;0;1;high;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Yield;flow;kcal/km2/Year;"""Kcal per km^2 avg per t"" * Innovation Index";"Yield
+ Wenn der Innovation Index über 1 liegt, erhöht sich die
+ Wachstumsrate. Wenn er unter 1 liegt, wird sie reduziert.",03_Income_and_Productivity,Innovation Index; Urban Productivity Elasticity,Net Income Growth Rate,2,1,high,Übersetzt den Innovation Index in einen zusätzlichen Produktivitätseffekt.,Urban Productivity Elasticity multipliziert die Abweichung des Innovation Index von 1.,Mehr Innovationspotenzial erhöht Produktivitäts-/Einkommenswachstum; der Effekt ist als Elastizitätsannahme vereinfacht.,Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541; GDP growth context: Eurostat GDP per capita (nama_10_pc): https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table?lang=en; World Bank EU GDP per-capita growth: https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=EU,Urban Productivity Elasticity ist ein kritischer Szenarioparameter und sollte mit Sensitivität getestet werden.,Bei Innovation Index > 1 erhöht sich Net Income Growth Rate; bei < 1 wird sie reduziert.,draft,high,flow sollte fachlich erklaert werden,True,True
+Yield,flow,kcal/km2/Year,Kcal per km2 avg per t * Innovation Index,"Yield
  
  Landwirtschaftlicher Ertrag pro km2 und Jahr.
  
  Da Innovation noch nicht modelliert ist, entspricht Yield vorerst
  dem Basis-Ertrag ""Kcal per km^2 avg per t"".
  
- Sp�ter kann Yield mit dem Innovation Index erweitert werden.";08_Agriculture_and_Scarcity;"Innovation Index; Kcal per km^2 avg per t";"Food Production; Target Value: Populational Need of Kcal in Km2";2;2;high;;;;;;;todo;high;flow sollte fachlich erklaert werden;WAHR;WAHR
-Mean Household Income;auxiliary;EUR/Household;Income per Capita * Mean Household Size;"Mean Household Income
+ Später kann Yield mit dem Innovation Index erweitert werden.",08_Agriculture_and_Scarcity,Innovation Index; Kcal per km2 avg per t,Food Production; Populational Need of Kcal in Km2,2,2,high,Beschreibt den landwirtschaftlichen kcal-Ertrag pro km2 und Jahr.,Basiswert Kcal per km2 avg per t wird mit Innovation Index multipliziert.,"Innovation erhöht landwirtschaftlichen Ertrag proportional; Klima-, Boden- und Fruchtartunterschiede werden nicht explizit modelliert.",FAO Food Balance Sheets / dietary energy supply: https://www.fao.org/statistics/highlights-archive/highlights-detail/food-balance-sheets-2010-2023/en; Eurostat agricultural production crops: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Agricultural_production_-_crops; innovation link as model assumption based on Bettencourt et al. (2007): https://www.pnas.org/doi/10.1073/pnas.0610172104; Bettencourt et al. (2010): https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0013541,"Aktuellen Basiswert prüfen: aus EU-Erträgen (t/ha), kcal/t und Umrechnung ha→km2 berechnen. Innovation Index als Szenario-/Produktivitätseffekt testen.",Höherer Yield erhöht Food Production und senkt Importabhängigkeit.,draft,high,flow sollte fachlich erklaert werden,True,True
+Expected Population,lookup,Person,"WITH LOOKUP ( Time for Lookup, ([(2025,4.4e+08)-(2050,4.6e+08)], (2025,4.518e+08), (2029,4.533e+08), (2030,4.529e+08), (2035,4.509e+08), (2040,4.49e+08), (2045,4.47e+08), (2050,4.45e+08)))","Expected Population
+ 
+ Exogener Bevölkerungspfad des Modells.
+ Die Bevölkerung wird nicht mehr endogen durch Geburten,
+ Todesfälle und Migration berechnet.
+ 
+ Diese Lookup-Tabelle gibt die erwartete Bevölkerung
+ für den Simulationszeitraum vor.",01_Population_Household; 08_Agriculture_and_Scarcity,Time for Lookup,Number of Households; Population kcal demand,1,2,high,Gibt den exogenen Bevölkerungspfad für die Simulation vor.,Lookup liest die Bevölkerung abhängig von Time for Lookup.,"Bevölkerung wird im Prognosemodell exogen gesetzt und nicht endogen über Geburten, Sterbefälle und Migration simuliert.",Eurostat population projections in the EU / EUROPOP2025: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Population_projections_in_the_EU,"Die Werte 451.8 Mio. 2025, Peak 453.3 Mio. 2029 und 445.0 Mio. 2050 sind durch Eurostat-Projektionen gedeckt. Zwischenwerte 2030–2045 sollten mit Eurostat-Daten abgeglichen oder interpoliert werden.","Zentraler exogener Treiber für Haushaltszahl, Flächennachfrage und Kalorienbedarf.",draft,high,zentrale Variable aus empfohlener Startliste; lookup sollte fachlich erklaert werden,True,True
+Aggricultural Land,stock,km2,"INTEG (-Land Conversion Rate, Initial Aggricultural Land)","Aggricultural Land
+ 
+ Stock für die landwirtschaftliche Fläche.
+ 
+ Aggricultural Land sinkt, wenn Fläche in urbane Nutzung
+ umgewandelt wird. Deshalb geht Land Conversion Rate mit
+ negativem Vorzeichen in diesen Stock ein.",08_Agriculture_and_Scarcity; Macro_Ebene,Initial Aggricultural Land; Land Conversion Rate,Aggricultural Land Requirement; Agricultural Scarcity Index; Food Production; Max Feasible Conversion,2,4,high,Speichert die verbleibende landwirtschaftliche Fläche.,"Der Stock sinkt durch Land Conversion Rate, da landwirtschaftliche Fläche in urbane Nutzung überführt wird.",Landwirtschaftliche Fläche ist im Modell begrenzt und nimmt durch Urbanisierung ab; Rückgewinnung wird nicht modelliert.,Eurostat land use / land cover als Datengrundlage möglich: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Land_cover_statistics; eigene Stock-Flow-Modellstruktur,Initial Aggricultural Land sollte aus EU-Land-cover-/Agrarflächenstatistik kalibriert werden.,"Sinkende Werte erhöhen Knappheit, können Food Production reduzieren und Max Feasible Conversion begrenzen.",draft,high,zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt,True,True
+Agricultural Rent,stock,EUR/km2,"INTEG (Agricultural Rent Change, Initial Agricultural Rent)","Agricultural Rent
+ 
+ Stock für die landwirtschaftliche Bodenrente.
+ 
+ Die Variable passt sich über Agricultural Rent Change
+ schrittweise an Desired Agricultural Rent an.
+ 
+ Agricultural Rent wird später in der AMM- und
+ Urban-Land-Conversion-Logik verwendet.",05_AMM_Budget_and_Housing_Demand; 08_Agriculture_and_Scarcity; 09_Urban_Land_Conversion_Logic,Agricultural Rent Change; Initial Agricultural Rent,AMM Fringe Condition Gap; Agricultural Rent Change; Current Fringe Rent Gap; Desired Agricultural Rent; Rent Gap Pressure Factor; Urban Fringe Radius,2,6,high,Speichert die landwirtschaftliche Bodenrente.,Stock passt sich über Agricultural Rent Change an Desired Agricultural Rent an.,Landwirtschaftliche Bodenrente reagiert verzögert auf relative Knappheit landwirtschaftlicher Fläche.,"Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327; Eurostat agricultural land/crops context: FAO Food Balance Sheets / dietary energy supply: https://www.fao.org/statistics/highlights-archive/highlights-detail/food-balance-sheets-2010-2023/en; Eurostat agricultural production crops: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Agricultural_production_-_crops",Initial Agricultural Rent ist schwer direkt EU-weit zu belegen; besser als kalibrierter Rentenindex oder aus Bodenpreis-/Pachtdaten ableiten.,Wichtige Vergleichsgrösse zur urbanen Rente und zur Fringe-/Conversion-Logik.,draft,high,zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt,True,True
+Income per Capita,stock,EUR/Person,"INTEG (Income per Capita Growth, Initial Income per Capita)","Income per Capita
+ 
+ Stock für das durchschnittliche Einkommen pro Person.
+ Die Variable wächst über Income per Capita Growth und wird
+ durch Initial Income per Capita initialisiert.
+ 
+ Sie bildet die Grundlage für das Haushaltseinkommen.",03_Income_and_Productivity,Income per Capita Growth; Initial Income per Capita,Income per Capita Growth; Mean Household Income,2,2,high,Speichert das durchschnittliche Einkommen pro Person.,Stock wächst über Income per Capita Growth und bildet die Basis für Haushaltseinkommen.,GDP/Income per capita wird als Proxy für verfügbares Einkommen genutzt; Verteilungsunterschiede werden nicht abgebildet.,Eurostat GDP per capita (nama_10_pc): https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table?lang=en; World Bank EU GDP per-capita growth: https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=EU,Initialwert aus Eurostat GDP per capita oder disposable-income-Daten ableiten. Wichtig: Einheit EUR/Person und Preisbasis dokumentieren.,Höheres Einkommen erhöht Haushaltsbudget und kann über AMM-Logik Flächen-/Wohnnachfrage beeinflussen.,draft,high,zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden,True,True
+Mean Household Size,stock,Person/Household,"INTEG (Mean Household Size Change, Initial Mean Household Size)","Mean Household Size
+ 
+ Shadow Variable aus View 01.
+ Sie wird hier verwendet, um die Anzahl Pendler pro Haushalt
+ zu berechnen.",01_Population_Household; 02_Transport_and_Commuting; 03_Income_and_Productivity; 05_AMM_Budget_and_Housing_Demand,Initial Mean Household Size; Mean Household Size Change,Commuters per Household; Desired Mean Household Size; Land per Household; Mean Annual Housing Cost per Household; Mean Household Income; Mean Household Size Change; Number of Households; Reference Initial Land Demand per Household,2,8,high,Speichert die durchschnittliche Haushaltsgrösse.,Stock nähert sich über Mean Household Size Change einem gewünschten langfristigen Wert an.,Haushaltsgrössen ändern sich langsam und können über einen glatten Anpassungsprozess angenähert werden.,"Eurostat Housing in Europe 2024, average household size: https://ec.europa.eu/eurostat/web/interactive-publications/housing-2024; Eurostat household composition: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Household_composition_statistics",Eurostat Housing in Europe 2024 nennt 2.3 Personen pro Haushalt im EU-Durchschnitt 2023. Initialwert/Desired-Wert daran ausrichten.,Sinkende Haushaltsgrösse erhöht bei gleicher Bevölkerung die Anzahl Haushalte und damit Flächendruck.,draft,high,zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt,True,True
+Mean Urban Rent,stock,EUR/km2,"INTEG (Mean Urban Rent Change, Initial Mean Urban Rent)","Mean Urban Rent
+ 
+ Stock für die mittlere urbane Miete.
+ 
+ Die Variable passt sich über Mean Urban Rent Change
+ schrittweise an Desired Mean Urban Rent an.
+ 
+ Mean Urban Rent wird später in der AMM-Housing-Demand-View
+ verwendet, um die Landnachfrage pro Haushalt zu berechnen.",04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand; 09_Urban_Land_Conversion_Logic,Initial Mean Urban Rent; Mean Urban Rent Change,Current Fringe Rent Gap; Desired Mean Urban Rent; Land Demand per Household q; Mean Urban Rent Change,2,4,high,Speichert die mittlere urbane Miete/Bodenrente pro km2.,Stock passt sich über Mean Urban Rent Change an Desired Mean Urban Rent an.,Mieten reagieren verzögert auf Landknappheit statt sofort im Gleichgewicht zu sein.,"Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327; Eurostat housing affordability: Eurostat housing-cost overburden / housing affordability: https://ec.europa.eu/eurostat/databrowser/view/tespm140/default/table?lang=en; Eurostat Housing in Europe 2024: https://ec.europa.eu/eurostat/web/interactive-publications/housing-2024",Initial Mean Urban Rent sollte aus Miet-/Bodenpreisdaten oder als kalibrierter Indexwert gesetzt werden; EUR/km2 ist stark aggregiert.,Höhere urbane Miete senkt Land Demand per Household und erhöht Rent Gap Effekte.,draft,high,zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt,True,True
+Transport Cost per km,stock,EUR/km,"INTEG (Transport Cost per km Change, Initial Transport Cost per km)","Transport Cost per km
+ 
+ Stock für die durchschnittlichen Transportkosten pro Kilometer.
+ Die Variable verändert sich über die Zeit in Richtung eines
+ langfristigen Zielwertes.
+ 
+ Sie bildet die Grundlage für die späteren jährlichen
+ Transportkosten eines Haushalts.",02_Transport_and_Commuting,Initial Transport Cost per km; Transport Cost per km Change,Desired Transport Cost per km; Transport Cost per Household; Transport Cost per km Change; Transport Cost per km per Capita; Transport Cost per km per Household; Urban Fringe Radius; Urban Rent at Current Fringe; Urban Rent at Fringe,2,8,high,Speichert durchschnittliche Transportkosten pro Kilometer.,Stock passt sich über Transport Cost per km Change an einen gewünschten langfristigen Wert an.,Transportkosten ändern sich graduell; ein aggregierter EUR/km-Wert repräsentiert alle Modi vereinfacht.,European Commission Handbook on external costs of transport: https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1; Eurostat commuting time: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Main_place_of_work_and_commuting_time_-_statistics,"Für konkrete EUR/km-Werte Kombination aus Nutzerkosten, externen Kosten und Modal Split dokumentieren; EU Handbook liefert externe Kostenmethodik, aber nicht euren Gesamtwert direkt.",Höhere Transportkosten erhöhen AMM-Fringe-Kosten und beeinflussen Renten-/Landnachfrage.,draft,high,zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt,True,True
+Urban Land,stock,km2,"INTEG (Land Conversion Rate, Initial Urban Land)","Urban Land
+ 
+ Stock für die gesamte urbane Fläche.
+ 
+ Urban Land steigt, wenn landwirtschaftliche Fläche in urbane
+ Nutzung umgewandelt wird. Die Veränderung erfolgt über
+ Land Conversion Rate.",04_Urban_Rent_and_Land_Tightness; 09_Urban_Land_Conversion_Logic; 11_Innovation_and_City_Size; Macro_Ebene,Initial Urban Land; Land Conversion Rate,AMM Consistent Economic Land Conversion Demand; Current Urban Land per Household; Current Urban Radius; Desired Urban Land Total; Household Capacity of Current Urban Land; Household Clearing Gap; Land Tightness Index; Reference Initial Desired Urban Land; Reference Initial Urban Land; Spatial Planning; Urban Aggregate Scale Factor; Urban Land Gap; Urban Land Index; Urban Population Total,2,14,high,Speichert die gesamte urbane Fläche im Modell.,Urban Land ist ein Stock und steigt durch Land Conversion Rate.,Urbane Fläche wird im Modell nicht aktiv in Landwirtschaftsfläche zurückgewandelt; der Prozess ist als Netto-Expansion modelliert.,"Alonso (1964), Muth (1969), Mills (1967); Mills URL: https://www.jstor.org/stable/1821621; Muth URL: https://www.cambridge.org/core/journals/recherches-economiques-de-louvain-louvain-economic-review/article/rf-muth-cities-and-housing-the-spatial-pattern-of-urban-residential-land-use-chicago-and-london-the-university-of-chicago-press-1969-xxii-p-355-p-90/0AA8AA64AD2123A62CED306A63423327",Initial Urban Land muss aus einer Land-cover-/Urban-area-Quelle kalibriert werden; die Dynamik folgt der AMM-basierten Flächennachfrage.,Zentrale Zielvariable für urbane Expansion und Flächenverbrauch.,draft,high,zentrale Variable aus empfohlener Startliste; stock sollte fachlich erklaert werden; stark vernetzt,True,True
+Mean Household Income,auxiliary,EUR/Household,Income per Capita * Mean Household Size,"Mean Household Income
  
  Berechnetes durchschnittliches Haushaltseinkommen.
  
  Es ergibt sich aus Income per Capita multipliziert mit
- Mean Household Size. Diese Variable wird sp�ter in der
- AMM-Budgetlogik verwendet.";"03_Income_and_Productivity; 04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand";"Income per Capita; Mean Household Size";"Disposable Income after Transport; Urban Fringe Radius; Urban Rent at Current Fringe; Urban Rent at Fringe";2;4;medium;;;;;;;todo;medium;stark vernetzt;FALSCH;FALSCH
-Other Consumption Per Household z;auxiliary;EUR/Household;(1 - Housing Preference Share Alpha) * Disposable Income after Transport;"Other Consumption Per Household z
+ Mean Household Size. Diese Variable wird später in der
+ AMM-Budgetlogik verwendet.",03_Income_and_Productivity; 04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand,Income per Capita; Mean Household Size,Disposable Income after Transport; Urban Fringe Radius; Urban Rent at Current Fringe; Urban Rent at Fringe,2,4,medium,,,,,,,todo,medium,stark vernetzt,False,False
+Other Consumption Per Household z,auxiliary,EUR/Household,(1 - Housing Preference Share Alpha) * Disposable Income after Transport,"Other Consumption Per Household z
  
- Teil des verf�gbaren Haushaltseinkommens, der nicht f�r Wohnen
+ Teil des verfügbaren Haushaltseinkommens, der nicht für Wohnen
  verwendet wird.
  
- Diese Variable repr�sentiert den sonstigen Konsum im AMM-Budget
- und wird sp�ter f�r den Cobb-Douglas Utility Index verwendet.";"04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand; 07_Cobb_Douglas_Utility";"Disposable Income after Transport; Housing Preference Share Alpha";"Reference Other Consumption Per Household; Relative Other Consumption per Household; Urban Fringe Radius; Urban Rent at Current Fringe; Urban Rent at Fringe";2;5;medium;;;;;;;todo;medium;stark vernetzt;FALSCH;FALSCH
-Reference Initial Land Demand per Household;auxiliary;km2/Household;INITIAL( Initial Mean Household Size * Reference Initial Land Demand per Capita );"Reference Initial Land Demand per Household
+ Diese Variable repräsentiert den sonstigen Konsum im AMM-Budget
+ und wird später für den Cobb-Douglas Utility Index verwendet.",04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand; 07_Cobb_Douglas_Utility,Disposable Income after Transport; Housing Preference Share Alpha,Reference Other Consumption Per Household; Relative Other Consumption per Household; Urban Fringe Radius; Urban Rent at Current Fringe; Urban Rent at Fringe,2,5,medium,,,,,,,todo,medium,stark vernetzt,False,False
+Reference Initial Land Demand per Household,auxiliary,km2/Household,INITIAL( Initial Mean Household Size * Reference Initial Land Demand per Capita ),"Reference Initial Land Demand per Household
  
  Referenzwert der urbanen Landnachfrage pro Haushalt
  zu Beginn der Simulation.
  
- Dieser Wert dient als Vergleichswert f�r die aktuell
- verf�gbare urbane Fl�che pro Haushalt.";"04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand";"Initial Mean Household Size; Mean Household Size; Reference Initial Land Demand per Capita";"Initial Mean Urban Rent; Land Tightness Index; Relative Land Demand per Household";3;3;medium;;;;;;;todo;medium;stark vernetzt;FALSCH;FALSCH
-Transport Cost per km per Household;auxiliary;EUR/km/Household;Transport Cost per km per Capita * Commuters per Household;"Transport Cost per km per Household
+ Dieser Wert dient als Vergleichswert für die aktuell
+ verfügbare urbane Fläche pro Haushalt.",04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand,Initial Mean Household Size; Mean Household Size; Reference Initial Land Demand per Capita,Initial Mean Urban Rent; Land Tightness Index; Relative Land Demand per Household,3,3,medium,,,,,,,todo,medium,stark vernetzt,False,False
+Transport Cost per km per Household,auxiliary,EUR/km/Household,Transport Cost per km per Capita * Commuters per Household,"Transport Cost per km per Household
  
- J�hrliche Transportkosten pro Kilometer und Haushalt.
+ Jährliche Transportkosten pro Kilometer und Haushalt.
  Die Kosten pro Person werden mit der Anzahl Pendler pro
- Haushalt multipliziert.";"02_Transport_and_Commuting; 04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand";"Commuters per Household; Transport Cost per km; Transport Cost per km per Capita";"Transport Cost per Household; Urban Fringe Radius; Urban Rent at Current Fringe; Urban Rent at Fringe";3;4;medium;;;;;;;todo;medium;stark vernetzt;FALSCH;FALSCH
-Urban Aggregate Scale Factor;auxiliary;Dmnl;Reference Initial Urban Land / Reference Initial Desired Urban Land;Skalierungsfaktor, der die synthetische AMM-Stadt auf die aggregierte urbane Fl�che des Gesamtmodells skaliert.;05_AMM_Budget_and_Housing_Demand;"Desired Urban Land; Initial Urban Land; Reference Initial Desired Urban Land; Reference Initial Urban Land; Urban Land";Desired Urban Land Total;5;1;medium;;;;;;;todo;medium;stark vernetzt;FALSCH;FALSCH
-Urban Fringe Radius;auxiliary;km;MAX( 0, ( Mean Household Income - Other Consumption Per Household z - Land Demand per Household q * Agricultural Rent ) / Transport Cost per km per Household );Theoretischer AMM-Stadtrand. Der Radius ergibt sich aus der Bedingung, dass die urbane Zahlungsbereitschaft am Rand der landwirtschaftlichen Rente entspricht.;05_AMM_Budget_and_Housing_Demand;"Agricultural Rent; Land Demand per Household q; Mean Household Income; Other Consumption Per Household z; Transport Cost per km; Transport Cost per km per Household";"Desired Urban Land; Urban Rent at Fringe";6;2;medium;;;;;;;todo;medium;stark vernetzt;FALSCH;FALSCH
-Urban Population Total;auxiliary;Dmnl;Urban Land / Urban Population Density;Normalisierte urbane Gr�ssenvariable f�r den Innovation-Block. Sie wird aus Urban Land und Urban Population Density berechnet.;11_Innovation_and_City_Size;"Urban Land; Urban Population Density";"Equivalent Number of Large Cities; Equivalent Number of Medium Cities; Equivalent Number of Small Cities; Equivalent Number of Very Large Cities";2;4;medium;;;;;;;todo;medium;stark vernetzt;FALSCH;FALSCH
-Urban Rent at Current Fringe;auxiliary;EUR/km2;( Mean Household Income - Other Consumption Per Household z - Transport Cost per km per Household * Current Urban Radius ) / Land Demand per Household q;Urbane Rente am aktuellen Stadtrand. Sie ergibt sich aus dem AMM-Budget nach Abzug des sonstigen Konsums und der distanzabh�ngigen Transportkosten.;04_Urban_Rent_and_Land_Tightness;"Current Urban Radius; Land Demand per Household q; Mean Household Income; Other Consumption Per Household z; Transport Cost per km; Transport Cost per km per Household";;6;0;medium;;;;;;;todo;medium;stark vernetzt;FALSCH;FALSCH
-Urban Rent at Fringe;auxiliary;EUR/km2;( Mean Household Income - Other Consumption Per Household z - Transport Cost per km per Household * Urban Fringe Radius ) / Land Demand per Household q;Urbane Rente am theoretischen AMM-Fringe. Diese Variable dient zur Pr�fung, ob der berechnete Fringe konsistent mit der Agricultural Rent ist.;05_AMM_Budget_and_Housing_Demand;"Land Demand per Household q; Mean Household Income; Other Consumption Per Household z; Transport Cost per km; Transport Cost per km per Household; Urban Fringe Radius";AMM Fringe Condition Gap;6;1;medium;;;;;;;todo;medium;stark vernetzt;FALSCH;FALSCH
-Agricultural Rent Adjustment Time;constant;Year;5;"Agricultural Rent Adjustment Time
+ Haushalt multipliziert.",02_Transport_and_Commuting; 04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand,Commuters per Household; Transport Cost per km; Transport Cost per km per Capita,Transport Cost per Household; Urban Fringe Radius; Urban Rent at Current Fringe; Urban Rent at Fringe,3,4,medium,,,,,,,todo,medium,stark vernetzt,False,False
+Urban Aggregate Scale Factor,auxiliary,Dmnl,Reference Initial Urban Land / Reference Initial Desired Urban Land,"Skalierungsfaktor, der die synthetische AMM-Stadt auf die aggregierte urbane Fläche des Gesamtmodells skaliert.",05_AMM_Budget_and_Housing_Demand,Desired Urban Land; Initial Urban Land; Reference Initial Desired Urban Land; Reference Initial Urban Land; Urban Land,Desired Urban Land Total,5,1,medium,,,,,,,todo,medium,stark vernetzt,False,False
+Urban Fringe Radius,auxiliary,km,"MAX( 0, ( Mean Household Income - Other Consumption Per Household z - Land Demand per Household q * Agricultural Rent ) / Transport Cost per km per Household )","Theoretischer AMM-Stadtrand. Der Radius ergibt sich aus der Bedingung, dass die urbane Zahlungsbereitschaft am Rand der landwirtschaftlichen Rente entspricht.",05_AMM_Budget_and_Housing_Demand,Agricultural Rent; Land Demand per Household q; Mean Household Income; Other Consumption Per Household z; Transport Cost per km; Transport Cost per km per Household,Desired Urban Land; Urban Rent at Fringe,6,2,medium,,,,,,,todo,medium,stark vernetzt,False,False
+Urban Population Total,auxiliary,Dmnl,Urban Land / Urban Population Density,Normalisierte urbane Grössenvariable für den Innovation-Block. Sie wird aus Urban Land und Urban Population Density berechnet.,11_Innovation_and_City_Size,Urban Land; Urban Population Density,Equivalent Number of Large Cities; Equivalent Number of Medium Cities; Equivalent Number of Small Cities; Equivalent Number of Very Large Cities,2,4,medium,,,,,,,todo,medium,stark vernetzt,False,False
+Urban Rent at Current Fringe,auxiliary,EUR/km2,( Mean Household Income - Other Consumption Per Household z - Transport Cost per km per Household * Current Urban Radius ) / Land Demand per Household q,Urbane Rente am aktuellen Stadtrand. Sie ergibt sich aus dem AMM-Budget nach Abzug des sonstigen Konsums und der distanzabhängigen Transportkosten.,04_Urban_Rent_and_Land_Tightness,Current Urban Radius; Land Demand per Household q; Mean Household Income; Other Consumption Per Household z; Transport Cost per km; Transport Cost per km per Household,,6,0,medium,,,,,,,todo,medium,stark vernetzt,False,False
+Urban Rent at Fringe,auxiliary,EUR/km2,( Mean Household Income - Other Consumption Per Household z - Transport Cost per km per Household * Urban Fringe Radius ) / Land Demand per Household q,"Urbane Rente am theoretischen AMM-Fringe. Diese Variable dient zur Prüfung, ob der berechnete Fringe konsistent mit der Agricultural Rent ist.",05_AMM_Budget_and_Housing_Demand,Land Demand per Household q; Mean Household Income; Other Consumption Per Household z; Transport Cost per km; Transport Cost per km per Household; Urban Fringe Radius,AMM Fringe Condition Gap,6,1,medium,,,,,,,todo,medium,stark vernetzt,False,False
+Agricultural Rent Adjustment Time,constant,Year,5,"Agricultural Rent Adjustment Time
  
  Anpassungszeit der landwirtschaftlichen Bodenrente.
  
- Je h�her dieser Wert ist, desto langsamer passt sich
- Agricultural Rent an Desired Agricultural Rent an.";08_Agriculture_and_Scarcity;;Agricultural Rent Change;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Agricultural Rent Sensitivity to Scarcity;constant;Dmnl;1;"Agricultural Rent Sensitivity to Scarcity
+ Je höher dieser Wert ist, desto langsamer passt sich
+ Agricultural Rent an Desired Agricultural Rent an.",08_Agriculture_and_Scarcity,,Agricultural Rent Change,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Agricultural Rent Sensitivity to Scarcity,constant,Dmnl,1,"Agricultural Rent Sensitivity to Scarcity
  
- Sensitivit�t der landwirtschaftlichen Bodenrente gegen�ber
+ Sensitivität der landwirtschaftlichen Bodenrente gegenüber
  landwirtschaftlicher Knappheit.
  
- Ein h�herer Wert bedeutet, dass Desired Agricultural Rent st�rker
- auf steigende Relative Agricultural Scarcity reagiert.";08_Agriculture_and_Scarcity;;Desired Agricultural Rent;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Base Income Growth Rate;constant;Dmnl/Year;0.01;"Base Income Growth Rate
+ Ein höherer Wert bedeutet, dass Desired Agricultural Rent stärker
+ auf steigende Relative Agricultural Scarcity reagiert.",08_Agriculture_and_Scarcity,,Desired Agricultural Rent,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Base Income Growth Rate,constant,Dmnl/Year,0.01,"Base Income Growth Rate
  
- Grundannahme f�r das j�hrliche Einkommenswachstum.
- Dieser Wert gilt unabh�ngig vom zus�tzlichen Produktivit�tseffekt.";03_Income_and_Productivity;;Net Income Growth Rate;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Caloric Baseline Need pP;constant;kcal/Person/Year;3400 * 365;"Caloric Baseline Need pP
+ Grundannahme für das jährliche Einkommenswachstum.
+ Dieser Wert gilt unabhängig vom zusätzlichen Produktivitätseffekt.",03_Income_and_Productivity,,Net Income Growth Rate,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Caloric Baseline Need pP,constant,kcal/Person/Year,3400 * 365,"Caloric Baseline Need pP
  
- J�hrlicher Kalorienbedarf pro Person.
+ Jährlicher Kalorienbedarf pro Person.
  
  Der Wert wird aus einem angenommenen Tagesbedarf von 3400 kcal
- multipliziert mit 365 Tagen berechnet.";08_Agriculture_and_Scarcity;;Population kcal demand;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Commuting Share of Employed Persons;constant;Dmnl;0.957;"Commuting Share of Employed Persons
+ multipliziert mit 365 Tagen berechnet.",08_Agriculture_and_Scarcity,,Population kcal demand,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Commuting Share of Employed Persons,constant,Dmnl,0.957,"Commuting Share of Employed Persons
  
- Anteil der erwerbst�tigen Personen, die regelm�ssig pendeln.
- Dieser Wert reduziert die erwerbst�tigen Personen auf die
- tats�chlichen Pendler pro Haushalt.";02_Transport_and_Commuting;;Commuters per Household;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Employment Share of Total Population;constant;Dmnl;0.439;"Employment Share of Total Population
+ Anteil der erwerbstätigen Personen, die regelmässig pendeln.
+ Dieser Wert reduziert die erwerbstätigen Personen auf die
+ tatsächlichen Pendler pro Haushalt.",02_Transport_and_Commuting,,Commuters per Household,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Employment Share of Total Population,constant,Dmnl,0.439,"Employment Share of Total Population
  
- Anteil der Gesamtbev�lkerung, der erwerbst�tig ist.
- Dieser Anteil wird verwendet, um aus der Haushaltsgr�sse
- die potenzielle Anzahl erwerbst�tiger Personen pro Haushalt
- abzuleiten.";02_Transport_and_Commuting;;Commuters per Household;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Household Size Adjustment Time;constant;Year;8;"Household Size Adjustment Time
+ Anteil der Gesamtbevölkerung, der erwerbstätig ist.
+ Dieser Anteil wird verwendet, um aus der Haushaltsgrösse
+ die potenzielle Anzahl erwerbstätiger Personen pro Haushalt
+ abzuleiten.",02_Transport_and_Commuting,,Commuters per Household,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Household Size Adjustment Time,constant,Year,8,"Household Size Adjustment Time
  
- Anpassungszeit der mittleren Haushaltsgr�sse.
- Je h�her dieser Wert ist, desto langsamer bewegt sich
- Mean Household Size in Richtung des langfristigen Zielwertes.";01_Population_Household;;Mean Household Size Change;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Housing Preference Share Alpha;constant;Dmnl;0.15;"Housing Preference Share Alpha
+ Anpassungszeit der mittleren Haushaltsgrösse.
+ Je höher dieser Wert ist, desto langsamer bewegt sich
+ Mean Household Size in Richtung des langfristigen Zielwertes.",01_Population_Household,,Mean Household Size Change,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Housing Preference Share Alpha,constant,Dmnl,0.15,"Housing Preference Share Alpha
  
- Anteil des verf�gbaren Haushaltseinkommens, der f�r Wohnen
+ Anteil des verfügbaren Haushaltseinkommens, der für Wohnen
  bzw. urbane Landnutzung verwendet wird.
  
- Ein Wert von 0.15 bedeutet, dass 15 Prozent des verf�gbaren
- Einkommens f�r Wohn- und Landkosten eingesetzt werden.";"05_AMM_Budget_and_Housing_Demand; 07_Cobb_Douglas_Utility";;"Cobb Douglas Utility Index; Housing Land Expenditure; Other Consumption Per Household z";0;3;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Initial Aggricultural Land;constant;km2;1.6004e+06;"Initial Aggricultural Land
+ Ein Wert von 0.15 bedeutet, dass 15 Prozent des verfügbaren
+ Einkommens für Wohn- und Landkosten eingesetzt werden.",05_AMM_Budget_and_Housing_Demand; 07_Cobb_Douglas_Utility,,Cobb Douglas Utility Index; Housing Land Expenditure; Other Consumption Per Household z,0,3,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Initial Aggricultural Land,constant,km2,1.6004e+06,"Initial Aggricultural Land
  
- Startwert der landwirtschaftlichen Fl�che zu Beginn der Simulation.
+ Startwert der landwirtschaftlichen Fläche zu Beginn der Simulation.
  
  Dieser Wert initialisiert den Stock Aggricultural Land.
- Die Fl�che sinkt, wenn Land in urbane Nutzung umgewandelt wird.";Macro_Ebene;;Aggricultural Land;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Initial Agricultural Rent;constant;EUR/km2;30000;"Initial Agricultural Rent
+ Die Fläche sinkt, wenn Land in urbane Nutzung umgewandelt wird.",Macro_Ebene,,Aggricultural Land,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Initial Agricultural Rent,constant,EUR/km2,30000,"Initial Agricultural Rent
  
  Startwert der landwirtschaftlichen Bodenrente.
  
- Dieser Wert initialisiert den Stock Agricultural Rent.";08_Agriculture_and_Scarcity;;"Agricultural Rent; Desired Agricultural Rent";0;2;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Initial Income per Capita;constant;EUR/Person;41650;"Initial Income per Capita
+ Dieser Wert initialisiert den Stock Agricultural Rent.",08_Agriculture_and_Scarcity,,Agricultural Rent; Desired Agricultural Rent,0,2,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Initial Income per Capita,constant,EUR/Person,41650,"Initial Income per Capita
  
  Startwert des durchschnittlichen Einkommens pro Person.
  Dieser Wert initialisiert den Stock Income per Capita
- zu Beginn der Simulation.";03_Income_and_Productivity;;Income per Capita;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Initial Mean Household Size;constant;Person/Household;2.3;"Initial Mean Household Size
+ zu Beginn der Simulation.",03_Income_and_Productivity,,Income per Capita,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Initial Mean Household Size,constant,Person/Household,2.3,"Initial Mean Household Size
  
- Startwert der durchschnittlichen Haushaltsgr�sse.
+ Startwert der durchschnittlichen Haushaltsgrösse.
  Dieser Wert initialisiert den Stock Mean Household Size
- zu Beginn der Simulation.";"01_Population_Household; 04_Urban_Rent_and_Land_Tightness";;"Mean Household Size; Reference Initial Land Demand per Household";0;2;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Initial Transport Cost per km;constant;EUR/km;0.47;"Initial Transport Cost per km
+ zu Beginn der Simulation.",01_Population_Household; 04_Urban_Rent_and_Land_Tightness,,Mean Household Size; Reference Initial Land Demand per Household,0,2,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Initial Transport Cost per km,constant,EUR/km,0.47,"Initial Transport Cost per km
  
  Startwert der Transportkosten pro Kilometer.
  Dieser Wert initialisiert den Stock Transport Cost per km
- zu Beginn der Simulation.";02_Transport_and_Commuting;;Transport Cost per km;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Initial Urban Land;constant;km2;181700;"Initial Urban Land
+ zu Beginn der Simulation.",02_Transport_and_Commuting,,Transport Cost per km,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Initial Urban Land,constant,km2,181700,"Initial Urban Land
  
- Startwert der urbanen Fl�che zu Beginn der Simulation.
- Dieser Wert initialisiert den Stock Urban Land.";Macro_Ebene;;"Urban Aggregate Scale Factor; Urban Land; Urban Land Index";0;3;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Kcal per km^2 avg per t;constant;kcal/km2/Year;1.8e+09;"Kcal per km^2 avg per t
+ Startwert der urbanen Fläche zu Beginn der Simulation.
+ Dieser Wert initialisiert den Stock Urban Land.",Macro_Ebene,,Urban Aggregate Scale Factor; Urban Land; Urban Land Index,0,3,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Kcal per km2 avg per t,constant,kcal/km2/Year,1.8e+09,"Kcal per km^2 avg per t
  
- Basis-Ertrag landwirtschaftlicher Fl�che.
+ Basis-Ertrag landwirtschaftlicher Fläche.
  
  Der Wert gibt an, wie viele Kilokalorien pro km2 und Jahr
- durch landwirtschaftliche Produktion erzeugt werden k�nnen.
+ durch landwirtschaftliche Produktion erzeugt werden können.
  
  In dieser Modellversion wird dieser Wert vorerst ohne
- Innovationseffekt verwendet.";08_Agriculture_and_Scarcity;;Yield;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Long Run Transport Cost per km;constant;EUR/km;0.47;"Long Run Transport Cost per km
+ Innovationseffekt verwendet.",08_Agriculture_and_Scarcity,,Yield,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Long Run Transport Cost per km,constant,EUR/km,0.47,"Long Run Transport Cost per km
  
  Langfristig angenommene Transportkosten pro Kilometer.
- Dieser Wert dient als Zielwert f�r Transport Cost per km.";02_Transport_and_Commuting;;Desired Transport Cost per km;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Max Ceiling Soil Protection;constant;Dmnl;0.8;"Max Ceiling Soil Protection
+ Dieser Wert dient als Zielwert für Transport Cost per km.",02_Transport_and_Commuting,,Desired Transport Cost per km,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Max Ceiling Soil Protection,constant,Dmnl,0.8,"Max Ceiling Soil Protection
  
  Maximale Reduktion der Landumwandlung durch Soil Protection.
  
- Ein Wert von 0.8 bedeutet, dass die Schutzlogik die sp�tere
- Land Conversion Rate maximal um 80 Prozent reduzieren kann.";10_Soil_Protection_and_Agricultural_Pressure;;Soil Protection Effect;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Maximum Income Growth Rate;constant;Dmnl/Year;0.03;"Maximum Income Growth Rate
+ Ein Wert von 0.8 bedeutet, dass die Schutzlogik die spätere
+ Land Conversion Rate maximal um 80 Prozent reduzieren kann.",10_Soil_Protection_and_Agricultural_Pressure,,Soil Protection Effect,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Maximum Income Growth Rate,constant,Dmnl/Year,0.03,"Maximum Income Growth Rate
  
- Obere Grenze f�r das j�hrliche Einkommenswachstum.
- Sie verhindert, dass das Einkommen unrealistisch stark w�chst.";03_Income_and_Productivity;;Net Income Growth Rate;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Mean Annual Housing Cost per Capita;constant;EUR/Person/Year;805 * 12;Durchschnittliche j�hrliche Wohnkosten pro Person. Der Monatswert wird auf ein Jahr hochgerechnet.;05_AMM_Budget_and_Housing_Demand;;Mean Annual Housing Cost per Household;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Minimum Income Growth Rate;constant;Dmnl/Year;-0.02;"Minimum Income Growth Rate
+ Obere Grenze für das jährliche Einkommenswachstum.
+ Sie verhindert, dass das Einkommen unrealistisch stark wächst.",03_Income_and_Productivity,,Net Income Growth Rate,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Mean Annual Housing Cost per Capita,constant,EUR/Person/Year,805 * 12,Durchschnittliche jährliche Wohnkosten pro Person. Der Monatswert wird auf ein Jahr hochgerechnet.,05_AMM_Budget_and_Housing_Demand,,Mean Annual Housing Cost per Household,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Minimum Income Growth Rate,constant,Dmnl/Year,-0.02,"Minimum Income Growth Rate
  
- Untere Grenze f�r das j�hrliche Einkommenswachstum.
- Sie erlaubt negatives Wachstum, begrenzt aber den maximalen R�ckgang.";03_Income_and_Productivity;;Net Income Growth Rate;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Reference Initial Land Demand per Capita;constant;km2/Person;0.000498;"Reference Initial Land Demand per Capita
+ Untere Grenze für das jährliche Einkommenswachstum.
+ Sie erlaubt negatives Wachstum, begrenzt aber den maximalen Rückgang.",03_Income_and_Productivity,,Net Income Growth Rate,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Reference Initial Land Demand per Capita,constant,km2/Person,0.000498,"Reference Initial Land Demand per Capita
  
- Referenzwert f�r die urbane Landnachfrage pro Person
+ Referenzwert für die urbane Landnachfrage pro Person
  im Startzustand.
  
  0.000498 km2 entspricht 498 m2 pro Person.
- Dieser Wert dient zur Kalibrierung der anf�nglichen
- Landnachfrage.";04_Urban_Rent_and_Land_Tightness;;Reference Initial Land Demand per Household;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Soil Protection Factor;constant;Dmnl;0.3;"Soil Protection Factor
+ Dieser Wert dient zur Kalibrierung der anfänglichen
+ Landnachfrage.",04_Urban_Rent_and_Land_Tightness,,Reference Initial Land Demand per Household,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Soil Protection Factor,constant,Dmnl,0.3,"Soil Protection Factor
  
- St�rke der Schutzreaktion auf landwirtschaftliche Knappheit.
+ Stärke der Schutzreaktion auf landwirtschaftliche Knappheit.
  
- Je h�her dieser Wert ist, desto st�rker reduziert steigende
- landwirtschaftliche Knappheit die sp�tere Land Conversion Rate.";10_Soil_Protection_and_Agricultural_Pressure;;Soil Protection;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Spatial Planing Factor;constant;Dmnl;1.0001;Szenarioparameter f�r r�umliche Planung. Ein Wert von 1 bedeutet eine neutrale Planungsannahme ohne zus�tzliche Verst�rkung oder D�mpfung.;10_Soil_Protection_and_Agricultural_Pressure;;Spatial Planning;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Transport Cost Adjustment Time;constant;Year;5;"Transport Cost Adjustment Time
+ Je höher dieser Wert ist, desto stärker reduziert steigende
+ landwirtschaftliche Knappheit die spätere Land Conversion Rate.",10_Soil_Protection_and_Agricultural_Pressure,,Soil Protection,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Spatial Planing Factor,constant,Dmnl,1.0001,Szenarioparameter für räumliche Planung. Ein Wert von 1 bedeutet eine neutrale Planungsannahme ohne zusätzliche Verstärkung oder Dämpfung.,10_Soil_Protection_and_Agricultural_Pressure,,Spatial Planning,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Transport Cost Adjustment Time,constant,Year,5,"Transport Cost Adjustment Time
  
  Anpassungszeit der Transportkosten.
- Je h�her dieser Wert ist, desto langsamer bewegt sich
- Transport Cost per km in Richtung des langfristigen Zielwertes.";02_Transport_and_Commuting;;Transport Cost per km Change;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Urban Expansion Adjustment Time;constant;Year;10;"Urban Expansion Adjustment Time
+ Je höher dieser Wert ist, desto langsamer bewegt sich
+ Transport Cost per km in Richtung des langfristigen Zielwertes.",02_Transport_and_Commuting,,Transport Cost per km Change,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Urban Expansion Adjustment Time,constant,Year,10,"Urban Expansion Adjustment Time
  
  Anpassungszeit der urbanen Expansion.
  
- Je h�her dieser Wert ist, desto langsamer wird ein bestehender
- Urban Land Gap durch neue Landumwandlung geschlossen.";09_Urban_Land_Conversion_Logic;;AMM Consistent Economic Land Conversion Demand;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Urban Productivity Elasticity;constant;Dmnl/Year;0.005;"Urban Productivity Elasticity
+ Je höher dieser Wert ist, desto langsamer wird ein bestehender
+ Urban Land Gap durch neue Landumwandlung geschlossen.",09_Urban_Land_Conversion_Logic,,AMM Consistent Economic Land Conversion Demand,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Urban Productivity Elasticity,constant,Dmnl/Year,0.005,"Urban Productivity Elasticity
  
- Sensitivit�t des Einkommenswachstums gegen�ber dem Innovation Index.
+ Sensitivität des Einkommenswachstums gegenüber dem Innovation Index.
  
- Je h�her dieser Wert ist, desto st�rker wirkt sich Innovation
- auf die Einkommensentwicklung aus.";03_Income_and_Productivity;;Urban Productivity Effect;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-Urban Rent Adjustment Time;constant;Year;2;"Urban Rent Adjustment Time
+ Je höher dieser Wert ist, desto stärker wirkt sich Innovation
+ auf die Einkommensentwicklung aus.",03_Income_and_Productivity,,Urban Productivity Effect,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+Urban Rent Adjustment Time,constant,Year,2,"Urban Rent Adjustment Time
  
  Anpassungszeit der urbanen Miete.
  
- Je h�her dieser Wert ist, desto langsamer passt sich
- Mean Urban Rent an Desired Mean Urban Rent an.";04_Urban_Rent_and_Land_Tightness;;Mean Urban Rent Change;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;FALSCH
-Urban Rent Sensitivity to Land Tightness;constant;Dmnl;1;"Urban Rent Sensitivity to Land Tightness
+ Je höher dieser Wert ist, desto langsamer passt sich
+ Mean Urban Rent an Desired Mean Urban Rent an.",04_Urban_Rent_and_Land_Tightness,,Mean Urban Rent Change,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,False
+Urban Rent Sensitivity to Land Tightness,constant,Dmnl,1,"Urban Rent Sensitivity to Land Tightness
  
- Sensitivit�t der urbanen Miete gegen�ber Landknappheit.
+ Sensitivität der urbanen Miete gegenüber Landknappheit.
  
- Ein h�herer Wert bedeutet, dass Desired Mean Urban Rent st�rker
- auf �nderungen im Land Tightness Index reagiert.";04_Urban_Rent_and_Land_Tightness;;Desired Mean Urban Rent;0;1;medium;;;;;;;todo;medium;Parameter/Konstante braucht Quelle oder Wertbegruendung;WAHR;WAHR
-AMM Fringe Condition Gap;auxiliary;EUR/km2;Urban Rent at Fringe - Agricultural Rent;Differenz zwischen urbaner Rente am AMM-Fringe und Agricultural Rent. Ein Wert nahe null zeigt, dass die Fringe-Bedingung erf�llt ist.;05_AMM_Budget_and_Housing_Demand;"Agricultural Rent; Urban Rent at Fringe";;2;0;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Additional Urban Land Needed for Clearing;auxiliary;km2;Household Clearing Gap * Land Demand per Household q;Zus�tzliche urbane Fl�che, die ben�tigt w�rde, um den Household Clearing Gap vollst�ndig zu schliessen.;09_Urban_Land_Conversion_Logic;"Household Clearing Gap; Land Demand per Household q";;2;0;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Aggricultural Land Requirement;auxiliary;km2;"""Target Value: Populational Need of Kcal in Km2"" - Aggricultural Land";Differenz zwischen der ben�tigten landwirtschaftlichen Fl�che f�r den Kalorienbedarf und der aktuell vorhandenen Aggricultural Land.;08_Agriculture_and_Scarcity;"Aggricultural Land; Target Value: Populational Need of Kcal in Km2";;2;0;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Agricultural Scarcity Index;auxiliary;Dmnl;"ZIDZ( ""Target Value: Populational Need of Kcal in Km2"", Aggricultural Land )";"Agricultural Scarcity Index
+ Ein höherer Wert bedeutet, dass Desired Mean Urban Rent stärker
+ auf Änderungen im Land Tightness Index reagiert.",04_Urban_Rent_and_Land_Tightness,,Desired Mean Urban Rent,0,1,medium,,,,,,,todo,medium,Parameter/Konstante braucht Quelle oder Wertbegruendung,True,True
+AMM Fringe Condition Gap,auxiliary,EUR/km2,Urban Rent at Fringe - Agricultural Rent,"Differenz zwischen urbaner Rente am AMM-Fringe und Agricultural Rent. Ein Wert nahe null zeigt, dass die Fringe-Bedingung erfüllt ist.",05_AMM_Budget_and_Housing_Demand,Agricultural Rent; Urban Rent at Fringe,,2,0,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Additional Urban Land Needed for Clearing,auxiliary,km2,Household Clearing Gap * Land Demand per Household q,"Zusätzliche urbane Fläche, die benötigt würde, um den Household Clearing Gap vollständig zu schliessen.",09_Urban_Land_Conversion_Logic,Household Clearing Gap; Land Demand per Household q,,2,0,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Aggricultural Land Requirement,auxiliary,km2,Populational Need of Kcal in Km2 - Aggricultural Land,Differenz zwischen der benötigten landwirtschaftlichen Fläche für den Kalorienbedarf und der aktuell vorhandenen Aggricultural Land.,08_Agriculture_and_Scarcity,Aggricultural Land; Populational Need of Kcal in Km2,,2,0,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Agricultural Scarcity Index,auxiliary,Dmnl,"ZIDZ( Populational Need of Kcal in Km2, Aggricultural Land )","Agricultural Scarcity Index
  
- Dimensionsloser Knappheitsindex der landwirtschaftlichen Fl�che.
+ Dimensionsloser Knappheitsindex der landwirtschaftlichen Fläche.
  
- Ein Wert von 1 bedeutet, dass die ben�tigte Fl�che ungef�hr der
- verf�gbaren Aggricultural Land entspricht.
+ Ein Wert von 1 bedeutet, dass die benötigte Fläche ungefähr der
+ verfügbaren Aggricultural Land entspricht.
  
- Werte �ber 1 deuten auf Knappheit hin.";08_Agriculture_and_Scarcity;"Aggricultural Land; Target Value: Populational Need of Kcal in Km2";"Reference Agricultural Scarcity Index; Relative Agricultural Scarcity";2;2;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Cobb Douglas Utility Index;auxiliary;Dmnl;(Relative Other Consumption per Household ^ (1 - Housing Preference Share Alpha)) * (Relative Land Demand per Household ^ Housing Preference Share Alpha);"Cobb Douglas Utility Index
+ Werte über 1 deuten auf Knappheit hin.",08_Agriculture_and_Scarcity,Aggricultural Land; Populational Need of Kcal in Km2,Reference Agricultural Scarcity Index; Relative Agricultural Scarcity,2,2,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Cobb Douglas Utility Index,auxiliary,Dmnl,(Relative Other Consumption per Household ^ (1 - Housing Preference Share Alpha)) * (Relative Land Demand per Household ^ Housing Preference Share Alpha),"Cobb Douglas Utility Index
  
  Dimensionsloser Nutzenindex auf Basis einer Cobb-Douglas-Logik.
  
@@ -406,213 +406,213 @@ Cobb Douglas Utility Index;auxiliary;Dmnl;(Relative Other Consumption per Househ
  Landnachfrage pro Haushalt.
  
  Ein Wert von 1 entspricht dem Nutzen im Startzustand.
- Werte �ber 1 zeigen eine Verbesserung gegen�ber dem Startzustand,
- Werte unter 1 eine Verschlechterung.";07_Cobb_Douglas_Utility;"Housing Preference Share Alpha; Relative Land Demand per Household; Relative Other Consumption per Household";;3;0;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Commuters per Household;auxiliary;Person/Household;Commuting Share of Employed Persons * Employment Share of Total Population * Mean Household Size;"Commuters per Household
+ Werte über 1 zeigen eine Verbesserung gegenüber dem Startzustand,
+ Werte unter 1 eine Verschlechterung.",07_Cobb_Douglas_Utility,Housing Preference Share Alpha; Relative Land Demand per Household; Relative Other Consumption per Household,,3,0,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Commuters per Household,auxiliary,Person/Household,Commuting Share of Employed Persons * Employment Share of Total Population * Mean Household Size,"Commuters per Household
  
  Berechnete Anzahl pendelnder Personen pro Haushalt.
  
- Die Variable kombiniert Haushaltsgr�sse, Erwerbsquote und
+ Die Variable kombiniert Haushaltsgrösse, Erwerbsquote und
  Pendleranteil. Sie bestimmt, wie stark Transportkosten auf
  einen durchschnittlichen Haushalt wirken.Commuters per Household
  
  Berechnete Anzahl pendelnder Personen pro Haushalt.
  
- Die Variable kombiniert Haushaltsgr�sse, Erwerbsquote und
+ Die Variable kombiniert Haushaltsgrösse, Erwerbsquote und
  Pendleranteil. Sie bestimmt, wie stark Transportkosten auf
- einen durchschnittlichen Haushalt wirken.";02_Transport_and_Commuting;"Commuting Share of Employed Persons; Employment Share of Total Population; Mean Household Size";Transport Cost per km per Household;3;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Current Fringe Rent Gap;auxiliary;EUR/km2;MAX(0, Mean Urban Rent - Agricultural Rent);"Current Fringe Rent Gap
+ einen durchschnittlichen Haushalt wirken.",02_Transport_and_Commuting,Commuting Share of Employed Persons; Employment Share of Total Population; Mean Household Size,Transport Cost per km per Household,3,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Current Fringe Rent Gap,auxiliary,EUR/km2,"MAX(0, Mean Urban Rent - Agricultural Rent)","Current Fringe Rent Gap
  
  Positive Differenz zwischen urbaner Miete und landwirtschaftlicher Rente.
  
- Wenn Mean Urban Rent h�her ist als Agricultural Rent, entsteht
- �konomischer Druck zur Umwandlung von landwirtschaftlicher in
- urbane Fl�che.
+ Wenn Mean Urban Rent höher ist als Agricultural Rent, entsteht
+ ökonomischer Druck zur Umwandlung von landwirtschaftlicher in
+ urbane Fläche.
  
- Wenn Agricultural Rent h�her ist, wird der Gap auf 0 gesetzt.";09_Urban_Land_Conversion_Logic;"Agricultural Rent; Mean Urban Rent";Rent Gap Pressure Factor;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Current Urban Land per Household;auxiliary;km2/Household;ZIDZ(Urban Land, Number of Households);"Current Urban Land per Household
+ Wenn Agricultural Rent höher ist, wird der Gap auf 0 gesetzt.",09_Urban_Land_Conversion_Logic,Agricultural Rent; Mean Urban Rent,Rent Gap Pressure Factor,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Current Urban Land per Household,auxiliary,km2/Household,"ZIDZ(Urban Land, Number of Households)","Current Urban Land per Household
  
- Aktuell verf�gbare urbane Fl�che pro Haushalt.
+ Aktuell verfügbare urbane Fläche pro Haushalt.
  
- Diese Variable zeigt, wie viel urbane Fl�che im Durchschnitt
- auf einen Haushalt entf�llt. Sie ist der zentrale Input f�r
- den Land Tightness Index.";04_Urban_Rent_and_Land_Tightness;"Number of Households; Urban Land";Land Tightness Index;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Current Urban Radius;auxiliary;km;SQRT(Urban Land / 3.141);Aktueller Radius der urbanen Fl�che. Die urbane Fl�che wird vereinfacht als kreisf�rmig interpretiert.;04_Urban_Rent_and_Land_Tightness;Urban Land;Urban Rent at Current Fringe;1;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Desired Mean Household Size;auxiliary;Person/Household;Long Run Mean Household Size;"Desired Mean Household Size
+ Diese Variable zeigt, wie viel urbane Fläche im Durchschnitt
+ auf einen Haushalt entfällt. Sie ist der zentrale Input für
+ den Land Tightness Index.",04_Urban_Rent_and_Land_Tightness,Number of Households; Urban Land,Land Tightness Index,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Current Urban Radius,auxiliary,km,SQRT(Urban Land / 3.141),Aktueller Radius der urbanen Fläche. Die urbane Fläche wird vereinfacht als kreisförmig interpretiert.,04_Urban_Rent_and_Land_Tightness,Urban Land,Urban Rent at Current Fringe,1,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Desired Mean Household Size,auxiliary,Person/Household,Long Run Mean Household Size,"Desired Mean Household Size
  
- Gew�nschte bzw. angestrebte Haushaltsgr�sse.
+ Gewünschte bzw. angestrebte Haushaltsgrösse.
  In dieser Modellversion entspricht sie direkt dem
- langfristigen Zielwert Long Run Mean Household Size.";01_Population_Household;"Long Run Mean Household Size; Mean Household Size";Mean Household Size Change;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Desired Transport Cost per km;auxiliary;EUR/km;Long Run Transport Cost per km;"Desired Transport Cost per km
+ langfristigen Zielwert Long Run Mean Household Size.",01_Population_Household,Long Run Mean Household Size; Mean Household Size,Mean Household Size Change,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Desired Transport Cost per km,auxiliary,EUR/km,Long Run Transport Cost per km,"Desired Transport Cost per km
  
- Gew�nschter Zielwert der Transportkosten pro Kilometer.
+ Gewünschter Zielwert der Transportkosten pro Kilometer.
  In dieser Modellversion entspricht er direkt dem langfristigen
- Transportkostenwert.";02_Transport_and_Commuting;"Long Run Transport Cost per km; Transport Cost per km";Transport Cost per km Change;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Desired Urban Land;auxiliary;km2;3.141 * (Urban Fringe Radius ^ 2);Gew�nschte urbane Fl�che der synthetischen AMM-Stadt. Sie wird aus dem theoretischen Urban Fringe Radius berechnet.;05_AMM_Budget_and_Housing_Demand;Urban Fringe Radius;"Desired Urban Land Total; Reference Initial Desired Urban Land; Urban Aggregate Scale Factor; Urban Land Gap";1;4;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Disposable Income after Transport;auxiliary;EUR/Household;MAX(0, Mean Household Income - Transport Cost per Household );"Disposable Income after Transport
+ Transportkostenwert.",02_Transport_and_Commuting,Long Run Transport Cost per km; Transport Cost per km,Transport Cost per km Change,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Desired Urban Land,auxiliary,km2,3.141 * (Urban Fringe Radius ^ 2),Gewünschte urbane Fläche der synthetischen AMM-Stadt. Sie wird aus dem theoretischen Urban Fringe Radius berechnet.,05_AMM_Budget_and_Housing_Demand,Urban Fringe Radius,Desired Urban Land Total; Reference Initial Desired Urban Land; Urban Aggregate Scale Factor; Urban Land Gap,1,4,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Disposable Income after Transport,auxiliary,EUR/Household,"MAX(0, Mean Household Income - Transport Cost per Household )","Disposable Income after Transport
  
- Verf�gbares Haushaltseinkommen nach Abzug der Transportkosten.
+ Verfügbares Haushaltseinkommen nach Abzug der Transportkosten.
  
  Die MAX-Funktion verhindert negative Werte. Diese Variable
- wird sp�ter in der AMM-Budgetlogik auf Wohnen und sonstigen
- Konsum aufgeteilt.";"03_Income_and_Productivity; 05_AMM_Budget_and_Housing_Demand";"Mean Household Income; Transport Cost per Household";"Housing Land Expenditure; Other Consumption Per Household z";2;2;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Economic Pressure;auxiliary;Dmnl;1 + (Import Dependence ^ 2);"Economic Pressure
+ wird später in der AMM-Budgetlogik auf Wohnen und sonstigen
+ Konsum aufgeteilt.",03_Income_and_Productivity; 05_AMM_Budget_and_Housing_Demand,Mean Household Income; Transport Cost per Household,Housing Land Expenditure; Other Consumption Per Household z,2,2,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Economic Pressure,auxiliary,Dmnl,1 + (Import Dependence ^ 2),"Economic Pressure
  
  Dimensionsloser Druckfaktor aus Import Dependence.
  
- Je st�rker die Unterdeckung der Nahrungsmittelproduktion ist,
- desto h�her wird dieser Druckfaktor. Er kann sp�ter in der
- Land-Conversion-Logik verwendet werden.";08_Agriculture_and_Scarcity;Import Dependence;;1;0;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Equivalent Number of Large Cities;auxiliary;Dmnl;Urban Population Total * (Share Large City / Representative Large City Size );Modellierte �quivalente Anzahl kleiner St�dte. Die urbane Bev�lkerung dieser Gr�ssenklasse wird durch eine repr�sentative Stadtgr�sse geteilt. Es handelt sich nicht um eine echte gez�hlte Anzahl St�dte, sondern um eine vereinfachte Modellgr�sse.;11_Innovation_and_City_Size;"Representative Large City Size; Share Large City; Urban Population Total";Innovation Large;3;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Equivalent Number of Medium Cities;auxiliary;Dmnl;Urban Population Total * (Share Medium City / Representative Medium City Size );Modellierte �quivalente Anzahl kleiner St�dte. Die urbane Bev�lkerung dieser Gr�ssenklasse wird durch eine repr�sentative Stadtgr�sse geteilt. Es handelt sich nicht um eine echte gez�hlte Anzahl St�dte, sondern um eine vereinfachte Modellgr�sse.;11_Innovation_and_City_Size;"Representative Medium City Size; Share Medium City; Urban Population Total";Innovation Medium;3;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Equivalent Number of Small Cities;auxiliary;Dmnl;Urban Population Total * (Share Small City / Representative Small City Size );Modellierte �quivalente Anzahl kleiner St�dte. Die urbane Bev�lkerung dieser Gr�ssenklasse wird durch eine repr�sentative Stadtgr�sse geteilt. Es handelt sich nicht um eine echte gez�hlte Anzahl St�dte, sondern um eine vereinfachte Modellgr�sse.;11_Innovation_and_City_Size;"Representative Small City Size; Share Small City; Urban Population Total";Innovation Small;3;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Equivalent Number of Very Large Cities;auxiliary;Dmnl;Urban Population Total * (Share very Large City / Representative Very Large City Size);Modellierte �quivalente Anzahl kleiner St�dte. Die urbane Bev�lkerung dieser Gr�ssenklasse wird durch eine repr�sentative Stadtgr�sse geteilt. Es handelt sich nicht um eine echte gez�hlte Anzahl St�dte, sondern um eine vereinfachte Modellgr�sse.;11_Innovation_and_City_Size;"Representative Very Large City Size; Share very Large City; Urban Population Total";Innovation very Large;3;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Household Capacity of Current Urban Land;auxiliary;Household;Urban Land / Land Demand per Household q;Anzahl Haushalte, die bei aktueller Urban Land und aktuellem Land Demand per Household theoretisch Platz h�tten.;09_Urban_Land_Conversion_Logic;"Land Demand per Household q; Urban Land";Household Clearing Gap;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Household Clearing Gap;auxiliary;Household;MAX( 0, Number of Households - Household Capacity of Current Urban Land );Positive Differenz zwischen ben�tigter Haushaltszahl und der Kapazit�t der aktuellen urbanen Fl�che. Negative Werte werden auf null gesetzt.;09_Urban_Land_Conversion_Logic;"Household Capacity of Current Urban Land; Number of Households; Urban Land";Additional Urban Land Needed for Clearing;3;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Household Scaling Factor;auxiliary;Dmnl;Number of Households / Reference Initial Number of Households;Relativer Skalierungsfaktor der Haushaltszahl. Er sorgt daf�r, dass die gew�nschte urbane Fl�che mit der Anzahl Haushalte w�chst.;05_AMM_Budget_and_Housing_Demand;"Number of Households; Reference Initial Number of Households";Desired Urban Land Total;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Housing Land Expenditure;auxiliary;EUR/Household;Housing Preference Share Alpha * Disposable Income after Transport;"Housing Land Expenditure
+ Je stärker die Unterdeckung der Nahrungsmittelproduktion ist,
+ desto höher wird dieser Druckfaktor. Er kann später in der
+ Land-Conversion-Logik verwendet werden.",08_Agriculture_and_Scarcity,Import Dependence,,1,0,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Equivalent Number of Large Cities,auxiliary,Dmnl,Urban Population Total * (Share Large City / Representative Large City Size ),"Modellierte äquivalente Anzahl kleiner Städte. Die urbane Bevölkerung dieser Grössenklasse wird durch eine repräsentative Stadtgrösse geteilt. Es handelt sich nicht um eine echte gezählte Anzahl Städte, sondern um eine vereinfachte Modellgrösse.",11_Innovation_and_City_Size,Representative Large City Size; Share Large City; Urban Population Total,Innovation Large,3,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Equivalent Number of Medium Cities,auxiliary,Dmnl,Urban Population Total * (Share Medium City / Representative Medium City Size ),"Modellierte äquivalente Anzahl kleiner Städte. Die urbane Bevölkerung dieser Grössenklasse wird durch eine repräsentative Stadtgrösse geteilt. Es handelt sich nicht um eine echte gezählte Anzahl Städte, sondern um eine vereinfachte Modellgrösse.",11_Innovation_and_City_Size,Representative Medium City Size; Share Medium City; Urban Population Total,Innovation Medium,3,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Equivalent Number of Small Cities,auxiliary,Dmnl,Urban Population Total * (Share Small City / Representative Small City Size ),"Modellierte äquivalente Anzahl kleiner Städte. Die urbane Bevölkerung dieser Grössenklasse wird durch eine repräsentative Stadtgrösse geteilt. Es handelt sich nicht um eine echte gezählte Anzahl Städte, sondern um eine vereinfachte Modellgrösse.",11_Innovation_and_City_Size,Representative Small City Size; Share Small City; Urban Population Total,Innovation Small,3,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Equivalent Number of Very Large Cities,auxiliary,Dmnl,Urban Population Total * (Share very Large City / Representative Very Large City Size),"Modellierte äquivalente Anzahl kleiner Städte. Die urbane Bevölkerung dieser Grössenklasse wird durch eine repräsentative Stadtgrösse geteilt. Es handelt sich nicht um eine echte gezählte Anzahl Städte, sondern um eine vereinfachte Modellgrösse.",11_Innovation_and_City_Size,Representative Very Large City Size; Share very Large City; Urban Population Total,Innovation very Large,3,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Household Capacity of Current Urban Land,auxiliary,Household,Urban Land / Land Demand per Household q,"Anzahl Haushalte, die bei aktueller Urban Land und aktuellem Land Demand per Household theoretisch Platz hätten.",09_Urban_Land_Conversion_Logic,Land Demand per Household q; Urban Land,Household Clearing Gap,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Household Clearing Gap,auxiliary,Household,"MAX( 0, Number of Households - Household Capacity of Current Urban Land )",Positive Differenz zwischen benötigter Haushaltszahl und der Kapazität der aktuellen urbanen Fläche. Negative Werte werden auf null gesetzt.,09_Urban_Land_Conversion_Logic,Household Capacity of Current Urban Land; Number of Households; Urban Land,Additional Urban Land Needed for Clearing,3,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Household Scaling Factor,auxiliary,Dmnl,Number of Households / Reference Initial Number of Households,"Relativer Skalierungsfaktor der Haushaltszahl. Er sorgt dafür, dass die gewünschte urbane Fläche mit der Anzahl Haushalte wächst.",05_AMM_Budget_and_Housing_Demand,Number of Households; Reference Initial Number of Households,Desired Urban Land Total,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Housing Land Expenditure,auxiliary,EUR/Household,Housing Preference Share Alpha * Disposable Income after Transport,"Housing Land Expenditure
  
  Wohn- bzw. Landbudget eines durchschnittlichen Haushalts.
  
- Die Variable ergibt sich aus dem verf�gbaren Haushaltseinkommen
+ Die Variable ergibt sich aus dem verfügbaren Haushaltseinkommen
  multipliziert mit dem Housing Preference Share Alpha.
  
- Sie bestimmt, wie viel ein Haushalt f�r urbane Landnutzung
- ausgeben kann.";"04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand";"Disposable Income after Transport; Housing Preference Share Alpha";"Initial Mean Urban Rent; Land Demand per Household q";2;2;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Import Dependence;auxiliary;Dmnl;ZIDZ(Population kcal demand, Food Production);"Import Dependence
+ Sie bestimmt, wie viel ein Haushalt für urbane Landnutzung
+ ausgeben kann.",04_Urban_Rent_and_Land_Tightness; 05_AMM_Budget_and_Housing_Demand,Disposable Income after Transport; Housing Preference Share Alpha,Initial Mean Urban Rent; Land Demand per Household q,2,2,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Import Dependence,auxiliary,Dmnl,"ZIDZ(Population kcal demand, Food Production)","Import Dependence
  
- Dimensionsloser Indikator f�r die Abh�ngigkeit von externer
+ Dimensionsloser Indikator für die Abhängigkeit von externer
  Nahrungsmittelversorgung.
  
  Ein Wert von 1 bedeutet, dass die modellierte Food Production
- den Kalorienbedarf deckt. Werte �ber 1 zeigen eine Unterdeckung.";08_Agriculture_and_Scarcity;"Food Production; Population kcal demand";Economic Pressure;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Initial Mean Urban Rent;auxiliary;EUR/km2;INITIAL( Housing Land Expenditure / Reference Initial Land Demand per Household );"Initial Mean Urban Rent
+ den Kalorienbedarf deckt. Werte über 1 zeigen eine Unterdeckung.",08_Agriculture_and_Scarcity,Food Production; Population kcal demand,Economic Pressure,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Initial Mean Urban Rent,auxiliary,EUR/km2,INITIAL( Housing Land Expenditure / Reference Initial Land Demand per Household ),"Initial Mean Urban Rent
  
  Startwert der mittleren urbanen Miete.
  
- Der Wert wird aus dem anf�nglichen Wohnbudget pro Haushalt
- und der anf�nglichen Referenz-Landnachfrage pro Haushalt
- berechnet.";04_Urban_Rent_and_Land_Tightness;"Housing Land Expenditure; Reference Initial Land Demand per Household";"Desired Mean Urban Rent; Mean Urban Rent";2;2;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Land Tightness Index;auxiliary;Dmnl;ZIDZ( Reference Initial Land Demand per Household, Current Urban Land per Household );"Land Tightness Index
+ Der Wert wird aus dem anfänglichen Wohnbudget pro Haushalt
+ und der anfänglichen Referenz-Landnachfrage pro Haushalt
+ berechnet.",04_Urban_Rent_and_Land_Tightness,Housing Land Expenditure; Reference Initial Land Demand per Household,Desired Mean Urban Rent; Mean Urban Rent,2,2,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Land Tightness Index,auxiliary,Dmnl,"ZIDZ( Reference Initial Land Demand per Household, Current Urban Land per Household )","Land Tightness Index
  
- Dimensionsloser Knappheitsindex f�r urbane Fl�che.
+ Dimensionsloser Knappheitsindex für urbane Fläche.
  
- Ein Wert von 1 bedeutet, dass die aktuelle urbane Fl�che pro
+ Ein Wert von 1 bedeutet, dass die aktuelle urbane Fläche pro
  Haushalt dem Referenzwert entspricht.
  
- Werte �ber 1 bedeuten h�here Knappheit und erzeugen Druck
- auf die urbane Miete.";04_Urban_Rent_and_Land_Tightness;"Current Urban Land per Household; Land per Household; Reference Initial Land Demand per Household; Urban Land";Desired Mean Urban Rent;4;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Land per Household;auxiliary;km2/Household;Land per Capita * Mean Household Size;Referenzwert f�r Landbedarf pro Haushalt. Er ergibt sich aus Land per Capita multipliziert mit Mean Household Size.;05_AMM_Budget_and_Housing_Demand;"Land per Capita; Mean Household Size";Land Tightness Index;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Reference Agricultural Scarcity Index;auxiliary;Dmnl;INITIAL(Agricultural Scarcity Index);"Reference Agricultural Scarcity Index
+ Werte über 1 bedeuten höhere Knappheit und erzeugen Druck
+ auf die urbane Miete.",04_Urban_Rent_and_Land_Tightness,Current Urban Land per Household; Land per Household; Reference Initial Land Demand per Household; Urban Land,Desired Mean Urban Rent,4,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Land per Household,auxiliary,km2/Household,Land per Capita * Mean Household Size,Referenzwert für Landbedarf pro Haushalt. Er ergibt sich aus Land per Capita multipliziert mit Mean Household Size.,05_AMM_Budget_and_Housing_Demand,Land per Capita; Mean Household Size,Land Tightness Index,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Populational Need of Kcal in Km2,auxiliary,km2,"ZIDZ(Population kcal demand, Yield)","Target Value: Populational Need of Kcal in Km2
+ 
+ Benötigte landwirtschaftliche Fläche, um den jährlichen
+ Kalorienbedarf der Bevölkerung zu decken.
+ 
+ Die Variable ergibt sich aus dem gesamten Kalorienbedarf
+ geteilt durch den Ertrag pro km2.",08_Agriculture_and_Scarcity,Population kcal demand; Yield,Aggricultural Land Requirement; Agricultural Scarcity Index,2,2,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Reference Agricultural Scarcity Index,auxiliary,Dmnl,INITIAL(Agricultural Scarcity Index),"Reference Agricultural Scarcity Index
  
  Referenzwert des Agricultural Scarcity Index zu Beginn
  der Simulation.
  
- Dieser Wert dient dazu, sp�tere Knappheit relativ zum
- Startzustand zu interpretieren.";08_Agriculture_and_Scarcity;Agricultural Scarcity Index;Relative Agricultural Scarcity;1;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Reference Initial Desired Urban Land;auxiliary;km2;INITIAL(Desired Urban Land);Initialer Referenzwert der Desired Urban Land. Dieser Wert wird f�r die Skalierung der synthetischen AMM-Stadt verwendet.;05_AMM_Budget_and_Housing_Demand;"Desired Urban Land; Urban Land";Urban Aggregate Scale Factor;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Reference Initial Number of Households;auxiliary;Household;INITIAL(Number of Households);Initialer Referenzwert der Anzahl Haushalte. Er wird verwendet, um die Entwicklung der Haushaltszahl relativ zum Startjahr abzubilden.;05_AMM_Budget_and_Housing_Demand;Number of Households;Household Scaling Factor;1;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Reference Initial Urban Land;auxiliary;km2;INITIAL(Urban Land);"Reference Initial Urban Land
+ Dieser Wert dient dazu, spätere Knappheit relativ zum
+ Startzustand zu interpretieren.",08_Agriculture_and_Scarcity,Agricultural Scarcity Index,Relative Agricultural Scarcity,1,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Reference Initial Desired Urban Land,auxiliary,km2,INITIAL(Desired Urban Land),Initialer Referenzwert der Desired Urban Land. Dieser Wert wird für die Skalierung der synthetischen AMM-Stadt verwendet.,05_AMM_Budget_and_Housing_Demand,Desired Urban Land; Urban Land,Urban Aggregate Scale Factor,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Reference Initial Number of Households,auxiliary,Household,INITIAL(Number of Households),"Initialer Referenzwert der Anzahl Haushalte. Er wird verwendet, um die Entwicklung der Haushaltszahl relativ zum Startjahr abzubilden.",05_AMM_Budget_and_Housing_Demand,Number of Households,Household Scaling Factor,1,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Reference Initial Urban Land,auxiliary,km2,INITIAL(Urban Land),"Reference Initial Urban Land
  
- Referenzwert der urbanen Fl�che zu Beginn der Simulation.
+ Referenzwert der urbanen Fläche zu Beginn der Simulation.
  
- Dieser Wert wird verwendet, um relative Ver�nderungen der
- urbanen Fl�che zu berechnen und sp�tere Skalierungsfaktoren
- zu bilden.";"05_AMM_Budget_and_Housing_Demand; Macro_Ebene";Urban Land;"Urban Aggregate Scale Factor; Urban Land Index";1;2;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Reference Other Consumption Per Household;auxiliary;EUR/Household;INITIAL(Other Consumption Per Household z);"Reference Other Consumption Per Household
+ Dieser Wert wird verwendet, um relative Veränderungen der
+ urbanen Fläche zu berechnen und spätere Skalierungsfaktoren
+ zu bilden.",05_AMM_Budget_and_Housing_Demand; Macro_Ebene,Urban Land,Urban Aggregate Scale Factor; Urban Land Index,1,2,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Reference Other Consumption Per Household,auxiliary,EUR/Household,INITIAL(Other Consumption Per Household z),"Reference Other Consumption Per Household
  
  Referenzwert des sonstigen Konsums pro Haushalt zu Beginn
  der Simulation.
  
  Dieser Wert wird verwendet, um den aktuellen Konsum relativ
- zum Startzustand zu messen.";07_Cobb_Douglas_Utility;Other Consumption Per Household z;Relative Other Consumption per Household;1;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Relative Agricultural Scarcity;auxiliary;Dmnl;ZIDZ( Agricultural Scarcity Index, Reference Agricultural Scarcity Index );"Relative Agricultural Scarcity
+ zum Startzustand zu messen.",07_Cobb_Douglas_Utility,Other Consumption Per Household z,Relative Other Consumption per Household,1,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Relative Agricultural Scarcity,auxiliary,Dmnl,"ZIDZ( Agricultural Scarcity Index, Reference Agricultural Scarcity Index )","Relative Agricultural Scarcity
  
- Relative landwirtschaftliche Knappheit gegen�ber dem Startzustand.
+ Relative landwirtschaftliche Knappheit gegenüber dem Startzustand.
  
- Ein Wert von 1 entspricht der anf�nglichen Knappheit.
- Werte �ber 1 zeigen zunehmende Knappheit.";08_Agriculture_and_Scarcity;"Agricultural Scarcity Index; Reference Agricultural Scarcity Index";Desired Agricultural Rent;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Relative Land Demand per Household;auxiliary;Dmnl;ZIDZ( Land Demand per Household q, Reference Initial Land Demand per Household );"Relative Land Demand per Household
+ Ein Wert von 1 entspricht der anfänglichen Knappheit.
+ Werte über 1 zeigen zunehmende Knappheit.",08_Agriculture_and_Scarcity,Agricultural Scarcity Index; Reference Agricultural Scarcity Index,Desired Agricultural Rent,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Relative Land Demand per Household,auxiliary,Dmnl,"ZIDZ( Land Demand per Household q, Reference Initial Land Demand per Household )","Relative Land Demand per Household
  
  Dimensionsloser Index der Landnachfrage pro Haushalt.
  
  Ein Wert von 1 bedeutet, dass die Landnachfrage pro Haushalt
- dem Startwert entspricht. Werte �ber 1 zeigen eine h�here,
- Werte unter 1 eine tiefere Landnachfrage.";"05_AMM_Budget_and_Housing_Demand; 07_Cobb_Douglas_Utility";"Land Demand per Household q; Reference Initial Land Demand per Household";Cobb Douglas Utility Index;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Relative Other Consumption per Household;auxiliary;Dmnl;ZIDZ( Other Consumption Per Household z, Reference Other Consumption Per Household );"Relative Other Consumption per Household
+ dem Startwert entspricht. Werte über 1 zeigen eine höhere,
+ Werte unter 1 eine tiefere Landnachfrage.",05_AMM_Budget_and_Housing_Demand; 07_Cobb_Douglas_Utility,Land Demand per Household q; Reference Initial Land Demand per Household,Cobb Douglas Utility Index,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Relative Other Consumption per Household,auxiliary,Dmnl,"ZIDZ( Other Consumption Per Household z, Reference Other Consumption Per Household )","Relative Other Consumption per Household
  
  Dimensionsloser Index des sonstigen Konsums pro Haushalt.
  
  Ein Wert von 1 bedeutet, dass der sonstige Konsum dem
- Startwert entspricht. Werte �ber 1 zeigen h�heren Konsum,
- Werte unter 1 tieferen Konsum.";07_Cobb_Douglas_Utility;"Other Consumption Per Household z; Reference Other Consumption Per Household";Cobb Douglas Utility Index;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Rent Gap Pressure Factor;auxiliary;Dmnl;1 + ZIDZ(Current Fringe Rent Gap, Agricultural Rent);"Rent Gap Pressure Factor
+ Startwert entspricht. Werte über 1 zeigen höheren Konsum,
+ Werte unter 1 tieferen Konsum.",07_Cobb_Douglas_Utility,Other Consumption Per Household z; Reference Other Consumption Per Household,Cobb Douglas Utility Index,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Rent Gap Pressure Factor,auxiliary,Dmnl,"1 + ZIDZ(Current Fringe Rent Gap, Agricultural Rent)","Rent Gap Pressure Factor
  
  Dimensionsloser Druckfaktor aus der Rentendifferenz.
  
- Wenn die urbane Miete deutlich �ber der landwirtschaftlichen Rente
- liegt, steigt der Druck zur Landumwandlung.";09_Urban_Land_Conversion_Logic;"Agricultural Rent; Current Fringe Rent Gap";;2;0;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Soil Protection;auxiliary;Dmnl;Spatial Planning * Soil Protection Factor;Dimensionsloser Boden- beziehungsweise Fl�chenschutzindex aus Spatial Planning und Soil Protection Factor.;10_Soil_Protection_and_Agricultural_Pressure;"Soil Protection Factor; Spatial Planning";Soil Protection Effect;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Soil Protection Effect;auxiliary;Dmnl;MAX(Max Ceiling Soil Protection, 1 / Soil Protection);Begrenzungsfaktor der Boden- und Fl�chenschutzlogik. Der Effekt reduziert die m�gliche Landumwandlung, wird aber durch Max Ceiling Soil Protection begrenzt.;10_Soil_Protection_and_Agricultural_Pressure;"Max Ceiling Soil Protection; Soil Protection";;2;0;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Spatial Planning;auxiliary;Dmnl;Urban Land Index * Spatial Planing Factor;Planungsindex aus Urban Land Index und Spacial Planing Factor.;10_Soil_Protection_and_Agricultural_Pressure;"Spatial Planing Factor; Urban Land; Urban Land Index";Soil Protection;3;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Target Value: Populational Need of Kcal in Km2;auxiliary;km2;ZIDZ(Population kcal demand, Yield);"Target Value: Populational Need of Kcal in Km2
+ Wenn die urbane Miete deutlich über der landwirtschaftlichen Rente
+ liegt, steigt der Druck zur Landumwandlung.",09_Urban_Land_Conversion_Logic,Agricultural Rent; Current Fringe Rent Gap,,2,0,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Soil Protection,auxiliary,Dmnl,Spatial Planning * Soil Protection Factor,Dimensionsloser Boden- beziehungsweise Flächenschutzindex aus Spatial Planning und Soil Protection Factor.,10_Soil_Protection_and_Agricultural_Pressure,Soil Protection Factor; Spatial Planning,Soil Protection Effect,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Soil Protection Effect,auxiliary,Dmnl,"MAX(Max Ceiling Soil Protection, 1 / Soil Protection)","Begrenzungsfaktor der Boden- und Flächenschutzlogik. Der Effekt reduziert die mögliche Landumwandlung, wird aber durch Max Ceiling Soil Protection begrenzt.",10_Soil_Protection_and_Agricultural_Pressure,Max Ceiling Soil Protection; Soil Protection,,2,0,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Spatial Planning,auxiliary,Dmnl,Urban Land Index * Spatial Planing Factor,Planungsindex aus Urban Land Index und Spacial Planing Factor.,10_Soil_Protection_and_Agricultural_Pressure,Spatial Planing Factor; Urban Land; Urban Land Index,Soil Protection,3,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Time for Lookup,auxiliary,Dmnl,Time / Year Unit,"Time for Lookup
  
- Ben�tigte landwirtschaftliche Fl�che, um den j�hrlichen
- Kalorienbedarf der Bev�lkerung zu decken.
- 
- Die Variable ergibt sich aus dem gesamten Kalorienbedarf
- geteilt durch den Ertrag pro km2.";08_Agriculture_and_Scarcity;"Population kcal demand; Yield";"Aggricultural Land Requirement; Agricultural Scarcity Index";2;2;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Time for Lookup;auxiliary;Dmnl;Time / Year Unit;"Time for Lookup
- 
- Dimensionslose Zeitvariable f�r Lookup-Funktionen.
+ Dimensionslose Zeitvariable für Lookup-Funktionen.
  
  Da Vensim Lookup-Argumente dimensionslos erwartet, wird Time
- durch Year Unit geteilt.";01_Population_Household;Year Unit;Expected Population;1;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Transport Cost per Household;auxiliary;EUR/Household;Average Commuting Distance * Transport Cost per km per Household;"Transport Cost per Household
+ durch Year Unit geteilt.",01_Population_Household,Year Unit,Expected Population,1,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Transport Cost per Household,auxiliary,EUR/Household,Average Commuting Distance * Transport Cost per km per Household,"Transport Cost per Household
  
- J�hrliche Transportkosten eines durchschnittlichen Haushalts.
+ Jährliche Transportkosten eines durchschnittlichen Haushalts.
  
- Diese Variable wird sp�ter in der AMM-Budgetlogik vom
+ Diese Variable wird später in der AMM-Budgetlogik vom
  Haushaltseinkommen abgezogen und beeinflusst dadurch die
- verf�gbare Wohn- und Konsumnachfrage.";"02_Transport_and_Commuting; 03_Income_and_Productivity";"Average Commuting Distance; Transport Cost per km; Transport Cost per km per Household";Disposable Income after Transport;3;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Transport Cost per km per Capita;auxiliary;EUR/km/Person;2 * Average Workdays per Capita * Transport Cost per km;"Transport Cost per km per Capita
+ verfügbare Wohn- und Konsumnachfrage.",02_Transport_and_Commuting; 03_Income_and_Productivity,Average Commuting Distance; Transport Cost per km; Transport Cost per km per Household,Disposable Income after Transport,3,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Transport Cost per km per Capita,auxiliary,EUR/km/Person,2 * Average Workdays per Capita * Transport Cost per km,"Transport Cost per km per Capita
  
- J�hrliche Transportkosten pro Kilometer und Person.
- Der Faktor 2 ber�cksichtigt Hin- und R�ckweg.
+ Jährliche Transportkosten pro Kilometer und Person.
+ Der Faktor 2 berücksichtigt Hin- und Rückweg.
  
- Diese Variable �bersetzt die Transportkosten pro Kilometer
- in eine j�hrliche Belastung pro pendelnder Person.";02_Transport_and_Commuting;"Average Workdays per Capita; Transport Cost per km";Transport Cost per km per Household;2;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Urban Land Index;auxiliary;Dmnl;ZIDZ( Urban Land, Reference Initial Urban Land );"Urban Land Index
+ Diese Variable übersetzt die Transportkosten pro Kilometer
+ in eine jährliche Belastung pro pendelnder Person.",02_Transport_and_Commuting,Average Workdays per Capita; Transport Cost per km,Transport Cost per km per Household,2,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Urban Land Index,auxiliary,Dmnl,"ZIDZ( Urban Land, Reference Initial Urban Land )","Urban Land Index
  
- Dimensionsloser Index der urbanen Fl�che.
+ Dimensionsloser Index der urbanen Fläche.
  
  Ein Wert von 1 bedeutet, dass Urban Land dem Startwert entspricht.
- Werte �ber 1 zeigen eine Zunahme der urbanen Fl�che gegen�ber
- dem Startzustand.";"10_Soil_Protection_and_Agricultural_Pressure; Macro_Ebene";"Initial Urban Land; Reference Initial Urban Land; Urban Land";Spatial Planning;3;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Urban Land Required for Households;auxiliary;km2;Land Demand per Household q * Number of Households;Direkter urbaner Fl�chenbedarf der Haushalte ohne AMM-Fringe-Skalierung.;05_AMM_Budget_and_Housing_Demand;"Land Demand per Household q; Number of Households";;2;0;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Average Commuting Distance;constant;km;14;"Average Commuting Distance
+ Werte über 1 zeigen eine Zunahme der urbanen Fläche gegenüber
+ dem Startzustand.",10_Soil_Protection_and_Agricultural_Pressure; Macro_Ebene,Initial Urban Land; Reference Initial Urban Land; Urban Land,Spatial Planning,3,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Urban Land Required for Households,auxiliary,km2,Land Demand per Household q * Number of Households,Direkter urbaner Flächenbedarf der Haushalte ohne AMM-Fringe-Skalierung.,05_AMM_Budget_and_Housing_Demand,Land Demand per Household q; Number of Households,,2,0,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Average Commuting Distance,constant,km,14,"Average Commuting Distance
  
  Durchschnittliche Pendeldistanz.
- Diese Distanz wird mit den j�hrlichen Transportkosten pro
- Kilometer und Haushalt multipliziert.";02_Transport_and_Commuting;;Transport Cost per Household;0;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Average Workdays per Capita;constant;Dmnl/Person;230;"Average Workdays per Capita
+ Diese Distanz wird mit den jährlichen Transportkosten pro
+ Kilometer und Haushalt multipliziert.",02_Transport_and_Commuting,,Transport Cost per Household,0,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Average Workdays per Capita,constant,Dmnl/Person,230,"Average Workdays per Capita
  
- Annualisierungsfaktor f�r die Transportkosten.
+ Annualisierungsfaktor für die Transportkosten.
  Der Wert gibt an, wie viele Arbeitstage bzw. Pendeltage
  pro Person und Jahr angenommen werden.
  
- Der Faktor 2 in der Transportkostenrechnung steht f�r
- Hin- und R�ckweg.";02_Transport_and_Commuting;;Transport Cost per km per Capita;0;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Long Run Mean Household Size;constant;Person/Household;2.2;"Long Run Mean Household Size
+ Der Faktor 2 in der Transportkostenrechnung steht für
+ Hin- und Rückweg.",02_Transport_and_Commuting,,Transport Cost per km per Capita,0,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Long Run Mean Household Size,constant,Person/Household,2.2,"Long Run Mean Household Size
  
- Langfristig angenommene durchschnittliche Haushaltsgr�sse.
+ Langfristig angenommene durchschnittliche Haushaltsgrösse.
  Dieser Wert dient als Zielwert, dem sich Mean Household Size
- �ber die Zeit ann�hert.";01_Population_Household;;Desired Mean Household Size;0;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Representative Large City Size;constant;Dmnl;866000;Repr�sentative Stadtgr�sse der grossen Stadtklasse. Der Wert wird zur Approximation der Anzahl grosser St�dte und ihres Innovationsbeitrags verwendet.;11_Innovation_and_City_Size;;"Equivalent Number of Large Cities; Innovation Large";0;2;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Representative Medium City Size;constant;Dmnl;316000;Repr�sentative Stadtgr�sse der mittleren Stadtklasse. Der Wert wird zur Approximation der Anzahl mittlerer St�dte und ihres Innovationsbeitrags verwendet.;11_Innovation_and_City_Size;;"Equivalent Number of Medium Cities; Innovation Medium";0;2;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Representative Small City Size;constant;Dmnl;100000;Repr�sentative Stadtgr�sse der kleinen Stadtklasse. Der Wert wird zur Approximation der Anzahl kleiner St�dte und ihres Innovationsbeitrags verwendet.;11_Innovation_and_City_Size;;"Equivalent Number of Small Cities; Innovation Small";0;2;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Representative Very Large City Size;constant;Dmnl;2.5e+06;Repr�sentative Stadtgr�sse der sehr grossen Stadtklasse. Der Wert wird zur Approximation der Anzahl sehr grosser St�dte und ihres Innovationsbeitrags verwendet.;11_Innovation_and_City_Size;;"Equivalent Number of Very Large Cities; Innovation very Large";0;2;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
-Year Unit;constant;Year;1;"Year Unit
+ über die Zeit annähert.",01_Population_Household,,Desired Mean Household Size,0,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Representative Large City Size,constant,Dmnl,866000,Repräsentative Stadtgrösse der grossen Stadtklasse. Der Wert wird zur Approximation der Anzahl grosser Städte und ihres Innovationsbeitrags verwendet.,11_Innovation_and_City_Size,,Equivalent Number of Large Cities; Innovation Large,0,2,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Representative Medium City Size,constant,Dmnl,316000,Repräsentative Stadtgrösse der mittleren Stadtklasse. Der Wert wird zur Approximation der Anzahl mittlerer Städte und ihres Innovationsbeitrags verwendet.,11_Innovation_and_City_Size,,Equivalent Number of Medium Cities; Innovation Medium,0,2,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Representative Small City Size,constant,Dmnl,100000,Repräsentative Stadtgrösse der kleinen Stadtklasse. Der Wert wird zur Approximation der Anzahl kleiner Städte und ihres Innovationsbeitrags verwendet.,11_Innovation_and_City_Size,,Equivalent Number of Small Cities; Innovation Small,0,2,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Representative Very Large City Size,constant,Dmnl,2.5e+06,Repräsentative Stadtgrösse der sehr grossen Stadtklasse. Der Wert wird zur Approximation der Anzahl sehr grosser Städte und ihres Innovationsbeitrags verwendet.,11_Innovation_and_City_Size,,Equivalent Number of Very Large Cities; Innovation very Large,0,2,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False
+Year Unit,constant,Year,1,"Year Unit
  
  Technische Hilfsvariable zur Umwandlung von Time in einen
- dimensionslosen Wert f�r Lookup-Funktionen.";01_Population_Household;;Time for Lookup;0;1;low;;;;;;;todo;low;"technisch extrahiert; vermutlich nur bei Bedarf vertiefen";FALSCH;FALSCH
+ dimensionslosen Wert für Lookup-Funktionen.",01_Population_Household,,Time for Lookup,0,1,low,,,,,,,todo,low,technisch extrahiert; vermutlich nur bei Bedarf vertiefen,False,False

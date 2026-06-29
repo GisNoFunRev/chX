@@ -8,6 +8,17 @@
       .replace(/'/g, "&#039;");
   }
 
+  function linkify(value) {
+    return String(value ?? "").replace(
+      /(https?:\/\/[^\s<]+)/g,
+      '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+    );
+  }
+
+  function formatText(value) {
+    return linkify(escapeHtml(value)).replace(/\n/g, "<br>");
+  }
+
   function normalize(value) {
     return String(value ?? "").toLowerCase().trim();
   }
@@ -40,6 +51,45 @@
         <div class="vensim-block-content">${content}</div>
       </section>
     `;
+  }
+
+  function documentationSubblock(title, value) {
+    if (!value || !String(value).trim()) return "";
+    return `
+      <div class="vensim-doc-subblock">
+        <h5>${escapeHtml(title)}</h5>
+        <div class="vensim-doc-text">${formatText(value)}</div>
+      </div>
+    `;
+  }
+
+  function documentationBlock(variable) {
+    const parts = [];
+
+    if (variable.documentationStatus) {
+      parts.push(`
+        <div class="vensim-doc-status-row">
+          <span class="vensim-doc-status-label">Dokumentationsstatus</span>
+          <span class="vensim-doc-status">${escapeHtml(variable.documentationStatus)}</span>
+        </div>
+      `);
+    }
+
+    parts.push(documentationSubblock("Vensim-Kommentar", variable.documentation));
+    parts.push(documentationSubblock("Zweck", variable.purpose));
+    parts.push(documentationSubblock("Modelllogik", variable.logic));
+    parts.push(documentationSubblock("Annahme", variable.assumption));
+    parts.push(documentationSubblock("Quelle", variable.source));
+    parts.push(documentationSubblock("Kalibrierung", variable.calibration));
+    parts.push(documentationSubblock("Interpretation", variable.interpretation));
+
+    const content = parts.join("").trim();
+
+    if (!content) {
+      return `<p class="vensim-empty">Für diese Variable ist noch keine Dokumentation vorhanden.</p>`;
+    }
+
+    return content;
   }
 
   function dependencyBlocks(variable) {
@@ -76,11 +126,16 @@
       return `<p class="vensim-empty">Keine Fokusvariable ausgewählt.</p>`;
     }
 
+    const statusPill = variable.documentationStatus
+      ? `<span class="vensim-pill vensim-pill-muted">Doku: ${escapeHtml(variable.documentationStatus)}</span>`
+      : `<span class="vensim-pill vensim-pill-warning">Doku: offen</span>`;
+
     const pills = [
       `<span class="vensim-pill">${escapeHtml(variable.kind)}</span>`,
       `<span class="vensim-pill">${escapeHtml(variable.units || "ohne Einheit")}</span>`,
       `<span class="vensim-pill">Inputs: ${variable.upstream.length}</span>`,
-      `<span class="vensim-pill">Outputs: ${variable.downstream.length}</span>`
+      `<span class="vensim-pill">Outputs: ${variable.downstream.length}</span>`,
+      statusPill
     ].join("");
 
     let html = `
@@ -103,10 +158,7 @@
     }
 
     if (options.documentation) {
-      const doc = variable.documentation && variable.documentation.trim()
-        ? `<div class="vensim-doc-text">${escapeHtml(variable.documentation)}</div>`
-        : `<p class="vensim-empty">Für diese Variable ist im Vensim-Modell keine Dokumentation hinterlegt.</p>`;
-      html += block("Dokumentation", doc);
+      html += block("Dokumentation", documentationBlock(variable));
     }
 
     if (options.equation) {

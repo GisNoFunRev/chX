@@ -11,7 +11,7 @@ Mean Annual Housing Cost per Capita=805 * 12
 		auf ein Jahr hochgerechnet.
 	|
 
-Aggricultural Land Requirement="Target Value: Populational Need of Kcal in Km2" - Aggricultural Land
+Aggricultural Land Requirement=Populational Need of Kcal in Km2 - Aggricultural Land
 	~	km2
 	~	Differenz zwischen der benötigten landwirtschaftlichen Fläche für den \
 		Kalorienbedarf und der aktuell vorhandenen Aggricultural Land.
@@ -267,7 +267,7 @@ Urban Scaling Exponent very Large=1.15
 		bedeuten, dass Innovation überproportional mit der Stadtgrösse steigt.
 	|
 
-Yield="Kcal per km^2 avg per t"
+Yield=Kcal per km2 avg per t
 	    * Innovation Index
 	~	kcal/km2/Year
 	~	Yield
@@ -492,7 +492,7 @@ Agricultural Rent Sensitivity to Scarcity=1
 	|
 
 Agricultural Scarcity Index=   ZIDZ(
-	        "Target Value: Populational Need of Kcal in Km2",
+	        Populational Need of Kcal in Km2,
 	        Aggricultural Land
 	    )
 	~	Dmnl
@@ -516,7 +516,7 @@ AMM Consistent Economic Land Conversion Demand=Urban Land Gap / Urban Expansion 
 		Anpassungszeit der urbanen Expansion.
 	|
 
-"Target Value: Populational Need of Kcal in Km2"= ZIDZ(Population kcal demand, Yield)
+Populational Need of Kcal in Km2= ZIDZ(Population kcal demand, Yield)
 	~	km2
 	~	Target Value: Populational Need of Kcal in Km2
 		
@@ -719,7 +719,7 @@ Import Dependence=ZIDZ(Population kcal demand, Food Production)
 		den Kalorienbedarf deckt. Werte über 1 zeigen eine Unterdeckung.
 	|
 
-"Kcal per km^2 avg per t"=1.8e+09
+Kcal per km2 avg per t=1.8e+09
 	~	kcal/km2/Year
 	~	Kcal per km^2 avg per t
 		
@@ -1663,56 +1663,56 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,119,2
 V300  Do not put anything below this section - it will be ignored
 *08_Agriculture_and_Scarcity
 $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,96,2
-12,1,0,814,334,284,199,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
+12,1,0,844,-241,284,199,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,256,0,0,0
 08 Agriculture & Scarcity|<<NnN>>||<<NnN>>|Diese View beschreibt die landwirtschaftliche Seite des Modells.|<<NnN>>||<<NnN>>|Aus Bevölkerung und Kalorienbedarf wird die benötigte|<<NnN>>|landwirtschaftliche Fläche berechnet. Diese wird mit der|<<NnN>>|tatsächlich verfügbaren Aggricultural Land verglichen.|<<NnN>>||<<NnN>>|Wenn die benötigte Fläche im Verhältnis zur verfügbaren Fläche|<<NnN>>|steigt, erhöht sich der Agricultural Scarcity Index. Dieser wirkt|<<NnN>>|auf Desired Agricultural Rent und damit auf Agricultural Rent.|<<NnN>>||<<NnN>>|Die View liefert Agricultural Rent als wichtigen Input für spätere|<<NnN>>|AMM- und Land-Conversion-Logik.
-10,2,Expected Population,309,862,60,20,3,2,0,7,-1,1,0,0,128-128-128,113-113-113,|||255-255-255,0,0,0,0,0,0
-10,3,Caloric Baseline Need pP,325,1058,64,64,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
-10,4,Population kcal demand,601,862,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Expected Population,339,287,60,20,3,2,0,7,-1,1,0,0,128-128-128,113-113-113,|||255-255-255,0,0,0,0,0,0
+10,3,Caloric Baseline Need pP,355,483,64,64,6,3,0,1,-1,0,0,0,0-0-0,0-0-0,|||0-0-0,0,0,0,0,0,0
+10,4,Population kcal demand,631,287,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,5,2,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,6,3,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,7,"Kcal per km^2 avg per t",767,1013,61,61,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,8,Yield,913,1073,46,46,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Kcal per km2 avg per t,797,438,61,61,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Yield,943,498,46,46,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,9,7,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,10,Food Production,1264,862,56,56,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,11,Aggricultural Land,1264,1142,55,20,3,2,0,7,-1,1,0,0,128-128-128,117-117-117,|||255-255-255,0,0,0,0,0,0
+10,10,Food Production,1294,287,56,56,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Aggricultural Land,1294,567,55,20,3,2,0,7,-1,1,0,0,128-128-128,117-117-117,|||255-255-255,0,0,0,0,0,0
 1,12,11,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,13,8,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,14,"Target Value: Populational Need of Kcal in Km2",601,1128,68,68,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Populational Need of Kcal in Km2,631,553,68,68,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,15,4,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,16,8,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,17,Agricultural Scarcity Index,1052,1142,53,53,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,Agricultural Scarcity Index,1082,567,53,53,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,18,14,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,19,11,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,20,Reference Agricultural Scarcity Index,617,1330,77,77,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,20,Reference Agricultural Scarcity Index,647,755,77,77,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,21,17,20,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
-10,22,Relative Agricultural Scarcity,908,1330,53,53,2,3,0,0,-1,1,0,0,0,0,0,0,0,0
+10,22,Relative Agricultural Scarcity,938,755,53,53,2,3,0,0,-1,1,0,0,0,0,0,0,0,0
 1,23,17,22,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,24,20,22,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,25,Initial Agricultural Rent,1254,1823,59,59,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,26,Agricultural Rent Sensitivity to Scarcity,1254,1314,66,66,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,27,Desired Agricultural Rent,1254,1534,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,25,Initial Agricultural Rent,1284,1248,59,59,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,26,Agricultural Rent Sensitivity to Scarcity,1284,739,66,66,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,27,Desired Agricultural Rent,1284,959,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,28,25,27,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,29,22,27,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,30,26,27,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,31,Agricultural Rent Adjustment Time,753,1531,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,32,Agricultural Rent,1034,1823,56,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
-1,33,35,32,100,0,0,22,0,192,0,-1--1--1,,1|(753,1823)|
-1,34,35,32,4,0,0,22,0,192,0,-1--1--1,,1|(753,1823)|
-11,35,0,753,1730,17,26,34,3,0,0,4,0,0,0,0,0,0,0,0,0
-10,36,Agricultural Rent Change,834,1730,64,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,Agricultural Rent Adjustment Time,783,956,57,57,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,32,Agricultural Rent,1064,1248,56,26,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,33,35,32,100,0,0,22,0,192,0,-1--1--1,,1|(783,1248)|
+1,34,35,32,4,0,0,22,0,192,0,-1--1--1,,1|(783,1248)|
+11,35,0,783,1155,17,26,34,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,36,Agricultural Rent Change,864,1155,64,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,37,25,32,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
 1,38,32,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,39,31,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,40,27,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,41,Import Dependence,999,862,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,41,Import Dependence,1029,287,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,42,4,41,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,43,10,41,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,44,Economic Pressure,999,706,61,61,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,44,Economic Pressure,1029,131,61,61,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,45,41,44,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,46,Aggricultural Land Requirement,756,1205,64,26,3,3,0,5,-1,0,0,0,0-0-0,0-255-0,|||0-0-0,0,0,0,0,0,0
+10,46,Aggricultural Land Requirement,786,630,64,26,3,3,0,5,-1,0,0,0,0-0-0,0-255-0,|||0-0-0,0,0,0,0,0,0
 1,47,14,46,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-1,48,11,46,1,0,0,0,0,192,0,-1--1--1,,1|(1037,1234)|
-10,49,Innovation Index,1086,1002,62,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,48,11,46,1,0,0,0,0,192,0,-1--1--1,,1|(1067,659)|
+10,49,Innovation Index,1116,427,62,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
 1,50,49,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
@@ -1773,25 +1773,25 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,82,2
 V300  Do not put anything below this section - it will be ignored
 *11_Innovation_and_City_Size
 $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,77,2
-12,1,0,1222,-1205,356,172,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
+12,1,0,1222,-804,356,172,8,7,0,58,-1,0,0,0,0-0-0,0-0-0,Helvetica|18|B|0-0-0,0,0,0,0,0,0
 11 Innovation & City Size|<<NnN>>||<<NnN>>|Diese View beschreibt den Zusammenhang zwischen Stadtgrösse|<<NnN>>|und Innovation.|<<NnN>>||<<NnN>>|Mit wachsender Bevölkerung steigt der Population Scale Index.|<<NnN>>|Dieser beeinflusst den Desired Innovation Index.|<<NnN>>||<<NnN>>|Der Innovation Index passt sich verzögert an diesen Zielwert an|<<NnN>>|und kann später Produktivität und landwirtschaftlichen Ertrag|<<NnN>>|beeinflussen.
-10,2,Urban Population Density,942,-715,77,77,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,3,Urban Population Total,1062,-416,61,61,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,4,Urban Land,1147,-714,54,13,3,2,0,7,-1,0,0,0,116-116-116,116-116-116,|||255-255-255,0,0,0,0,0,0
+10,2,Urban Population Density,942,-314,77,77,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Urban Population Total,1062,-15,61,61,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,Urban Land,1147,-313,54,13,3,2,0,7,-1,0,0,0,116-116-116,116-116-116,|||255-255-255,0,0,0,0,0,0
 1,5,4,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,6,2,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,7,Share Small City,313,-297,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,8,Share Medium City,730,-161,61,61,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,9,Share Large City,1143,-177,55,55,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,10,Share very Large City,2066,-284,66,66,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,11,Representative Small City Size,313,-80,61,61,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,12,Representative Medium City Size,730,12,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,13,Representative Large City Size,1143,19,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,14,Representative Very Large City Size,2072,-46,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,15,Equivalent Number of Small Cities,489,-177,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,16,Equivalent Number of Medium Cities,942,-161,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,17,Equivalent Number of Large Cities,1397,-177,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,18,Equivalent Number of Very Large Cities,1858,-177,66,66,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,Share Small City,313,104,54,54,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,Share Medium City,730,240,61,61,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,Share Large City,1143,224,55,55,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Share very Large City,2066,117,66,66,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,Representative Small City Size,313,321,61,61,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Representative Medium City Size,730,413,58,58,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,Representative Large City Size,1143,420,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Representative Very Large City Size,2072,355,63,63,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,Equivalent Number of Small Cities,489,224,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,Equivalent Number of Medium Cities,942,240,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,Equivalent Number of Large Cities,1397,224,65,65,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,Equivalent Number of Very Large Cities,1858,224,66,66,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,19,3,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,20,3,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,21,3,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
@@ -1804,14 +1804,14 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,77,2
 1,28,9,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,29,14,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,30,10,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,31,Urban Scaling Exponent Small,422,418,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,32,Urban Scaling Exponent Medium,706,413,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,33,Urban Scaling Exponent Large,996,433,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,34,Urban Scaling Exponent very Large,1316,415,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,35,Innovation Small,564,566,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,36,Innovation Medium,855,589,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,37,Innovation Large,1098,592,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
-10,38,Innovation very Large,1373,553,57,57,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,Urban Scaling Exponent Small,422,819,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,32,Urban Scaling Exponent Medium,706,814,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,33,Urban Scaling Exponent Large,996,834,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,Urban Scaling Exponent very Large,1316,816,62,62,6,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,35,Innovation Small,564,967,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,36,Innovation Medium,855,990,62,62,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,37,Innovation Large,1098,993,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,38,Innovation very Large,1373,954,57,57,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,39,15,35,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,40,31,35,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,41,16,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
@@ -1820,14 +1820,14 @@ $-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,77,2
 1,44,18,38,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,45,34,38,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,46,33,37,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,47,Total Urban Innovation Potential,987,781,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,47,Total Urban Innovation Potential,987,1182,60,60,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,48,35,47,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,49,36,47,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,50,37,47,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,51,38,47,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
-10,52,Reference Total Innovation Potential,1352,775,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,52,Reference Total Innovation Potential,1352,1176,64,64,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,53,47,52,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
-10,54,Innovation Index,961,949,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,54,Innovation Index,961,1350,56,56,2,3,0,0,-1,0,0,0,0,0,0,0,0,0
 1,55,47,54,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,56,52,54,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 1,57,11,35,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
@@ -1864,11 +1864,10 @@ Macro Ebene|<<NnN>>||<<NnN>>|Diese View zeigt die Makro-Ebene der Landflächen.|
 1,23,22,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
 ///---\\\
 :L<%^E!@
-1:current.vdfx
 4:Time
-5:Urban Scaling Exponent very Large
+5:Kcal per km2 avg per t
 9:current
-19:77,10
+19:96,7
 24:2025
 25:2050
 26:2050
