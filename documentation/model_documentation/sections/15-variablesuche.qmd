@@ -1,5 +1,6 @@
-## Zweck der Suche
+# Suchfunktion
 
+## Zweck der Suche
 Diese Seite dient als kompakter Einstieg in die automatisch erzeugte Modelldokumentation. Die Suche ist bewusst einfach gehalten: Man sucht nach einem **Variablennamen**, wählt eine **Fokusvariable** und entscheidet anschliessend, welche Informationsblöcke angezeigt werden sollen.
 
 Die Suche ist statisch in das HTML gerendert. Das bedeutet: Alle Variablendaten und Grafiken werden beim Erzeugen der Dokumentation vorbereitet. Im Browser werden nur noch die vorbereiteten Inhalte gefiltert und ein- oder ausgeblendet.

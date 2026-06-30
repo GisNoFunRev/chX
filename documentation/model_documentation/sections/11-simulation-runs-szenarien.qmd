@@ -1,24 +1,59 @@
-# Simulation Runs und Szenarien {#sec-simulation-runs-szenarien}
+## Forecast-Resultate: Urbanes Land und Agrarland {#sec-forecast-urban-agricultural-land}
 
-Dieses Kapitel beschreibt die Simulation Runs und Szenarien.
+Dieses Kapitel beschreibt die zentralen Forecast-Resultate für die Entwicklung des urbanen Landes und des landwirtschaftlichen Landes im Zeitraum von 2025 bis 2050.
 
-## Basislauf
+Im Modell werden beide Flächenbestände als Stocks abgebildet. `Urban Land` steigt durch die `Land Conversion Rate`, während `Agricultural Land` im gleichen Umfang abnimmt. Die Landumwandlung wird damit als direkte Verschiebung von landwirtschaftlicher zu urbaner Fläche modelliert.
 
-Der Basislauf zeigt das Verhalten des Modells unter den Standardannahmen.
+## Entwicklung der Flächenbestände
 
-Er dient als Referenz für alle weiteren Szenarien.
+Die Simulation startet im Jahr 2025 mit einer urbanen Fläche von rund 181'700 km² und einer landwirtschaftlichen Fläche von rund 1'600'400 km².
 
-## Szenarien
+Bis 2050 steigt die urbane Fläche auf rund 250'040 km². Das entspricht einer Zunahme von etwa 68'340 km² oder 37.6 % gegenüber dem Startwert. Gleichzeitig sinkt das landwirtschaftliche Land auf rund 1'532'060 km². Da die Umwandlung im Modell eins zu eins erfolgt, entspricht der Rückgang des Agrarlandes ebenfalls rund 68'340 km². Relativ zum grossen Ausgangsbestand entspricht dies einem Rückgang von etwa 4.3 %.
 
-Mögliche Szenarien sind:
+| Jahr | Urban Land [km²] | Agricultural Land [km²] | Land Conversion Rate [km²/Jahr] | Urban Land Gap [km²] |
+| ---: | ---------------: | ----------------------: | ------------------------------: | -------------------: |
+| 2025 |          181'700 |               1'600'400 |                               0 |                    0 |
+| 2030 |          185'599 |               1'596'501 |                           1'722 |               17'216 |
+| 2035 |          196'244 |               1'585'856 |                           2'662 |               26'620 |
+| 2040 |          210'987 |               1'571'113 |                           3'350 |               33'496 |
+| 2045 |          228'961 |               1'553'139 |                           3'962 |               39'616 |
+| 2050 |          250'040 |               1'532'060 |                           4'613 |               46'127 |
 
-- höheres Einkommen
-- tiefere Transportkosten
-- höhere Transportkosten
-- stärkere Landknappheit
-- langsamere Rentenanpassung
-- schnellere Rentenanpassung
+## Interpretation der urbanen Entwicklung
 
-## Ergebnisdarstellung
+Die Entwicklung zeigt, dass die urbane Fläche im Forecast kontinuierlich zunimmt. Besonders ab den 2030er-Jahren verstärkt sich die jährliche Landumwandlung.
 
-Die Ergebnisse werden später mit Vensim-Grafiken oder exportierten Daten dargestellt.
+Die `Land Conversion Rate` steigt von rund 1'722 km²/Jahr im Jahr 2030 auf rund 4'613 km²/Jahr im Jahr 2050. Der Grund dafür ist, dass die modellierte gewünschte urbane Fläche schneller wächst als die tatsächlich vorhandene urbane Fläche. Dadurch entsteht ein positiver `Urban Land Gap`, der im Modell schrittweise durch zusätzliche Landumwandlung reduziert wird.
+
+Die urbane Expansion wird in diesem Forecast also nicht durch einen abrupten Schock ausgelöst, sondern durch eine kontinuierlich wachsende Differenz zwischen gewünschter und bestehender urbaner Fläche.
+
+## Interpretation der landwirtschaftlichen Fläche
+
+Trotz der zunehmenden Urbanisierung bleibt der Rückgang des landwirtschaftlichen Landes im Verhältnis zum Gesamtbestand moderat. Im Jahr 2050 sind noch rund 1.53 Millionen km² landwirtschaftliche Fläche vorhanden.
+
+Der modellierte Verlust an Agrarland ist deshalb absolut sichtbar, relativ zum gesamten Agrarlandbestand aber begrenzt. Das Modell zeigt damit keine vollständige Verdrängung der Landwirtschaft, sondern eine graduelle Verschiebung von landwirtschaftlicher zu urbaner Fläche.
+
+## Landwirtschaftliche Knappheit
+
+Ein wichtiger Befund ist, dass die landwirtschaftliche Knappheit im Forecast nicht zunimmt. Der `Agricultural Scarcity Index` sinkt von rund 0.195 im Jahr 2025 auf rund 0.146 im Jahr 2050.
+
+Dies liegt daran, dass der modellierte landwirtschaftliche Ertrag über den `Innovation Index` steigt und die erwartete Bevölkerung im gleichen Zeitraum leicht zurückgeht. Dadurch sinkt die berechnete Fläche, die zur Deckung des Kalorienbedarfs benötigt wird, von rund 311'491 km² auf rund 222'949 km².
+
+Die Resultate deuten somit auf eine klare Ausweitung urbaner Fläche hin, ohne dass das Modell im Forecast eine akute landwirtschaftliche Flächenknappheit erzeugt.
+
+## Zwischenfazit
+
+Die Urbanisierung wird in diesem Forecast primär durch den wachsenden Bedarf an urbaner Fläche und die AMM-basierte Land-Conversion-Logik getrieben. Das Agrarland wirkt in dieser Modellversion vor allem als verfügbarer Flächenbestand, aus dem die urbane Expansion gespeist wird.
+
+Die zentrale Dynamik lautet:
+
+```text
+Desired Urban Land steigt
+→ Urban Land Gap entsteht
+→ Land Conversion Rate steigt
+→ Urban Land nimmt zu
+→ Agricultural Land nimmt ab
+```
+
+::: {.callout-note}
+In der vorliegenden Modellversion wird die Landumwandlung hauptsächlich über den `Urban Land Gap` und die `Urban Expansion Adjustment Time` gesteuert. Eine stärkere Schutzwirkung für Agrarland würde die Resultate verändern, wenn die Soil-Protection-Logik direkt in die `Land Conversion Rate` eingebunden wird.

@@ -1,6 +1,6 @@
 # Systemgrenzen {#sec-systemgrenzen}
 
-Diese Modell beschreibt  ein makroskopisches EU27-System, in dem urbane Expansion und landwirtschaftliche Flächennutzung über mehrere Rückkopplungen miteinander verbunden sind. Innerhalb der Systemgrenze liegen Flächenumwandlung, Wohnraumnachfrage, Einkommen, Transportkosten, Bodenrenten, landwirtschaftliche Produktion, Importabhängigkeit, wirtschaftlicher Druck, Bodenschutz, Raumplanung und Innovation.
+Dieses Modell beschreibt ein makroskopisches EU27-System, in dem urbane Expansion und landwirtschaftliche Flächennutzung über mehrere Rückkopplungen miteinander verbunden sind. Innerhalb der Systemgrenze liegen Flächenumwandlung, Wohnraumnachfrage, Einkommen, Transportkosten, Bodenrenten, landwirtschaftliche Produktion, Importabhängigkeit, wirtschaftlicher Druck, Bodenschutz, Raumplanung und Innovation.
 
 Ausserhalb der Systemgrenze liegen regionale Unterschiede, globale Märkte, geopolitische Schocks, explizite Klimadynamiken und detaillierte demografische oder agrarökologische Prozesse. Diese Abgrenzung macht das Modell überschaubar und erlaubt eine fokussierte Analyse der zentralen systemdynamischen Strukturen.
 
@@ -8,9 +8,28 @@ Ausserhalb der Systemgrenze liegen regionale Unterschiede, globale Märkte, geop
 
 Die räumliche Systemgrenze umfasst die EU27 als aggregiertes Gesamtsystem. Das Modell unterscheidet nicht zwischen einzelnen Ländern, Regionen oder Städten. Alle Flächen-, Bevölkerungs-, Einkommens- und Produktionsgrössen werden auf makroskopischer Ebene betrachtet.
 
+Eine besonders wichtige Vereinfachung betrifft die räumliche Umsetzung des Alonso-Muth-Mills-Kerns. Im Modell wird die gesamte urbane Fläche der EU27 zu einer einzigen idealisierten kreisförmigen Stadt aggregiert. Diese Konstruktion wird im Folgenden als analytische Europastadt verstanden.
+
+Diese Europastadt ist keine reale Geografie. Sie bedeutet nicht, dass Europa tatsächlich als zusammenhängende runde Stadt interpretiert wird. Die kreisförmige Fläche ist eine mathematische Hilfskonstruktion, mit der der AMM-Fringe-Radius in eine aggregierte urbane Fläche übersetzt werden kann.
+
+Die Modelllogik lautet deshalb nicht:
+
+```text
+Europa ist eine Stadt.
+```
+
+Sondern:
+
+```text
+Die gesamte urbane Fläche Europas wird als äquivalente Kreisfläche dargestellt,
+damit die AMM-Flächenlogik auf ein makroskopisches EU27-Modell übertragen werden kann.
+```
+
 Diese Aggregation bedeutet, dass regionale Unterschiede bewusst vereinfacht werden. Unterschiedliche Stadtstrukturen, nationale Planungssysteme, Bodenpreise, klimatische Bedingungen oder landwirtschaftliche Produktionssysteme werden nicht separat modelliert. Stattdessen beschreibt das Modell eine durchschnittliche EU27-Dynamik.
 
 Diese Vereinfachung ist für das Ziel des Modells sinnvoll, weil nicht einzelne regionale Entwicklungen prognostiziert werden sollen. Im Zentrum steht die Frage, wie sich zentrale Rückkopplungen zwischen urbanem Wachstum und landwirtschaftlicher Flächenverfügbarkeit auf Systemebene verhalten.
+
+Die Aggregation zur Europastadt ist gleichzeitig eine kritische Modellannahme. Sie erlaubt eine flächenbezogene Plausibilisierung urbaner Expansion auf EU27-Ebene, begrenzt aber die Aussagekraft für einzelne Städte, Regionen oder reale Siedlungsmuster.
 
 ## Zeitliche Systemgrenze
 
@@ -36,7 +55,7 @@ Die sachliche Systemgrenze umfasst jene Mechanismen, die für die untersuchte La
 * wirtschaftlicher Druck als Folge steigender Importabhängigkeit,
 * agrotechnologischer Fortschritt beziehungsweise Innovation als produktivitätssteigernder Mechanismus.
 
-Die zentrale Bestandslogik des Modells liegt in den Variablen `Urban Land` und `Aggricultural Land`. `Urban Land` steigt durch die `Land Conversion Rate`, während `Aggricultural Land` durch dieselbe Rate sinkt. Damit bildet das Modell die Umwandlung von landwirtschaftlicher Fläche in urbane Nutzung als Kernprozess ab.
+Die zentrale Bestandslogik des Modells liegt in den Variablen `Urban Land` und `Agricultural Land`. `Urban Land` steigt durch die `Land Conversion Rate`, während `Agricultural Land` durch dieselbe Rate sinkt. Damit bildet das Modell die Umwandlung von landwirtschaftlicher Fläche in urbane Nutzung als Kernprozess ab.
 
 ## Endogene Modellgrenze
 
@@ -64,15 +83,16 @@ Auch mehrere Parameter wie initiale Flächenwerte, Transportkosten, Mietwerte, S
 
 Mehrere reale Einflussbereiche liegen ausserhalb der Systemgrenze. Sie werden im Modell nicht explizit abgebildet:
 
-| Ausgeschlossener Bereich      | Bedeutung für die Modellgrenze                                                                                                     |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Explizite Klimadynamiken      | Klimawandel, Extremwetter, Dürren oder Ertragsverluste durch Klimaeffekte werden nicht als eigener Wirkungsmechanismus modelliert. |
-| Geopolitische Schocks         | Kriege, Handelskonflikte, Energiekrisen oder abrupte politische Ereignisse werden nicht endogen berücksichtigt.                    |
-| Globale Marktdynamiken        | Weltmarktpreise, internationale Handelsströme und globale Angebots-Nachfrage-Dynamiken werden nicht detailliert modelliert.        |
-| Regionale Differenzierung     | Unterschiede zwischen EU-Ländern, Städten, Regionen oder Agrarräumen werden aggregiert.                                            |
-| Rückumwandlung urbaner Fläche | Eine systematische Rückumwandlung von urbaner Fläche in landwirtschaftliche Fläche wird nicht als dominanter Trend angenommen.     |
-| Verteilungsfragen             | Unterschiede zwischen Einkommensgruppen, Haushaltstypen oder sozialen Gruppen werden nicht separat modelliert.                     |
-| Detaillierte Agrarsysteme     | Kulturarten, Tierhaltung, Bodenqualität oder unterschiedliche Produktionssysteme werden nicht einzeln abgebildet.                  |
+| Ausgeschlossener Bereich      | Bedeutung für die Modellgrenze                                                                                                                |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Explizite Klimadynamiken      | Klimawandel, Extremwetter, Dürren oder Ertragsverluste durch Klimaeffekte werden nicht als eigener Wirkungsmechanismus modelliert.            |
+| Geopolitische Schocks         | Kriege, Handelskonflikte, Energiekrisen oder abrupte politische Ereignisse werden nicht endogen berücksichtigt.                               |
+| Globale Marktdynamiken        | Weltmarktpreise, internationale Handelsströme und globale Angebots-Nachfrage-Dynamiken werden nicht detailliert modelliert.                   |
+| Regionale Differenzierung     | Unterschiede zwischen EU-Ländern, Städten, Regionen oder Agrarräumen werden aggregiert.                                                       |
+| Reale Siedlungsgeometrie      | Das Modell bildet keine tatsächlichen Stadtformen, Siedlungsachsen, polyzentrischen Strukturen oder räumlichen Distanzen zwischen Städten ab. |
+| Rückumwandlung urbaner Fläche | Eine systematische Rückumwandlung von urbaner Fläche in landwirtschaftliche Fläche wird nicht als dominanter Trend angenommen.                |
+| Verteilungsfragen             | Unterschiede zwischen Einkommensgruppen, Haushaltstypen oder sozialen Gruppen werden nicht separat modelliert.                                |
+| Detaillierte Agrarsysteme     | Kulturarten, Tierhaltung, Bodenqualität oder unterschiedliche Produktionssysteme werden nicht einzeln abgebildet.                             |
 
 Diese Ausschlüsse bedeuten nicht, dass die Faktoren unwichtig sind. Sie liegen lediglich ausserhalb des gewählten Modellzwecks. Das Modell fokussiert nicht auf vollständige Realitätsabbildung, sondern auf eine nachvollziehbare Struktur zur Analyse ausgewählter Rückkopplungen.
 
@@ -80,9 +100,10 @@ Diese Ausschlüsse bedeuten nicht, dass die Faktoren unwichtig sind. Sie liegen 
 
 Die gewählte Systemgrenze hat direkte Konsequenzen für die Interpretation der Ergebnisse. Aussagen des Modells beziehen sich auf die EU27 als aggregiertes System und nicht auf einzelne Länder oder Regionen. Ebenso zeigen die Ergebnisse keine kurzfristigen Schocks, sondern längerfristige strukturelle Entwicklungen.
 
-Besonders wichtig ist, dass das Modell keine präzise Prognose zukünftiger Flächennutzung liefert. Es zeigt vielmehr, wie sich urbane Expansion, landwirtschaftliche Flächenverfügbarkeit, Nahrungsmittelproduktion und regulierende Gegenmechanismen unter bestimmten Annahmen gegenseitig beeinflussen können.
+Besonders wichtig ist die Interpretation der kreisförmigen Europastadt. Sie ist kein räumliches Abbild Europas, sondern eine äquivalente Flächenkonstruktion. Der im AMM-Kern berechnete Radius beschreibt deshalb keine reale Entfernung vom Zentrum Europas. Er dient dazu, eine gewünschte urbane Gesamtfläche aus der AMM-Logik abzuleiten.
+
+Das Modell kann damit Aussagen über aggregierte Flächenentwicklung und Land Conversion machen. Es kann aber keine Aussagen darüber machen, wo Urbanisierung räumlich stattfindet, welche Städte wachsen oder welche Regionen besonders betroffen sind.
+
+Besonders wichtig ist auch, dass das Modell keine präzise Prognose zukünftiger Flächennutzung liefert. Es zeigt vielmehr, wie sich urbane Expansion, landwirtschaftliche Flächenverfügbarkeit, Nahrungsmittelproduktion und regulierende Gegenmechanismen unter bestimmten Annahmen gegenseitig beeinflussen können.
 
 Die Resultate sollten daher als Szenario- und Strukturinformation gelesen werden. Sie helfen zu verstehen, welche Rückkopplungen im System stark wirken könnten, welche Annahmen kritisch sind und an welchen Stellen politische oder technologische Gegenkräfte eine dämpfende Rolle spielen.
-
-
-

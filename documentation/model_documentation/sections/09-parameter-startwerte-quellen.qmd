@@ -1,4 +1,4 @@
-## Einordnung
+## Parameter, Startwerte und Datenquellen
 
 Diese Tabelle dokumentiert die im Modell als `constant` erkannten Grössen. Fachlich werden diese Grössen als **Parameter** verstanden, da sie Startwerte, Modellannahmen, Kalibrierungen, Szenarien oder technische Umrechnungsfaktoren festlegen.
 
@@ -11,6 +11,13 @@ Die Spalte **Status** unterscheidet:
 - **Zu prüfen**: Der Wert sollte für die Zukunft geprüft oder abgeleitet werden.
 
 ```{python}
+#| echo: false
+
+#| message: false
+
+#| warning: false
+
+
 import pandas as pd
 from IPython.display import HTML, display
 

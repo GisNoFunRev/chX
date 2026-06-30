@@ -1,0 +1,57 @@
+# Backtesting und historische Plausibilisierung {#sec-backtesting}
+
+Dieses Kapitel prüft, ob das Modell die historische Entwicklung der urbanen Fläche im Zeitraum von 2000 bis 2025 in einer plausiblen Grössenordnung reproduzieren kann. Das Backtesting ist damit keine Zukunftssimulation, sondern eine historische Modellprüfung.
+
+Im Zentrum steht die Frage, ob das Modell die beobachtete Entwicklung von `Urban Land` grundsätzlich nachvollziehen kann. Dafür wird die modellierte Variable `Urban Land` mit der historischen Vergleichsvariable `Historical Urban Land` verglichen.
+
+## Ziel des Backtestings
+
+Das Backtesting dient dazu, die historische Anschlussfähigkeit des Modells zu prüfen. Es soll zeigen, ob das Modell unter den gewählten Annahmen eine urbane Flächenentwicklung erzeugt, die in Richtung und Grössenordnung zur historischen Entwicklung passt.
+
+Das Backtesting ist nicht als exakte Validierung zu verstehen. Ein System-Dynamics-Modell dieser Aggregationsstufe kann die reale Flächennutzung nicht punktgenau reproduzieren. Entscheidend ist, ob der Verlauf plausibel bleibt und keine extremen Abweichungen auftreten.
+
+## Fehlerberechnung
+
+Der Fehler wird als prozentuale Abweichung zwischen modellierter und historischer urbaner Fläche berechnet:
+
+$$
+Urban\ Land\ Error\ Percent =
+\frac{Urban\ Land - Historical\ Urban\ Land}{Historical\ Urban\ Land}
+\cdot 100
+$$
+
+Ein positiver Wert bedeutet, dass das Modell die historische urbane Fläche überschätzt. Ein negativer Wert bedeutet, dass das Modell die historische urbane Fläche unterschätzt.
+
+## Resultate des Backtestings
+
+Die Resultate zeigen, dass das Modell den historischen Verlauf grundsätzlich nachvollzieht, jedoch nicht vollständig deckungsgleich reproduziert.
+
+Zu Beginn des Backtestings liegt der Fehler nahe bei null. Bis 2005 überschätzt das Modell die urbane Fläche leicht. Danach kippt die Abweichung ins Negative. Das bedeutet, dass das Modell die historische urbane Fläche zunehmend unterschätzt.
+
+| Jahr | Urban Land Error Percent |
+| ---: | -----------------------: |
+| 2000 |                   0.00 % |
+| 2005 |                   1.28 % |
+| 2010 |                  -3.60 % |
+| 2015 |                  -7.50 % |
+| 2020 |                  -9.75 % |
+| 2025 |                  -8.78 % |
+
+Der stärkste Fehler tritt ungefähr um 2021 auf, mit einer Abweichung von rund -9.77 %. Bis 2025 verbessert sich die Abweichung leicht auf -8.78 %. Über den gesamten Zeitraum liegt der durchschnittliche absolute Fehler bei ungefähr 5.17 %.
+
+## Interpretation
+
+Inhaltlich bedeutet das Resultat, dass das Modell die Richtung der Entwicklung korrekt abbildet. Die urbane Flächenzunahme im historischen Zeitraum fällt im Modell jedoch etwas zu schwach aus.
+
+Für den Zweck des Backtestings ist das Resultat brauchbar, weil die Grössenordnung stimmt und keine extremen Abweichungen auftreten. Gleichzeitig zeigt der Backtest, dass die Dynamik der Landumwandlung nicht perfekt getroffen wird.
+
+Das Backtesting zeigt damit zwei Dinge:
+
+1. Das Modell läuft grundsätzlich in die richtige Richtung.
+2. Es weist bei der urbanen Flächenentwicklung eine systematische Unterschätzung auf.
+
+## Bedeutung für die Zukunftssimulation
+
+Das Backtesting ist ein Zwischenschritt zwischen Kalibrierung und Szenarioanalyse. Es zeigt, ob das Modell historisch plausibel genug ist, um anschliessend Szenarien für den Zeitraum 2026 bis 2050 zu simulieren.
+
+Die Ergebnisse sollten deshalb nicht als Beweis für Prognosefähigkeit verstanden werden. Sie zeigen lediglich, dass das Modell eine historisch anschlussfähige Grössenordnung erzeugt. Die folgenden Simulation Runs und Szenarien bauen auf diesem plausibilisierten Modellstand auf.

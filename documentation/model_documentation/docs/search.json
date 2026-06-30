@@ -210,6 +210,16 @@
     ]
   },
   {
+    "objectID": "sections/04-modellgrenze.html#räumliche-systemgrenze",
+    "href": "sections/04-modellgrenze.html#räumliche-systemgrenze",
+    "title": "4  Systemgrenzen",
+    "section": "",
+    "text": "Europa ist eine Stadt.\n\nDie gesamte urbane Fläche Europas wird als äquivalente Kreisfläche dargestellt,\ndamit die AMM-Flächenlogik auf ein makroskopisches EU27-Modell übertragen werden kann.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Systemgrenzen</span>"
+    ]
+  },
+  {
     "objectID": "sections/04-modellgrenze.html#zeitliche-systemgrenze",
     "href": "sections/04-modellgrenze.html#zeitliche-systemgrenze",
     "title": "4  Systemgrenzen",
@@ -570,6 +580,56 @@
     ]
   },
   {
+    "objectID": "sections/10b-backtesting.html",
+    "href": "sections/10b-backtesting.html",
+    "title": "14  Backtesting und historische Plausibilisierung",
+    "section": "",
+    "text": "14.1 Ziel des Backtestings\nDieses Kapitel prüft, ob das Modell die historische Entwicklung der urbanen Fläche im Zeitraum von 2000 bis 2025 in einer plausiblen Grössenordnung reproduzieren kann. Das Backtesting ist damit keine Zukunftssimulation, sondern eine historische Modellprüfung.\nIm Zentrum steht die Frage, ob das Modell die beobachtete Entwicklung von Urban Land grundsätzlich nachvollziehen kann. Dafür wird die modellierte Variable Urban Land mit der historischen Vergleichsvariable Historical Urban Land verglichen.\nDas Backtesting dient dazu, die historische Anschlussfähigkeit des Modells zu prüfen. Es soll zeigen, ob das Modell unter den gewählten Annahmen eine urbane Flächenentwicklung erzeugt, die in Richtung und Grössenordnung zur historischen Entwicklung passt.\nDas Backtesting ist nicht als exakte Validierung zu verstehen. Ein System-Dynamics-Modell dieser Aggregationsstufe kann die reale Flächennutzung nicht punktgenau reproduzieren. Entscheidend ist, ob der Verlauf plausibel bleibt und keine extremen Abweichungen auftreten.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10b-backtesting.html#fehlerberechnung",
+    "href": "sections/10b-backtesting.html#fehlerberechnung",
+    "title": "14  Backtesting und historische Plausibilisierung",
+    "section": "14.2 Fehlerberechnung",
+    "text": "14.2 Fehlerberechnung\nDer Fehler wird als prozentuale Abweichung zwischen modellierter und historischer urbaner Fläche berechnet:\n\\[\nUrban\\ Land\\ Error\\ Percent =\n\\frac{Urban\\ Land - Historical\\ Urban\\ Land}{Historical\\ Urban\\ Land}\n\\cdot 100\n\\]\nEin positiver Wert bedeutet, dass das Modell die historische urbane Fläche überschätzt. Ein negativer Wert bedeutet, dass das Modell die historische urbane Fläche unterschätzt.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10b-backtesting.html#resultate-des-backtestings",
+    "href": "sections/10b-backtesting.html#resultate-des-backtestings",
+    "title": "14  Backtesting und historische Plausibilisierung",
+    "section": "14.3 Resultate des Backtestings",
+    "text": "14.3 Resultate des Backtestings\nDie Resultate zeigen, dass das Modell den historischen Verlauf grundsätzlich nachvollzieht, jedoch nicht vollständig deckungsgleich reproduziert.\nZu Beginn des Backtestings liegt der Fehler nahe bei null. Bis 2005 überschätzt das Modell die urbane Fläche leicht. Danach kippt die Abweichung ins Negative. Das bedeutet, dass das Modell die historische urbane Fläche zunehmend unterschätzt.\n\n\n\nJahr\nUrban Land Error Percent\n\n\n\n\n2000\n0.00 %\n\n\n2005\n1.28 %\n\n\n2010\n-3.60 %\n\n\n2015\n-7.50 %\n\n\n2020\n-9.75 %\n\n\n2025\n-8.78 %\n\n\n\nDer stärkste Fehler tritt ungefähr um 2021 auf, mit einer Abweichung von rund -9.77 %. Bis 2025 verbessert sich die Abweichung leicht auf -8.78 %. Über den gesamten Zeitraum liegt der durchschnittliche absolute Fehler bei ungefähr 5.17 %.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10b-backtesting.html#interpretation",
+    "href": "sections/10b-backtesting.html#interpretation",
+    "title": "14  Backtesting und historische Plausibilisierung",
+    "section": "14.4 Interpretation",
+    "text": "14.4 Interpretation\nInhaltlich bedeutet das Resultat, dass das Modell die Richtung der Entwicklung korrekt abbildet. Die urbane Flächenzunahme im historischen Zeitraum fällt im Modell jedoch etwas zu schwach aus.\nFür den Zweck des Backtestings ist das Resultat brauchbar, weil die Grössenordnung stimmt und keine extremen Abweichungen auftreten. Gleichzeitig zeigt der Backtest, dass die Dynamik der Landumwandlung nicht perfekt getroffen wird.\nDas Backtesting zeigt damit zwei Dinge:\n\nDas Modell läuft grundsätzlich in die richtige Richtung.\nEs weist bei der urbanen Flächenentwicklung eine systematische Unterschätzung auf.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10b-backtesting.html#bedeutung-für-die-zukunftssimulation",
+    "href": "sections/10b-backtesting.html#bedeutung-für-die-zukunftssimulation",
+    "title": "14  Backtesting und historische Plausibilisierung",
+    "section": "14.5 Bedeutung für die Zukunftssimulation",
+    "text": "14.5 Bedeutung für die Zukunftssimulation\nDas Backtesting ist ein Zwischenschritt zwischen Kalibrierung und Szenarioanalyse. Es zeigt, ob das Modell historisch plausibel genug ist, um anschliessend Szenarien für den Zeitraum 2026 bis 2050 zu simulieren.\nDie Ergebnisse sollten deshalb nicht als Beweis für Prognosefähigkeit verstanden werden. Sie zeigen lediglich, dass das Modell eine historisch anschlussfähige Grössenordnung erzeugt. Die folgenden Simulation Runs und Szenarien bauen auf diesem plausibilisierten Modellstand auf.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
+    ]
+  },
+  {
     "objectID": "sections/11-simulation-runs-szenarien.html",
     "href": "sections/11-simulation-runs-szenarien.html",
     "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
@@ -580,83 +640,53 @@
     ]
   },
   {
-    "objectID": "sections/11-simulation-runs-szenarien.html#szenarien",
-    "href": "sections/11-simulation-runs-szenarien.html#szenarien",
-    "title": "15  Simulation Runs und Szenarien",
-    "section": "15.2 Szenarien",
-    "text": "15.2 Szenarien\nMögliche Szenarien sind:\n\nhöheres Einkommen\ntiefere Transportkosten\nhöhere Transportkosten\nstärkere Landknappheit\nlangsamere Rentenanpassung\nschnellere Rentenanpassung",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Simulation Runs und Szenarien</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#ergebnisdarstellung",
-    "href": "sections/11-simulation-runs-szenarien.html#ergebnisdarstellung",
-    "title": "15  Simulation Runs und Szenarien",
-    "section": "15.3 Ergebnisdarstellung",
-    "text": "15.3 Ergebnisdarstellung\nDie Ergebnisse werden später mit Vensim-Grafiken oder exportierten Daten dargestellt.",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Simulation Runs und Szenarien</span>"
-    ]
-  },
-  {
-    "objectID": "sections/12-sensitivitaetsanalyse.html",
-    "href": "sections/12-sensitivitaetsanalyse.html",
-    "title": "16  Sensitivitätsanalyse",
+    "objectID": "sections/11-simulation-runs-szenarien.html#entwicklung-der-flächenbestände",
+    "href": "sections/11-simulation-runs-szenarien.html#entwicklung-der-flächenbestände",
+    "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
     "section": "",
-    "text": "16.1 Ziel\nDieses Kapitel beschreibt die Sensitivitätsanalyse.\nDie Sensitivitätsanalyse zeigt, welche Parameter das Modellverhalten besonders stark beeinflussen.",
+    "text": "Jahr\nUrban Land [km²]\nAgricultural Land [km²]\nLand Conversion Rate [km²/Jahr]\nUrban Land Gap [km²]\n\n\n\n\n2025\n181’700\n1’600’400\n0\n0\n\n\n2030\n185’599\n1’596’501\n1’722\n17’216\n\n\n2035\n196’244\n1’585’856\n2’662\n26’620\n\n\n2040\n210’987\n1’571’113\n3’350\n33’496\n\n\n2045\n228’961\n1’553’139\n3’962\n39’616\n\n\n2050\n250’040\n1’532’060\n4’613\n46’127",
     "crumbs": [
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Sensitivitätsanalyse</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Forecast-Resultate: Urbanes Land und Agrarland</span>"
     ]
   },
   {
-    "objectID": "sections/12-sensitivitaetsanalyse.html#mögliche-sensitivitätsparameter",
-    "href": "sections/12-sensitivitaetsanalyse.html#mögliche-sensitivitätsparameter",
-    "title": "16  Sensitivitätsanalyse",
-    "section": "16.2 Mögliche Sensitivitätsparameter",
-    "text": "16.2 Mögliche Sensitivitätsparameter\nBesonders relevante Parameter sind:\n\nUrban Rent Adjustment Time\nUrban Rent Sensitivity to Land Tightness\nMinimum Land Demand per Household\nMaximum Land Demand per Household\nUrban Expansion Adjustment Time\nTransport Cost per km\nAgricultural Rent",
+    "objectID": "sections/11-simulation-runs-szenarien.html#interpretation-der-urbanen-entwicklung",
+    "href": "sections/11-simulation-runs-szenarien.html#interpretation-der-urbanen-entwicklung",
+    "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
+    "section": "15.2 Interpretation der urbanen Entwicklung",
+    "text": "15.2 Interpretation der urbanen Entwicklung\nDie Entwicklung zeigt, dass die urbane Fläche im Forecast kontinuierlich zunimmt. Besonders ab den 2030er-Jahren verstärkt sich die jährliche Landumwandlung.\nDie Land Conversion Rate steigt von rund 1’722 km²/Jahr im Jahr 2030 auf rund 4’613 km²/Jahr im Jahr 2050. Der Grund dafür ist, dass die modellierte gewünschte urbane Fläche schneller wächst als die tatsächlich vorhandene urbane Fläche. Dadurch entsteht ein positiver Urban Land Gap, der im Modell schrittweise durch zusätzliche Landumwandlung reduziert wird.\nDie urbane Expansion wird in diesem Forecast also nicht durch einen abrupten Schock ausgelöst, sondern durch eine kontinuierlich wachsende Differenz zwischen gewünschter und bestehender urbaner Fläche.",
     "crumbs": [
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Sensitivitätsanalyse</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Forecast-Resultate: Urbanes Land und Agrarland</span>"
     ]
   },
   {
-    "objectID": "sections/12-sensitivitaetsanalyse.html#ergebnisdarstellung",
-    "href": "sections/12-sensitivitaetsanalyse.html#ergebnisdarstellung",
-    "title": "16  Sensitivitätsanalyse",
-    "section": "16.3 Ergebnisdarstellung",
-    "text": "16.3 Ergebnisdarstellung\nDie Ergebnisse werden später als Bandbreiten, Szenariovergleiche oder Vensim-Sensitivitätsgrafiken dokumentiert.",
+    "objectID": "sections/11-simulation-runs-szenarien.html#interpretation-der-landwirtschaftlichen-fläche",
+    "href": "sections/11-simulation-runs-szenarien.html#interpretation-der-landwirtschaftlichen-fläche",
+    "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
+    "section": "15.3 Interpretation der landwirtschaftlichen Fläche",
+    "text": "15.3 Interpretation der landwirtschaftlichen Fläche\nTrotz der zunehmenden Urbanisierung bleibt der Rückgang des landwirtschaftlichen Landes im Verhältnis zum Gesamtbestand moderat. Im Jahr 2050 sind noch rund 1.53 Millionen km² landwirtschaftliche Fläche vorhanden.\nDer modellierte Verlust an Agrarland ist deshalb absolut sichtbar, relativ zum gesamten Agrarlandbestand aber begrenzt. Das Modell zeigt damit keine vollständige Verdrängung der Landwirtschaft, sondern eine graduelle Verschiebung von landwirtschaftlicher zu urbaner Fläche.",
     "crumbs": [
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Sensitivitätsanalyse</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Forecast-Resultate: Urbanes Land und Agrarland</span>"
     ]
   },
   {
-    "objectID": "appendix/A-vensim-gleichungsliste.html",
-    "href": "appendix/A-vensim-gleichungsliste.html",
-    "title": "Appendix A – vollständige Vensim-Gleichungsliste",
-    "section": "",
-    "text": "Dokumentationsschema\nDieser Anhang enthält später die vollständige technische Gleichungsliste des finalen Vensim-Modells.\nDie Gleichungsliste wird nach Abschluss des Modells aus Vensim exportiert und hier eingefügt.\nFür jede Variable werden dokumentiert:",
+    "objectID": "sections/11-simulation-runs-szenarien.html#landwirtschaftliche-knappheit",
+    "href": "sections/11-simulation-runs-szenarien.html#landwirtschaftliche-knappheit",
+    "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
+    "section": "15.4 Landwirtschaftliche Knappheit",
+    "text": "15.4 Landwirtschaftliche Knappheit\nEin wichtiger Befund ist, dass die landwirtschaftliche Knappheit im Forecast nicht zunimmt. Der Agricultural Scarcity Index sinkt von rund 0.195 im Jahr 2025 auf rund 0.146 im Jahr 2050.\nDies liegt daran, dass der modellierte landwirtschaftliche Ertrag über den Innovation Index steigt und die erwartete Bevölkerung im gleichen Zeitraum leicht zurückgeht. Dadurch sinkt die berechnete Fläche, die zur Deckung des Kalorienbedarfs benötigt wird, von rund 311’491 km² auf rund 222’949 km².\nDie Resultate deuten somit auf eine klare Ausweitung urbaner Fläche hin, ohne dass das Modell im Forecast eine akute landwirtschaftliche Flächenknappheit erzeugt.",
     "crumbs": [
-      "Appendix A – vollständige Vensim-Gleichungsliste"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Forecast-Resultate: Urbanes Land und Agrarland</span>"
     ]
   },
   {
-    "objectID": "appendix/A-vensim-gleichungsliste.html#dokumentationsschema",
-    "href": "appendix/A-vensim-gleichungsliste.html#dokumentationsschema",
-    "title": "Appendix A – vollständige Vensim-Gleichungsliste",
-    "section": "",
-    "text": "Variablenname\nTyp\nGleichung\nEinheit\nInitialwert\nParameterwert\nQuelle oder Begründung\nRolle im Modell\nHinweise und Grenzen",
+    "objectID": "sections/11-simulation-runs-szenarien.html#zwischenfazit",
+    "href": "sections/11-simulation-runs-szenarien.html#zwischenfazit",
+    "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
+    "section": "15.5 Zwischenfazit",
+    "text": "15.5 Zwischenfazit\nDie Urbanisierung wird in diesem Forecast primär durch den wachsenden Bedarf an urbaner Fläche und die AMM-basierte Land-Conversion-Logik getrieben. Das Agrarland wirkt in dieser Modellversion vor allem als verfügbarer Flächenbestand, aus dem die urbane Expansion gespeist wird.\nDie zentrale Dynamik lautet:\nDesired Urban Land steigt\n→ Urban Land Gap entsteht\n→ Land Conversion Rate steigt\n→ Urban Land nimmt zu\n→ Agricultural Land nimmt ab\n\n\n\n\n\n\nNote\n\n\n\nIn der vorliegenden Modellversion wird die Landumwandlung hauptsächlich über den Urban Land Gap und die Urban Expansion Adjustment Time gesteuert. Eine stärkere Schutzwirkung für Agrarland würde die Resultate verändern, wenn die Soil-Protection-Logik direkt in die Land Conversion Rate eingebunden wird.",
     "crumbs": [
-      "Appendix A – vollständige Vensim-Gleichungsliste"
-    ]
-  },
-  {
-    "objectID": "appendix/A-vensim-gleichungsliste.html#platzhalter",
-    "href": "appendix/A-vensim-gleichungsliste.html#platzhalter",
-    "title": "Appendix A – vollständige Vensim-Gleichungsliste",
-    "section": "Platzhalter",
-    "text": "Platzhalter\nDie vollständige Vensim-Gleichungsliste wird hier eingefügt.",
-    "crumbs": [
-      "Appendix A – vollständige Vensim-Gleichungsliste"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Forecast-Resultate: Urbanes Land und Agrarland</span>"
     ]
   },
   {
@@ -757,166 +787,6 @@
     "text": "17.4 Suchlogik\nEine Dependency bedeutet, dass eine Variable in der Gleichung einer anderen Variable verwendet wird. Wenn zum Beispiel A in der Gleichung von B vorkommt, dann gilt:\nA -&gt; B\nDas heisst: A beeinflusst rechnerisch B. Die Suche trennt diese Beziehungen deshalb in zwei Richtungen:\nBeeinflusst diese Variable: Inputs -&gt; Fokusvariable\nWird von dieser Variable beeinflusst: Fokusvariable -&gt; Outputs",
     "crumbs": [
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>Suchfunktion</span>"
-    ]
-  },
-  {
-    "objectID": "sections/04-modellgrenze.html#räumliche-systemgrenze",
-    "href": "sections/04-modellgrenze.html#räumliche-systemgrenze",
-    "title": "4  Systemgrenzen",
-    "section": "",
-    "text": "Europa ist eine Stadt.\n\nDie gesamte urbane Fläche Europas wird als äquivalente Kreisfläche dargestellt,\ndamit die AMM-Flächenlogik auf ein makroskopisches EU27-Modell übertragen werden kann.",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Systemgrenzen</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#backtesting",
-    "href": "sections/11-simulation-runs-szenarien.html#backtesting",
-    "title": "15  Simulation Runs und Szenarien",
-    "section": "15.4 backtesting",
-    "text": "15.4 backtesting\nResultate des Backtestings Das Backtesting wurde für den Zeitraum von 2000 bis 2025 durchgeführt. Ziel war es, zu prüfen, ob das Modell die historische Entwicklung der urbanen Fläche in einer plausiblen Grössenordnung reproduzieren kann. Dafür wurde die modellierte Variable Urban Land mit der historischen Vergleichsvariable Historical Urban Land verglichen. Der Fehler wurde als prozentuale Abweichung berechnet:\n$$\nUrban Land Error Percent = \n$$\nDie Resultate zeigen, dass das Modell den historischen Verlauf grundsätzlich nachvollzieht, jedoch nicht vollständig deckungsgleich reproduziert. Zu Beginn des Backtestings liegt der Fehler nahe bei null. Bis 2005 überschätzt das Modell die urbane Fläche leicht. Danach kippt die Abweichung ins Negative, was bedeutet, dass das Modell die historische urbane Fläche zunehmend unterschätzt. Jahr Urban Land Error Percent 2000 0.00 % 2005 1.28 % 2010 -3.60 % 2015 -7.50 % 2020 -9.75 % 2025 -8.78 % Der stärkste Fehler tritt ungefähr um 2021 auf, mit einer Abweichung von rund -9.77 %. Bis 2025 verbessert sich die Abweichung leicht auf -8.78 %. Über den gesamten Zeitraum liegt der durchschnittliche absolute Fehler bei ungefähr 5.17 %. Inhaltlich bedeutet dies, dass das Modell die Richtung der Entwicklung korrekt abbildet, die urbane Flächenzunahme im historischen Zeitraum aber etwas zu schwach ausfällt. Für den Zweck des Backtestings ist das Resultat dennoch brauchbar, da die Grössenordnung stimmt und keine extremen Abweichungen auftreten. Gleichzeitig zeigt der Backtest, dass insbesondere die Dynamik der Landumwandlung weiter kalibriert werden sollte, wenn das Modell für die Prognose von 2025 bis 2050 verwendet wird. Das Backtesting dient damit nicht als exakte Validierung, sondern als Plausibilitätsprüfung. Es zeigt, dass das Modell grundsätzlich in die richtige Richtung läuft, aber bei der urbanen Flächenentwicklung noch eine systematische Unterschätzung aufweist.",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Simulation Runs und Szenarien</span>"
-    ]
-  },
-  {
-    "objectID": "sections/10b-backtesting.html",
-    "href": "sections/10b-backtesting.html",
-    "title": "14  Backtesting und historische Plausibilisierung",
-    "section": "",
-    "text": "14.1 Ziel des Backtestings\nDieses Kapitel prüft, ob das Modell die historische Entwicklung der urbanen Fläche im Zeitraum von 2000 bis 2025 in einer plausiblen Grössenordnung reproduzieren kann. Das Backtesting ist damit keine Zukunftssimulation, sondern eine historische Modellprüfung.\nIm Zentrum steht die Frage, ob das Modell die beobachtete Entwicklung von Urban Land grundsätzlich nachvollziehen kann. Dafür wird die modellierte Variable Urban Land mit der historischen Vergleichsvariable Historical Urban Land verglichen.\nDas Backtesting dient dazu, die historische Anschlussfähigkeit des Modells zu prüfen. Es soll zeigen, ob das Modell unter den gewählten Annahmen eine urbane Flächenentwicklung erzeugt, die in Richtung und Grössenordnung zur historischen Entwicklung passt.\nDas Backtesting ist nicht als exakte Validierung zu verstehen. Ein System-Dynamics-Modell dieser Aggregationsstufe kann die reale Flächennutzung nicht punktgenau reproduzieren. Entscheidend ist, ob der Verlauf plausibel bleibt und keine extremen Abweichungen auftreten.",
-    "crumbs": [
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
-    ]
-  },
-  {
-    "objectID": "sections/10b-backtesting.html#fehlerberechnung",
-    "href": "sections/10b-backtesting.html#fehlerberechnung",
-    "title": "14  Backtesting und historische Plausibilisierung",
-    "section": "14.2 Fehlerberechnung",
-    "text": "14.2 Fehlerberechnung\nDer Fehler wird als prozentuale Abweichung zwischen modellierter und historischer urbaner Fläche berechnet:\n\\[\nUrban\\ Land\\ Error\\ Percent =\n\\frac{Urban\\ Land - Historical\\ Urban\\ Land}{Historical\\ Urban\\ Land}\n\\cdot 100\n\\]\nEin positiver Wert bedeutet, dass das Modell die historische urbane Fläche überschätzt. Ein negativer Wert bedeutet, dass das Modell die historische urbane Fläche unterschätzt.",
-    "crumbs": [
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
-    ]
-  },
-  {
-    "objectID": "sections/10b-backtesting.html#resultate-des-backtestings",
-    "href": "sections/10b-backtesting.html#resultate-des-backtestings",
-    "title": "14  Backtesting und historische Plausibilisierung",
-    "section": "14.3 Resultate des Backtestings",
-    "text": "14.3 Resultate des Backtestings\nDie Resultate zeigen, dass das Modell den historischen Verlauf grundsätzlich nachvollzieht, jedoch nicht vollständig deckungsgleich reproduziert.\nZu Beginn des Backtestings liegt der Fehler nahe bei null. Bis 2005 überschätzt das Modell die urbane Fläche leicht. Danach kippt die Abweichung ins Negative. Das bedeutet, dass das Modell die historische urbane Fläche zunehmend unterschätzt.\n\n\n\nJahr\nUrban Land Error Percent\n\n\n\n\n2000\n0.00 %\n\n\n2005\n1.28 %\n\n\n2010\n-3.60 %\n\n\n2015\n-7.50 %\n\n\n2020\n-9.75 %\n\n\n2025\n-8.78 %\n\n\n\nDer stärkste Fehler tritt ungefähr um 2021 auf, mit einer Abweichung von rund -9.77 %. Bis 2025 verbessert sich die Abweichung leicht auf -8.78 %. Über den gesamten Zeitraum liegt der durchschnittliche absolute Fehler bei ungefähr 5.17 %.",
-    "crumbs": [
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
-    ]
-  },
-  {
-    "objectID": "sections/10b-backtesting.html#interpretation",
-    "href": "sections/10b-backtesting.html#interpretation",
-    "title": "14  Backtesting und historische Plausibilisierung",
-    "section": "14.4 Interpretation",
-    "text": "14.4 Interpretation\nInhaltlich bedeutet das Resultat, dass das Modell die Richtung der Entwicklung korrekt abbildet. Die urbane Flächenzunahme im historischen Zeitraum fällt im Modell jedoch etwas zu schwach aus.\nFür den Zweck des Backtestings ist das Resultat brauchbar, weil die Grössenordnung stimmt und keine extremen Abweichungen auftreten. Gleichzeitig zeigt der Backtest, dass die Dynamik der Landumwandlung nicht perfekt getroffen wird.\nDas Backtesting zeigt damit zwei Dinge:\n\nDas Modell läuft grundsätzlich in die richtige Richtung.\nEs weist bei der urbanen Flächenentwicklung eine systematische Unterschätzung auf.",
-    "crumbs": [
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
-    ]
-  },
-  {
-    "objectID": "sections/10b-backtesting.html#bedeutung-für-die-zukunftssimulation",
-    "href": "sections/10b-backtesting.html#bedeutung-für-die-zukunftssimulation",
-    "title": "14  Backtesting und historische Plausibilisierung",
-    "section": "14.5 Bedeutung für die Zukunftssimulation",
-    "text": "14.5 Bedeutung für die Zukunftssimulation\nDas Backtesting ist ein Zwischenschritt zwischen Kalibrierung und Szenarioanalyse. Es zeigt, ob das Modell historisch plausibel genug ist, um anschliessend Szenarien für den Zeitraum 2026 bis 2050 zu simulieren.\nDie Ergebnisse sollten deshalb nicht als Beweis für Prognosefähigkeit verstanden werden. Sie zeigen lediglich, dass das Modell eine historisch anschlussfähige Grössenordnung erzeugt. Die folgenden Simulation Runs und Szenarien bauen auf diesem plausibilisierten Modellstand auf.",
-    "crumbs": [
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#fehlerberechnung",
-    "href": "sections/11-simulation-runs-szenarien.html#fehlerberechnung",
-    "title": "15  Backtesting und historische Plausibilisierung",
-    "section": "15.2 Fehlerberechnung",
-    "text": "15.2 Fehlerberechnung\nDer Fehler wird als prozentuale Abweichung zwischen modellierter und historischer urbaner Fläche berechnet:\n\\[\nUrban\\ Land\\ Error\\ Percent =\n\\frac{Urban\\ Land - Historical\\ Urban\\ Land}{Historical\\ Urban\\ Land}\n\\cdot 100\n\\]\nEin positiver Wert bedeutet, dass das Modell die historische urbane Fläche überschätzt. Ein negativer Wert bedeutet, dass das Modell die historische urbane Fläche unterschätzt.",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#resultate-des-backtestings",
-    "href": "sections/11-simulation-runs-szenarien.html#resultate-des-backtestings",
-    "title": "15  Backtesting und historische Plausibilisierung",
-    "section": "15.3 Resultate des Backtestings",
-    "text": "15.3 Resultate des Backtestings\nDie Resultate zeigen, dass das Modell den historischen Verlauf grundsätzlich nachvollzieht, jedoch nicht vollständig deckungsgleich reproduziert.\nZu Beginn des Backtestings liegt der Fehler nahe bei null. Bis 2005 überschätzt das Modell die urbane Fläche leicht. Danach kippt die Abweichung ins Negative. Das bedeutet, dass das Modell die historische urbane Fläche zunehmend unterschätzt.\n\n\n\nJahr\nUrban Land Error Percent\n\n\n\n\n2000\n0.00 %\n\n\n2005\n1.28 %\n\n\n2010\n-3.60 %\n\n\n2015\n-7.50 %\n\n\n2020\n-9.75 %\n\n\n2025\n-8.78 %\n\n\n\nDer stärkste Fehler tritt ungefähr um 2021 auf, mit einer Abweichung von rund -9.77 %. Bis 2025 verbessert sich die Abweichung leicht auf -8.78 %. Über den gesamten Zeitraum liegt der durchschnittliche absolute Fehler bei ungefähr 5.17 %.",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#interpretation",
-    "href": "sections/11-simulation-runs-szenarien.html#interpretation",
-    "title": "15  Backtesting und historische Plausibilisierung",
-    "section": "15.4 Interpretation",
-    "text": "15.4 Interpretation\nInhaltlich bedeutet das Resultat, dass das Modell die Richtung der Entwicklung korrekt abbildet. Die urbane Flächenzunahme im historischen Zeitraum fällt im Modell jedoch etwas zu schwach aus.\nFür den Zweck des Backtestings ist das Resultat brauchbar, weil die Grössenordnung stimmt und keine extremen Abweichungen auftreten. Gleichzeitig zeigt der Backtest, dass die Dynamik der Landumwandlung nicht perfekt getroffen wird.\nDas Backtesting zeigt damit zwei Dinge:\n\nDas Modell läuft grundsätzlich in die richtige Richtung.\nEs weist bei der urbanen Flächenentwicklung eine systematische Unterschätzung auf.",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#bedeutung-für-die-zukunftssimulation",
-    "href": "sections/11-simulation-runs-szenarien.html#bedeutung-für-die-zukunftssimulation",
-    "title": "15  Backtesting und historische Plausibilisierung",
-    "section": "15.5 Bedeutung für die Zukunftssimulation",
-    "text": "15.5 Bedeutung für die Zukunftssimulation\nDas Backtesting ist ein Zwischenschritt zwischen Kalibrierung und Szenarioanalyse. Es zeigt, ob das Modell historisch plausibel genug ist, um anschliessend Szenarien für den Zeitraum 2026 bis 2050 zu simulieren.\nDie Ergebnisse sollten deshalb nicht als Beweis für Prognosefähigkeit verstanden werden. Sie zeigen lediglich, dass das Modell eine historisch anschlussfähige Grössenordnung erzeugt. Die folgenden Simulation Runs und Szenarien bauen auf diesem plausibilisierten Modellstand auf.",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Backtesting und historische Plausibilisierung</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#entwicklung-der-flächenbestände",
-    "href": "sections/11-simulation-runs-szenarien.html#entwicklung-der-flächenbestände",
-    "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
-    "section": "",
-    "text": "Jahr\nUrban Land [km²]\nAgricultural Land [km²]\nLand Conversion Rate [km²/Jahr]\nUrban Land Gap [km²]\n\n\n\n\n2025\n181’700\n1’600’400\n0\n0\n\n\n2030\n185’599\n1’596’501\n1’722\n17’216\n\n\n2035\n196’244\n1’585’856\n2’662\n26’620\n\n\n2040\n210’987\n1’571’113\n3’350\n33’496\n\n\n2045\n228’961\n1’553’139\n3’962\n39’616\n\n\n2050\n250’040\n1’532’060\n4’613\n46’127",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Forecast-Resultate: Urbanes Land und Agrarland</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#interpretation-der-urbanen-entwicklung",
-    "href": "sections/11-simulation-runs-szenarien.html#interpretation-der-urbanen-entwicklung",
-    "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
-    "section": "15.2 Interpretation der urbanen Entwicklung",
-    "text": "15.2 Interpretation der urbanen Entwicklung\nDie Entwicklung zeigt, dass die urbane Fläche im Forecast kontinuierlich zunimmt. Besonders ab den 2030er-Jahren verstärkt sich die jährliche Landumwandlung.\nDie Land Conversion Rate steigt von rund 1’722 km²/Jahr im Jahr 2030 auf rund 4’613 km²/Jahr im Jahr 2050. Der Grund dafür ist, dass die modellierte gewünschte urbane Fläche schneller wächst als die tatsächlich vorhandene urbane Fläche. Dadurch entsteht ein positiver Urban Land Gap, der im Modell schrittweise durch zusätzliche Landumwandlung reduziert wird.\nDie urbane Expansion wird in diesem Forecast also nicht durch einen abrupten Schock ausgelöst, sondern durch eine kontinuierlich wachsende Differenz zwischen gewünschter und bestehender urbaner Fläche.",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Forecast-Resultate: Urbanes Land und Agrarland</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#interpretation-der-landwirtschaftlichen-fläche",
-    "href": "sections/11-simulation-runs-szenarien.html#interpretation-der-landwirtschaftlichen-fläche",
-    "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
-    "section": "15.3 Interpretation der landwirtschaftlichen Fläche",
-    "text": "15.3 Interpretation der landwirtschaftlichen Fläche\nTrotz der zunehmenden Urbanisierung bleibt der Rückgang des landwirtschaftlichen Landes im Verhältnis zum Gesamtbestand moderat. Im Jahr 2050 sind noch rund 1.53 Millionen km² landwirtschaftliche Fläche vorhanden.\nDer modellierte Verlust an Agrarland ist deshalb absolut sichtbar, relativ zum gesamten Agrarlandbestand aber begrenzt. Das Modell zeigt damit keine vollständige Verdrängung der Landwirtschaft, sondern eine graduelle Verschiebung von landwirtschaftlicher zu urbaner Fläche.",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Forecast-Resultate: Urbanes Land und Agrarland</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#landwirtschaftliche-knappheit",
-    "href": "sections/11-simulation-runs-szenarien.html#landwirtschaftliche-knappheit",
-    "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
-    "section": "15.4 Landwirtschaftliche Knappheit",
-    "text": "15.4 Landwirtschaftliche Knappheit\nEin wichtiger Befund ist, dass die landwirtschaftliche Knappheit im Forecast nicht zunimmt. Der Agricultural Scarcity Index sinkt von rund 0.195 im Jahr 2025 auf rund 0.146 im Jahr 2050.\nDies liegt daran, dass der modellierte landwirtschaftliche Ertrag über den Innovation Index steigt und die erwartete Bevölkerung im gleichen Zeitraum leicht zurückgeht. Dadurch sinkt die berechnete Fläche, die zur Deckung des Kalorienbedarfs benötigt wird, von rund 311’491 km² auf rund 222’949 km².\nDie Resultate deuten somit auf eine klare Ausweitung urbaner Fläche hin, ohne dass das Modell im Forecast eine akute landwirtschaftliche Flächenknappheit erzeugt.",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Forecast-Resultate: Urbanes Land und Agrarland</span>"
-    ]
-  },
-  {
-    "objectID": "sections/11-simulation-runs-szenarien.html#zwischenfazit",
-    "href": "sections/11-simulation-runs-szenarien.html#zwischenfazit",
-    "title": "15  Forecast-Resultate: Urbanes Land und Agrarland",
-    "section": "15.5 Zwischenfazit",
-    "text": "15.5 Zwischenfazit\nDie Urbanisierung wird in diesem Forecast primär durch den wachsenden Bedarf an urbaner Fläche und die AMM-basierte Land-Conversion-Logik getrieben. Das Agrarland wirkt in dieser Modellversion vor allem als verfügbarer Flächenbestand, aus dem die urbane Expansion gespeist wird.\nDie zentrale Dynamik lautet:\nDesired Urban Land steigt\n→ Urban Land Gap entsteht\n→ Land Conversion Rate steigt\n→ Urban Land nimmt zu\n→ Agricultural Land nimmt ab\n\n\n\n\n\n\nNote\n\n\n\nIn der vorliegenden Modellversion wird die Landumwandlung hauptsächlich über den Urban Land Gap und die Urban Expansion Adjustment Time gesteuert. Eine stärkere Schutzwirkung für Agrarland würde die Resultate verändern, wenn die Soil-Protection-Logik direkt in die Land Conversion Rate eingebunden wird.",
-    "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Forecast-Resultate: Urbanes Land und Agrarland</span>"
     ]
   }
 ]

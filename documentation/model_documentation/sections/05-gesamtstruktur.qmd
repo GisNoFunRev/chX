@@ -1,10 +1,11 @@
+## Gesamtstruktur
+
 ```{python}
 from pathlib import Path
 import subprocess
 import sys
 
-# Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot
-# oder aus dem Ordner pages/ rendert.
+
 def find_project_root(start: Path) -> Path:
     start = start.resolve()
     for candidate in [start, *start.parents]:
