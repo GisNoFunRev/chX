@@ -1,0 +1,10 @@
+pages:
+  image: alpine:latest
+  script:
+    - mkdir -p public
+    - cp -r documentation/model_documentation/docs/* public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
