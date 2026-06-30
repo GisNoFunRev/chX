@@ -1,5 +1,6 @@
 project:
   type: book
+jupyter: vensim
 
 book:
   title: "Dokumentation eines systemdynamischen Modells der urbanen Landnutzungsdynamik"
@@ -30,6 +31,7 @@ book:
     - appendix/A-vensim-gleichungsliste.qmd
     - sections/14-verwendung-von-ki.qmd
     - sections/14-references.qmd
+    - sections/15-variablesuche.qmd
 
 bibliography: references.bib
 
@@ -49,3 +51,4 @@ format:
     toc-depth: 4
     number-sections: true
     number-depth: 4
+

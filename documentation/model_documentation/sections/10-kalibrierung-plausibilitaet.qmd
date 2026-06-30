@@ -1,24 +1,405 @@
-# Kalibrierung und Plausibilitätsprüfung {#sec-kalibrierung-plausibilitaet}
+# Kalibrierung und Plausibilitätsprüfung
 
-Dieses Kapitel beschreibt die Kalibrierung und Plausibilitätsprüfung des Modells.
+Ziel der Kalibrierung ist es, ausgewählte Modellparameter so anzupassen, dass das Modell die historische Entwicklung der urbanen Fläche im Backtesting-Zeitraum möglichst gut reproduziert. Das Modell wird dafür für den Zeitraum 2000 bis 2025 ausgeführt und mit historischen Vergleichswerten verglichen.
 
-## Ziel der Kalibrierung
+Die Kalibrierung ersetzt dabei keine fachliche Modellprüfung. Sie dient lediglich dazu, plausible Parameterkombinationen systematisch zu testen und den numerischen Fehler zwischen Modellresultat und Referenzdaten zu reduzieren. Die anschliessende Plausibilitätsprüfung wird bewusst manuell durchgeführt, da ein rein numerisch optimiertes Modell nicht automatisch fachlich sinnvoll ist.
 
-Die Kalibrierung soll sicherstellen, dass das Modell im Basislauf plausible Werte erzeugt.
+## Grundidee der Kalibrierung
 
-Das Ziel ist keine perfekte historische Reproduktion, sondern eine glaubwürdige Ausgangsdynamik.
+Für die Kalibrierung wird ein Python-Skript verwendet, welches das Vensim-Modell automatisiert ausführt. Dabei werden ausgewählte Parameter innerhalb vorher definierter Grenzen variiert. Nach jedem Modelllauf wird der Fehler zwischen der simulierten urbanen Fläche und der historischen urbanen Fläche berechnet.
 
-## Plausibilitätsprüfungen
+Als zentrale Fehlergrösse wird der prozentuale Fehler der urbanen Fläche verwendet:
 
-Geprüft werden später insbesondere:
 
-- Startwerte
-- Einheitenkonsistenz
-- Grössenordnungen
-- Verhalten im Basislauf
-- Verhalten bei Extremwerten
-- Verhalten bei Parameteränderungen
+Zusätzlich wird der absolute prozentuale Fehler betrachtet, damit positive und negative Abweichungen sich nicht gegenseitig aufheben.
 
-## Dokumentationsstand
+Wichtig ist, dass nicht die historischen Vergleichswerte optimiert werden. Die historischen Werte dienen ausschliesslich als Referenz. Optimiert werden nur ausgewählte Modellparameter, deren Werte fachlich unsicher sind oder im Modell als Kalibrierparameter verstanden werden können.
 
-Die Kalibrierung wird nach Abschluss des finalen Modells ergänzt.
+## Auswahl der Kalibrierparameter
+
+Für die automatische Kalibrierung werden nur Parameter verwendet, die das Verhalten des Modells beeinflussen, aber nicht selbst Ergebnis- oder Vergleichsgrössen sind. Dazu gehören insbesondere Parameter, welche die Geschwindigkeit der Flächenausdehnung, die Wirkung von Schutz- und Planungsfaktoren oder Annahmen zur Landnachfrage beeinflussen.
+
+| Parameter                                  | Rolle im Modell                                 | Begründung für Kalibrierung                                              |
+| ------------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------------------ |
+| `Initial Urban Land`                       | Startwert der urbanen Fläche                    | Muss zum historischen Startpunkt des Backtestings passen                 |
+| `Urban Expansion Adjustment Time`          | Anpassungsgeschwindigkeit der urbanen Expansion | Beeinflusst, wie schnell sich die Fläche dem gewünschten Niveau annähert |
+| `Soil Protection Factor`                   | Begrenzung durch Bodenschutz                    | Fachlich unsichere Annahme zur Einschränkung der Expansion               |
+| `Spatial Planing Factor`                   | Wirkung der Raumplanung                         | Beeinflusst die räumliche Expansionslogik                                |
+| `Urban Population Density`                 | Übersetzung von Fläche in Bevölkerung           | Zentrale Annahme zur Dichte                                              |
+| `Reference Initial Land Demand per Capita` | Referenzwert der Landnachfrage                  | Beeinflusst die berechnete Flächennachfrage                              |
+| `Housing Preference Share Alpha`           | Gewichtung der Wohnflächennachfrage             | Beeinflusst die AMM-basierte Nachfragekomponente                         |
+| `Long Run Transport Cost per km`           | langfristige Transportkosten                    | Beeinflusst die räumliche Ausdehnungslogik                               |
+
+Die Parameterbereiche werden bewusst begrenzt. Dadurch wird verhindert, dass der Optimierer unrealistische Werte wählt, nur um den Fehler numerisch zu minimieren.
+
+## Technische Umsetzung
+
+Die Kalibrierung wird mit Python durchgeführt. Das Vensim-Modell wird mit `PySD` geladen und wiederholt mit unterschiedlichen Parameterkombinationen ausgeführt. Die Optimierung erfolgt mit `scipy.optimize.differential_evolution`.
+
+Der folgende Code ist als reproduzierbares Kalibrierungsskript zu verstehen. Da die Optimierung je nach Anzahl der Parameter und Iterationen etwas länger dauern kann, sollte dieser Chunk nicht zwingend bei jedem Rendern des Quarto Books ausgeführt werden. Stattdessen können die Resultate einmal erzeugt und danach als CSV- oder Excel-Dateien in die Dokumentation eingelesen werden.
+
+```{python}
+#| label: calibration-imports
+#| eval: false
+
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import pysd
+
+from scipy.optimize import differential_evolution
+```
+
+```{python}
+#| label: calibration-config
+#| eval: false
+
+MODEL_PATH = Path("data/DiamondDuckTheClean_Backtesting.mdl")
+OUT_DIR = Path("assets/backtesting_calibration")
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+YEARS = np.arange(2000, 2026)
+
+TRAIN_YEARS = np.arange(2000, 2019)
+TEST_YEARS = np.arange(2019, 2026)
+
+RETURN_COLUMNS_REAL = [
+    "Urban Land",
+    "Historical Urban Land",
+    "Urban Land Error Percent",
+    "Urban Land Absolute Error Percent",
+]
+
+PARAM_BOUNDS = {
+    "Initial Urban Land": (145000, 155000),
+    "Urban Expansion Adjustment Time": (3, 20),
+    "Soil Protection Factor": (0.1, 0.8),
+    "Spatial Planing Factor": (0.8, 1.3),
+    "Urban Population Density": (1200, 2500),
+    "Reference Initial Land Demand per Capita": (0.0003, 0.0008),
+    "Housing Preference Share Alpha": (0.10, 0.25),
+    "Long Run Transport Cost per km": (0.30, 0.80),
+}
+```
+
+```{python}
+#| label: calibration-load-model
+#| eval: false
+
+model = pysd.read_vensim(str(MODEL_PATH))
+
+# PySD wandelt Vensim-Variablennamen intern in Python-Namen um.
+# Je nach PySD-Version ist model.doc entweder ein DataFrame oder eine Methode.
+model_doc = model.doc if not callable(model.doc) else model.doc()
+
+name_map = dict(zip(model_doc["Real Name"], model_doc["Py Name"]))
+
+def py_name(real_name: str) -> str:
+    return name_map.get(real_name, real_name)
+
+RETURN_COLUMNS_PY = [py_name(name) for name in RETURN_COLUMNS_REAL]
+```
+
+```{python}
+#| label: calibration-functions
+#| eval: false
+
+def convert_params_to_pysd(params_real: dict) -> dict:
+    """Wandelt Vensim-Parameternamen in PySD-kompatible Namen um."""
+    return {
+        py_name(parameter_name): value
+        for parameter_name, value in params_real.items()
+    }
+
+
+def vector_to_params(x: np.ndarray) -> dict:
+    """Wandelt einen Optimierungsvektor in ein Parameter-Dictionary um."""
+    return {
+        parameter_name: value
+        for parameter_name, value in zip(PARAM_BOUNDS.keys(), x)
+    }
+
+
+def run_model(params_real: dict, years=YEARS) -> pd.DataFrame:
+    """Führt das Modell mit einer bestimmten Parameterkombination aus."""
+    params_pysd = convert_params_to_pysd(params_real)
+
+    result = model.run(
+        params=params_pysd,
+        return_columns=RETURN_COLUMNS_PY,
+        return_timestamps=years,
+        reload=True,
+    )
+
+    result = result.reset_index()
+    result = result.rename(columns={result.columns[0]: "Year"})
+
+    rename_back = {
+        py_name(real_name): real_name
+        for real_name in RETURN_COLUMNS_REAL
+    }
+
+    result = result.rename(columns=rename_back)
+
+    return result
+
+
+def calculate_scores(df: pd.DataFrame, years) -> dict:
+    """Berechnet Fehlerkennzahlen für einen bestimmten Zeitraum."""
+    sub = df[df["Year"].isin(years)].copy()
+
+    error = sub["Urban Land Error Percent"].astype(float)
+    abs_error = error.abs()
+
+    return {
+        "RMSE Error Percent": float(np.sqrt(np.mean(error ** 2))),
+        "MAE Error Percent": float(np.mean(abs_error)),
+        "Max Absolute Error Percent": float(np.max(abs_error)),
+        "Mean Error Percent": float(np.mean(error)),
+    }
+```
+
+## Baseline-Lauf
+
+Vor der Optimierung wird zuerst ein Baseline-Lauf durchgeführt. Dieser zeigt, wie gut das Modell mit den aktuell im Modell gespeicherten Parameterwerten funktioniert.
+
+```{python}
+#| label: calibration-baseline
+#| eval: false
+
+baseline_df = run_model(params_real={})
+
+baseline_train_scores = calculate_scores(baseline_df, TRAIN_YEARS)
+baseline_test_scores = calculate_scores(baseline_df, TEST_YEARS)
+
+baseline_scores_df = pd.DataFrame([
+    {
+        "Run": "Baseline",
+        "Period": "Train 2000-2018",
+        **baseline_train_scores,
+    },
+    {
+        "Run": "Baseline",
+        "Period": "Test 2019-2025",
+        **baseline_test_scores,
+    },
+])
+
+baseline_scores_df
+```
+
+## Automatische Kalibrierung
+
+Die Zielfunktion der Optimierung minimiert den Fehler im Trainingszeitraum. In diesem Fall wird der RMSE des prozentualen Fehlers verwendet. Der Testzeitraum wird nicht direkt optimiert, sondern dient danach zur Kontrolle, ob die gefundene Parameterkombination auch ausserhalb des Kalibrierungszeitraums plausibel bleibt.
+
+```{python}
+#| label: calibration-optimization
+#| eval: false
+
+calibration_history = []
+
+def objective(x: np.ndarray) -> float:
+    params_real = vector_to_params(x)
+
+    try:
+        df = run_model(params_real=params_real, years=YEARS)
+        scores = calculate_scores(df, TRAIN_YEARS)
+
+        score = scores["RMSE Error Percent"]
+
+        calibration_history.append({
+            "Score Train RMSE Percent": score,
+            **params_real,
+            **scores,
+        })
+
+        if not np.isfinite(score):
+            return 1e12
+
+        return score
+
+    except Exception:
+        # Ungültige Parameterkombinationen werden stark bestraft.
+        return 1e12
+
+
+result = differential_evolution(
+    objective,
+    bounds=list(PARAM_BOUNDS.values()),
+    maxiter=60,
+    popsize=10,
+    seed=42,
+    polish=True,
+    workers=1,
+)
+```
+
+## Ergebnisse der Kalibrierung
+
+Nach Abschluss der Optimierung werden die beste Parameterkombination, die Fehlerkennzahlen und die Zeitreihe exportiert.
+
+```{python}
+#| label: calibration-results
+#| eval: false
+
+best_params = vector_to_params(result.x)
+
+best_df = run_model(params_real=best_params, years=YEARS)
+
+best_train_scores = calculate_scores(best_df, TRAIN_YEARS)
+best_test_scores = calculate_scores(best_df, TEST_YEARS)
+
+runs_df = (
+    pd.DataFrame(calibration_history)
+    .sort_values("Score Train RMSE Percent")
+    .reset_index(drop=True)
+)
+
+best_params_df = pd.DataFrame({
+    "Parameter": list(best_params.keys()),
+    "Best Value": list(best_params.values()),
+    "Lower Bound": [value[0] for value in PARAM_BOUNDS.values()],
+    "Upper Bound": [value[1] for value in PARAM_BOUNDS.values()],
+})
+
+score_summary_df = pd.DataFrame([
+    {
+        "Run": "Baseline",
+        "Period": "Train 2000-2018",
+        **baseline_train_scores,
+    },
+    {
+        "Run": "Baseline",
+        "Period": "Test 2019-2025",
+        **baseline_test_scores,
+    },
+    {
+        "Run": "Calibrated",
+        "Period": "Train 2000-2018",
+        **best_train_scores,
+    },
+    {
+        "Run": "Calibrated",
+        "Period": "Test 2019-2025",
+        **best_test_scores,
+    },
+])
+
+baseline_export = baseline_df.rename(columns={
+    "Urban Land": "Baseline Urban Land",
+    "Urban Land Error Percent": "Baseline Error Percent",
+    "Urban Land Absolute Error Percent": "Baseline Absolute Error Percent",
+})
+
+calibrated_export = best_df.rename(columns={
+    "Urban Land": "Calibrated Urban Land",
+    "Urban Land Error Percent": "Calibrated Error Percent",
+    "Urban Land Absolute Error Percent": "Calibrated Absolute Error Percent",
+})
+
+comparison_df = calibrated_export.merge(
+    baseline_export[
+        [
+            "Year",
+            "Baseline Urban Land",
+            "Baseline Error Percent",
+            "Baseline Absolute Error Percent",
+        ]
+    ],
+    on="Year",
+    how="left",
+)
+
+comparison_df = comparison_df[
+    [
+        "Year",
+        "Historical Urban Land",
+        "Baseline Urban Land",
+        "Baseline Error Percent",
+        "Calibrated Urban Land",
+        "Calibrated Error Percent",
+        "Calibrated Absolute Error Percent",
+    ]
+]
+```
+
+```{python}
+#| label: calibration-export
+#| eval: false
+
+runs_df.to_csv(OUT_DIR / "all_calibration_runs.csv", index=False)
+best_params_df.to_csv(OUT_DIR / "best_parameters.csv", index=False)
+score_summary_df.to_csv(OUT_DIR / "score_summary.csv", index=False)
+comparison_df.to_csv(OUT_DIR / "calibrated_timeseries.csv", index=False)
+
+with pd.ExcelWriter(OUT_DIR / "calibration_summary.xlsx") as writer:
+    score_summary_df.to_excel(writer, sheet_name="Scores", index=False)
+    best_params_df.to_excel(writer, sheet_name="Best Parameters", index=False)
+    comparison_df.to_excel(writer, sheet_name="Time Series", index=False)
+    runs_df.head(100).to_excel(writer, sheet_name="Top 100 Runs", index=False)
+```
+
+```{python}
+#| label: load-calibration-results
+#| echo: false
+#| message: false
+#| warning: false
+
+from pathlib import Path
+import pandas as pd
+
+OUT_DIR = Path("assets/backtesting_calibration")
+
+score_summary_df = pd.read_csv(OUT_DIR / "score_summary.csv")
+best_params_df = pd.read_csv(OUT_DIR / "best_parameters.csv")
+comparison_df = pd.read_csv(OUT_DIR / "calibrated_timeseries.csv")
+```
+
+Die wichtigsten Resultate der Kalibrierung sind die Fehlerkennzahlen sowie die gefundenen Parameterwerte.
+
+```{python}
+#| label: calibration-show-scores
+#| eval: true
+
+score_summary_df
+```
+
+```{python}
+#| label: calibration-show-params
+#| eval: true
+
+best_params_df
+```
+
+```{python}
+#| label: calibration-show-timeseries
+#| eval: true
+
+comparison_df
+```
+
+## Manuelle Plausibilitätsprüfung
+
+Nach der automatischen Kalibrierung wird die gefundene Parameterkombination manuell geprüft. Diese Prüfung ist wichtig, weil ein niedriger Fehlerwert allein nicht garantiert, dass das Modellverhalten fachlich sinnvoll ist.
+
+Die Plausibilitätsprüfung erfolgt anhand folgender Kriterien:
+
+| Prüfkriterium            | Fragestellung                                                                         | Bewertung |
+| ------------------------ | ------------------------------------------------------------------------------------- | --------- |
+| Parametergrenzen         | Liegen alle optimierten Parameter innerhalb fachlich plausibler Wertebereiche?        | manuell   |
+| Modellverhalten          | Entwickelt sich die urbane Fläche kontinuierlich und ohne unrealistische Sprünge?     | manuell   |
+| Fehlerverlauf            | Ist der Fehler über die Zeit verteilt oder wird nur ein einzelnes Jahr gut getroffen? | manuell   |
+| Testzeitraum             | Bleibt der Fehler auch im nicht direkt optimierten Zeitraum 2019-2025 akzeptabel?     | manuell   |
+| Fachliche Interpretation | Lassen sich die gefundenen Parameter inhaltlich begründen?                            | manuell   |
+| Systemlogik              | Bleiben Ursache-Wirkungs-Beziehungen des Modells erhalten?                            | manuell   |
+
+Die Plausibilitätsprüfung wird bewusst nicht vollständig automatisiert. Sie basiert auf der Interpretation der Modellstruktur, der Parameterwerte und der simulierten Zeitreihen. Insbesondere wird geprüft, ob die Kalibrierung lediglich eine numerische Anpassung erzeugt oder ob das Modell weiterhin eine nachvollziehbare Erklärung für die Entwicklung der urbanen Fläche liefert.
+
+## Interpretation
+
+Die Kalibrierung liefert eine Parameterkombination, welche den Fehler im Backtesting-Zeitraum reduziert. Dadurch kann überprüft werden, ob das Modell grundsätzlich in der Lage ist, die historische Entwicklung der urbanen Fläche approximativ nachzubilden.
+
+Die Resultate sind jedoch nicht als exakte Vorhersage zu interpretieren. Das Modell bleibt eine vereinfachte Abbildung eines komplexen Stadtwachstumssystems. Die Kalibrierung dient deshalb vor allem dazu, grob unplausible Parameterwerte zu vermeiden und die Modellstruktur auf ihre historische Anschlussfähigkeit zu prüfen.
+
+Für die weitere Simulation von 2025 bis 2050 wird die kalibrierte Parameterkombination nur dann übernommen, wenn sie auch die manuelle Plausibilitätsprüfung besteht.

@@ -1,15 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Dokumentation eines systemdynamischen Modells der urbanen Landnutzungsdynamik",
-    "section": "",
-    "text": "Überblick\nDiese Dokumentation beschreibt ein in Vensim entwickeltes Systemdynamikmodell zur urbanen Landnutzungsdynamik.\nDie Dokumentation hat zwei Ziele:\n\nDie Modellstruktur verständlich erklären.\nDie technische Reproduzierbarkeit des Modells sichern.\n\nDer Hauptteil beschreibt die Modelllogik, die Submodelle, die Kalibrierung und die Grenzen des Modells.\nDer technische Anhang enthält die vollständige Vensim-Gleichungsliste.",
-    "crumbs": [
-      "Überblick"
-    ]
-  },
-  {
     "objectID": "sections/01-systemarchitektur.html",
     "href": "sections/01-systemarchitektur.html",
     "title": "2  Dokumentations-Guide: Wie diese Dokumentation zu lesen ist",
@@ -127,26 +117,6 @@
     "text": "2.11 Pflege der Variablendokumentation\nDie fachlichen Zusatzinformationen der Variablensuche stammen aus der Datei:\ndocs/variable_documentation.csv\nDiese Datei ergänzt die automatisch aus dem .mdl-Modell extrahierten Informationen. Dort können zum Beispiel Zweck, Modelllogik, Annahmen, Quellen, Kalibrierung und Interpretation einer Variable ergänzt werden.\nNach einer Änderung an dieser CSV-Datei müssen die Suchdaten neu erzeugt und das Quarto-Book neu gerendert werden:\npython scripts/build_search_assets.py\nquarto render\nErst danach sind die Änderungen in der gerenderten Variablensuche sichtbar.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Dokumentations-Guide: Wie diese Dokumentation zu lesen ist</span>"
-    ]
-  },
-  {
-    "objectID": "sections/02-dokumentation-struktur-beziehung-cld.html",
-    "href": "sections/02-dokumentation-struktur-beziehung-cld.html",
-    "title": "3  Dokumentationsstruktur und Beziehung zum CLD",
-    "section": "",
-    "text": "3.1 Rolle des CLD\nDieses Kapitel beschreibt, wie die spätere Modelldokumentation mit dem Causal Loop Diagramm verbunden wird.\nDas Causal Loop Diagramm dient als qualitative Vorstruktur des Modells. Die Vensim-Implementierung übersetzt diese Struktur in Stocks, Flows, Auxiliaries und Parameter.\nDas CLD zeigt die wichtigsten Rückkopplungen des Modells.\nIn der Dokumentation wird das CLD verwendet, um die Gesamtlogik des Modells zu erklären, bevor die technischen Gleichungen beschrieben werden.",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Dokumentationsstruktur und Beziehung zum CLD</span>"
-    ]
-  },
-  {
-    "objectID": "sections/02-dokumentation-struktur-beziehung-cld.html#beziehung-zur-vensim-struktur",
-    "href": "sections/02-dokumentation-struktur-beziehung-cld.html#beziehung-zur-vensim-struktur",
-    "title": "3  Dokumentationsstruktur und Beziehung zum CLD",
-    "section": "3.2 Beziehung zur Vensim-Struktur",
-    "text": "3.2 Beziehung zur Vensim-Struktur\nDie spätere Dokumentation soll für jedes zentrale Submodell zeigen:\n\nWelche Logik im CLD dargestellt ist.\nWie diese Logik in Vensim umgesetzt wurde.\nWelche Gleichungen und Parameter dafür verwendet werden.\nWelche Annahmen und Grenzen damit verbunden sind.",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Dokumentationsstruktur und Beziehung zum CLD</span>"
     ]
   },
   {
@@ -302,61 +272,71 @@
   {
     "objectID": "sections/05-gesamtstruktur.html",
     "href": "sections/05-gesamtstruktur.html",
-    "title": "5  Gesamtstruktur des Modells",
+    "title": "5  Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot",
     "section": "",
-    "text": "5.1 Zentrale Modelllogik\nDieses Kapitel beschreibt die Gesamtstruktur des Vensim-Modells.\nDas Modell wird in zwei zentrale Modellbereiche und ein eingebettetes Untermodell gegliedert:\nDiese Gliederung trennt die physische Landumwandlung von der ökonomischen Erklärung der urbanen Landnachfrage.\nDie zentrale Modelllogik lautet:\nDer AMM-Kern erzeugt eine ökonomisch begründete gewünschte urbane Fläche. Die Conversion-Struktur übersetzt diese gewünschte Fläche in eine physische Veränderung der Land Stocks.",
+    "text": "5.1 Modellzusammenfassung\nDiese Seite erzeugt eine grafische Gesamtübersicht des Vensim-Modells direkt aus der .mdl-Datei. Dadurch wird die Übersicht bei jedem Rendern automatisch aktualisiert, sobald sich das Modell verändert.\nDie Darstellung besteht aus zwei Ebenen:\nDie Macro_Ebene wird bewusst hervorgehoben, weil sie die wichtigste Orientierungsebene des Modells darstellt. Die Views 01 bis 04 sind als dynamisierende Komponenten des AMM-Modells markiert. Die AMM-relevante Kernlogik ist separat eingefärbt und verwendet eine eigene Knotenform.\nimport pandas as pd\nfrom IPython.display import Markdown, SVG, display\n\nsummary = pd.read_csv(OUT_DIR / \"model_summary.csv\")\nsummary_t = summary.drop(columns=[\"model_file\"], errors=\"ignore\").T.reset_index()\nsummary_t.columns = [\"Kennzahl\", \"Wert\"]\n\nmetric_names = {\n    \"variables\": \"Variablen\",\n    \"edges\": \"Abhängigkeiten\",\n    \"views\": \"Views\",\n    \"stocks\": \"Stocks\",\n    \"flows\": \"Flows\",\n    \"lookups\": \"Lookups\",\n    \"parameters\": \"Parameter\",\n}\nsummary_t[\"Kennzahl\"] = summary_t[\"Kennzahl\"].replace(metric_names)\ndisplay(Markdown(summary_t.to_markdown(index=False)))\n\n\n\n\nKennzahl\nWert\n\n\n\n\nVariablen\n140\n\n\nAbhängigkeiten\n195\n\n\nViews\n12\n\n\nStocks\n7\n\n\nFlows\n6\n\n\nLookups\n1\n\n\nParameter\n47",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot</span>"
     ]
   },
   {
-    "objectID": "sections/05-gesamtstruktur.html#zentrale-modelllogik",
-    "href": "sections/05-gesamtstruktur.html#zentrale-modelllogik",
-    "title": "5  Gesamtstruktur des Modells",
-    "section": "",
-    "text": "AMM-Kern\n→ Desired Urban Land\n→ Urban Land Gap\n→ Land Conversion Rate\n→ Urban Land",
+    "objectID": "sections/05-gesamtstruktur.html#gerichtete-view-abhängigkeiten",
+    "href": "sections/05-gesamtstruktur.html#gerichtete-view-abhängigkeiten",
+    "title": "5  Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot",
+    "section": "5.2 Gerichtete View-Abhängigkeiten",
+    "text": "5.2 Gerichtete View-Abhängigkeiten\nDiese Grafik zeigt, wie die einzelnen Vensim-Views voneinander abhängen. Ein Pfeil bedeutet: Mindestens eine Variable aus der Quell-View wird in einer Gleichung der Ziel-View verwendet. Die Zahl an einer Kante zeigt die Anzahl solcher view-übergreifenden Abhängigkeiten, sofern sie hoch genug ist.\nDie Farb- und Formlogik ist in der Legende der Grafik enthalten:\n\nMacro_Ebene: zentrale Modellübersicht, bewusst grösser dargestellt.\nAMM-Dynamisierung: Views 01 bis 04, also Population, Transport, Einkommen und urbane Miete/Landknappheit.\nAMM-Kernlogik: Budget-, Nutzen-, Agrar-/Knappheits- und Landkonversionslogik.\n\n\ndisplay(SVG(filename=str(OUT_DIR / \"model_view_dependency_map.svg\")))",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot</span>"
     ]
   },
   {
-    "objectID": "sections/05-gesamtstruktur.html#submodell-a-land-stocks-und-land-conversion",
-    "href": "sections/05-gesamtstruktur.html#submodell-a-land-stocks-und-land-conversion",
-    "title": "5  Gesamtstruktur des Modells",
-    "section": "5.2 Submodell A: Land Stocks und Land Conversion",
-    "text": "5.2 Submodell A: Land Stocks und Land Conversion\nDieses Submodell beschreibt die physische Seite des Modells.\nEs enthält insbesondere:\n\nUrban Land\nAgricultural Land\nUrban Land Gap\nLand Conversion Rate\n\nDie zentrale Aufgabe dieses Submodells ist die Umwandlung von Agricultural Land in Urban Land.",
+    "objectID": "sections/05-gesamtstruktur.html#gesamtübersicht-nach-modell-views",
+    "href": "sections/05-gesamtstruktur.html#gesamtübersicht-nach-modell-views",
+    "title": "5  Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot",
+    "section": "5.3 Gesamtübersicht nach Modell-Views",
+    "text": "5.3 Gesamtübersicht nach Modell-Views\nDiese Grafik zeigt die Variablen des gesamten Modells gruppiert nach ihrer primären Vensim-View. Die Pfeile sind gerichtet und zeigen von der Input-Variable zur berechneten Zielvariable.\nDie Macro-Ebene wird als grosser oberer Bereich angezeigt. Dadurch ist sofort sichtbar, welche aggregierten Variablen auf der obersten Ebene des Modells liegen. Die Views 01 bis 04 sind als AMM-Dynamisierung markiert, während die AMM-relevante Kernlogik farblich und über eine eigene Knotenform hervorgehoben wird.\n\ndisplay(SVG(filename=str(OUT_DIR / \"model_overview_by_view.svg\")))",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot</span>"
     ]
   },
   {
-    "objectID": "sections/05-gesamtstruktur.html#submodell-b-alonso-muth-mills-kern",
-    "href": "sections/05-gesamtstruktur.html#submodell-b-alonso-muth-mills-kern",
-    "title": "5  Gesamtstruktur des Modells",
-    "section": "5.3 Submodell B: Alonso-Muth-Mills-Kern",
-    "text": "5.3 Submodell B: Alonso-Muth-Mills-Kern\nDieses Submodell beschreibt die ökonomische Seite des Modells.\nEs enthält insbesondere:\n\nHaushaltsbudget\nBid-Rent-Logik\nTransportkosteneffekt\nFringe Condition\nUrban Fringe Radius\nDesired Urban Land\n\nDer AMM-Kern erklärt, warum sich eine bestimmte gewünschte urbane Fläche ergibt.",
+    "objectID": "sections/05-gesamtstruktur.html#übersicht-pro-view",
+    "href": "sections/05-gesamtstruktur.html#übersicht-pro-view",
+    "title": "5  Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot",
+    "section": "5.4 Übersicht pro View",
+    "text": "5.4 Übersicht pro View\nDie folgende Tabelle fasst zusammen, wie viele Variablen, Stocks, Flows, Parameter und weitere Elemente pro View enthalten sind. Zusätzlich werden eingehende und ausgehende Abhängigkeiten zwischen Views gezählt.\n\nviews = pd.read_csv(OUT_DIR / \"model_views.csv\")\ncols = [\n    \"view\", \"variables\", \"stocks\", \"flows\", \"parameters\", \"lookups\",\n    \"auxiliaries\", \"guards\", \"kpis\",\n    \"incoming_cross_view_edges\", \"outgoing_cross_view_edges\",\n]\nviews = views[cols]\nviews = views.rename(columns={\n    \"view\": \"View\",\n    \"variables\": \"Variablen\",\n    \"stocks\": \"Stocks\",\n    \"flows\": \"Flows\",\n    \"parameters\": \"Parameter\",\n    \"lookups\": \"Lookups\",\n    \"auxiliaries\": \"Auxiliaries\",\n    \"guards\": \"Guards\",\n    \"kpis\": \"KPIs\",\n    \"incoming_cross_view_edges\": \"Eingehende View-Kanten\",\n    \"outgoing_cross_view_edges\": \"Ausgehende View-Kanten\",\n})\ndisplay(Markdown(views.to_markdown(index=False)))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nView\nVariablen\nStocks\nFlows\nParameter\nLookups\nAuxiliaries\nGuards\nKPIs\nEingehende View-Kanten\nAusgehende View-Kanten\n\n\n\n\n00_Legend\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n\n\n01_Population_Household\n10\n1\n1\n4\n1\n3\n0\n0\n0\n11\n\n\n02_Transport_and_Commuting\n14\n1\n1\n7\n0\n5\n0\n0\n1\n4\n\n\n03_Income_and_Productivity\n12\n1\n1\n5\n0\n2\n2\n1\n4\n6\n\n\n04_Urban_Rent_and_Land_Tightness\n16\n2\n1\n3\n0\n7\n3\n0\n10\n17\n\n\n05_AMM_Budget_and_Housing_Demand\n18\n1\n0\n3\n0\n10\n2\n2\n19\n9\n\n\n07_Cobb_Douglas_Utility\n3\n0\n0\n0\n0\n1\n1\n1\n4\n0\n\n\n08_Agriculture_and_Scarcity\n18\n1\n1\n5\n0\n6\n4\n1\n5\n3\n\n\n09_Urban_Land_Conversion_Logic\n9\n0\n0\n1\n0\n4\n4\n0\n9\n1\n\n\n10_Soil_Protection_and_Agricultural_Pressure\n7\n0\n0\n3\n0\n2\n2\n0\n2\n0\n\n\n11_Innovation_and_City_Size\n24\n0\n0\n13\n0\n8\n0\n3\n1\n2\n\n\nMacro_Ebene\n5\n0\n1\n3\n0\n1\n0\n0\n2\n4\n\n\nUnassigned\n4\n0\n0\n0\n0\n0\n0\n0\n0\n0",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot</span>"
     ]
   },
   {
-    "objectID": "sections/05-gesamtstruktur.html#cobb-douglas-untermodell-im-amm-kern",
-    "href": "sections/05-gesamtstruktur.html#cobb-douglas-untermodell-im-amm-kern",
-    "title": "5  Gesamtstruktur des Modells",
-    "section": "5.4 Cobb-Douglas-Untermodell im AMM-Kern",
-    "text": "5.4 Cobb-Douglas-Untermodell im AMM-Kern\nDas Cobb-Douglas-Untermodell ist kein gleichrangiges Hauptsubmodell.\nEs ist ein eingebettetes Untermodell innerhalb des AMM-Kerns. Es liefert die Grössen, mit denen Haushalte zwischen Landkonsum und anderem Konsum aufgeteilt werden.\nIm Modell betrifft dies insbesondere:\n\nLand Demand per Household q\nOther Consumption per Household z",
+    "objectID": "sections/05-gesamtstruktur.html#strukturell-wichtige-variablen",
+    "href": "sections/05-gesamtstruktur.html#strukturell-wichtige-variablen",
+    "title": "5  Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot",
+    "section": "5.5 Strukturell wichtige Variablen",
+    "text": "5.5 Strukturell wichtige Variablen\nDie folgende Tabelle zeigt Variablen mit dem höchsten gesamten Abhängigkeitsgrad. Ein hoher Wert bedeutet, dass eine Variable entweder von vielen anderen Variablen abhängt oder selbst in vielen Gleichungen verwendet wird. Solche Variablen sind oft strukturell wichtig für das Modellverhalten.\n\nvariables = pd.read_csv(OUT_DIR / \"model_variables.csv\")\nhubs = (\n    variables\n    .sort_values(\"degree\", ascending=False)\n    .loc[:, [\"name\", \"type\", \"units\", \"primary_view\", \"inputs\", \"outputs\", \"degree\"]]\n    .head(25)\n    .rename(columns={\n        \"name\": \"Variable\",\n        \"type\": \"Typ\",\n        \"units\": \"Einheit\",\n        \"primary_view\": \"Primäre View\",\n        \"inputs\": \"Inputs\",\n        \"outputs\": \"Outputs\",\n        \"degree\": \"Grad\",\n    })\n)\ndisplay(Markdown(hubs.to_markdown(index=False)))\n\n\n\n\n\n\n\n\n\n\n\n\n\nVariable\nTyp\nEinheit\nPrimäre View\nInputs\nOutputs\nGrad\n\n\n\n\nUrban Land\nStock\nkm2\n04_Urban_Rent_and_Land_Tightness\n2\n7\n9\n\n\nLand Demand per Household q\nDecision / Guard\nkm2/Household\n04_Urban_Rent_and_Land_Tightness\n2\n7\n9\n\n\nMean Household Size\nStock\nPerson/Household\n01_Population_Household\n2\n6\n8\n\n\nUrban Fringe Radius\nDecision / Guard\nkm\n05_AMM_Budget_and_Housing_Demand\n5\n2\n7\n\n\nOther Consumption Per Household z\nAuxiliary\nEUR/Household\n04_Urban_Rent_and_Land_Tightness\n2\n5\n7\n\n\nAgricultural Rent\nStock\nEUR/km2\n05_AMM_Budget_and_Housing_Demand\n2\n5\n7\n\n\nNumber of Households\nAuxiliary\nHousehold\n01_Population_Household\n2\n5\n7\n\n\nUrban Population Total\nKPI / Output\nDmnl\n11_Innovation_and_City_Size\n2\n4\n6\n\n\nUrban Rent at Fringe\nAuxiliary\nEUR/km2\n05_AMM_Budget_and_Housing_Demand\n5\n1\n6\n\n\nAggricultural Land\nStock\nkm2\n08_Agriculture_and_Scarcity\n2\n4\n6\n\n\nMean Household Income\nAuxiliary\nEUR/Household\n03_Income_and_Productivity\n2\n4\n6\n\n\nTransport Cost per km per Household\nAuxiliary\nEUR/km/Household\n02_Transport_and_Commuting\n2\n4\n6\n\n\nTotal Urban Innovation Potential\nKPI / Output\nDmnl\n11_Innovation_and_City_Size\n4\n2\n6\n\n\nReference Initial Land Demand per Household\nAuxiliary\nkm2/Household\n04_Urban_Rent_and_Land_Tightness\n2\n3\n5\n\n\nMean Urban Rent\nStock\nEUR/km2\n04_Urban_Rent_and_Land_Tightness\n2\n3\n5\n\n\nUrban Rent at Current Fringe\nAuxiliary\nEUR/km2\n04_Urban_Rent_and_Land_Tightness\n5\n0\n5\n\n\nNet Income Growth Rate\nDecision / Guard\nDmnl/Year\n03_Income_and_Productivity\n4\n1\n5\n\n\nTransport Cost per km Change\nFlow\n(EUR/km)/Year\n02_Transport_and_Commuting\n3\n1\n4\n\n\nEquivalent Number of Large Cities\nAuxiliary\nDmnl\n11_Innovation_and_City_Size\n3\n1\n4\n\n\nDesired Urban Land Total\nKPI / Output\nkm2\n05_AMM_Budget_and_Housing_Demand\n3\n1\n4\n\n\nAgricultural Scarcity Index\nDecision / Guard\nDmnl\n08_Agriculture_and_Scarcity\n2\n2\n4\n\n\nPopulational Need of Kcal in Km2\nDecision / Guard\nkm2\n08_Agriculture_and_Scarcity\n2\n2\n4\n\n\nYield\nAuxiliary\nkcal/km2/Year\n08_Agriculture_and_Scarcity\n2\n2\n4\n\n\nAgricultural Rent Change\nFlow\n(EUR/km2)/Year\n08_Agriculture_and_Scarcity\n3\n1\n4\n\n\nPopulation kcal demand\nAuxiliary\nkcal/Year\n08_Agriculture_and_Scarcity\n2\n2\n4",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot</span>"
     ]
   },
   {
-    "objectID": "sections/05-gesamtstruktur.html#hilfsmechanismen",
-    "href": "sections/05-gesamtstruktur.html#hilfsmechanismen",
-    "title": "5  Gesamtstruktur des Modells",
-    "section": "5.5 Hilfsmechanismen",
-    "text": "5.5 Hilfsmechanismen\nWeitere Variablen wie Mean Urban Rent, Land Tightness Index oder Adjustment Times werden nicht als eigenständige Submodelle behandelt.\nSie sind Hilfsmechanismen innerhalb der AMM-Logik oder der Kalibrierung.\nIhre Funktion wird dort dokumentiert, wo sie in die Modelllogik eingreifen.",
+    "objectID": "sections/05-gesamtstruktur.html#stocks-und-flows",
+    "href": "sections/05-gesamtstruktur.html#stocks-und-flows",
+    "title": "5  Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot",
+    "section": "5.6 Stocks und Flows",
+    "text": "5.6 Stocks und Flows\nStocks und Flows sind für die Dynamik des Modells besonders wichtig. Diese Tabelle zeigt sie mit Einheit, primärer View und Gleichung.\n\nstocks_flows = (\n    variables[variables[\"type\"].isin([\"Stock\", \"Flow\"])]\n    .sort_values([\"type\", \"primary_view\", \"name\"])\n    .loc[:, [\"name\", \"type\", \"units\", \"primary_view\", \"equation\"]]\n    .rename(columns={\n        \"name\": \"Variable\",\n        \"type\": \"Typ\",\n        \"units\": \"Einheit\",\n        \"primary_view\": \"Primäre View\",\n        \"equation\": \"Gleichung\",\n    })\n)\ndisplay(Markdown(stocks_flows.to_markdown(index=False)))\n\n\n\n\n\n\n\n\n\n\n\nVariable\nTyp\nEinheit\nPrimäre View\nGleichung\n\n\n\n\nMean Household Size Change\nFlow\nPerson/Household/Year\n01_Population_Household\n(Desired Mean Household Size - Mean Household Size) / Household Size Adjustment Time\n\n\nTransport Cost per km Change\nFlow\n(EUR/km)/Year\n02_Transport_and_Commuting\n(Desired Transport Cost per km - Transport Cost per km) / Transport Cost Adjustment Time\n\n\nIncome per Capita Growth\nFlow\n(EUR/Person)/Year\n03_Income_and_Productivity\nIncome per Capita * Net Income Growth Rate\n\n\nMean Urban Rent Change\nFlow\n(EUR/km2)/Year\n04_Urban_Rent_and_Land_Tightness\n(Desired Mean Urban Rent - Mean Urban Rent) / Urban Rent Adjustment Time\n\n\nAgricultural Rent Change\nFlow\n(EUR/km2)/Year\n08_Agriculture_and_Scarcity\n(Desired Agricultural Rent - Agricultural Rent) / Agricultural Rent Adjustment Time\n\n\nLand Conversion Rate\nFlow\nkm2/Year\nMacro_Ebene\nMIN( Land Conversion Pressure Factors, Max Feasible Conversion )\n\n\nMean Household Size\nStock\nPerson/Household\n01_Population_Household\nINTEG (Mean Household Size Change, Initial Mean Household Size)\n\n\nTransport Cost per km\nStock\nEUR/km\n02_Transport_and_Commuting\nINTEG (Transport Cost per km Change, Initial Transport Cost per km)\n\n\nIncome per Capita\nStock\nEUR/Person\n03_Income_and_Productivity\nINTEG (Income per Capita Growth, Initial Income per Capita)\n\n\nMean Urban Rent\nStock\nEUR/km2\n04_Urban_Rent_and_Land_Tightness\nINTEG (Mean Urban Rent Change, Initial Mean Urban Rent)\n\n\nUrban Land\nStock\nkm2\n04_Urban_Rent_and_Land_Tightness\nINTEG (Land Conversion Rate, Initial Urban Land)\n\n\nAgricultural Rent\nStock\nEUR/km2\n05_AMM_Budget_and_Housing_Demand\nINTEG (Agricultural Rent Change, Initial Agricultural Rent)\n\n\nAggricultural Land\nStock\nkm2\n08_Agriculture_and_Scarcity\nINTEG (-Land Conversion Rate, Initial Aggricultural Land)",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gesamtstruktur des Modells</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot</span>"
+    ]
+  },
+  {
+    "objectID": "sections/05-gesamtstruktur.html#nicht-zugewiesene-variablen",
+    "href": "sections/05-gesamtstruktur.html#nicht-zugewiesene-variablen",
+    "title": "5  Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot",
+    "section": "5.7 Nicht zugewiesene Variablen",
+    "text": "5.7 Nicht zugewiesene Variablen\nDiese Variablen sind in den Gleichungen der .mdl-Datei vorhanden, konnten aber keiner sichtbaren Vensim-Sketch-View zugeordnet werden. Das ist hilfreich, um aufzuräumen oder fehlende View-Zuordnungen zu finden.\n\nunassigned = (\n    variables[variables[\"primary_view\"] == \"Unassigned\"]\n    .sort_values(\"name\")\n    .loc[:, [\"name\", \"type\", \"units\", \"equation\"]]\n    .rename(columns={\n        \"name\": \"Variable\",\n        \"type\": \"Typ\",\n        \"units\": \"Einheit\",\n        \"equation\": \"Gleichung\",\n    })\n)\nif len(unassigned) == 0:\n    display(Markdown(\"Keine nicht zugewiesenen Variablen gefunden.\"))\nelse:\n    display(Markdown(unassigned.to_markdown(index=False)))\n\n\n\n\nVariable\nTyp\nEinheit\nGleichung\n\n\n\n\nFINAL TIME\nControl\nYear\n2050\n\n\nINITIAL TIME\nControl\nYear\n2025\n\n\nSAVEPER\nControl\nYear [0,?]\nTIME STEP\n\n\nTIME STEP\nControl\nYear [0,?]\n1",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Diese Funktion macht die Seite stabil, egal ob Quarto aus dem Projektroot</span>"
     ]
   },
   {
@@ -502,31 +482,11 @@
   {
     "objectID": "sections/09-parameter-startwerte-quellen.html",
     "href": "sections/09-parameter-startwerte-quellen.html",
-    "title": "12  Parameter, Startwerte und Quellen",
+    "title": "12  Einordnung",
     "section": "",
-    "text": "12.1 Ziel\nDieses Kapitel dokumentiert die Parameter, Startwerte und Quellen des Modells.\nDie Parameterdokumentation soll nachvollziehbar machen, welche Werte im Modell verwendet werden und warum diese Werte plausibel sind.",
+    "text": "12.1 Quellenverzeichnis\nDiese Tabelle dokumentiert die im Modell als constant erkannten Grössen. Fachlich werden diese Grössen als Parameter verstanden, da sie Startwerte, Modellannahmen, Kalibrierungen, Szenarien oder technische Umrechnungsfaktoren festlegen.\nDie Spalte Status unterscheidet:\nsource_rows = []\n\nfor sid, item in sources.items():\n    if item[\"url\"]:\n        source_rows.append(\n            f'''\n            &lt;li id=\"src-{sid}\"&gt;\n                &lt;strong&gt;{sid}&lt;/strong&gt;: \n                &lt;a href=\"{item[\"url\"]}\" target=\"_blank\" rel=\"noopener noreferrer\"&gt;{item[\"title\"]}&lt;/a&gt;&lt;br&gt;\n                &lt;span&gt;{item[\"note\"]}&lt;/span&gt;\n            &lt;/li&gt;\n            '''\n        )\n    else:\n        source_rows.append(\n            f'''\n            &lt;li id=\"src-{sid}\"&gt;\n                &lt;strong&gt;{sid}&lt;/strong&gt;: {item[\"title\"]}&lt;br&gt;\n                &lt;span&gt;{item[\"note\"]}&lt;/span&gt;\n            &lt;/li&gt;\n            '''\n        )\n\ndisplay(HTML(\"&lt;ol&gt;\" + \"\\n\".join(source_rows) + \"&lt;/ol&gt;\"))\n\n\n            \n                M0: Eigene Modellannahme / Kalibrierung\n                Wert ist nicht direkt empirisch belegt, sondern wird als Szenario-, Kalibrierungs- oder technischer Modellparameter verwendet.\n            \n            \n\n            \n                S1: \n                Eurostat – Farms and farmland in the European Union\n                EU farms managed 156.2 million hectares utilised agricultural area in 2023.\n            \n            \n\n            \n                S2: \n                Eurostat – Land cover statistics\n                Artificial land accounted for 4.4% of the EU's total area in 2022.\n            \n            \n\n            \n                S3: \n                EU-OECD definition of a functional urban area\n                Urban centres are identified using contiguous grid cells with at least 1,500 residents per km2 and at least 50,000 inhabitants.\n            \n            \n\n            \n                S4: \n                Bettencourt et al. 2007 – Growth, innovation, scaling, and the pace of life in cities\n                Urban scaling theory; socio-economic and innovation-related indicators often scale superlinearly with population.\n            \n            \n\n            \n                S5: \n                OECD – Urban population by city size\n                OECD city-size classes: small 50k–200k, medium 200k–500k, metropolitan 500k–1.5m, large metropolitan above 1.5m.\n            \n            \n\n            \n                S6: \n                EIB/JRC – Europe and its Urban Development\n                European city population shares: below 250k about 28%, 1m–5m about 26%, above 5m about 14%.\n            \n            \n\n            \n                S7: \n                Eurostat – Housing in Europe 2024\n                Average household size in the EU was 2.3 persons per household in 2023.\n            \n            \n\n            \n                S8: \n                Eurostat – GDP per capita, current prices\n                GDP per capita at market prices, current prices, euro per capita.\n            \n            \n\n            \n                S9: \n                European Commission – Spring 2025 Economic Forecast\n                EU real GDP growth forecast around 1.1% for 2025.\n            \n            \n\n            \n                S10: \n                Eurostat – EU employment rate 2024\n                In 2024, 197.6 million people aged 20–64 were employed in the EU.\n            \n            \n\n            \n                S11: \n                Eurostat – Main place of work and commuting time\n                Average commuting time in the EU was 25 minutes in 2019; 4.3% of employed people did not need to travel to work.\n            \n            \n\n            \n                S12: \n                SD Worx – European commuting distance survey\n                Reported average commuting distance of 28.56 km per day in surveyed European countries; one-way approximation is about 14.3 km.\n            \n            \n\n            \n                S13: \n                European Commission / CE Delft – Handbook on external costs of transport\n                Methodological source for transport cost categories and external cost assessment. Does not directly prove 0.47 EUR/km as private cost.\n            \n            \n\n            \n                S14: \n                Eurostat – Agricultural land prices and rents\n                Average EU rental price of arable land and permanent grassland was about 295 EUR/ha in 2024.\n            \n            \n\n            \n                S15: \n                FAO – Food balance sheets\n                Food balance sheets provide dietary energy supply in kcal per capita per day.\n            \n            \n\n            \n                S16: \n                Eurostat – Passenger mobility statistics\n                Commuting is one of the main reasons for daily travel; passenger mobility context for distance and modal assumptions.\n            \n            \n\n            \n                S17: \n                Eurostat – Housing in Europe\n                Context source for housing costs and household living conditions; the exact model value 805 EUR/month should be treated as an approximation.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Parameter, Startwerte und Quellen</span>"
-    ]
-  },
-  {
-    "objectID": "sections/09-parameter-startwerte-quellen.html#dokumentationsschema",
-    "href": "sections/09-parameter-startwerte-quellen.html#dokumentationsschema",
-    "title": "12  Parameter, Startwerte und Quellen",
-    "section": "12.2 Dokumentationsschema",
-    "text": "12.2 Dokumentationsschema\nFür jeden Parameter werden später dokumentiert:\n\nName\nEinheit\nWert\nQuelle\nBegründung\nRolle im Modell\nUnsicherheit",
-    "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Parameter, Startwerte und Quellen</span>"
-    ]
-  },
-  {
-    "objectID": "sections/09-parameter-startwerte-quellen.html#platzhalter-für-parametertabelle",
-    "href": "sections/09-parameter-startwerte-quellen.html#platzhalter-für-parametertabelle",
-    "title": "12  Parameter, Startwerte und Quellen",
-    "section": "12.3 Platzhalter für Parametertabelle",
-    "text": "12.3 Platzhalter für Parametertabelle\n\n\n\nParameter\nEinheit\nWert\nQuelle\nBegründung\n\n\n\n\nInitial Mean Urban Rent\nTBD\nTBD\nTBD\nTBD\n\n\nUrban Rent Adjustment Time\nYear\nTBD\nTBD\nTBD\n\n\nUrban Rent Sensitivity to Land Tightness\ndmnl\nTBD\nTBD\nTBD\n\n\nMinimum Land Demand per Household\nkm2/Household\nTBD\nTBD\nTBD\n\n\nMaximum Land Demand per Household\nkm2/Household\nTBD\nTBD\nTBD",
-    "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Parameter, Startwerte und Quellen</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Einordnung</span>"
     ]
   },
   {
@@ -534,27 +494,77 @@
     "href": "sections/10-kalibrierung-plausibilitaet.html",
     "title": "13  Kalibrierung und Plausibilitätsprüfung",
     "section": "",
-    "text": "13.1 Ziel der Kalibrierung\nDieses Kapitel beschreibt die Kalibrierung und Plausibilitätsprüfung des Modells.\nDie Kalibrierung soll sicherstellen, dass das Modell im Basislauf plausible Werte erzeugt.\nDas Ziel ist keine perfekte historische Reproduktion, sondern eine glaubwürdige Ausgangsdynamik.",
+    "text": "13.1 Grundidee der Kalibrierung\nZiel der Kalibrierung ist es, ausgewählte Modellparameter so anzupassen, dass das Modell die historische Entwicklung der urbanen Fläche im Backtesting-Zeitraum möglichst gut reproduziert. Das Modell wird dafür für den Zeitraum 2000 bis 2025 ausgeführt und mit historischen Vergleichswerten verglichen.\nDie Kalibrierung ersetzt dabei keine fachliche Modellprüfung. Sie dient lediglich dazu, plausible Parameterkombinationen systematisch zu testen und den numerischen Fehler zwischen Modellresultat und Referenzdaten zu reduzieren. Die anschliessende Plausibilitätsprüfung wird bewusst manuell durchgeführt, da ein rein numerisch optimiertes Modell nicht automatisch fachlich sinnvoll ist.\nFür die Kalibrierung wird ein Python-Skript verwendet, welches das Vensim-Modell automatisiert ausführt. Dabei werden ausgewählte Parameter innerhalb vorher definierter Grenzen variiert. Nach jedem Modelllauf wird der Fehler zwischen der simulierten urbanen Fläche und der historischen urbanen Fläche berechnet.\nAls zentrale Fehlergrösse wird der prozentuale Fehler der urbanen Fläche verwendet:\nZusätzlich wird der absolute prozentuale Fehler betrachtet, damit positive und negative Abweichungen sich nicht gegenseitig aufheben.\nWichtig ist, dass nicht die historischen Vergleichswerte optimiert werden. Die historischen Werte dienen ausschliesslich als Referenz. Optimiert werden nur ausgewählte Modellparameter, deren Werte fachlich unsicher sind oder im Modell als Kalibrierparameter verstanden werden können.",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
     ]
   },
   {
-    "objectID": "sections/10-kalibrierung-plausibilitaet.html#plausibilitätsprüfungen",
-    "href": "sections/10-kalibrierung-plausibilitaet.html#plausibilitätsprüfungen",
+    "objectID": "sections/10-kalibrierung-plausibilitaet.html#auswahl-der-kalibrierparameter",
+    "href": "sections/10-kalibrierung-plausibilitaet.html#auswahl-der-kalibrierparameter",
     "title": "13  Kalibrierung und Plausibilitätsprüfung",
-    "section": "13.2 Plausibilitätsprüfungen",
-    "text": "13.2 Plausibilitätsprüfungen\nGeprüft werden später insbesondere:\n\nStartwerte\nEinheitenkonsistenz\nGrössenordnungen\nVerhalten im Basislauf\nVerhalten bei Extremwerten\nVerhalten bei Parameteränderungen",
+    "section": "13.2 Auswahl der Kalibrierparameter",
+    "text": "13.2 Auswahl der Kalibrierparameter\nFür die automatische Kalibrierung werden nur Parameter verwendet, die das Verhalten des Modells beeinflussen, aber nicht selbst Ergebnis- oder Vergleichsgrössen sind. Dazu gehören insbesondere Parameter, welche die Geschwindigkeit der Flächenausdehnung, die Wirkung von Schutz- und Planungsfaktoren oder Annahmen zur Landnachfrage beeinflussen.\n\n\n\n\n\n\n\n\nParameter\nRolle im Modell\nBegründung für Kalibrierung\n\n\n\n\nInitial Urban Land\nStartwert der urbanen Fläche\nMuss zum historischen Startpunkt des Backtestings passen\n\n\nUrban Expansion Adjustment Time\nAnpassungsgeschwindigkeit der urbanen Expansion\nBeeinflusst, wie schnell sich die Fläche dem gewünschten Niveau annähert\n\n\nSoil Protection Factor\nBegrenzung durch Bodenschutz\nFachlich unsichere Annahme zur Einschränkung der Expansion\n\n\nSpatial Planing Factor\nWirkung der Raumplanung\nBeeinflusst die räumliche Expansionslogik\n\n\nUrban Population Density\nÜbersetzung von Fläche in Bevölkerung\nZentrale Annahme zur Dichte\n\n\nReference Initial Land Demand per Capita\nReferenzwert der Landnachfrage\nBeeinflusst die berechnete Flächennachfrage\n\n\nHousing Preference Share Alpha\nGewichtung der Wohnflächennachfrage\nBeeinflusst die AMM-basierte Nachfragekomponente\n\n\nLong Run Transport Cost per km\nlangfristige Transportkosten\nBeeinflusst die räumliche Ausdehnungslogik\n\n\n\nDie Parameterbereiche werden bewusst begrenzt. Dadurch wird verhindert, dass der Optimierer unrealistische Werte wählt, nur um den Fehler numerisch zu minimieren.",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
     ]
   },
   {
-    "objectID": "sections/10-kalibrierung-plausibilitaet.html#dokumentationsstand",
-    "href": "sections/10-kalibrierung-plausibilitaet.html#dokumentationsstand",
+    "objectID": "sections/10-kalibrierung-plausibilitaet.html#technische-umsetzung",
+    "href": "sections/10-kalibrierung-plausibilitaet.html#technische-umsetzung",
     "title": "13  Kalibrierung und Plausibilitätsprüfung",
-    "section": "13.3 Dokumentationsstand",
-    "text": "13.3 Dokumentationsstand\nDie Kalibrierung wird nach Abschluss des finalen Modells ergänzt.",
+    "section": "13.3 Technische Umsetzung",
+    "text": "13.3 Technische Umsetzung\nDie Kalibrierung wird mit Python durchgeführt. Das Vensim-Modell wird mit PySD geladen und wiederholt mit unterschiedlichen Parameterkombinationen ausgeführt. Die Optimierung erfolgt mit scipy.optimize.differential_evolution.\nDer folgende Code ist als reproduzierbares Kalibrierungsskript zu verstehen. Da die Optimierung je nach Anzahl der Parameter und Iterationen etwas länger dauern kann, sollte dieser Chunk nicht zwingend bei jedem Rendern des Quarto Books ausgeführt werden. Stattdessen können die Resultate einmal erzeugt und danach als CSV- oder Excel-Dateien in die Dokumentation eingelesen werden.\n\nfrom pathlib import Path\n\nimport numpy as np\nimport pandas as pd\nimport pysd\n\nfrom scipy.optimize import differential_evolution\n\n\nMODEL_PATH = Path(\"data/DiamondDuckTheClean_Backtesting.mdl\")\nOUT_DIR = Path(\"assets/backtesting_calibration\")\nOUT_DIR.mkdir(parents=True, exist_ok=True)\n\nYEARS = np.arange(2000, 2026)\n\nTRAIN_YEARS = np.arange(2000, 2019)\nTEST_YEARS = np.arange(2019, 2026)\n\nRETURN_COLUMNS_REAL = [\n    \"Urban Land\",\n    \"Historical Urban Land\",\n    \"Urban Land Error Percent\",\n    \"Urban Land Absolute Error Percent\",\n]\n\nPARAM_BOUNDS = {\n    \"Initial Urban Land\": (145000, 155000),\n    \"Urban Expansion Adjustment Time\": (3, 20),\n    \"Soil Protection Factor\": (0.1, 0.8),\n    \"Spatial Planing Factor\": (0.8, 1.3),\n    \"Urban Population Density\": (1200, 2500),\n    \"Reference Initial Land Demand per Capita\": (0.0003, 0.0008),\n    \"Housing Preference Share Alpha\": (0.10, 0.25),\n    \"Long Run Transport Cost per km\": (0.30, 0.80),\n}\n\n\nmodel = pysd.read_vensim(str(MODEL_PATH))\n\n# PySD wandelt Vensim-Variablennamen intern in Python-Namen um.\n# Je nach PySD-Version ist model.doc entweder ein DataFrame oder eine Methode.\nmodel_doc = model.doc if not callable(model.doc) else model.doc()\n\nname_map = dict(zip(model_doc[\"Real Name\"], model_doc[\"Py Name\"]))\n\ndef py_name(real_name: str) -&gt; str:\n    return name_map.get(real_name, real_name)\n\nRETURN_COLUMNS_PY = [py_name(name) for name in RETURN_COLUMNS_REAL]\n\n\ndef convert_params_to_pysd(params_real: dict) -&gt; dict:\n    \"\"\"Wandelt Vensim-Parameternamen in PySD-kompatible Namen um.\"\"\"\n    return {\n        py_name(parameter_name): value\n        for parameter_name, value in params_real.items()\n    }\n\n\ndef vector_to_params(x: np.ndarray) -&gt; dict:\n    \"\"\"Wandelt einen Optimierungsvektor in ein Parameter-Dictionary um.\"\"\"\n    return {\n        parameter_name: value\n        for parameter_name, value in zip(PARAM_BOUNDS.keys(), x)\n    }\n\n\ndef run_model(params_real: dict, years=YEARS) -&gt; pd.DataFrame:\n    \"\"\"Führt das Modell mit einer bestimmten Parameterkombination aus.\"\"\"\n    params_pysd = convert_params_to_pysd(params_real)\n\n    result = model.run(\n        params=params_pysd,\n        return_columns=RETURN_COLUMNS_PY,\n        return_timestamps=years,\n        reload=True,\n    )\n\n    result = result.reset_index()\n    result = result.rename(columns={result.columns[0]: \"Year\"})\n\n    rename_back = {\n        py_name(real_name): real_name\n        for real_name in RETURN_COLUMNS_REAL\n    }\n\n    result = result.rename(columns=rename_back)\n\n    return result\n\n\ndef calculate_scores(df: pd.DataFrame, years) -&gt; dict:\n    \"\"\"Berechnet Fehlerkennzahlen für einen bestimmten Zeitraum.\"\"\"\n    sub = df[df[\"Year\"].isin(years)].copy()\n\n    error = sub[\"Urban Land Error Percent\"].astype(float)\n    abs_error = error.abs()\n\n    return {\n        \"RMSE Error Percent\": float(np.sqrt(np.mean(error ** 2))),\n        \"MAE Error Percent\": float(np.mean(abs_error)),\n        \"Max Absolute Error Percent\": float(np.max(abs_error)),\n        \"Mean Error Percent\": float(np.mean(error)),\n    }",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10-kalibrierung-plausibilitaet.html#baseline-lauf",
+    "href": "sections/10-kalibrierung-plausibilitaet.html#baseline-lauf",
+    "title": "13  Kalibrierung und Plausibilitätsprüfung",
+    "section": "13.4 Baseline-Lauf",
+    "text": "13.4 Baseline-Lauf\nVor der Optimierung wird zuerst ein Baseline-Lauf durchgeführt. Dieser zeigt, wie gut das Modell mit den aktuell im Modell gespeicherten Parameterwerten funktioniert.\n\nbaseline_df = run_model(params_real={})\n\nbaseline_train_scores = calculate_scores(baseline_df, TRAIN_YEARS)\nbaseline_test_scores = calculate_scores(baseline_df, TEST_YEARS)\n\nbaseline_scores_df = pd.DataFrame([\n    {\n        \"Run\": \"Baseline\",\n        \"Period\": \"Train 2000-2018\",\n        **baseline_train_scores,\n    },\n    {\n        \"Run\": \"Baseline\",\n        \"Period\": \"Test 2019-2025\",\n        **baseline_test_scores,\n    },\n])\n\nbaseline_scores_df",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10-kalibrierung-plausibilitaet.html#automatische-kalibrierung",
+    "href": "sections/10-kalibrierung-plausibilitaet.html#automatische-kalibrierung",
+    "title": "13  Kalibrierung und Plausibilitätsprüfung",
+    "section": "13.5 Automatische Kalibrierung",
+    "text": "13.5 Automatische Kalibrierung\nDie Zielfunktion der Optimierung minimiert den Fehler im Trainingszeitraum. In diesem Fall wird der RMSE des prozentualen Fehlers verwendet. Der Testzeitraum wird nicht direkt optimiert, sondern dient danach zur Kontrolle, ob die gefundene Parameterkombination auch ausserhalb des Kalibrierungszeitraums plausibel bleibt.\n\ncalibration_history = []\n\ndef objective(x: np.ndarray) -&gt; float:\n    params_real = vector_to_params(x)\n\n    try:\n        df = run_model(params_real=params_real, years=YEARS)\n        scores = calculate_scores(df, TRAIN_YEARS)\n\n        score = scores[\"RMSE Error Percent\"]\n\n        calibration_history.append({\n            \"Score Train RMSE Percent\": score,\n            **params_real,\n            **scores,\n        })\n\n        if not np.isfinite(score):\n            return 1e12\n\n        return score\n\n    except Exception:\n        # Ungültige Parameterkombinationen werden stark bestraft.\n        return 1e12\n\n\nresult = differential_evolution(\n    objective,\n    bounds=list(PARAM_BOUNDS.values()),\n    maxiter=60,\n    popsize=10,\n    seed=42,\n    polish=True,\n    workers=1,\n)",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10-kalibrierung-plausibilitaet.html#ergebnisse-der-kalibrierung",
+    "href": "sections/10-kalibrierung-plausibilitaet.html#ergebnisse-der-kalibrierung",
+    "title": "13  Kalibrierung und Plausibilitätsprüfung",
+    "section": "13.6 Ergebnisse der Kalibrierung",
+    "text": "13.6 Ergebnisse der Kalibrierung\nNach Abschluss der Optimierung werden die beste Parameterkombination, die Fehlerkennzahlen und die Zeitreihe exportiert.\n\nbest_params = vector_to_params(result.x)\n\nbest_df = run_model(params_real=best_params, years=YEARS)\n\nbest_train_scores = calculate_scores(best_df, TRAIN_YEARS)\nbest_test_scores = calculate_scores(best_df, TEST_YEARS)\n\nruns_df = (\n    pd.DataFrame(calibration_history)\n    .sort_values(\"Score Train RMSE Percent\")\n    .reset_index(drop=True)\n)\n\nbest_params_df = pd.DataFrame({\n    \"Parameter\": list(best_params.keys()),\n    \"Best Value\": list(best_params.values()),\n    \"Lower Bound\": [value[0] for value in PARAM_BOUNDS.values()],\n    \"Upper Bound\": [value[1] for value in PARAM_BOUNDS.values()],\n})\n\nscore_summary_df = pd.DataFrame([\n    {\n        \"Run\": \"Baseline\",\n        \"Period\": \"Train 2000-2018\",\n        **baseline_train_scores,\n    },\n    {\n        \"Run\": \"Baseline\",\n        \"Period\": \"Test 2019-2025\",\n        **baseline_test_scores,\n    },\n    {\n        \"Run\": \"Calibrated\",\n        \"Period\": \"Train 2000-2018\",\n        **best_train_scores,\n    },\n    {\n        \"Run\": \"Calibrated\",\n        \"Period\": \"Test 2019-2025\",\n        **best_test_scores,\n    },\n])\n\nbaseline_export = baseline_df.rename(columns={\n    \"Urban Land\": \"Baseline Urban Land\",\n    \"Urban Land Error Percent\": \"Baseline Error Percent\",\n    \"Urban Land Absolute Error Percent\": \"Baseline Absolute Error Percent\",\n})\n\ncalibrated_export = best_df.rename(columns={\n    \"Urban Land\": \"Calibrated Urban Land\",\n    \"Urban Land Error Percent\": \"Calibrated Error Percent\",\n    \"Urban Land Absolute Error Percent\": \"Calibrated Absolute Error Percent\",\n})\n\ncomparison_df = calibrated_export.merge(\n    baseline_export[\n        [\n            \"Year\",\n            \"Baseline Urban Land\",\n            \"Baseline Error Percent\",\n            \"Baseline Absolute Error Percent\",\n        ]\n    ],\n    on=\"Year\",\n    how=\"left\",\n)\n\ncomparison_df = comparison_df[\n    [\n        \"Year\",\n        \"Historical Urban Land\",\n        \"Baseline Urban Land\",\n        \"Baseline Error Percent\",\n        \"Calibrated Urban Land\",\n        \"Calibrated Error Percent\",\n        \"Calibrated Absolute Error Percent\",\n    ]\n]\n\n\nruns_df.to_csv(OUT_DIR / \"all_calibration_runs.csv\", index=False)\nbest_params_df.to_csv(OUT_DIR / \"best_parameters.csv\", index=False)\nscore_summary_df.to_csv(OUT_DIR / \"score_summary.csv\", index=False)\ncomparison_df.to_csv(OUT_DIR / \"calibrated_timeseries.csv\", index=False)\n\nwith pd.ExcelWriter(OUT_DIR / \"calibration_summary.xlsx\") as writer:\n    score_summary_df.to_excel(writer, sheet_name=\"Scores\", index=False)\n    best_params_df.to_excel(writer, sheet_name=\"Best Parameters\", index=False)\n    comparison_df.to_excel(writer, sheet_name=\"Time Series\", index=False)\n    runs_df.head(100).to_excel(writer, sheet_name=\"Top 100 Runs\", index=False)\n\nDie wichtigsten Resultate der Kalibrierung sind die Fehlerkennzahlen sowie die gefundenen Parameterwerte.\n\nscore_summary_df\n\n\n\n\n\n\n\n\nRun\nPeriod\nRMSE Error Percent\nMAE Error Percent\nMax Absolute Error Percent\nMean Error Percent\n\n\n\n\n0\nBaseline\nTrain 2000-2018\n5.339509\n4.639048\n9.080682\n-2.122727\n\n\n1\nBaseline\nTest 2019-2025\n9.718432\n9.714430\n10.009884\n-9.714430\n\n\n2\nCalibrated\nTrain 2000-2018\n1.415157\n1.210010\n3.074272\n-0.014452\n\n\n3\nCalibrated\nTest 2019-2025\n6.681997\n6.314588\n9.714568\n6.314588\n\n\n\n\n\n\n\n\nbest_params_df\n\n\n\n\n\n\n\n\nParameter\nBest Value\nLower Bound\nUpper Bound\n\n\n\n\n0\nInitial Urban Land\n154611.408330\n145000.0000\n155000.0000\n\n\n1\nUrban Expansion Adjustment Time\n19.760073\n3.0000\n20.0000\n\n\n2\nSoil Protection Factor\n0.753470\n0.1000\n0.8000\n\n\n3\nSpatial Planing Factor\n1.197297\n0.8000\n1.3000\n\n\n4\nUrban Population Density\n2007.507541\n1200.0000\n2500.0000\n\n\n5\nReference Initial Land Demand per Capita\n0.000800\n0.0003\n0.0008\n\n\n6\nHousing Preference Share Alpha\n0.100000\n0.1000\n0.2500\n\n\n7\nLong Run Transport Cost per km\n0.357632\n0.3000\n0.8000\n\n\n\n\n\n\n\n\ncomparison_df\n\n\n\n\n\n\n\n\nYear\nHistorical Urban Land\nBaseline Urban Land\nBaseline Error Percent\nCalibrated Urban Land\nCalibrated Error Percent\nCalibrated Absolute Error Percent\n\n\n\n\n0\n2000\n150000.0\n160018.000000\n6.678667\n154611.408330\n3.074272\n3.074272\n\n\n1\n2001\n151600.0\n160018.000000\n5.552770\n154611.408330\n1.986417\n1.986417\n\n\n2\n2002\n153200.0\n160018.000000\n4.450392\n154856.142303\n1.081033\n1.081033\n\n\n3\n2003\n154800.0\n160018.000000\n3.370801\n155315.280549\n0.332869\n0.332869\n\n\n4\n2004\n156400.0\n160018.000000\n2.313299\n155974.550164\n-0.272027\n0.272027\n\n\n5\n2005\n158000.0\n160018.000000\n1.277215\n156822.812512\n-0.745055\n0.745055\n\n\n6\n2006\n159600.0\n160018.000000\n0.261905\n157850.195556\n-1.096369\n1.096369\n\n\n7\n2007\n161200.0\n160018.000000\n-0.733251\n159030.837914\n-1.345634\n1.345634\n\n\n8\n2008\n162800.0\n160018.000000\n-1.708845\n160356.577044\n-1.500874\n1.500874\n\n\n9\n2009\n164400.0\n160018.000000\n-2.665450\n161819.940710\n-1.569379\n1.569379\n\n\n10\n2010\n166000.0\n160018.000000\n-3.603614\n163414.130989\n-1.557752\n1.557752\n\n\n11\n2011\n167400.0\n160018.000000\n-4.409797\n165133.015745\n-1.354232\n1.354232\n\n\n12\n2012\n168800.0\n160018.000000\n-5.202607\n166971.117827\n-1.083461\n1.083461\n\n\n13\n2013\n170200.0\n160018.000000\n-5.982374\n168923.599395\n-0.749942\n0.749942\n\n\n14\n2014\n171600.0\n160018.000000\n-6.749417\n170986.241506\n-0.357668\n0.357668\n\n\n15\n2015\n173000.0\n160018.000000\n-7.504046\n173155.420003\n0.089838\n0.089838\n\n\n16\n2016\n174000.0\n160018.000000\n-8.035632\n175428.078941\n0.820735\n0.820735\n\n\n17\n2017\n175000.0\n160018.000000\n-8.561143\n177776.598947\n1.586628\n1.586628\n\n\n18\n2018\n176000.0\n160018.000000\n-9.080682\n180199.373960\n2.386008\n2.386008\n\n\n19\n2019\n177000.0\n160057.236807\n-9.572183\n182695.255895\n3.217659\n3.217659\n\n\n20\n2020\n178000.0\n160340.209518\n-9.921231\n185263.513037\n4.080625\n4.080625\n\n\n21\n2021\n178740.0\n160848.334090\n-10.009884\n187903.797172\n5.126887\n5.126887\n\n\n22\n2022\n179480.0\n161587.184291\n-9.969253\n190632.477063\n6.213771\n6.213771\n\n\n23\n2023\n180220.0\n162539.921434\n-9.810276\n193449.633315\n7.340824\n7.340824\n\n\n24\n2024\n180960.0\n163691.433842\n-9.542753\n196355.682596\n8.507782\n8.507782\n\n\n25\n2025\n181700.0\n165028.243162\n-9.175430\n199351.369234\n9.714568\n9.714568",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10-kalibrierung-plausibilitaet.html#manuelle-plausibilitätsprüfung",
+    "href": "sections/10-kalibrierung-plausibilitaet.html#manuelle-plausibilitätsprüfung",
+    "title": "13  Kalibrierung und Plausibilitätsprüfung",
+    "section": "13.7 Manuelle Plausibilitätsprüfung",
+    "text": "13.7 Manuelle Plausibilitätsprüfung\nNach der automatischen Kalibrierung wird die gefundene Parameterkombination manuell geprüft. Diese Prüfung ist wichtig, weil ein niedriger Fehlerwert allein nicht garantiert, dass das Modellverhalten fachlich sinnvoll ist.\nDie Plausibilitätsprüfung erfolgt anhand folgender Kriterien:\n\n\n\n\n\n\n\n\nPrüfkriterium\nFragestellung\nBewertung\n\n\n\n\nParametergrenzen\nLiegen alle optimierten Parameter innerhalb fachlich plausibler Wertebereiche?\nmanuell\n\n\nModellverhalten\nEntwickelt sich die urbane Fläche kontinuierlich und ohne unrealistische Sprünge?\nmanuell\n\n\nFehlerverlauf\nIst der Fehler über die Zeit verteilt oder wird nur ein einzelnes Jahr gut getroffen?\nmanuell\n\n\nTestzeitraum\nBleibt der Fehler auch im nicht direkt optimierten Zeitraum 2019-2025 akzeptabel?\nmanuell\n\n\nFachliche Interpretation\nLassen sich die gefundenen Parameter inhaltlich begründen?\nmanuell\n\n\nSystemlogik\nBleiben Ursache-Wirkungs-Beziehungen des Modells erhalten?\nmanuell\n\n\n\nDie Plausibilitätsprüfung wird bewusst nicht vollständig automatisiert. Sie basiert auf der Interpretation der Modellstruktur, der Parameterwerte und der simulierten Zeitreihen. Insbesondere wird geprüft, ob die Kalibrierung lediglich eine numerische Anpassung erzeugt oder ob das Modell weiterhin eine nachvollziehbare Erklärung für die Entwicklung der urbanen Fläche liefert.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
+    ]
+  },
+  {
+    "objectID": "sections/10-kalibrierung-plausibilitaet.html#interpretation",
+    "href": "sections/10-kalibrierung-plausibilitaet.html#interpretation",
+    "title": "13  Kalibrierung und Plausibilitätsprüfung",
+    "section": "13.8 Interpretation",
+    "text": "13.8 Interpretation\nDie Kalibrierung liefert eine Parameterkombination, welche den Fehler im Backtesting-Zeitraum reduziert. Dadurch kann überprüft werden, ob das Modell grundsätzlich in der Lage ist, die historische Entwicklung der urbanen Fläche approximativ nachzubilden.\nDie Resultate sind jedoch nicht als exakte Vorhersage zu interpretieren. Das Modell bleibt eine vereinfachte Abbildung eines komplexen Stadtwachstumssystems. Die Kalibrierung dient deshalb vor allem dazu, grob unplausible Parameterwerte zu vermeiden und die Modellstruktur auf ihre historische Anschlussfähigkeit zu prüfen.\nFür die weitere Simulation von 2025 bis 2050 wird die kalibrierte Parameterkombination nur dann übernommen, wenn sie auch die manuelle Plausibilitätsprüfung besteht.",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Kalibrierung und Plausibilitätsprüfung</span>"
     ]
@@ -620,46 +630,6 @@
     ]
   },
   {
-    "objectID": "sections/13-grenzen-des-modells.html",
-    "href": "sections/13-grenzen-des-modells.html",
-    "title": "16  Grenzen des Modells",
-    "section": "",
-    "text": "16.1 Räumliche Vereinfachung\nDieses Kapitel beschreibt die Grenzen des Modells.\nDas Modell bildet keine echte räumliche Struktur ab.\nDie Stadt wird über aggregierte Grössen beschrieben, nicht über einzelne Standorte oder Parzellen.",
-    "crumbs": [
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Grenzen des Modells</span>"
-    ]
-  },
-  {
-    "objectID": "sections/13-grenzen-des-modells.html#ökonomische-vereinfachung",
-    "href": "sections/13-grenzen-des-modells.html#ökonomische-vereinfachung",
-    "title": "16  Grenzen des Modells",
-    "section": "16.2 Ökonomische Vereinfachung",
-    "text": "16.2 Ökonomische Vereinfachung\nDer AMM-Kern wird stark vereinfacht.\nDas Modell nutzt zentrale Beziehungen zwischen Einkommen, Transportkosten, Bodenrente und Landnachfrage, aber es bildet keinen vollständigen Wohnungsmarkt ab.",
-    "crumbs": [
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Grenzen des Modells</span>"
-    ]
-  },
-  {
-    "objectID": "sections/13-grenzen-des-modells.html#politische-und-institutionelle-vereinfachung",
-    "href": "sections/13-grenzen-des-modells.html#politische-und-institutionelle-vereinfachung",
-    "title": "16  Grenzen des Modells",
-    "section": "16.3 Politische und institutionelle Vereinfachung",
-    "text": "16.3 Politische und institutionelle Vereinfachung\nPlanungsrecht, Zonierung, Steuern, Eigentum und politische Konflikte werden nicht explizit modelliert.",
-    "crumbs": [
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Grenzen des Modells</span>"
-    ]
-  },
-  {
-    "objectID": "sections/13-grenzen-des-modells.html#datenbezogene-grenzen",
-    "href": "sections/13-grenzen-des-modells.html#datenbezogene-grenzen",
-    "title": "16  Grenzen des Modells",
-    "section": "16.4 Datenbezogene Grenzen",
-    "text": "16.4 Datenbezogene Grenzen\nEinige Parameter müssen aus Literaturwerten, Näherungen oder plausibilisierten Annahmen abgeleitet werden.",
-    "crumbs": [
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Grenzen des Modells</span>"
-    ]
-  },
-  {
     "objectID": "appendix/A-vensim-gleichungsliste.html",
     "href": "appendix/A-vensim-gleichungsliste.html",
     "title": "Appendix A – vollständige Vensim-Gleichungsliste",
@@ -690,6 +660,56 @@
     ]
   },
   {
+    "objectID": "sections/14-verwendung-von-ki.html",
+    "href": "sections/14-verwendung-von-ki.html",
+    "title": "16  Verwendung von KI",
+    "section": "",
+    "text": "16.1 Zweck der KI-Nutzung\nBei der Erstellung dieser Dokumentation wurde ChatGPT punktuell als unterstützendes Werkzeug eingesetzt. Die Nutzung der KI erfolgte dabei nicht als Ersatz für die eigene fachliche Arbeit, sondern als technische und sprachliche Unterstützung im Arbeitsprozess.\nDie inhaltliche Verantwortung für die Modellierung, die Auswahl der Systemgrenzen, die Interpretation der Ergebnisse, die Prüfung der Quellen sowie die finale Ausarbeitung liegt vollständig bei den Verfassenden dieser Arbeit. Die KI wurde nicht verwendet, um zentrale fachliche Entscheidungen zu treffen oder die Argumentation des Berichts eigenständig zu entwickeln.\nDie KI wurde insbesondere für unterstützende Tätigkeiten verwendet, welche den Schreib- und Dokumentationsprozess erleichtert haben. Dazu gehörten:\nDie KI wurde damit vor allem als Werkzeug zur Effizienzsteigerung eingesetzt. Sie half dabei, bestehende Gedanken klarer zu formulieren, technische Probleme schneller einzuordnen und die Dokumentation konsistenter aufzubauen.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Verwendung von KI</span>"
+    ]
+  },
+  {
+    "objectID": "sections/14-verwendung-von-ki.html#zweck-der-ki-nutzung",
+    "href": "sections/14-verwendung-von-ki.html#zweck-der-ki-nutzung",
+    "title": "16  Verwendung von KI",
+    "section": "",
+    "text": "sprachliche Überarbeitung einzelner Textabschnitte,\nFormulierungsvorschläge für verständlichere und präzisere Beschreibungen,\nUnterstützung bei der Strukturierung einzelner Kapitel,\nHilfe bei der Erstellung von Quarto- und Markdown-Texten,\nLaTeX-Unterstützung bei mathematischen Formulierungen,\ntechnische Unterstützung bei Code- und Skriptproblemen,\nHinweise auf mögliche Quellen und Datenpunkte,\nUnterstützung bei der Formulierung von Dokumentationsbausteinen,\nHilfe bei der Erklärung einzelner Vensim- oder Systemdynamik-Konzepte,\nUnterstützung beim Debugging und bei der Interpretation technischer Fehlermeldungen.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Verwendung von KI</span>"
+    ]
+  },
+  {
+    "objectID": "sections/14-verwendung-von-ki.html#abgrenzung-der-ki-nutzung",
+    "href": "sections/14-verwendung-von-ki.html#abgrenzung-der-ki-nutzung",
+    "title": "16  Verwendung von KI",
+    "section": "16.2 Abgrenzung der KI-Nutzung",
+    "text": "16.2 Abgrenzung der KI-Nutzung\nWichtig ist, dass die KI nicht als inhaltliche Denkhilfe im Sinne einer eigenständigen fachlichen Bewertung verwendet wurde. Die zentralen Entscheidungen der Arbeit wurden durch die Verfassenden getroffen.\nNicht durch KI übernommen wurden insbesondere:\n\ndie Festlegung der Forschungs- und Modellierungsziele,\ndie Auswahl der relevanten Modellvariablen,\ndie Entscheidung über die Systemgrenzen,\ndie Bewertung der Modellstruktur,\ndie Interpretation der Simulationsergebnisse,\ndie fachliche Prüfung der Modellannahmen,\ndie finale Auswahl und Bewertung der Quellen,\ndie Entscheidung, welche Inhalte in die Dokumentation aufgenommen werden,\ndie Verantwortung für Korrektheit, Nachvollziehbarkeit und Vollständigkeit des Berichts.\n\nDie von der KI vorgeschlagenen Inhalte wurden jeweils geprüft, angepasst und nur dann übernommen, wenn sie zur eigenen Argumentation und zum tatsächlichen Stand des Projekts passten.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Verwendung von KI</span>"
+    ]
+  },
+  {
+    "objectID": "sections/14-verwendung-von-ki.html#rolle-der-verfassenden",
+    "href": "sections/14-verwendung-von-ki.html#rolle-der-verfassenden",
+    "title": "16  Verwendung von KI",
+    "section": "16.3 Rolle der Verfassenden",
+    "text": "16.3 Rolle der Verfassenden\nDie Verfassenden haben die fachliche Arbeit eigenständig durchgeführt. Dazu gehören insbesondere die Arbeit am Vensim-Modell, die Strukturierung der Dokumentation, die Auswahl der relevanten Kapitel, die Bewertung der Modelllogik sowie die Interpretation der Resultate.\nKI-generierte Vorschläge wurden nicht ungeprüft übernommen. Sie dienten als Ausgangspunkt für sprachliche Verbesserungen, technische Korrekturen oder alternative Formulierungen. Die finale Fassung wurde durch die Verfassenden kontrolliert und verantwortet.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Verwendung von KI</span>"
+    ]
+  },
+  {
+    "objectID": "sections/14-verwendung-von-ki.html#transparenzhinweis",
+    "href": "sections/14-verwendung-von-ki.html#transparenzhinweis",
+    "title": "16  Verwendung von KI",
+    "section": "16.4 Transparenzhinweis",
+    "text": "16.4 Transparenzhinweis\nZusammenfassend wurde KI in dieser Arbeit als unterstützendes Werkzeug für Sprache, Technik und Dokumentation verwendet. Die inhaltliche Konzeption, die fachliche Bewertung und die finale Verantwortung liegen vollständig bei den Verfassenden.\nDie Verwendung von KI entspricht damit einer technischen Unterstützung im Arbeitsprozess und nicht einer Auslagerung der eigentlichen wissenschaftlichen oder modellbezogenen Denkleistung.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Verwendung von KI</span>"
+    ]
+  },
+  {
     "objectID": "sections/14-references.html",
     "href": "sections/14-references.html",
     "title": "References – Literaturverzeichnis",
@@ -700,53 +720,43 @@
     ]
   },
   {
-    "objectID": "sections/14-verwendung-von-ki.html",
-    "href": "sections/14-verwendung-von-ki.html",
-    "title": "18  Verwendung von KI",
+    "objectID": "sections/15-variablesuche.html",
+    "href": "sections/15-variablesuche.html",
+    "title": "17  Zweck der Suche",
     "section": "",
-    "text": "18.1 Zweck der KI-Nutzung\nBei der Erstellung dieser Dokumentation wurde ChatGPT punktuell als unterstützendes Werkzeug eingesetzt. Die Nutzung der KI erfolgte dabei nicht als Ersatz für die eigene fachliche Arbeit, sondern als technische und sprachliche Unterstützung im Arbeitsprozess.\nDie inhaltliche Verantwortung für die Modellierung, die Auswahl der Systemgrenzen, die Interpretation der Ergebnisse, die Prüfung der Quellen sowie die finale Ausarbeitung liegt vollständig bei den Verfassenden dieser Arbeit. Die KI wurde nicht verwendet, um zentrale fachliche Entscheidungen zu treffen oder die Argumentation des Berichts eigenständig zu entwickeln.\nDie KI wurde insbesondere für unterstützende Tätigkeiten verwendet, welche den Schreib- und Dokumentationsprozess erleichtert haben. Dazu gehörten:\nDie KI wurde damit vor allem als Werkzeug zur Effizienzsteigerung eingesetzt. Sie half dabei, bestehende Gedanken klarer zu formulieren, technische Probleme schneller einzuordnen und die Dokumentation konsistenter aufzubauen.",
+    "text": "17.1 Was wird angezeigt?\nDiese Seite dient als kompakter Einstieg in die automatisch erzeugte Modelldokumentation. Die Suche ist bewusst einfach gehalten: Man sucht nach einem Variablennamen, wählt eine Fokusvariable und entscheidet anschliessend, welche Informationsblöcke angezeigt werden sollen.\nDie Suche ist statisch in das HTML gerendert. Das bedeutet: Alle Variablendaten und Grafiken werden beim Erzeugen der Dokumentation vorbereitet. Im Browser werden nur noch die vorbereiteten Inhalte gefiltert und ein- oder ausgeblendet.\nDie Anzeige besteht aus mehreren Blöcken:\nTechnische Steuergrössen wie INITIAL TIME, FINAL TIME, TIME STEP und SAVEPER werden in der Suche standardmässig ausgeblendet, damit die Ergebnisliste übersichtlich bleibt.\nDie fachlichen Zusatzinformationen stammen aus:\nWenn du diese CSV bearbeitest, musst du danach die Suchdaten neu erzeugen:",
     "crumbs": [
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Verwendung von KI</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Zweck der Suche</span>"
     ]
   },
   {
-    "objectID": "sections/14-verwendung-von-ki.html#zweck-der-ki-nutzung",
-    "href": "sections/14-verwendung-von-ki.html#zweck-der-ki-nutzung",
-    "title": "18  Verwendung von KI",
+    "objectID": "sections/15-variablesuche.html#was-wird-angezeigt",
+    "href": "sections/15-variablesuche.html#was-wird-angezeigt",
+    "title": "17  Zweck der Suche",
     "section": "",
-    "text": "sprachliche Überarbeitung einzelner Textabschnitte,\nFormulierungsvorschläge für verständlichere und präzisere Beschreibungen,\nUnterstützung bei der Strukturierung einzelner Kapitel,\nHilfe bei der Erstellung von Quarto- und Markdown-Texten,\nLaTeX-Unterstützung bei mathematischen Formulierungen,\ntechnische Unterstützung bei Code- und Skriptproblemen,\nHinweise auf mögliche Quellen und Datenpunkte,\nUnterstützung bei der Formulierung von Dokumentationsbausteinen,\nHilfe bei der Erklärung einzelner Vensim- oder Systemdynamik-Konzepte,\nUnterstützung beim Debugging und bei der Interpretation technischer Fehlermeldungen.",
+    "text": "Grafik: Dependency-Umfeld der Fokusvariable. Inputs zeigen auf die Fokusvariable, Outputs gehen von ihr weg.\nEinheiten: Typ und Einheit der Fokusvariable.\nDokumentation: Kommentar aus dem Vensim-Modell plus ergänzte CSV-Felder wie Zweck, Modelllogik, Annahme, Quelle, Kalibrierung und Interpretation.\nGleichung: Originale Gleichung aus der .mdl-Datei.\nVerbundene Variablen: Aufgeteilt in Variablen, welche die Fokusvariable beeinflussen, und Variablen, die von der Fokusvariable beeinflusst werden.\nViews: Vensim-Views, in denen die Fokusvariable vorkommt.\n\n\n\ndocs/variable_documentation.csv\n\npython scripts/build_search_assets.py\nquarto render",
     "crumbs": [
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Verwendung von KI</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Zweck der Suche</span>"
     ]
   },
   {
-    "objectID": "sections/14-verwendung-von-ki.html#abgrenzung-der-ki-nutzung",
-    "href": "sections/14-verwendung-von-ki.html#abgrenzung-der-ki-nutzung",
-    "title": "18  Verwendung von KI",
-    "section": "18.2 Abgrenzung der KI-Nutzung",
-    "text": "18.2 Abgrenzung der KI-Nutzung\nWichtig ist, dass die KI nicht als inhaltliche Denkhilfe im Sinne einer eigenständigen fachlichen Bewertung verwendet wurde. Die zentralen Entscheidungen der Arbeit wurden durch die Verfassenden getroffen.\nNicht durch KI übernommen wurden insbesondere:\n\ndie Festlegung der Forschungs- und Modellierungsziele,\ndie Auswahl der relevanten Modellvariablen,\ndie Entscheidung über die Systemgrenzen,\ndie Bewertung der Modellstruktur,\ndie Interpretation der Simulationsergebnisse,\ndie fachliche Prüfung der Modellannahmen,\ndie finale Auswahl und Bewertung der Quellen,\ndie Entscheidung, welche Inhalte in die Dokumentation aufgenommen werden,\ndie Verantwortung für Korrektheit, Nachvollziehbarkeit und Vollständigkeit des Berichts.\n\nDie von der KI vorgeschlagenen Inhalte wurden jeweils geprüft, angepasst und nur dann übernommen, wenn sie zur eigenen Argumentation und zum tatsächlichen Stand des Projekts passten.",
+    "objectID": "sections/15-variablesuche.html#variablensuche",
+    "href": "sections/15-variablesuche.html#variablensuche",
+    "title": "17  Zweck der Suche",
+    "section": "17.2 Variablensuche",
+    "text": "17.2 Variablensuche\n\n\n\n\nDie Variablensuche wird geladen…",
     "crumbs": [
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Verwendung von KI</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Zweck der Suche</span>"
     ]
   },
   {
-    "objectID": "sections/14-verwendung-von-ki.html#rolle-der-verfassenden",
-    "href": "sections/14-verwendung-von-ki.html#rolle-der-verfassenden",
-    "title": "18  Verwendung von KI",
-    "section": "18.3 Rolle der Verfassenden",
-    "text": "18.3 Rolle der Verfassenden\nDie Verfassenden haben die fachliche Arbeit eigenständig durchgeführt. Dazu gehören insbesondere die Arbeit am Vensim-Modell, die Strukturierung der Dokumentation, die Auswahl der relevanten Kapitel, die Bewertung der Modelllogik sowie die Interpretation der Resultate.\nKI-generierte Vorschläge wurden nicht ungeprüft übernommen. Sie dienten als Ausgangspunkt für sprachliche Verbesserungen, technische Korrekturen oder alternative Formulierungen. Die finale Fassung wurde durch die Verfassenden kontrolliert und verantwortet.",
+    "objectID": "sections/15-variablesuche.html#suchlogik",
+    "href": "sections/15-variablesuche.html#suchlogik",
+    "title": "17  Zweck der Suche",
+    "section": "17.3 Suchlogik",
+    "text": "17.3 Suchlogik\nEine Dependency bedeutet, dass eine Variable in der Gleichung einer anderen Variable verwendet wird. Wenn zum Beispiel A in der Gleichung von B vorkommt, dann gilt:\nA -&gt; B\nDas heisst: A beeinflusst rechnerisch B. Die Suche trennt diese Beziehungen deshalb in zwei Richtungen:\nBeeinflusst diese Variable: Inputs -&gt; Fokusvariable\nWird von dieser Variable beeinflusst: Fokusvariable -&gt; Outputs",
     "crumbs": [
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Verwendung von KI</span>"
-    ]
-  },
-  {
-    "objectID": "sections/14-verwendung-von-ki.html#transparenzhinweis",
-    "href": "sections/14-verwendung-von-ki.html#transparenzhinweis",
-    "title": "18  Verwendung von KI",
-    "section": "18.4 Transparenzhinweis",
-    "text": "18.4 Transparenzhinweis\nZusammenfassend wurde KI in dieser Arbeit als unterstützendes Werkzeug für Sprache, Technik und Dokumentation verwendet. Die inhaltliche Konzeption, die fachliche Bewertung und die finale Verantwortung liegen vollständig bei den Verfassenden.\nDie Verwendung von KI entspricht damit einer technischen Unterstützung im Arbeitsprozess und nicht einer Auslagerung der eigentlichen wissenschaftlichen oder modellbezogenen Denkleistung.",
-    "crumbs": [
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Verwendung von KI</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Zweck der Suche</span>"
     ]
   }
 ]

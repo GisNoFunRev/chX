@@ -9,7 +9,6 @@ Thumbs.db
 # --- Dokumentation Logik ---
 
 # 1. Alles in documentation ignorieren
-documentation/**/*
 
 # 2. Die Ordnerstruktur explizit begehbar machen
 !documentation/

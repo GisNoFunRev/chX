@@ -1,29 +1,613 @@
-# Parameter, Startwerte und Quellen {#sec-parameter-startwerte-quellen}
+## Einordnung
 
-Dieses Kapitel dokumentiert die Parameter, Startwerte und Quellen des Modells.
+Diese Tabelle dokumentiert die im Modell als `constant` erkannten Grössen. Fachlich werden diese Grössen als **Parameter** verstanden, da sie Startwerte, Modellannahmen, Kalibrierungen, Szenarien oder technische Umrechnungsfaktoren festlegen.
 
-## Ziel
+Die Spalte **Status** unterscheidet:
 
-Die Parameterdokumentation soll nachvollziehbar machen, welche Werte im Modell verwendet werden und warum diese Werte plausibel sind.
+- **Direkt belegt**: Der Wert ist direkt oder nahezu direkt durch eine Quelle gestützt.
+- **Abgeleitet**: Der Wert wurde aus einer Quelle berechnet.
+- **Approximation**: Der Wert ist plausibel, aber vereinfacht.
+- **Modellannahme**: Der Wert ist ein bewusst gesetzter Modell- oder Szenarioparameter.
+- **Zu prüfen**: Der Wert sollte für die Zukunft geprüft oder abgeleitet werden.
 
-## Dokumentationsschema
+```{python}
+import pandas as pd
+from IPython.display import HTML, display
 
-Für jeden Parameter werden später dokumentiert:
+sources = {
+    "M0": {
+        "title": "Eigene Modellannahme / Kalibrierung",
+        "url": "",
+        "note": "Wert ist nicht direkt empirisch belegt, sondern wird als Szenario-, Kalibrierungs- oder technischer Modellparameter verwendet."
+    },
+    "S1": {
+        "title": "Eurostat – Farms and farmland in the European Union",
+        "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Farms_and_farmland_in_the_European_Union_-_statistics",
+        "note": "EU farms managed 156.2 million hectares utilised agricultural area in 2023."
+    },
+    "S2": {
+        "title": "Eurostat – Land cover statistics",
+        "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Land_cover_statistics",
+        "note": "Artificial land accounted for 4.4% of the EU's total area in 2022."
+    },
+    "S3": {
+        "title": "EU-OECD definition of a functional urban area",
+        "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2019/12/the-eu-oecd-definition-of-a-functional-urban-area_cef4a128/d58cb34d-en.pdf",
+        "note": "Urban centres are identified using contiguous grid cells with at least 1,500 residents per km2 and at least 50,000 inhabitants."
+    },
+    "S4": {
+        "title": "Bettencourt et al. 2007 – Growth, innovation, scaling, and the pace of life in cities",
+        "url": "https://www.pnas.org/doi/10.1073/pnas.0610172104",
+        "note": "Urban scaling theory; socio-economic and innovation-related indicators often scale superlinearly with population."
+    },
+    "S5": {
+        "title": "OECD – Urban population by city size",
+        "url": "https://www.oecd.org/en/data/indicators/urban-population-by-city-size.html",
+        "note": "OECD city-size classes: small 50k–200k, medium 200k–500k, metropolitan 500k–1.5m, large metropolitan above 1.5m."
+    },
+    "S6": {
+        "title": "EIB/JRC – Europe and its Urban Development",
+        "url": "https://www.eib.org/en/stories/the-story-of-your-city",
+        "note": "European city population shares: below 250k about 28%, 1m–5m about 26%, above 5m about 14%."
+    },
+    "S7": {
+        "title": "Eurostat – Housing in Europe 2024",
+        "url": "https://ec.europa.eu/eurostat/web/interactive-publications/housing-2024",
+        "note": "Average household size in the EU was 2.3 persons per household in 2023."
+    },
+    "S8": {
+        "title": "Eurostat – GDP per capita, current prices",
+        "url": "https://ec.europa.eu/eurostat/databrowser/product/view/tec00001",
+        "note": "GDP per capita at market prices, current prices, euro per capita."
+    },
+    "S9": {
+        "title": "European Commission – Spring 2025 Economic Forecast",
+        "url": "https://economy-finance.ec.europa.eu/economic-forecast-and-surveys/economic-forecasts/spring-2025-economic-forecast-moderate-growth-amid-global-economic-uncertainty_en",
+        "note": "EU real GDP growth forecast around 1.1% for 2025."
+    },
+    "S10": {
+        "title": "Eurostat – EU employment rate 2024",
+        "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20250415-1",
+        "note": "In 2024, 197.6 million people aged 20–64 were employed in the EU."
+    },
+    "S11": {
+        "title": "Eurostat – Main place of work and commuting time",
+        "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Main_place_of_work_and_commuting_time_-_statistics",
+        "note": "Average commuting time in the EU was 25 minutes in 2019; 4.3% of employed people did not need to travel to work."
+    },
+    "S12": {
+        "title": "SD Worx – European commuting distance survey",
+        "url": "https://www.sdworx.com/en-en/about-sd-worx/press/2018-09-20-more-20-europeans-commute-least-90-minutes-daily",
+        "note": "Reported average commuting distance of 28.56 km per day in surveyed European countries; one-way approximation is about 14.3 km."
+    },
+    "S13": {
+        "title": "European Commission / CE Delft – Handbook on external costs of transport",
+        "url": "https://op.europa.eu/en/publication-detail/-/publication/9781f65f-8448-11ea-bf12-01aa75ed71a1",
+        "note": "Methodological source for transport cost categories and external cost assessment. Does not directly prove 0.47 EUR/km as private cost."
+    },
+    "S14": {
+        "title": "Eurostat – Agricultural land prices and rents",
+        "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Agricultural_land_prices_and_rents_-_statistics",
+        "note": "Average EU rental price of arable land and permanent grassland was about 295 EUR/ha in 2024."
+    },
+    "S15": {
+        "title": "FAO – Food balance sheets",
+        "url": "https://www.fao.org/statistics/highlights-archive/highlights-detail/food-balance-sheets-2010-2023/en",
+        "note": "Food balance sheets provide dietary energy supply in kcal per capita per day."
+    },
+    "S16": {
+        "title": "Eurostat – Passenger mobility statistics",
+        "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Passenger_mobility_statistics",
+        "note": "Commuting is one of the main reasons for daily travel; passenger mobility context for distance and modal assumptions."
+    },
+    "S17": {
+        "title": "Eurostat – Housing in Europe",
+        "url": "https://ec.europa.eu/eurostat/web/interactive-publications/housing-2024",
+        "note": "Context source for housing costs and household living conditions; the exact model value 805 EUR/month should be treated as an approximation."
+    }
+}
 
-- Name
-- Einheit
-- Wert
-- Quelle
-- Begründung
-- Rolle im Modell
-- Unsicherheit
+def src(ids):
+    return ", ".join(
+        f'<a href="#src-{sid}">{sid}</a>'
+        for sid in ids
+    )
 
-## Platzhalter für Parametertabelle
+rows = [
+    {
+        "Kategorie": "Technischer Parameter / Mindestzeit",
+        "Parameter": "Land Conversion Time Minimum",
+        "Einheit": "Year",
+        "Startwert": "1",
+        "Quellenbeleg / Einordnung": "Mindestwert zur Vermeidung unrealistisch schneller oder numerisch instabiler Landkonversion. Kein empirischer Startwert.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Landnutzung",
+        "Parameter": "Land per Capita",
+        "Einheit": "km2/Person",
+        "Startwert": "0.00067",
+        "Quellenbeleg / Einordnung": "Der Parameter `Land per Capita` beschreibt den angenommenen urbanen Flächenbedarf pro Person. Im Modell wird der Wert konsistent aus der angenommenen urbanen Bevölkerungsdichte abgeleitet. Bei einer Referenzdichte von `1'500 Personen/km2` ergibt sich ein Flächenbedarf von `0.000667 km2/Person`.Der Parameter verbindet damit die Bevölkerungsentwicklung mit dem modellierten Bedarf an urbaner Fläche. Höhere Werte bedeuten einen grösseren Flächenbedarf pro Person und können den Druck auf die Umwandlung landwirtschaftlicher Fläche erhöhen. Da der Wert aus der EU-OECD-Urban-Centre-Dichte abgeleitet ist, dient er als nachvollziehbare Referenzannahme für die urbane Flächennutzung im Modell.",
+        "source_ids": ["S3"],
+        "Status": "Zu prüfen"
+    },
+    {
+        "Kategorie": "Stadtgrössenstruktur",
+        "Parameter": "Share Large City",
+        "Einheit": "Dmnl",
+        "Startwert": "0.26",
+        "Quellenbeleg / Einordnung": "POC-Anteil für Bevölkerung in grossen Städten. Angelehnt an europäische Stadtgrössenanteile und OECD-Klassen, aber nicht exakt aus einem FUA-Datensatz berechnet.",
+        "source_ids": ["S5", "S6"],
+        "Status": "Approximation"
+    },
+    {
+        "Kategorie": "Stadtgrössenstruktur",
+        "Parameter": "Share Medium City",
+        "Einheit": "Dmnl",
+        "Startwert": "0.20",
+        "Quellenbeleg / Einordnung": "POC-Anteil für Bevölkerung in mittleren Städten. Sollte final aus OECD/FUA-Daten berechnet werden.",
+        "source_ids": ["S5"],
+        "Status": "Approximation"
+    },
+    {
+        "Kategorie": "Stadtgrössenstruktur",
+        "Parameter": "Share Small City",
+        "Einheit": "Dmnl",
+        "Startwert": "0.28",
+        "Quellenbeleg / Einordnung": "Stützt sich auf die Angabe, dass Städte unter 250,000 Einwohnern rund 28% der europäischen Stadtbevölkerung ausmachen. Nicht exakt identisch mit der OECD-small-Klasse 50,000–200,000.",
+        "source_ids": ["S5", "S6"],
+        "Status": "Approximation"
+    },
+    {
+        "Kategorie": "Stadtgrössenstruktur",
+        "Parameter": "Share very Large City",
+        "Einheit": "Dmnl",
+        "Startwert": "0.26",
+        "Quellenbeleg / Einordnung": "POC-Anteil für sehr grosse Städte. Der Wert ist plausibilisiert durch europäische Stadtgrössenanteile, aber nicht exakt aus Rohdaten berechnet.",
+        "source_ids": ["S5", "S6"],
+        "Status": "Approximation"
+    },
+    {
+        "Kategorie": "Urbanisierung / Dichte",
+        "Parameter": "Urban Population Density",
+        "Einheit": "Person/km2",
+        "Startwert": "1500",
+        "Quellenbeleg / Einordnung": "EU-OECD-Schwellenwert für Urban Centres: mindestens 1,500 Personen pro km2 in zusammenhängenden Rasterzellen. Im Modell sollte die Einheit von Dmnl auf Person/km2 angepasst werden.",
+        "source_ids": ["S3"],
+        "Status": "Direkt belegt"
+    },
+    {
+        "Kategorie": "Urban Scaling / Innovation",
+        "Parameter": "Urban Scaling Exponent Large",
+        "Einheit": "Dmnl",
+        "Startwert": "1.15",
+        "Quellenbeleg / Einordnung": "Superlinearer Urban-Scaling-Exponent für sozioökonomische und innovationsnahe Grössen. 1.15 ist ein konservativer Basiswert.",
+        "source_ids": ["S4"],
+        "Status": "Theoriebasiert"
+    },
+    {
+        "Kategorie": "Urban Scaling / Innovation",
+        "Parameter": "Urban Scaling Exponent Medium",
+        "Einheit": "Dmnl",
+        "Startwert": "1.15",
+        "Quellenbeleg / Einordnung": "Gleicher Basis-Exponent für alle Stadtklassen, damit Grössenvorteile durch Population^β entstehen und nicht zusätzlich durch klassenspezifische Exponenten verstärkt werden.",
+        "source_ids": ["S4"],
+        "Status": "Theoriebasiert"
+    },
+    {
+        "Kategorie": "Urban Scaling / Innovation",
+        "Parameter": "Urban Scaling Exponent Small",
+        "Einheit": "Dmnl",
+        "Startwert": "1.15",
+        "Quellenbeleg / Einordnung": "Superlinearer Urban-Scaling-Exponent. Werte über 1 bedeuten zunehmende Skalenerträge durch Agglomeration.",
+        "source_ids": ["S4"],
+        "Status": "Theoriebasiert"
+    },
+    {
+        "Kategorie": "Urban Scaling / Innovation",
+        "Parameter": "Urban Scaling Exponent very Large",
+        "Einheit": "Dmnl",
+        "Startwert": "1.15",
+        "Quellenbeleg / Einordnung": "1.15 ist plausibler als sehr hohe Werte wie 1.6. Ein höherer Wert müsste als starke zusätzliche Szenarioannahme begründet werden.",
+        "source_ids": ["S4"],
+        "Status": "Theoriebasiert"
+    },
+    {
+        "Kategorie": "Anpassungszeit",
+        "Parameter": "Agricultural Rent Adjustment Time",
+        "Einheit": "Year",
+        "Startwert": "5",
+        "Quellenbeleg / Einordnung": "Kalibrierungsparameter für verzögerte Anpassung landwirtschaftlicher Bodenrenten. Kein direkt beobachteter empirischer Wert.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Sensitivität",
+        "Parameter": "Agricultural Rent Sensitivity to Scarcity",
+        "Einheit": "Dmnl",
+        "Startwert": "1",
+        "Quellenbeleg / Einordnung": "Elastizität der landwirtschaftlichen Bodenrente gegenüber relativer Knappheit. Wert 1 bedeutet proportionale Reaktion.",
+        "source_ids": ["M0", "S14"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Wachstum",
+        "Parameter": "Base Income Growth Rate",
+        "Einheit": "Dmnl/Year",
+        "Startwert": "0.01",
+        "Quellenbeleg / Einordnung": "Plausibel als konservative langfristige reale Wachstumsannahme. EU-Wachstumsprognosen um ca. 1.1% dienen als Kontext.",
+        "source_ids": ["S9"],
+        "Status": "Approximation"
+    },
+    {
+        "Kategorie": "Ernährung",
+        "Parameter": "Caloric Baseline Need pP",
+        "Einheit": "kcal/Person/Year",
+        "Startwert": "3400 * 365 = 1,241,000",
+        "Quellenbeleg / Einordnung": "3400 kcal pro Person und Tag ist eher eine hohe Versorgung-/Food-supply-Annahme als ein physiologischer Mindestbedarf. Für Food-Balance-Ansätze ist FAO passend.",
+        "source_ids": ["S15"],
+        "Status": "Approximation"
+    },
+    {
+        "Kategorie": "Pendeln",
+        "Parameter": "Commuting Share of Employed Persons",
+        "Einheit": "Dmnl",
+        "Startwert": "0.957",
+        "Quellenbeleg / Einordnung": "Eurostat berichtet, dass 4.3% der Beschäftigten 2019 nicht zum Arbeitsplatz reisen mussten. Daraus folgt 1 - 0.043 = 0.957.",
+        "source_ids": ["S11"],
+        "Status": "Abgeleitet"
+    },
+    {
+        "Kategorie": "Arbeitsmarkt",
+        "Parameter": "Employment Share of Total Population",
+        "Einheit": "Dmnl",
+        "Startwert": "0.439",
+        "Quellenbeleg / Einordnung": "Nähe zu 197.6 Mio. Beschäftigten im Verhältnis zur EU-Gesamtbevölkerung. Nicht identisch mit der Beschäftigungsquote 20–64, sondern Anteil an der Gesamtbevölkerung.",
+        "source_ids": ["S10"],
+        "Status": "Abgeleitet"
+    },
+    {
+        "Kategorie": "Anpassungszeit",
+        "Parameter": "Household Size Adjustment Time",
+        "Einheit": "Year",
+        "Startwert": "8",
+        "Quellenbeleg / Einordnung": "Kalibrierungsparameter für langsame demografische Anpassung der Haushaltsgrösse.",
+        "source_ids": ["M0", "S7"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "AMM / Wohnen",
+        "Parameter": "Housing Preference Share Alpha",
+        "Einheit": "Dmnl",
+        "Startwert": "0.15",
+        "Quellenbeleg / Einordnung": "Budgetanteil für Wohnen/Land im Modell. Eurostat-Housing-Daten dienen als Kontext; 0.15 ist eine Modellannahme und sollte als konservativer Wohnpräferenzanteil beschrieben werden.",
+        "source_ids": ["S17"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Initialwert / Landwirtschaft",
+        "Parameter": "Initial Aggricultural Land",
+        "Einheit": "km2",
+        "Startwert": "1.6004e+06",
+        "Quellenbeleg / Einordnung": "Plausibel aus Eurostat-Landnutzung: landwirtschaftliche Fläche ca. 38.8% der EU-Gesamtfläche. Alternativ UAA 2023: 156.2 Mio. ha = 1.562 Mio. km2.",
+        "source_ids": ["S1", "S2"],
+        "Status": "Abgeleitet"
+    },
+    {
+        "Kategorie": "Initialwert / Landwirtschaftliche Bodenrente",
+        "Parameter": "Initial Agricultural Rent",
+        "Einheit": "EUR/km2",
+        "Startwert": "30000",
+        "Quellenbeleg / Einordnung": "30,000 EUR/km2 entspricht 300 EUR/ha. Eurostat nennt für 2024 eine durchschnittliche EU-Landpacht von ca. 295 EUR/ha.",
+        "source_ids": ["S14"],
+        "Status": "Direkt belegt"
+    },
+    {
+        "Kategorie": "Initialwert / Einkommen",
+        "Parameter": "Initial Income per Capita",
+        "Einheit": "EUR/Person",
+        "Startwert": "41650",
+        "Quellenbeleg / Einordnung": "Entspricht ungefähr Eurostat GDP per capita current prices für EU27. Als Modellproxy für Einkommen pro Kopf verwenden.",
+        "source_ids": ["S8"],
+        "Status": "Direkt belegt"
+    },
+    {
+        "Kategorie": "Initialwert / Haushalte",
+        "Parameter": "Initial Mean Household Size",
+        "Einheit": "Person/Household",
+        "Startwert": "2.3",
+        "Quellenbeleg / Einordnung": "Eurostat berichtet 2.3 Personen pro Haushalt im EU-Durchschnitt 2023.",
+        "source_ids": ["S7"],
+        "Status": "Direkt belegt"
+    },
+    {
+        "Kategorie": "Initialwert / Transport",
+        "Parameter": "Initial Transport Cost per km",
+        "Einheit": "EUR/km",
+        "Startwert": "0.47",
+        "Quellenbeleg / Einordnung": "Nicht direkt durch eine EU-Quelle belegt. Als generalisierte Transportkostenannahme verwenden; EU/CE-Delft-Handbücher liefern Methodik zu externen und nutzerbezogenen Transportkosten.",
+        "source_ids": ["S13"],
+        "Status": "Zu prüfen"
+    },
+    {
+        "Kategorie": "Initialwert / Urban Land",
+        "Parameter": "Initial Urban Land",
+        "Einheit": "km2",
+        "Startwert": "181700",
+        "Quellenbeleg / Einordnung": "Plausibel abgeleitet aus Eurostat Land Cover: artificial land 4.4% der EU-Fläche. 4.4% von ca. 4.13 Mio. km2 ergibt rund 181,700 km2.",
+        "source_ids": ["S2"],
+        "Status": "Abgeleitet"
+    },
+    {
+        "Kategorie": "Landwirtschaftlicher Ertrag",
+        "Parameter": "Kcal per km^2 avg per t",
+        "Einheit": "kcal/km2/Year",
+        "Startwert": "1.8e+09",
+        "Quellenbeleg / Einordnung": "Kcal/km2 sollte aus landwirtschaftlicher Produktion, Flächenbezug und Kalorienumrechnung berechnet werden. Aktueller Wert ist eine grobe Modellannahme.",
+        "source_ids": ["S15", "M0"],
+        "Status": "Zu prüfen"
+    },
+    {
+        "Kategorie": "Transport",
+        "Parameter": "Long Run Transport Cost per km",
+        "Einheit": "EUR/km",
+        "Startwert": "0.47",
+        "Quellenbeleg / Einordnung": "Langfristiger Zielwert wird gleich wie Initialwert gesetzt. Als neutraler Basisszenario-Wert interpretieren.",
+        "source_ids": ["S13", "M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Bodenschutz",
+        "Parameter": "Max Ceiling Soil Protection",
+        "Einheit": "Dmnl",
+        "Startwert": "0.8",
+        "Quellenbeleg / Einordnung": "Obergrenze für Bodenschutzwirkung. Normativer Szenarioparameter, nicht direkt empirisch belegt.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Wachstumsgrenze",
+        "Parameter": "Maximum Income Growth Rate",
+        "Einheit": "Dmnl/Year",
+        "Startwert": "0.03",
+        "Quellenbeleg / Einordnung": "Obere Wachstumsgrenze von 3% p.a. als plausible Szenariobegrenzung. Nicht als Prognosewert interpretieren.",
+        "source_ids": ["S9", "M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Wohnen",
+        "Parameter": "Mean Annual Housing Cost per Capita",
+        "Einheit": "EUR/Person/Year",
+        "Startwert": "805 * 12 = 9660",
+        "Quellenbeleg / Einordnung": "805 EUR/Monat ist nicht direkt belegt. Sie dient als Modelannahme, die Problematik hier: Die Kosten steigen mit Einkommen nicht mit. In Zukunft müsste ein Wert gefunden werden welcher belegbar wäre, oder ein Sub-Model erstellt werden, welches diesen Wert prognostiziert.",
+        "source_ids": ["S17", "M0"],
+        "Status": "Zu prüfen"
+    },
+    {
+        "Kategorie": "Wachstumsgrenze",
+        "Parameter": "Minimum Income Growth Rate",
+        "Einheit": "Dmnl/Year",
+        "Startwert": "-0.02",
+        "Quellenbeleg / Einordnung": "Untere Wachstumsgrenze von -2% p.a. als Szenario- und Stabilitätsannahme.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Referenzwert / Landnachfrage",
+        "Parameter": "Reference Initial Land Demand per Capita",
+        "Einheit": "km2/Person",
+        "Startwert": "0.000498",
+        "Quellenbeleg / Einordnung": "Kalibrierter Referenzwert für anfängliche Landnachfrage pro Kopf. Sollte gegen Initial Urban Land und Expected Population geprüft werden.",
+        "source_ids": ["M0"],
+        "Status": "Zu prüfen"
+    },
+    {
+        "Kategorie": "Bodenschutz",
+        "Parameter": "Soil Protection Factor",
+        "Einheit": "Dmnl",
+        "Startwert": "0.3",
+        "Quellenbeleg / Einordnung": "Szenarioparameter für Bodenschutzwirkung. Keine direkte empirische Quelle; sollte als normative Modellannahme beschrieben werden.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Raumplanung",
+        "Parameter": "Spatial Planing Factor",
+        "Einheit": "Dmnl",
+        "Startwert": "1.0001",
+        "Quellenbeleg / Einordnung": "Nahezu neutraler Raumplanungsfaktor. Für die Doku besser als 1.0 oder als numerischer Platzhalter erklären. Schreibweise langfristig zu Spatial Planning Factor korrigieren.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Anpassungszeit",
+        "Parameter": "Transport Cost Adjustment Time",
+        "Einheit": "Year",
+        "Startwert": "5",
+        "Quellenbeleg / Einordnung": "Kalibrierungsparameter für verzögerte Anpassung der Transportkosten.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Anpassungszeit",
+        "Parameter": "Urban Expansion Adjustment Time",
+        "Einheit": "Year",
+        "Startwert": "10",
+        "Quellenbeleg / Einordnung": "Kalibrierungsparameter für verzögerte urbane Expansion. Sollte über Backtesting/Sensitivität geprüft werden.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Produktivität",
+        "Parameter": "Urban Productivity Elasticity",
+        "Einheit": "Dmnl/Year",
+        "Startwert": "0.005",
+        "Quellenbeleg / Einordnung": "Übersetzt den Innovationsindex in zusätzliches Einkommenswachstum. Eigene Kalibrierung auf Basis der Urban-Scaling-Idee.",
+        "source_ids": ["S4", "M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Anpassungszeit",
+        "Parameter": "Urban Rent Adjustment Time",
+        "Einheit": "Year",
+        "Startwert": "2",
+        "Quellenbeleg / Einordnung": "Kalibrierungsparameter für Mietanpassung. Relativ schnelle Anpassung urbaner Mieten angenommen.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Sensitivität",
+        "Parameter": "Urban Rent Sensitivity to Land Tightness",
+        "Einheit": "Dmnl",
+        "Startwert": "1",
+        "Quellenbeleg / Einordnung": "Elastizität der urbanen Miete gegenüber Landknappheit. Wert 1 bedeutet proportionale Reaktion.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Pendeln",
+        "Parameter": "Average Commuting Distance",
+        "Einheit": "km",
+        "Startwert": "14",
+        "Quellenbeleg / Einordnung": "Plausibel als einfache Distanzannahme. SD Worx berichtet 28.56 km tägliche Pendeldistanz; ein Weg entspricht ca. 14.3 km.",
+        "source_ids": ["S11", "S12", "S16"],
+        "Status": "Approximation"
+    },
+    {
+        "Kategorie": "Arbeitstage",
+        "Parameter": "Average Workdays per Capita",
+        "Einheit": "Dmnl/Person",
+        "Startwert": "230",
+        "Quellenbeleg / Einordnung": "Approximation für jährliche Arbeitstage. Sollte als eigene Annahme dokumentiert werden.",
+        "source_ids": ["M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Langfristige Haushaltsstruktur",
+        "Parameter": "Long Run Mean Household Size",
+        "Einheit": "Person/Household",
+        "Startwert": "2.2",
+        "Quellenbeleg / Einordnung": "Leichter Rückgang gegenüber EU-Durchschnitt 2.3. Als langfristige demografische Szenarioannahme interpretieren.",
+        "source_ids": ["S7", "M0"],
+        "Status": "Approximation"
+    },
+    {
+        "Kategorie": "Stadtgrössenstruktur",
+        "Parameter": "Representative Large City Size",
+        "Einheit": "Person",
+        "Startwert": "866000",
+        "Quellenbeleg / Einordnung": "Geometrischer Mittelpunkt der OECD-Klasse 500,000–1,500,000: sqrt(500000*1500000) ≈ 866,000.",
+        "source_ids": ["S5"],
+        "Status": "Abgeleitet"
+    },
+    {
+        "Kategorie": "Stadtgrössenstruktur",
+        "Parameter": "Representative Medium City Size",
+        "Einheit": "Person",
+        "Startwert": "316000",
+        "Quellenbeleg / Einordnung": "Geometrischer Mittelpunkt der OECD-Klasse 200,000–500,000: sqrt(200000*500000) ≈ 316,000.",
+        "source_ids": ["S5"],
+        "Status": "Abgeleitet"
+    },
+    {
+        "Kategorie": "Stadtgrössenstruktur",
+        "Parameter": "Representative Small City Size",
+        "Einheit": "Person",
+        "Startwert": "100000",
+        "Quellenbeleg / Einordnung": "Repräsentativer Wert innerhalb der OECD-Klasse 50,000–200,000. Geometrischer Mittelpunkt wäre ebenfalls rund 100,000.",
+        "source_ids": ["S5"],
+        "Status": "Abgeleitet"
+    },
+    {
+        "Kategorie": "Stadtgrössenstruktur",
+        "Parameter": "Representative Very Large City Size",
+        "Einheit": "Person",
+        "Startwert": "2.5e+06",
+        "Quellenbeleg / Einordnung": "POC-Wert für die offene Klasse über 1.5 Mio. Einwohner. Da die Klasse nach oben offen ist, braucht es eine Modellannahme.",
+        "source_ids": ["S5", "M0"],
+        "Status": "Modellannahme"
+    },
+    {
+        "Kategorie": "Technischer Parameter",
+        "Parameter": "Year Unit",
+        "Einheit": "Year",
+        "Startwert": "1",
+        "Quellenbeleg / Einordnung": "Technischer Umrechnungsparameter für Jahre. Keine inhaltliche Modellannahme.",
+        "source_ids": ["M0"],
+        "Status": "Technisch"
+    },
+]
 
-| Parameter | Einheit | Wert | Quelle | Begründung |
-|---|---:|---:|---|---|
-| Initial Mean Urban Rent | TBD | TBD | TBD | TBD |
-| Urban Rent Adjustment Time | Year | TBD | TBD | TBD |
-| Urban Rent Sensitivity to Land Tightness | dmnl | TBD | TBD | TBD |
-| Minimum Land Demand per Household | km2/Household | TBD | TBD | TBD |
-| Maximum Land Demand per Household | km2/Household | TBD | TBD | TBD |
+df = pd.DataFrame(rows)
+df["Quellen"] = df["source_ids"].apply(src)
+df = df.drop(columns=["source_ids"])
+
+html = df.to_html(
+    index=False,
+    escape=False,
+    classes="parameter-table"
+)
+
+display(HTML("""
+<style>
+.parameter-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.88rem;
+}
+.parameter-table th {
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    padding: 6px;
+    text-align: left;
+    vertical-align: top;
+}
+.parameter-table td {
+    border: 1px solid #e5e7eb;
+    padding: 6px;
+    vertical-align: top;
+}
+.parameter-table td:nth-child(2) {
+    font-weight: 600;
+    white-space: nowrap;
+}
+.parameter-table td:nth-child(5) {
+    min-width: 340px;
+}
+.parameter-table a {
+    text-decoration: none;
+}
+</style>
+""" + html))
+```
+
+## Quellenverzeichnis
+
+```{python}
+source_rows = []
+
+for sid, item in sources.items():
+    if item["url"]:
+        source_rows.append(
+            f'''
+            <li id="src-{sid}">
+                <strong>{sid}</strong>: 
+                <a href="{item["url"]}" target="_blank" rel="noopener noreferrer">{item["title"]}</a><br>
+                <span>{item["note"]}</span>
+            </li>
+            '''
+        )
+    else:
+        source_rows.append(
+            f'''
+            <li id="src-{sid}">
+                <strong>{sid}</strong>: {item["title"]}<br>
+                <span>{item["note"]}</span>
+            </li>
+            '''
+        )
+
+display(HTML("<ol>" + "\n".join(source_rows) + "</ol>"))
+```
+
