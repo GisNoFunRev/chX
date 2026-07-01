@@ -1,0 +1,57 @@
+\documentclass[11pt,a4paper,twoside]{report} % 'twoside' ist optimal für den Druck
+
+% --- Grundlegende Pakete ---
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{left=3cm, right=2.5cm, top=3cm, bottom=3.5cm, headheight=15pt}
+\usepackage{hyperref}
+
+% --- Kopf- und Fußzeilen (fancyhdr) ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Bereinigt die Standard-Einstellungen
+\fancyhead[L]{\nouppercase{\leftmark}} % Kapitelname oben links
+\fancyhead[R]{Modellierung komplexer Systeme} % Kurztitel oben rechts
+\fancyfoot[L]{R. Fazekas \& A. Makaratzis} % Eure Namen unten links
+\fancyfoot[R]{Seite \thepage} % Seitenzahl unten rechts
+\renewcommand{\headrulewidth}{0.4pt} % Trennlinie Kopfzeile
+\renewcommand{\footrulewidth}{0.4pt} % Trennlinie Fußzeile
+
+% --- Literaturverzeichnis Setup (biblatex) ---
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{references.bib} % Verweist auf die .bib Datei
+
+% --- Metadaten für die Titelseite ---
+\title{\textbf{Dokumentation: Modellierung komplexer Systeme}\\ \large Systemarchitektur, Dynamik und Validierung}
+\author{Roberto Fazekas \and Alexis Makaratzis}
+\date{\today}
+
+\begin{document}
+
+% Titelseite generieren
+\maketitle
+
+% Inhaltsverzeichnis
+\tableofcontents
+\newpage
+
+% --- Hauptteil (Kapitel einbinden) ---
+\input{./sections/01_systemarchitektur}
+% \input{sections/02_...}
+
+% --- Verzeichnisse am Ende ---
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\listoffigures % Generiert das Bildverzeichnis automatisch
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\printbibliography % Generiert das Literaturverzeichnis automatisch
+
+\end{document}

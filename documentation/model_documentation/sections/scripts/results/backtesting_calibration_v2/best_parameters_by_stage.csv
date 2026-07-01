@@ -1,0 +1,4 @@
+Stage,Parameter,Best Value,Lower Bound,Upper Bound
+stage_1_adjustment_time_only,Urban Expansion Adjustment Time,3.0,3.0,20.0
+stage_2_adjustment_time_plus_land_demand,Urban Expansion Adjustment Time,3.0,3.0,20.0
+stage_2_adjustment_time_plus_land_demand,Reference Initial Land Demand per Capita,0.00044,0.00036,0.00044

@@ -1,0 +1,196 @@
+source,target
+AMM Consistent Economic Land Conversion Demand,Land Conversion Pressure Factors
+Aggricultural Land,Aggricultural Land Requirement
+Aggricultural Land,Agricultural Scarcity Index
+Aggricultural Land,Food Production
+Aggricultural Land,Max Feasible Conversion
+Agricultural Rent,AMM Fringe Condition Gap
+Agricultural Rent,Agricultural Rent Change
+Agricultural Rent,Current Fringe Rent Gap
+Agricultural Rent,Rent Gap Pressure Factor
+Agricultural Rent,Urban Fringe Radius
+Agricultural Rent Adjustment Time,Agricultural Rent Change
+Agricultural Rent Change,Agricultural Rent
+Agricultural Rent Sensitivity to Scarcity,Desired Agricultural Rent
+Agricultural Scarcity Index,Reference Agricultural Scarcity Index
+Agricultural Scarcity Index,Relative Agricultural Scarcity
+Average Commuting Distance,Transport Cost per Household
+Average Workdays per Capita,Transport Cost per km per Capita
+Base Income Growth Rate,Net Income Growth Rate
+Caloric Baseline Need pP,Population kcal demand
+Commuters per Household,Transport Cost per km per Household
+Commuting Share of Employed Persons,Commuters per Household
+Current Fringe Rent Gap,Rent Gap Pressure Factor
+Current Urban Land per Household,Land Tightness Index
+Current Urban Radius,Urban Rent at Current Fringe
+Desired Agricultural Rent,Agricultural Rent Change
+Desired Mean Household Size,Mean Household Size Change
+Desired Mean Urban Rent,Mean Urban Rent Change
+Desired Transport Cost per km,Transport Cost per km Change
+Desired Urban Land,Desired Urban Land Total
+Desired Urban Land,Reference Initial Desired Urban Land
+Desired Urban Land Total,Urban Land Gap
+Disposable Income after Transport,Housing Land Expenditure
+Disposable Income after Transport,Other Consumption Per Household z
+Employment Share of Total Population,Commuters per Household
+Equivalent Number of Large Cities,Innovation Large
+Equivalent Number of Medium Cities,Innovation Medium
+Equivalent Number of Small Cities,Innovation Small
+Equivalent Number of Very Large Cities,Innovation very Large
+Expected Population,Number of Households
+Expected Population,Population kcal demand
+Food Production,Import Dependence
+Household Capacity of Current Urban Land,Household Clearing Gap
+Household Clearing Gap,Additional Urban Land Needed for Clearing
+Household Scaling Factor,Desired Urban Land Total
+Household Size Adjustment Time,Mean Household Size Change
+Housing Land Expenditure,Initial Mean Urban Rent
+Housing Land Expenditure,Land Demand per Household q
+Housing Preference Share Alpha,Cobb Douglas Utility Index
+Housing Preference Share Alpha,Housing Land Expenditure
+Housing Preference Share Alpha,Other Consumption Per Household z
+Import Dependence,Economic Pressure
+Income per Capita,Income per Capita Growth
+Income per Capita,Mean Household Income
+Income per Capita Growth,Income per Capita
+Initial Aggricultural Land,Aggricultural Land
+Initial Agricultural Rent,Agricultural Rent
+Initial Agricultural Rent,Desired Agricultural Rent
+Initial Income per Capita,Income per Capita
+Initial Mean Household Size,Mean Household Size
+Initial Mean Household Size,Reference Initial Land Demand per Household
+Initial Mean Urban Rent,Desired Mean Urban Rent
+Initial Mean Urban Rent,Mean Urban Rent
+Initial Transport Cost per km,Transport Cost per km
+Initial Urban Land,Urban Land
+Innovation Index,Urban Productivity Effect
+Innovation Index,Yield
+Innovation Large,Total Urban Innovation Potential
+Innovation Medium,Total Urban Innovation Potential
+Innovation Small,Total Urban Innovation Potential
+Innovation very Large,Total Urban Innovation Potential
+Kcal per km2 avg per t,Yield
+Land Conversion Pressure Factors,Land Conversion Rate
+Land Conversion Rate,Aggricultural Land
+Land Conversion Rate,Urban Land
+Land Conversion Time Minimum,Max Feasible Conversion
+Land Demand per Household q,Additional Urban Land Needed for Clearing
+Land Demand per Household q,Household Capacity of Current Urban Land
+Land Demand per Household q,Relative Land Demand per Household
+Land Demand per Household q,Urban Fringe Radius
+Land Demand per Household q,Urban Land Required for Households
+Land Demand per Household q,Urban Rent at Current Fringe
+Land Demand per Household q,Urban Rent at Fringe
+Land Tightness Index,Desired Mean Urban Rent
+Land per Capita,Land per Household
+Long Run Mean Household Size,Desired Mean Household Size
+Long Run Transport Cost per km,Desired Transport Cost per km
+Max Ceiling Soil Protection,Soil Protection Effect
+Max Feasible Conversion,Land Conversion Rate
+Maximum Income Growth Rate,Net Income Growth Rate
+Mean Annual Housing Cost per Capita,Mean Annual Housing Cost per Household
+Mean Household Income,Disposable Income after Transport
+Mean Household Income,Urban Fringe Radius
+Mean Household Income,Urban Rent at Current Fringe
+Mean Household Income,Urban Rent at Fringe
+Mean Household Size,Commuters per Household
+Mean Household Size,Land per Household
+Mean Household Size,Mean Annual Housing Cost per Household
+Mean Household Size,Mean Household Income
+Mean Household Size,Mean Household Size Change
+Mean Household Size,Number of Households
+Mean Household Size Change,Mean Household Size
+Mean Urban Rent,Current Fringe Rent Gap
+Mean Urban Rent,Land Demand per Household q
+Mean Urban Rent,Mean Urban Rent Change
+Mean Urban Rent Change,Mean Urban Rent
+Minimum Income Growth Rate,Net Income Growth Rate
+Net Income Growth Rate,Income per Capita Growth
+Number of Households,Current Urban Land per Household
+Number of Households,Household Clearing Gap
+Number of Households,Household Scaling Factor
+Number of Households,Reference Initial Number of Households
+Number of Households,Urban Land Required for Households
+Other Consumption Per Household z,Reference Other Consumption Per Household
+Other Consumption Per Household z,Relative Other Consumption per Household
+Other Consumption Per Household z,Urban Fringe Radius
+Other Consumption Per Household z,Urban Rent at Current Fringe
+Other Consumption Per Household z,Urban Rent at Fringe
+Population kcal demand,Import Dependence
+Population kcal demand,Populational Need of Kcal in Km2
+Populational Need of Kcal in Km2,Aggricultural Land Requirement
+Populational Need of Kcal in Km2,Agricultural Scarcity Index
+Reference Agricultural Scarcity Index,Relative Agricultural Scarcity
+Reference Initial Desired Urban Land,Urban Aggregate Scale Factor
+Reference Initial Land Demand per Capita,Reference Initial Land Demand per Household
+Reference Initial Land Demand per Household,Initial Mean Urban Rent
+Reference Initial Land Demand per Household,Land Tightness Index
+Reference Initial Land Demand per Household,Relative Land Demand per Household
+Reference Initial Number of Households,Household Scaling Factor
+Reference Initial Urban Land,Urban Aggregate Scale Factor
+Reference Initial Urban Land,Urban Land Index
+Reference Other Consumption Per Household,Relative Other Consumption per Household
+Reference Total Innovation Potential,Innovation Index
+Relative Agricultural Scarcity,Desired Agricultural Rent
+Relative Land Demand per Household,Cobb Douglas Utility Index
+Relative Other Consumption per Household,Cobb Douglas Utility Index
+Representative Large City Size,Equivalent Number of Large Cities
+Representative Large City Size,Innovation Large
+Representative Medium City Size,Equivalent Number of Medium Cities
+Representative Medium City Size,Innovation Medium
+Representative Small City Size,Equivalent Number of Small Cities
+Representative Small City Size,Innovation Small
+Representative Very Large City Size,Equivalent Number of Very Large Cities
+Representative Very Large City Size,Innovation very Large
+Share Large City,Equivalent Number of Large Cities
+Share Medium City,Equivalent Number of Medium Cities
+Share Small City,Equivalent Number of Small Cities
+Share very Large City,Equivalent Number of Very Large Cities
+Soil Protection,Soil Protection Effect
+Soil Protection Factor,Soil Protection
+Spatial Planing Factor,Spatial Planning
+Spatial Planning,Soil Protection
+TIME STEP,SAVEPER
+Time for Lookup,Expected Population
+Total Urban Innovation Potential,Innovation Index
+Total Urban Innovation Potential,Reference Total Innovation Potential
+Transport Cost Adjustment Time,Transport Cost per km Change
+Transport Cost per Household,Disposable Income after Transport
+Transport Cost per km,Transport Cost per km Change
+Transport Cost per km,Transport Cost per km per Capita
+Transport Cost per km Change,Transport Cost per km
+Transport Cost per km per Capita,Transport Cost per km per Household
+Transport Cost per km per Household,Transport Cost per Household
+Transport Cost per km per Household,Urban Fringe Radius
+Transport Cost per km per Household,Urban Rent at Current Fringe
+Transport Cost per km per Household,Urban Rent at Fringe
+Urban Aggregate Scale Factor,Desired Urban Land Total
+Urban Expansion Adjustment Time,AMM Consistent Economic Land Conversion Demand
+Urban Fringe Radius,Desired Urban Land
+Urban Fringe Radius,Urban Rent at Fringe
+Urban Land,Current Urban Land per Household
+Urban Land,Current Urban Radius
+Urban Land,Household Capacity of Current Urban Land
+Urban Land,Reference Initial Urban Land
+Urban Land,Urban Land Gap
+Urban Land,Urban Land Index
+Urban Land,Urban Population Total
+Urban Land Gap,AMM Consistent Economic Land Conversion Demand
+Urban Land Index,Spatial Planning
+Urban Population Density,Urban Population Total
+Urban Population Total,Equivalent Number of Large Cities
+Urban Population Total,Equivalent Number of Medium Cities
+Urban Population Total,Equivalent Number of Small Cities
+Urban Population Total,Equivalent Number of Very Large Cities
+Urban Productivity Effect,Net Income Growth Rate
+Urban Productivity Elasticity,Urban Productivity Effect
+Urban Rent Adjustment Time,Mean Urban Rent Change
+Urban Rent Sensitivity to Land Tightness,Desired Mean Urban Rent
+Urban Rent at Fringe,AMM Fringe Condition Gap
+Urban Scaling Exponent Large,Innovation Large
+Urban Scaling Exponent Medium,Innovation Medium
+Urban Scaling Exponent Small,Innovation Small
+Urban Scaling Exponent very Large,Innovation very Large
+Year Unit,Time for Lookup
+Yield,Food Production
+Yield,Populational Need of Kcal in Km2

@@ -1,0 +1,14 @@
+view,variables,stocks,flows,parameters,lookups,auxiliaries,guards,kpis,incoming_cross_view_edges,outgoing_cross_view_edges
+00_Legend,0,0,0,0,0,0,0,0,0,0
+01_Population_Household,10,1,1,4,1,3,0,0,0,11
+02_Transport_and_Commuting,14,1,1,7,0,5,0,0,1,4
+03_Income_and_Productivity,12,1,1,5,0,2,2,1,4,6
+04_Urban_Rent_and_Land_Tightness,16,2,1,3,0,7,3,0,10,17
+05_AMM_Budget_and_Housing_Demand,18,1,0,3,0,10,2,2,19,9
+07_Cobb_Douglas_Utility,3,0,0,0,0,1,1,1,4,0
+08_Agriculture_and_Scarcity,18,1,1,5,0,6,4,1,5,3
+09_Urban_Land_Conversion_Logic,9,0,0,1,0,4,4,0,9,1
+10_Soil_Protection_and_Agricultural_Pressure,7,0,0,3,0,2,2,0,2,0
+11_Innovation_and_City_Size,24,0,0,13,0,8,0,3,1,2
+Macro_Ebene,5,0,1,3,0,1,0,0,2,4
+Unassigned,4,0,0,0,0,0,0,0,0,0
