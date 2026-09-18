@@ -375,8 +375,8 @@ def equivalent_number_of_small_cities():
     comp_subtype="Normal",
     depends_on={
         "urban_population_total": 1,
-        "share_very_large_city": 1,
         "representative_very_large_city_size": 1,
+        "share_very_large_city": 1,
     },
 )
 def equivalent_number_of_very_large_cities():
@@ -494,8 +494,8 @@ def innovation_large():
     comp_subtype="Normal",
     depends_on={
         "equivalent_number_of_medium_cities": 1,
-        "representative_medium_city_size": 1,
         "urban_scaling_exponent_medium": 1,
+        "representative_medium_city_size": 1,
     },
 )
 def innovation_medium():
@@ -541,8 +541,8 @@ _initial_reference_total_innovation_potential = Initial(
     comp_subtype="Normal",
     depends_on={
         "equivalent_number_of_very_large_cities": 1,
-        "urban_scaling_exponent_very_large": 1,
         "representative_very_large_city_size": 1,
+        "urban_scaling_exponent_very_large": 1,
     },
 )
 def innovation_very_large():
@@ -792,8 +792,8 @@ def household_clearing_gap():
     comp_subtype="Normal",
     depends_on={
         "equivalent_number_of_small_cities": 1,
-        "representative_small_city_size": 1,
         "urban_scaling_exponent_small": 1,
+        "representative_small_city_size": 1,
     },
 )
 def innovation_small():
@@ -1011,8 +1011,8 @@ def total_urban_innovation_potential():
     depends_on={
         "mean_household_income": 1,
         "other_consumption_per_household_z": 1,
-        "transport_cost_per_km_per_household": 1,
         "urban_fringe_radius": 1,
+        "transport_cost_per_km_per_household": 1,
         "land_demand_per_household_q": 1,
     },
 )
@@ -2272,8 +2272,8 @@ def minimum_income_growth_rate():
     comp_subtype="Normal",
     depends_on={
         "maximum_income_growth_rate": 1,
-        "urban_productivity_effect": 1,
         "base_income_growth_rate": 1,
+        "urban_productivity_effect": 1,
         "minimum_income_growth_rate": 1,
     },
 )

@@ -1,4 +1,4 @@
-time,Year,Aggricultural Land,Land Conversion Rate,Urban Land Gap,Expected Population,Agricultural Scarcity Index,Populational Need of Kcal in Km2,Yield,Mean Household Size,Income per Capita,Transport Cost per km,Agricultural Rent
+Year,Urban Land,Aggricultural Land,Land Conversion Rate,Urban Land Gap,Expected Population,Agricultural Scarcity Index,Populational Need of Kcal in Km2,Yield,Mean Household Size,Income per Capita,Transport Cost per km,Agricultural Rent
 2025,181700.0,1600400.0,0.0,0.0,451800000.0,0.19463321669582603,311491.0,1800000000.0,2.3,41650.0,0.47,30000.0
 2026,181700.0,1600400.0,1438.6507306655014,4315.952191996505,452080000.0,0.19475383931794832,311684.0444444445,1800000000.0,2.2874999999999996,42066.5,0.47,30000.0
 2027,183138.6507306655,1598961.3492693345,2376.628394982079,7129.885184946237,452360000.0,0.19351757935976063,309427.1298004184,1814251905.97247,2.2765625,42487.165,0.47,30003.718459495354

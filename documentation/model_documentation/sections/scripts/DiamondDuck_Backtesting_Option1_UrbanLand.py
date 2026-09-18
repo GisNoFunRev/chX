@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 
 from pysd.py_backend.functions import zidz
-from pysd.py_backend.statefuls import Integ, Initial
+from pysd.py_backend.statefuls import Initial, Integ
 from pysd import Component
 
 __pysd_version__ = "3.14.3"
@@ -262,8 +262,8 @@ def current_urban_radius():
     depends_on={
         "mean_household_income": 1,
         "other_consumption_per_household_z": 1,
-        "agricultural_rent": 1,
         "land_demand_per_household_q": 1,
+        "agricultural_rent": 1,
         "transport_cost_per_km_per_household": 1,
     },
 )
@@ -541,8 +541,8 @@ _initial_reference_total_innovation_potential = Initial(
     comp_subtype="Normal",
     depends_on={
         "equivalent_number_of_very_large_cities": 1,
-        "urban_scaling_exponent_very_large": 1,
         "representative_very_large_city_size": 1,
+        "urban_scaling_exponent_very_large": 1,
     },
 )
 def innovation_very_large():
@@ -603,8 +603,8 @@ def spatial_planing_factor():
     depends_on={
         "mean_household_income": 1,
         "other_consumption_per_household_z": 1,
-        "current_urban_radius": 1,
         "transport_cost_per_km_per_household": 1,
+        "current_urban_radius": 1,
         "land_demand_per_household_q": 1,
     },
 )
@@ -792,8 +792,8 @@ def household_clearing_gap():
     comp_subtype="Normal",
     depends_on={
         "equivalent_number_of_small_cities": 1,
-        "representative_small_city_size": 1,
         "urban_scaling_exponent_small": 1,
+        "representative_small_city_size": 1,
     },
 )
 def innovation_small():
@@ -1011,8 +1011,8 @@ def total_urban_innovation_potential():
     depends_on={
         "mean_household_income": 1,
         "other_consumption_per_household_z": 1,
-        "urban_fringe_radius": 1,
         "transport_cost_per_km_per_household": 1,
+        "urban_fringe_radius": 1,
         "land_demand_per_household_q": 1,
     },
 )
@@ -1279,8 +1279,8 @@ def cobb_douglas_utility_index():
     comp_subtype="Normal",
     depends_on={
         "initial_agricultural_rent": 1,
-        "relative_agricultural_scarcity": 1,
         "agricultural_rent_sensitivity_to_scarcity": 1,
+        "relative_agricultural_scarcity": 1,
     },
 )
 def desired_agricultural_rent():
@@ -2272,9 +2272,9 @@ def minimum_income_growth_rate():
     comp_subtype="Normal",
     depends_on={
         "maximum_income_growth_rate": 1,
-        "base_income_growth_rate": 1,
         "minimum_income_growth_rate": 1,
         "urban_productivity_effect": 1,
+        "base_income_growth_rate": 1,
     },
 )
 def net_income_growth_rate():
