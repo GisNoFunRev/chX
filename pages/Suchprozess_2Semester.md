@@ -26,7 +26,12 @@
 	- [[DF_Prüfung_auf_11Kirterien]]
 	- **Es verbleiben 22 Modelle. noch zu viele**
 	- **Daraus**: Rangbildung nach Priorität der 11 Kriterien
--
+- ## 6. Vertiefter Fokus auf Kriterien für weiteren Ausschluss
+  background-color:: pink
+	- Kriterien:
+		- **inhaltliche Passung zu Urban Sciences / euren Lernzielen**
+		- **grundsätzliche Semester-Machbarkeit**
+		- **realistische empirische Calibration/Validation**
 -
 -
 -
