@@ -299,7 +299,7 @@
  ;;  :charge-range    600}   ; Default value: 600
 
  ;; Favorites to list on the left sidebar
- :favorites ["Suchprozess_2Semester" "logseq coding" "Zeitplan" "log" "Lernplan" "Vorlagen"]
+ :favorites ["Geneva DPSIR/TRACES" "logseq coding" "Zeitplan" "Lernplan" "Vorlagen"]
 
  ;; Set flashcards interval.
  ;; Expected value:

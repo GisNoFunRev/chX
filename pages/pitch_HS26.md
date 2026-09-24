@@ -1,0 +1,62 @@
+# Challenge X — Elevator Pitch
+- **In our first Challenge X, we learned a slightly uncomfortable lesson:**
+	- We were able to build a model — but we were not always able to scientifically justify why the model should look exactly the way it did.
+	- We used **System Dynamics** to model urban growth and agricultural land use in Europe, including a forecast up to 2050.
+	- But because we were working outside our own domain expertise, many seemingly small modelling decisions turned out to depend on knowledge we simply did not have.
+- **That became the starting point for our second Challenge X.**
+	- Our broader goal is to develop our ability to work with **different modelling paradigms for complex systems**:
+		- to understand what they represent,
+		- when they are appropriate,
+		- how they can be implemented and validated,
+		- and what kinds of assumptions they introduce.
+	- After working with System Dynamics, we now want to move towards **Agent-Based Modelling** and study complex urban systems from a different modelling perspective.
+- **This time, we therefore changed the way we approach the problem.**
+	- Instead of choosing an urban problem first and constructing a model largely from scratch, we started from **existing scientific models**.
+	- With support from LLMs, we developed an iterative literature-search and screening process.
+	- We collected a broad set of papers dealing with related urban modelling problems and evaluated them using criteria relevant to our project.
+- **We then progressively reduced this collection.**
+	- Important criteria included:
+		- empirical grounding,
+		- availability of the codebase,
+		- possibilities for calibration and validation,
+		- feasibility within one semester,
+		- and how much of the model would have to be reimplemented.
+	- This process reduced our initial corpus to **five candidate papers and models**.
+- **Our current favourite is an existing agent-based model of residential choice in Geneva.**
+	- In this model, households are represented as individual agents deciding where to live.
+	- Their residential choices are influenced by factors such as:
+		- public-transport commuting time,
+		- housing affordability,
+		- housing availability,
+		- and residential preferences.
+	- So compared with our previous System Dynamics model, we move from aggregated stocks and flows towards **heterogeneous agents making individual spatial decisions**.
+- ---
+- **The existing paper itself investigates several questions that are relevant for understanding the model.**
+	- At its core, it deals with:
+		- how an ABM for commuting and land-cover change can be designed,
+		- how agents can obtain information about possible commuting routes,
+		- and how the resulting simulation data can be efficiently analysed.
+	- **These are not yet our own research questions.**
+	- Our next step is to understand the model well enough to define where we can make a meaningful contribution within one semester.
+- **And this brings us back to the problem we started with.**
+	- Using an existing scientific model gives us a much stronger domain foundation than building one from scratch.
+	- But it introduces a new risk:
+		- when we refactor or extend the code, we may change something that looks like a technical implementation detail,
+		- while it actually encodes an important assumption from urban science.
+- **Our current challenge is therefore to determine the boundary between reuse and modification:**
+	- What can we safely change?
+	- What do we first need to understand?
+	- And where can we add something new without undermining the scientific basis of the existing model?
+- **This is also where we would especially appreciate feedback:**
+	- Is this a sensible scope for one semester?
+	- And how should we approach modifications of an existing model when some of its design decisions depend on domain knowledge we do not yet have?
+- **Planned deliverables**
+	- an adapted and extended model/codebase,
+	- technical and methodological documentation,
+	- and potentially a paper-style report.
+-
+- Feedback:
+	- start with the problem, follow with solutions,
+	- images, pictures, key points
+	-
+	-

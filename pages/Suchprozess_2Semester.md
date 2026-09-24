@@ -1,10 +1,14 @@
 - **Anmerkung KI- Verwendung:** Dieser Prozess wurde weitgehend mithilfe von ChatGPT gemacht
 - **Vorarbeit** bisher (ca. 2 Tage arbeit):
 	- Erarbeiten von Suchmethode
+	- Feedback Adrian und Salomon auf FS26 -> [[Feedback-fs26]] 
+	  background-color:: purple
+	  -> **Feedback ist integriert in:**
 	- Definieren von Suchkriterien -> [[11_Auswahlkriterien]]
 	  background-color:: pink
 	- Definieren von 10 Metriken/ Feldern nach denen Refernz- Papers eingeordnet werden -> [[10_Felder]]
 	  background-color:: green
+	-
 - ## 1. Finden von Papers die in Frage kommen
 	- [[deep_reserach_1]]
 - ## 2. Weiteres einordnen dieser nach Modellgruppen
@@ -14,24 +18,64 @@
 		- First, **true temporal out-of-sample validation is scarce**. ABM papers often call several different operations “validation”: expert review, pattern reproduction, sensitivity analysis, comparison to an observed endpoint, posterior predictive checks, or parameter recovery.
 		- Second, **code availability is highly age-dependent and uneven**.
 		- Third, **model complexity varies by more than an order of magnitude conceptually and computationally**.
-- ## 3. Strukturierte Exktraktion: 
-  background-color:: green
-  Jedes relevante Modell anhand unserer **10 Felder** dokumentieren:RQ/Ziel, Ort, Agents, Mechanismen, Raum, Daten, Calibration, Validation, Code, Anschlussform.
-	- [[Strucutred_Extraction]]
-- ## 4. Alle 28 Modelle werden anhand der 10 Felder beschrieben
+- ## 3. Alle 28 Modelle werden anhand der 10 Felder beschrieben
   background-color:: green
 	- [[Urban_ABM_Corpus]]
-- ## 5. Diese 14 Modelle werden anhand unserer 11 Kriterien geprüft
+- ## 4. Diese 28 Modelle werden anhand unserer 11 Kriterien geprüft
   background-color:: pink
 	- [[DF_Prüfung_auf_11Kirterien]]
 	- **Es verbleiben 22 Modelle. noch zu viele**
 	- **Daraus**: Rangbildung nach Priorität der 11 Kriterien
-- ## 6. Vertiefter Fokus auf Kriterien für weiteren Ausschluss
+- ## 5. Vertiefter Fokus auf 3 Kriterien für weiteren Ausschluss
   background-color:: pink
+	- [[Stage-A_Screening]]
 	- Kriterien:
-		- **inhaltliche Passung zu Urban Sciences / euren Lernzielen**
+		- **ABM-Mehrwert**
 		- **grundsätzliche Semester-Machbarkeit**
 		- **realistische empirische Calibration/Validation**
+	- **Es verbleiben 12 Modelle und 6 weitere in Reserve**
+- ## 6. Prüfung Codebase × Reimplementationsaufwand
+  background-color:: pink
+	- [[CodebaseXReimplementations-Aufwand]]
+	- Ausschluss, wenn:
+		- **keine nutzbare offene Codebase** verfügbar ist **und**
+		- eine **Neuimplementierung aufgrund der Modellkomplexität zu aufwändig** für den Semesterrahmen wäre
+	- Fehlende Codebase allein ist **kein Ausschlusskriterium**.
+	- **Ausgeschlossen: 1 Modell :), 17 verbleiben**
+- ## 7. Minimum Viable Project Path + Redundanzreduktion
+	- [[Minimum Viable Project Paths]]
+	- Nur Modelle weiterverfolgen, für die ein konkreter Projektpfad positiv belegbar ist:
+		- **Modellkern** — begrenzter, sinnvoll implementierbarer Teil des publizierten Modells
+		- **Datenpfad** — real verfügbare Daten für diesen Modellkern
+		- **Validation-Pfad** — unabhängige empirische Beobachtungen für die Validation
+		- **Implementationspfad** — offene Codebase oder realistisch kleine Reimplementation
+	- Danach **Redundanz innerhalb ähnlicher Forschungsfamilien reduzieren**:
+		- Modelle mit vergleichbarem wissenschaftlichem/ABM-Anschluss direkt vergleichen
+		- Modell streichen, wenn ein anderes einen vergleichbaren Forschungsanschluss mit klar besserem Daten-, Validation- oder Implementationspfad bietet
+	- **Es verbleiben 5 Modelle**
+- ## 8. Strukturierte Zusammenfassung der 5 Modelle
 -
 -
+-
+- ---
+- kommentare
+- Salomon
+	- modellierung- kallibrieung ist gefährlich/ flascher ansatz.
+	- validierung: true out of sample validation -> baccktestin wird bei ABM anders gemacht
+	- code: reverse engeneering ist nicht zu erwarten (eigentlich)
+	- lernprozess: nicht NUR paper nachvollziehen, sondern implementieren
+	- abm- frameworks können out-dated sein und sind tw. intransparent.
+- Adrian:
+	- Buch: Encounters with AI (Florini)
+	- Strukturiertes Vorgehen mit ChatGPT dokumentieren.
+	- Was bedeutet offene Datengrundlage für uns.
+	- Genf: Am konkretesten
+	- Genf: Global Geneva als Einflussfaktor (check: Bundesstelle)
+- Wie weiter
+	- Biweekly, 08:05 - 09:00
+	- Salomon: Journal, niederschwellig, wird nicht verändert
+		- Was ist für uns am niederschwelligsten?
+	-
+	-
+	-
 -

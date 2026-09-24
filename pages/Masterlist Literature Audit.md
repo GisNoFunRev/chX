@@ -1,0 +1,198 @@
+# Master-Checklist — Geneva DPSIR/TRACES Literature Audit
+	- Organisation: Jeder Hauptblock entspricht einem sinnvollen Deep-Research-Auftrag.
+	- Reihenfolge = empfohlene Bearbeitungsreihenfolge.
+- ## DR1 — Ausgangspaper: Modell, Evidenz und Limitationen
+	- ### Modell verstehen
+		- Was ist der zentrale Modellkern?
+		- Welche Agenten gibt es?
+		- Welche Zustände haben sie?
+		- Welche Entscheidungsregeln gibt es?
+		- Welche Interaktionen gibt es?
+		- Wie wird Raum repräsentiert?
+		- Was sind Inputs und Outputs?
+		- Woher stammen die zentralen Agentenregeln, Annahmen und Parameter?
+			- empirisch belegt
+			- aus Literatur übernommen
+			- von den Autoren modelliert/angenommen
+	- ### Claims vs. Evidenz
+		- Was behauptet das Paper als wissenschaftlichen Beitrag?
+		- Was zeigt es tatsächlich?
+		- Welche Ergebnisse sind reine Simulationsergebnisse?
+		- Welche Ergebnisse werden empirisch geprüft?
+		- Welche Calibration wird durchgeführt?
+		- Welche Validation wird durchgeführt?
+		- Gegen welche empirischen Beobachtungen wird validiert?
+		- Sind Calibration- und Validation-Daten unabhängig?
+		- Gibt es einen echten Out-of-Sample-/Out-of-Time-Test?
+		- Wo besteht Gefahr von Parameterkompensation bzw. Overfitting?
+	- ### Selbstkritik der Autoren
+		- Welche Limitationen nennen die Autoren selbst?
+		- Welche Punkte nennen sie unter Future Work, insbesondere Section 6.2?
+		- Welche Modellbestandteile bzw. Outputs werden ausdrücklich nicht validiert?
+	- ### Reproduzierbarkeit – Ausgangslage
+		- Ist der veröffentlichte Code verfügbar?
+		- Sind benötigte Daten verfügbar?
+		- Sind Code und Daten grundsätzlich ausreichend dokumentiert, um eine Reproduktion zu versuchen?
+- ## DR2 — Modellgenealogie: Backward Citation Chain + Vorgängermodelle
+  collapsed:: true
+	- ### Herkunft des Modells
+		- Welche Arbeiten sind direkte Vorläufer des Modells?
+		- Welche früheren Geneva-/TRACES-Arbeiten sind zentral?
+		- Auf welchen theoretischen Arbeiten basiert das Modell?
+		- Auf welchen empirischen Arbeiten basieren Agentenregeln und Parameter?
+		- Welche Modellbestandteile stammen aus früherer Forschung?
+		- Welche Modellbestandteile sind Entscheidungen des Autorenteams?
+	- ### Entwicklung des Modells
+		- Welche früheren Modelle der Autor:innen behandeln bereits:
+			- residential choice/mobility?
+			- commuting?
+			- public transport/accessibility?
+			- land use/land cover?
+		- Wie entwickelte sich der Modellkern über diese Arbeiten?
+	- ### Neuheit des 2024-Papers
+		- Was übernimmt das Paper aus den Vorgängermodellen?
+		- Was verändert es?
+		- Was fügt es neu hinzu?
+		- Was ist damit tatsächlich neu gegenüber den vorherigen Modellen?
+	- ### Dissertation
+		- Gibt es eine Dissertation von Flann Chambers?
+		- Welche Teile davon gehören zur Genealogie dieses Modells?
+		- Enthält sie zusätzliche Informationen zu Modell, Daten, Calibration oder Validation, die im Paper fehlen?
+- ## DR3 — Die aktuell 5 Cited-by-Papers + Forward Citation Chain
+	- ### Alle 5 identifizieren und klassifizieren
+		- Für jedes der aktuell fünf Google-Scholar-Cited-by-Papers:
+			- Vollständige bibliografische Angaben
+			- Ist die Arbeit unabhängig vom ursprünglichen Autorenteam?
+			- Warum wird Chambers et al. (2024) zitiert?
+			- Ist die Citation:
+				- beiläufig/background
+				- methodisch relevant
+				- substanzielle Auseinandersetzung mit dem Modell?
+			- Verwendet die Arbeit tatsächlich das Modell?
+			- Repliziert sie das Modell?
+			- Erweitert oder verändert sie das Modell?
+			- Überträgt sie es auf einen anderen Kontext?
+			- Führt sie zusätzliche/externe Validation durch?
+			- Kritisiert sie das Modell?
+			- Identifiziert sie neue Limitationen oder Schwächen?
+			- Welche neuen Anschlussmöglichkeiten entstehen daraus?
+	- ### Übergreifend
+		- Welche der fünf Arbeiten sind unabhängig vom Autorenteam?
+		- Welche verwenden tatsächlich das Modell?
+		- Gab es eine unabhängige Replikation?
+		- Gab es eine externe Validation?
+		- Hat jemand das Modell substanziell kritisiert?
+	- ### Weitere Forward Chain
+		- Welche der fünf Arbeiten sind relevant genug, um ihre eigenen späteren Citations weiterzuverfolgen?
+		- Gibt es daraus entstandene:
+			- Folgearbeiten
+			- Modellvarianten
+			- Replikationen
+			- Transfers
+			- externe Validationen
+			- Kritik?
+- ## DR4 — Autor:innen-Folgearbeiten + TRACES nach 2024
+	- ### Folgearbeiten
+		- Welche späteren Arbeiten von Chambers, Di Marzo Serugendo und Cruz hängen mit diesem Modell zusammen?
+		- Welche davon entwickeln dieses konkrete Modell weiter?
+		- Welche entwickeln nur verwandte Geneva-/TRACES-Modelle weiter?
+		- Gibt es relevante Papers, Reports, Dissertationsteile, Repositories oder andere offizielle Materialien?
+	- ### TRACES
+		- Welche Rolle spielt das Modell innerhalb von TRACES?
+		- Welche weiteren TRACES-Modelle/-Arbeiten sind relevant?
+		- Wie hängen diese Modelle technisch und wissenschaftlich zusammen?
+		- Wurde unser Modell innerhalb von TRACES später:
+			- erweitert?
+			- verändert?
+			- ersetzt?
+			- gekoppelt?
+			- neu kalibriert?
+			- validiert?
+			- auf andere Daten/Fragestellungen angewendet?
+	- ### Future Work nachverfolgen
+		- Für jeden Future-Work-Punkt aus DR1:
+			- Wurde er später bearbeitet?
+			- Von demselben Autorenteam?
+			- Von unabhängigen Forschenden?
+			- Wie wurde er bearbeitet?
+			- Welche ursprüngliche Limitation wurde dadurch gelöst?
+			- Welche bleibt bestehen?
+- ## DR5 — Replikation, Reproduzierbarkeit und externe Validation
+	- ### Reproduzierbarkeit
+		- Ist der veröffentlichte Code vollständig verfügbar?
+		- Welche Version / welches Repository gehört tatsächlich zum Paper?
+		- Sind die benötigten Daten verfügbar?
+		- Sind Initialisierung, Parameter und Experimente ausreichend dokumentiert?
+		- Lassen sich die publizierten Ergebnisse grundsätzlich mit Code + Daten reproduzieren?
+		- Welche Teile müssten selbst rekonstruiert werden?
+	- ### Replikation
+		- Dokumentieren die Autoren selbst eine Reproduktion?
+		- Gibt es unabhängige Replikationen?
+		- Gibt es unabhängige Anwendungen des Modells?
+		- Gibt es Transfers auf andere räumliche oder zeitliche Kontexte?
+	- ### Validation
+		- Welche Outputs wurden bisher empirisch validiert?
+		- Welche nicht?
+		- Gibt es spätere Out-of-Sample-Validation?
+		- Gibt es spätere Out-of-Time-Validation?
+		- Gibt es Validation mit Daten, die nicht zur Modellentwicklung oder Calibration verwendet wurden?
+		- Gibt es unabhängige Validation durch andere Forschende?
+- ## DR6 — Synthese: tatsächlich offene Forschungsräume
+	- Erst durchführen, wenn DR1–DR5 vorliegen.
+	- ### Was ist noch offen?
+		- Welche vom Originalpaper genannten Limitationen bestehen weiterhin?
+		- Welche Future-Work-Punkte wurden bereits bearbeitet?
+		- Welche wurden noch nicht bearbeitet?
+		- Welche neuen Schwächen zeigen spätere Arbeiten?
+		- Welche Kritikpunkte wurden bislang nicht adressiert?
+	- ### Methodische Lücken
+		- Wo fehlen noch:
+			- Replikation?
+			- externe Validation?
+			- Out-of-Time-Validation?
+			- Out-of-Sample-Validation?
+			- Model Comparison?
+			- Sensitivity Analysis?
+			- Uncertainty Analysis?
+			- empirische Fundierung bestimmter Agentenregeln?
+			- empirische Prüfung bestimmter Outputs?
+	- ### Mögliche Anschlussformen
+		- Welche wissenschaftlich belegten Möglichkeiten bestehen für:
+			- Replikation
+			- Validation
+			- Model Comparison
+			- Mechanismenvergleich / Ablation
+			- empirisch begründete Erweiterung
+			- räumlichen Transfer
+			- zeitlichen Transfer
+			- Policy-/Scenario-Experimente?
+- ## DR7 — RQ-Kandidaten + Projekt-Fit
+	- Erst hier konkrete Forschungsfragen formulieren.
+	- Für jede aus DR6 abgeleitete RQ:
+		- wissenschaftlicher Anschluss
+		- Herkunft der RQ bzw. belegte Forschungslücke
+		- Urban-Sciences-Relevanz
+		- Forschungs- und Agentenfundierung
+		- ABM-Mehrwert
+		- Datenverfügbarkeit und Datenaufwand
+		- räumliche Repräsentation
+		- Calibration möglich?
+		- unabhängige Validation möglich?
+		- Übertragbarkeit, falls relevant
+		- Implementations-/Reimplementationsaufwand
+		- Semester-Machbarkeit
+		- Raum für mehrere Runs
+		- Sensitivity Analysis
+		- Uncertainty Analysis
+		- sinnvoller Forschungsfokus statt maximaler Stadtsimulation
+	- Ergebnis:
+		- kleine Menge sauber hergeleiteter RQ-Kandidaten
+		- danach Anwendung unserer 11 Auswahlkriterien
+- ## Empfohlene Reihenfolge
+	- DR1 Paper
+	- → DR2 Herkunft
+	- → DR3 externe Rezeption
+	- → DR4 interne/TRACES-Weiterentwicklung
+	- → DR5 Replikation & Validation
+	- → DR6 offene Forschungsräume
+	- → DR7 RQ-Kandidaten

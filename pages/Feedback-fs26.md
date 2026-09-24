@@ -1,0 +1,37 @@
+- **Lernziele früh und verbindlich definieren**
+	- klar festhalten, was ihr fachlich und methodisch lernen wollt
+	- Projektentscheidungen daran ausrichten
+- **Coachings strukturierter nutzen**
+	- regelmässige Meetings vorbereiten
+	- offene Entscheidungen, Probleme und nächste Schritte vorab festhalten
+	- Ergebnisse/Entscheide aus Meetings dokumentieren
+- **Inhalt stärker fokussieren**
+	- eine klar abgegrenzte Forschungsfrage
+	- nicht zu viele Themen oder Mechanismen gleichzeitig modellieren
+- **Kalibrierung nicht zur Fehlerkompensation verwenden**
+	- strukturelle Modellschwächen nicht durch Parameteranpassung „wegkalibrieren“
+	- besonders auf Initialbedingungen und fehlende Prozesse achten
+	- Calibration und Modellstruktur getrennt beurteilen
+- **Vorhersagekraft und Interpretierbarkeit erhalten**
+	- vermeiden, dass gegenläufige Fehler nur in einem engen Zeitraum gute Fits erzeugen
+	- Parameter und Mechanismen müssen inhaltlich interpretierbar bleiben
+- **Pragmatisch modellieren**
+	- keine unnötige Perfektion
+	- Modellkomplexität nur dort erhöhen, wo sie für die Forschungsfrage relevant ist
+- **Vom Tool abstrahieren**
+	- nicht Vensim, Python, Mesa etc. zum Zentrum der Argumentation machen
+	- Modellkonzepte, Mechanismen und Annahmen erklären
+- **Bericht entlang der Forschungslogik strukturieren**
+	- RQ → Modellannahmen → Modell → Calibration/Validation → Experimente → Ergebnisse → Interpretation
+	- technische Implementationsdetails davon trennen
+- **Modelldokumentation weiterhin detailliert halten**
+	- insbesondere Submodelle, Mechanismen, Parameter und Schnittstellen sauber dokumentieren
+- **Komplexere, aber begründete Modellarchitektur**
+	- über ein stark vereinfachendes Wirtschaftsmodell hinausgehen
+	- zusätzliche Dynamiken nur aufnehmen, wenn sie inhaltlich begründet sind
+- **Stärker in einem konkreten Anwendungsfeld verankern**
+	- insbesondere **Urban Systems** oder Landwirtschaft
+	- Domänenproblem soll die Modellstruktur mitbestimmen
+- **ABM als mögliche Weiterentwicklung nutzen**
+	- heterogene Akteure und differenzierte Entscheidungen explizit modellieren
+	- ABM aber nur einsetzen, wenn daraus tatsächlich zusätzlicher Erkenntniswert entsteht
